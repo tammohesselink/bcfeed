@@ -2,11 +2,18 @@
 
 A macOS/desktop app that reads Bandcamp release emails from your Gmail, caches them locally, and generates an interactive dashboard of releases that is much faster to browse than Bandcamp itself. 
 
-## 🛠️ Build / Packaging
 
-- Run `scripts/build_mac_app.sh` from the repo root to produce `dist/bcfeed.app` (and a zipped copy if `ditto` is available). The script creates an isolated `.venv-build`, installs `requirements-build.txt`, and invokes `pyinstaller --clean --noconfirm bcfeed.spec`.
-- Artifacts land in `dist/`; delete that folder before re-running if you want a clean output.
-- Run `xattr -r -d com.apple.quarantine dist/bcfeed.app` to clear the MacOS quarantine, otherwise loading time will be really long. 
+## Running
+
+If you're familiar with Python and CLI tools, you can simply create a virtual environment, install the dependencies and run the script from the CLI:
+
+- Ensure Python 3.14.2 is installed, along with virtualenv and pip
+- In the project directory, run `virtualenv --python 3.14.2 .venv`
+- Run `source ./.venv/bin/activate`
+- Run `python3 bcfeed.py`
+
+Alternatively, you can download the **bcfeed** executable from GitHub; note, however, that this suffers from long startup times because it's not notarized and codesigned.
+
 
 ## 📘 Setup Guide
 
@@ -130,3 +137,13 @@ Publishing the app to **In Production** fixes this.
 
 **I get a 403 or insufficient permissions error.**  
 Make sure you enabled the Gmail API and used the downloaded OAuth file.
+
+
+
+## 🛠️ Build / Packaging
+
+(noted here more for my own reference, for now)
+
+- Run `scripts/build_mac_app.sh` from the repo root to produce `dist/bcfeed.app` (and a zipped copy if `ditto` is available). The script creates an isolated `.venv-build`, installs `requirements-build.txt`, and invokes `pyinstaller --clean --noconfirm bcfeed.spec`.
+- Artifacts land in `dist/`; delete that folder before re-running if you want a clean output.
+- Run `xattr -r -d com.apple.quarantine dist/bcfeed.app` to clear the MacOS quarantine, otherwise loading time will be really long. 
