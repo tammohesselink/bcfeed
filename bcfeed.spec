@@ -3,6 +3,8 @@
 PyInstaller spec to build a standalone bcfeed macOS app bundle.
 """
 
+import os
+
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 block_cipher = None
@@ -12,8 +14,12 @@ hiddenimports = (
     collect_submodules("googleapiclient")
     + collect_submodules("google.auth")
     + collect_submodules("google_auth_oauthlib")
+    + collect_submodules("requests")
     + collect_submodules("tkinter")
 )
+
+# Keep the intermediate executable out of dist; only ship the .app bundle.
+EXE_DIST = os.path.join("build", "bcfeed_exe")
 
 a = Analysis(
     ["app_gui.py"],
@@ -44,6 +50,7 @@ exe = EXE(
     upx=False,
     upx_exclude=[],
     runtime_tmpdir=None,
+    distpath=EXE_DIST,
     console=False,
     disable_windowed_traceback=False,
     argv_emulation=True,
@@ -57,4 +64,5 @@ app = BUNDLE(
     name="bcfeed.app",
     icon=None,
     bundle_identifier="com.bcfeed.app",
+    distpath="dist",
 )
