@@ -22,7 +22,7 @@ hiddenimports = (
 EXE_DIST = os.path.join("build", "bcfeed_exe")
 
 a = Analysis(
-    ["app_gui.py"],
+    ["bcfeed.py"],
     pathex=["."],
     binaries=[],
     datas=datas,
