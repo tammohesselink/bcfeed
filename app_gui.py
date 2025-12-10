@@ -13,10 +13,8 @@ import sys
 import json
 import shutil
 from pathlib import Path
-from tkinter import Tk, StringVar, IntVar, Toplevel, Button, Label, Entry, Frame, messagebox, filedialog, ttk
+from tkinter import Tk, StringVar, IntVar, Button, Label, Entry, Frame, messagebox, filedialog, ttk
 from tkinter.scrolledtext import ScrolledText
-
-from tkcalendar import Calendar
 
 from embed_proxy import app as proxy_app, start_proxy_server
 from pipeline import gather_releases_with_cache
@@ -94,25 +92,6 @@ def start_proxy_thread():
     port = find_free_port(PROXY_PORT)
     server, thread = start_proxy_server(port)
     return server, thread, port
-
-
-def pick_date(title: str, initial: datetime.date) -> str:
-    top = Toplevel()
-    top.title(title)
-    selected = StringVar(value=initial.strftime("%Y/%m/%d"))
-
-    cal = Calendar(top, selectmode="day", year=initial.year, month=initial.month, day=initial.day, date_pattern="yyyy/mm/dd")
-    cal.pack(padx=10, pady=10)
-
-    def on_ok():
-        selected.set(cal.get_date())
-        top.destroy()
-
-    Button(top, text="OK", command=on_ok).pack(pady=5)
-    top.transient()
-    top.grab_set()
-    top.wait_window()
-    return selected.get()
 
 
 def run_pipeline(after_date: str, before_date: str, max_results: int, proxy_port: int, preload_embeds: bool, *, log=print):

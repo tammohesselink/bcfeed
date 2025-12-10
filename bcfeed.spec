@@ -7,10 +7,9 @@ from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 block_cipher = None
 
-datas = collect_data_files("tkcalendar")
+datas = []
 hiddenimports = (
-    collect_submodules("tkcalendar")
-    + collect_submodules("googleapiclient")
+    collect_submodules("googleapiclient")
     + collect_submodules("google.auth")
     + collect_submodules("google_auth_oauthlib")
 )
