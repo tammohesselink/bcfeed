@@ -1,4 +1,4 @@
-## bcfeed
+# bcfeed
 
 A macOS/desktop app that reads Bandcamp release emails from your Gmail, caches them locally, and generates an interactive dashboard of releases.
 
