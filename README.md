@@ -2,6 +2,11 @@
 
 A macOS/desktop app that reads Bandcamp release emails from your Gmail, caches them locally, and generates an interactive dashboard of releases that is much faster to browse than Bandcamp itself. 
 
+## 🛠️ Build / Packaging
+
+- Run `scripts/build_mac_app.sh` from the repo root to produce `dist/bcfeed.app` (and a zipped copy if `ditto` is available). The script creates an isolated `.venv-build`, installs `requirements-build.txt`, and invokes `pyinstaller --clean --noconfirm bcfeed.spec`.
+- Artifacts land in `dist/`; delete that folder before re-running if you want a clean output.
+
 ## 📘 Setup Guide
 
 This application uses the Gmail API.
