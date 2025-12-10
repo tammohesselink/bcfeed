@@ -5,3 +5,5 @@
 *.data
 *.pickle
 __pycache__/
+dist/
+build/
