@@ -1597,6 +1597,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     if (populateBtn) populateBtn.addEventListener("click", populateRangeFromCalendars);
 
     function setDefaultDateFilters() {{
+      if ((dateFilterFrom && dateFilterFrom.value) || (dateFilterTo && dateFilterTo.value)) return;
       if (!releases.length) return;
       const dates = releases
         .map(entry => parseDateString(entry.date))
@@ -1651,8 +1652,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         if (!raw) return;
         const data = JSON.parse(raw);
         if (data && typeof data === "object") {{
-          if (data.from) dateFilterFrom.value = data.from;
-          if (data.to) dateFilterTo.value = data.to;
+          if (typeof data.from === "string") dateFilterFrom.value = data.from;
+          if (typeof data.to === "string") dateFilterTo.value = data.to;
         }}
       }} catch (err) {{}}
       onDateFilterChange();
@@ -1661,8 +1662,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     function persistCalendarState() {{
       if (!dateFilterFrom || !dateFilterTo) return;
       const payload = {{
-        from: dateFilterFrom.value.trim(),
-        to: dateFilterTo.value.trim(),
+        from: (dateFilterFrom.value || "").trim(),
+        to: (dateFilterTo.value || "").trim(),
       }};
       try {{
         localStorage.setItem(CALENDAR_STATE_KEY, JSON.stringify(payload));
