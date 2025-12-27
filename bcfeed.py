@@ -156,7 +156,6 @@ def main():
     end_date_var = StringVar(value=settings.get("end_date") or today.strftime("%Y/%m/%d"))
     max_results_var = StringVar(value=str(_coerce_max(settings.get("max_results"), 500)))
     preload_embeds_var = IntVar(value=1 if settings.get("preload_embeds") else 0)
-    cache_only_var = IntVar(value=1 if settings.get("cache_only") else 0)
 
     # Custom layout for date rows to fit compact buttons around the entry
     date_button_sets = []
@@ -306,22 +305,18 @@ def main():
                 "start_date": start_date_var.get(),
                 "end_date": end_date_var.get(),
                 "max_results": max_val if max_val is not None else "",
-                "preload_embeds": bool(preload_embeds_var.get()),
-                "cache_only": bool(cache_only_var.get()),
+                "preload_embeds": bool(preload_embeds_var.get())
             }
         )
 
     # Toggle defaults and actions
     from tkinter import Checkbutton  # localized import to avoid polluting top
     Checkbutton(root, text="Preload Bandcamp players (dashboard creation takes a while, but browsing is faster)", variable=preload_embeds_var).grid(row=3, column=0, columnspan=2, padx=8, sticky="w")
-    Checkbutton(root, text="Cache only (skip Gmail fetches)", variable=cache_only_var).grid(row=3, column=2, padx=8, sticky="w")
+
 
     # Run / Reload credentials buttons
     actions_frame = Frame(root)
     actions_frame.grid(row=4, column=0, columnspan=3, padx=8, pady=6, sticky="e")
-
-    run_btn = ttk.Button(actions_frame, text="Run", width=14, style="Run.TButton", command=lambda: on_run())
-    run_btn.grid(row=0, column=1, padx=(10, 0), sticky="e")
 
     download_btn = ttk.Button(actions_frame, text="Download", width=14, style="Action.TButton", command=lambda: on_download())
     download_btn.grid(row=0, column=0, padx=(0, 6), sticky="e")
@@ -373,7 +368,7 @@ def main():
     # Persist settings whenever inputs change
     for var in (start_date_var, end_date_var):
         var.trace_add("write", save_current_settings)
-    for var in (max_results_var, preload_embeds_var, cache_only_var):
+    for var in (max_results_var, preload_embeds_var):
         var.trace_add("write", save_current_settings)
 
     def _validate_inputs():
@@ -401,7 +396,6 @@ def main():
             return
 
         should_preload = False  # no embed preloads on download-only
-        cache_only = bool(cache_only_var.get())
         _ensure_proxy()
 
         def worker():
@@ -414,51 +408,13 @@ def main():
                 log(f"Starting cache refresh...")
                 log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 log(f"")
-                log(f"Running query from {start_date_var.get()} to {end_date_var.get()} with max {max_results} (proxy port {proxy_port}, preload {'on' if should_preload else 'off'}, cache_only {'on' if cache_only else 'off'})")
+                log(f"Running query from {start_date_var.get()} to {end_date_var.get()} with max {max_results} (proxy port {proxy_port}, preload {'on' if should_preload else 'off'})")
                 
                 try:
-                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, cache_only, log=log, launch_browser=False)
+                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, cache_only=False, log=log, launch_browser=False)
                     log("Download complete; cache updated.")
                     log("")
                     root.after(0, lambda: messagebox.showinfo("Done", "Download complete; cache updated."))
-                finally:
-                    sys.stdout = original_stdout
-            except Exception as exc:
-                log(f"Error: {exc}")
-                root.after(0, lambda exc=exc: messagebox.showerror("Error", str(exc)))
-
-        if MULTITHREADING:
-            threading.Thread(target=worker, daemon=True).start()
-        else:
-            worker()
-
-    def on_run():
-        nonlocal proxy_thread, proxy_port
-        max_results = _validate_inputs()
-        if max_results is None:
-            return
-
-        should_preload = bool(preload_embeds_var.get())
-        cache_only = bool(cache_only_var.get())
-        _ensure_proxy()
-
-        def worker():
-            try:
-                original_stdout = sys.stdout
-                logger = GuiLogger(log)
-                sys.stdout = logger
-                
-                log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                log(f"Starting generation of Bandcamp release feed...")
-                log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                log(f"")
-                log(f"Running query from {start_date_var.get()} to {end_date_var.get()} with max {max_results} (proxy port {proxy_port}, preload {'on' if should_preload else 'off'}, cache_only {'on' if cache_only else 'off'})")
-                
-                try:
-                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, cache_only, log=log, launch_browser=True)
-                    log("Dashboard generated and opened in browser.")
-                    log("")
-                    root.after(0, lambda: messagebox.showinfo("Done", "Dashboard generated and opened in browser."))
                 finally:
                     sys.stdout = original_stdout
             except Exception as exc:
