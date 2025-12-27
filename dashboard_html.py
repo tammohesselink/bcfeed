@@ -369,10 +369,19 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
       background: transparent;
     }}
+    .calendar-day.scraped {{
+      background: rgba(255,255,255,0.12);
+    }}
+    body.theme-light .calendar-day.scraped {{
+      background: rgba(0,0,0,0.1);
+    }}
     .calendar-day .dot.scraped {{
-      background: #7adf85;
-      border-color: rgba(60,140,72,0.6);
-      box-shadow: 0 0 0 1px rgba(122,223,133,0.35);
+      display: none;
+    }}
+    .calendar-day .dot.unseen {{
+      background: #64a8ff;
+      border-color: rgba(50,120,200,0.6);
+      box-shadow: 0 0 0 1px rgba(100,168,255,0.35);
     }}
     .calendar-day:hover {{
       transform: translateY(-1px);
@@ -581,7 +590,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           </div>
           <button id="scrape-wireframe-toggle" class="button" aria-expanded="false" aria-controls="scrape-wireframe-body">Expand</button>
         </div>
-        <div class="wireframe-body" id="scrape-wireframe-body" hidden>
+        <div class="wireframe-body" id="scrape-wireframe-body">
           <div class="date-range-panel">
             <div class="calendar-row">
               <div class="calendar-card">
@@ -1441,9 +1450,18 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         dots.className = "dot-strip";
         const scraped = scrapeStatus.scraped.has(key);
         if (scraped) {{
-          const dot = document.createElement("span");
-          dot.className = "dot scraped";
-          dots.appendChild(dot);
+          cell.classList.add("scraped");
+        }}
+        const hasUnseen = releases.some(rel => {{
+          const relDate = formatDate(rel.date);
+          const relKey = releaseKey(rel);
+          if (!relDate || relDate !== key) return false;
+          return !state.viewed.has(relKey);
+        }});
+        if (hasUnseen) {{
+          const unseenDot = document.createElement("span");
+          unseenDot.className = "dot unseen";
+          dots.appendChild(unseenDot);
         }}
         cell.appendChild(dots);
 
@@ -1656,8 +1674,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       wireframeToggle.setAttribute("aria-expanded", open ? "true" : "false");
       wireframeToggle.textContent = open ? "Collapse" : "Expand";
     }}
+    setWireframeOpen(true);
     if (wireframeToggle) {{
-      setWireframeOpen(true);
       wireframeToggle.addEventListener("click", () => {{
         const isOpen = wireframePanel && wireframePanel.classList.contains("open");
         setWireframeOpen(!isOpen);
