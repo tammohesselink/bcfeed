@@ -20,6 +20,7 @@ from embed_proxy import app as proxy_app, start_proxy_server
 from pipeline import gather_releases_with_cache
 from dashboard import write_release_dashboard
 from util import get_data_dir
+from session_store import get_full_release_cache
 
 MULTITHREADING = True
 PROXY_PORT = 5050
@@ -95,7 +96,7 @@ def start_proxy_thread():
     return server, thread, port
 
 
-def run_pipeline(after_date: str, before_date: str, max_results: int, proxy_port: int, preload_embeds: bool, cache_only: bool, *, log=print):
+def run_pipeline(after_date: str, before_date: str, max_results: int, proxy_port: int, preload_embeds: bool, cache_only: bool, *, log=print, launch_browser: bool = True):
     output_path = DATA_DIR / "output.html"
 
     releases = gather_releases_with_cache(after_date, before_date, max_results, batch_size=20, cache_only=cache_only, log=log)
@@ -107,7 +108,30 @@ def run_pipeline(after_date: str, before_date: str, max_results: int, proxy_port
         embed_proxy_url=f"http://localhost:{proxy_port}/embed-meta",
         log=log,
     )
-    webbrowser.open_new_tab(output_file.resolve().as_uri())
+    if launch_browser:
+        webbrowser.open_new_tab(output_file.resolve().as_uri())
+    return output_file
+
+
+def launch_from_cache(proxy_port: int, preload_embeds: bool, *, log=print, launch_browser: bool = True):
+    """
+    Generate dashboard from all cached releases (no Gmail fetch).
+    """
+    output_path = DATA_DIR / "output.html"
+    releases = get_full_release_cache()
+    if not releases:
+        log("No cached releases found.")
+    output_file = write_release_dashboard(
+        releases=releases,
+        output_path=output_path,
+        title="bcfeed",
+        fetch_missing_ids=preload_embeds,
+        embed_proxy_url=f"http://localhost:{proxy_port}/embed-meta",
+        log=log,
+    )
+    if launch_browser:
+        webbrowser.open_new_tab(output_file.resolve().as_uri())
+    return output_file
 
 
 def main():
@@ -296,10 +320,16 @@ def main():
     actions_frame = Frame(root)
     actions_frame.grid(row=4, column=0, columnspan=3, padx=8, pady=6, sticky="e")
 
-    run_btn = ttk.Button(actions_frame, text="Run", width=16, style="Run.TButton", command=lambda: on_run())
+    run_btn = ttk.Button(actions_frame, text="Run", width=14, style="Run.TButton", command=lambda: on_run())
     run_btn.grid(row=0, column=1, padx=(10, 0), sticky="e")
 
-    reload_credentials_btn = ttk.Button(actions_frame, text="Reload credentials", width=16, style="Action.TButton", command=reload_credentials)
+    download_btn = ttk.Button(actions_frame, text="Download", width=14, style="Action.TButton", command=lambda: on_download())
+    download_btn.grid(row=0, column=0, padx=(0, 6), sticky="e")
+
+    launch_btn = ttk.Button(actions_frame, text="Launch", width=14, style="Action.TButton", command=lambda: on_launch())
+    launch_btn.grid(row=1, column=0, padx=(0, 6), pady=(4, 0), sticky="e")
+
+    reload_credentials_btn = ttk.Button(actions_frame, text="Reload credentials", width=14, style="Action.TButton", command=reload_credentials)
     reload_credentials_btn.grid(row=1, column=1, pady=(4, 0), sticky="e")
 
     # Status box
@@ -334,34 +364,83 @@ def main():
         # marshal to UI thread
         root.after(0, append_log, msg)
 
+    def _ensure_proxy():
+        nonlocal proxy_thread, proxy_port
+        if proxy_thread is None or not proxy_thread.is_alive():
+            proxy_server, proxy_thread, proxy_port = start_proxy_thread()
+        return proxy_port
+
     # Persist settings whenever inputs change
     for var in (start_date_var, end_date_var):
         var.trace_add("write", save_current_settings)
     for var in (max_results_var, preload_embeds_var, cache_only_var):
         var.trace_add("write", save_current_settings)
 
-    def on_run():
-        nonlocal proxy_thread, proxy_port
+    def _validate_inputs():
         try:
             max_results = int(max_results_var.get())
             if max_results > MAX_RESULTS_HARD:
                 messagebox.showerror("Error", f"Max results cannot exceed {MAX_RESULTS_HARD}")
-                return
+                return None
         except ValueError:
             messagebox.showerror("Error", "Max results must be a number")
-            return
+            return None
         try:
             # validate dates
             for val in (start_date_var.get(), end_date_var.get()):
                 datetime.datetime.strptime(val, "%Y/%m/%d")
         except ValueError:
             messagebox.showerror("Error", "Dates must be in YYYY/MM/DD format")
+            return None
+        return int(max_results_var.get())
+
+    def on_download():
+        nonlocal proxy_thread, proxy_port
+        max_results = _validate_inputs()
+        if max_results is None:
+            return
+
+        should_preload = False  # no embed preloads on download-only
+        cache_only = bool(cache_only_var.get())
+        _ensure_proxy()
+
+        def worker():
+            try:
+                original_stdout = sys.stdout
+                logger = GuiLogger(log)
+                sys.stdout = logger
+                
+                log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                log(f"Starting cache refresh...")
+                log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                log(f"")
+                log(f"Running query from {start_date_var.get()} to {end_date_var.get()} with max {max_results} (proxy port {proxy_port}, preload {'on' if should_preload else 'off'}, cache_only {'on' if cache_only else 'off'})")
+                
+                try:
+                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, cache_only, log=log, launch_browser=False)
+                    log("Download complete; cache updated.")
+                    log("")
+                    root.after(0, lambda: messagebox.showinfo("Done", "Download complete; cache updated."))
+                finally:
+                    sys.stdout = original_stdout
+            except Exception as exc:
+                log(f"Error: {exc}")
+                root.after(0, lambda exc=exc: messagebox.showerror("Error", str(exc)))
+
+        if MULTITHREADING:
+            threading.Thread(target=worker, daemon=True).start()
+        else:
+            worker()
+
+    def on_run():
+        nonlocal proxy_thread, proxy_port
+        max_results = _validate_inputs()
+        if max_results is None:
             return
 
         should_preload = bool(preload_embeds_var.get())
         cache_only = bool(cache_only_var.get())
-        if proxy_thread is None or not proxy_thread.is_alive():
-            proxy_server, proxy_thread, proxy_port = start_proxy_thread()
+        _ensure_proxy()
 
         def worker():
             try:
@@ -376,7 +455,7 @@ def main():
                 log(f"Running query from {start_date_var.get()} to {end_date_var.get()} with max {max_results} (proxy port {proxy_port}, preload {'on' if should_preload else 'off'}, cache_only {'on' if cache_only else 'off'})")
                 
                 try:
-                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, cache_only, log=log)
+                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, cache_only, log=log, launch_browser=True)
                     log("Dashboard generated and opened in browser.")
                     log("")
                     root.after(0, lambda: messagebox.showinfo("Done", "Dashboard generated and opened in browser."))
@@ -390,8 +469,40 @@ def main():
             threading.Thread(target=worker, daemon=True).start()
         else:
             worker()
-            
 
+    def on_launch():
+        nonlocal proxy_thread, proxy_port
+        should_preload = bool(preload_embeds_var.get())
+        _ensure_proxy()
+
+        def worker():
+            try:
+                original_stdout = sys.stdout
+                logger = GuiLogger(log)
+                sys.stdout = logger
+
+                log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                log(f"Launching dashboard from cache...")
+                log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                log(f"")
+                log(f"Building page from cached releases (proxy port {proxy_port}, preload {'on' if should_preload else 'off'})")
+
+                try:
+                    launch_from_cache(proxy_port, should_preload, log=log, launch_browser=True)
+                    log("Dashboard generated from cache and opened in browser.")
+                    log("")
+                    root.after(0, lambda: messagebox.showinfo("Done", "Dashboard generated from cache and opened in browser."))
+                finally:
+                    sys.stdout = original_stdout
+            except Exception as exc:
+                log(f"Error: {exc}")
+                root.after(0, lambda exc=exc: messagebox.showerror("Error", str(exc)))
+
+        if MULTITHREADING:
+            threading.Thread(target=worker, daemon=True).start()
+        else:
+            worker()
+            
     from tkinter import Checkbutton  # localized import to avoid polluting top
     def on_close():
         nonlocal proxy_server, proxy_thread

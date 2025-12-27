@@ -156,6 +156,19 @@ def _dedupe_by_url(items: Iterable[dict]) -> List[dict]:
     return deduped
 
 
+def get_full_release_cache() -> List[dict]:
+    """
+    Return all cached release metadata, flattened across all dates.
+    """
+    cache = _load_cache()
+    all_items: List[dict] = []
+    for day in sorted(cache.keys()):
+        day_entries = cache.get(day) or []
+        if isinstance(day_entries, list):
+            all_items.extend(day_entries)
+    return _dedupe_by_url(all_items)
+
+
 def mark_dates_scraped(dates: Iterable[datetime.date], *, exclude_today: bool = True) -> None:
     """
     Mark specific dates as having been scraped from Gmail.
