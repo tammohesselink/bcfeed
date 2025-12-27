@@ -596,8 +596,9 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       </header>
       <section class="wireframe-panel" id="scrape-wireframe">
         <div class="wireframe-header">
-          <div class="wireframe-title">
-            <span>Date range</span>
+          <div class="wireframe-title" style="display:flex; align-items:center; gap:6px; white-space:nowrap;">
+            <span class="detail-meta" style="font-size:12px;">Date range:</span>
+            <span id="header-range-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
           </div>
           <button id="scrape-wireframe-toggle" class="button" aria-expanded="false" aria-controls="scrape-wireframe-body">Expand</button>
         </div>
@@ -985,6 +986,19 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
 
     function updateRangePreview() {{}}
 
+    function updateHeaderRange() {{
+      if (!headerRangeLabel) return;
+      const fromVal = state.dateFilterFrom || "";
+      const toVal = state.dateFilterTo || "";
+      if (!fromVal && !toVal) {{
+        headerRangeLabel.textContent = "";
+        return;
+      }}
+      const start = fromVal || toVal;
+      const end = toVal || fromVal;
+      headerRangeLabel.textContent = start === end ? start : `${{start}} to ${{end}}`;
+    }}
+
     function syncShowCheckboxAvailability() {{
       const disableShow = state.showOnlyLabels.size > 0;
       document.querySelectorAll("#label-filters .filter-item").forEach(item => {{
@@ -1291,6 +1305,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const POPULATE_LOG_KEY = "bc_populate_log_v1";
     const populateLog = document.getElementById("populate-log");
     const CALENDAR_STATE_KEY = "bc_calendar_state_v1";
+    const headerRangeLabel = document.getElementById("header-range-label");
     const SCRAPE_STATUS_URL = API_ROOT ? `${{API_ROOT}}/scrape-status` : null;
 
     function toggleSettings(open) {{
@@ -1719,6 +1734,9 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         if (data && typeof data === "object") {{
           if (typeof data.from === "string") dateFilterFrom.value = data.from;
           if (typeof data.to === "string") dateFilterTo.value = data.to;
+          if (populateLog && typeof data.populateLog === "string") {{
+            populateLog.textContent = data.populateLog;
+          }}
         }}
       }} catch (err) {{}}
       try {{
@@ -1765,6 +1783,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       syncCalendarsFromInputs();
       renderCalendar("range");
       updateRangePreview();
+      updateHeaderRange();
       persistCalendarState();
       renderTable();
     }}
