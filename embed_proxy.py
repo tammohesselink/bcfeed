@@ -241,6 +241,20 @@ def reset_caches():
         for p in (RELEASE_CACHE_PATH, EMPTY_DATES_PATH, SCRAPE_STATUS_PATH, EMBED_CACHE_PATH):
             if _safe_unlink(p):
                 cleared.append(p.name)
+        # Rebuild an empty dashboard so the browser can reload cleanly.
+        try:
+            output_path = DATA_DIR / "output.html"
+            embed_proxy_url = request.host_url.rstrip("/") + "/embed-meta"
+            write_release_dashboard(
+                releases=[],
+                output_path=output_path,
+                title="bcfeed",
+                fetch_missing_ids=False,
+                embed_proxy_url=embed_proxy_url,
+                log=lambda msg: None,
+            )
+        except Exception as exc:
+            errors.append(f"regen: {exc}")
     if clear_viewed:
         if _safe_unlink(VIEWED_PATH):
             cleared.append(VIEWED_PATH.name)

@@ -1315,6 +1315,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       toggleSettings(false);
       if (hadError && clearCache) {{
         alert("Could not clear disk cache (proxy not reachable). Run the app/proxy and try again.");
+      }} else if (clearCache) {{
+        window.location.reload();
       }}
     }}
     if (settingsReset) settingsReset.addEventListener("click", performReset);
