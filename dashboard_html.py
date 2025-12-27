@@ -751,6 +751,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       }}
       persistViewedLocal(state.viewed);
       persistViewedRemote(release.url || key, isRead);
+      renderCalendar("range");
     }}
     const state = {{
       sortKey: "date",
@@ -1363,6 +1364,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         state.hideViewedSnapshot = new Set(state.viewed);
       }}
       renderTable();
+      renderCalendar("range");
     }}
     if (markSeenBtn) markSeenBtn.addEventListener("click", () => markVisibleRows(true));
     if (markUnseenBtn) markUnseenBtn.addEventListener("click", () => markVisibleRows(false));
