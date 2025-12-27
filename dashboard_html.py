@@ -581,7 +581,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         <div class="header-bar">
           <div style="display:flex; flex-direction:column; gap:4px;">
             <h1>{escaped_title}</h1>
-            <div class="detail-meta" id="date-range"></div>
           </div>
           <div style="display:flex; gap:8px;">
             <label style="display:flex; align-items:center; gap:4px; font-size:12px;">
