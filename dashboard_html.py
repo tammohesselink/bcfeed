@@ -1706,9 +1706,11 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       state.viewed = set;
       renderDateRangeLabel();
       renderTable();
+      renderCalendar("range");
     }}).catch(() => {{
       renderDateRangeLabel();
       renderTable();
+      renderCalendar("range");
     }});
   </script>
 </body>
