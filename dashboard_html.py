@@ -1577,8 +1577,10 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
 
     function populateRangeFromCalendars() {{
       applyCalendarFiltersFromSelection();
-      const startVal = dateFilterFrom ? dateFilterFrom.value.trim() : "";
-      const endVal = dateFilterTo ? dateFilterTo.value.trim() : startVal;
+      let startVal = dateFilterFrom ? dateFilterFrom.value.trim() : "";
+      let endVal = dateFilterTo ? dateFilterTo.value.trim() : "";
+      if (startVal && !endVal) endVal = startVal;
+      if (endVal && !startVal) startVal = endVal;
       if (!API_ROOT || !startVal || !endVal) return;
       const btn = populateBtn;
       const original = btn ? btn.textContent : "";
