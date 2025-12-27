@@ -221,7 +221,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 8px;
+      padding: 4px 0;
     }}
     .wireframe-title {{
       display: flex;
@@ -253,23 +254,11 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }}
     .date-range-panel {{
       display: grid;
-      gap: 10px;
-    }}
-    .date-range-header {{
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-    }}
-    .date-range-header h3 {{
-      margin: 0;
-      font-size: 14px;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-      color: var(--muted);
+      gap: 8px;
     }}
     .calendar-row {{
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 270px 1fr;
       gap: 12px;
       align-items: start;
     }}
@@ -280,7 +269,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       padding: 10px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
       width: 270px;
-      height: 400px;
+      height: 460px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -338,6 +327,28 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       font-size: 12px;
       flex: 1;
       min-height: 340px;
+    }}
+    .calendar-log {{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 10px;
+      height: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }}
+    .scrollbox {{
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      background: rgba(255,255,255,0.02);
+      flex: 1;
+      overflow-y: auto;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: pre-line;
     }}
     .calendar-day {{
       position: relative;
@@ -606,7 +617,12 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
                 </div>
                 <div class="calendar-grid" id="calendar-range"></div>
               </div>
-              <div></div>
+              <div class="calendar-log">
+                <div class="calendar-label" style="justify-content:flex-start; gap:8px;">
+                  <span style="font-weight:600;">Status</span>
+                </div>
+                <div id="populate-log" class="scrollbox"></div>
+              </div>
             </div>
             <div style="display:flex; justify-content:flex-end;">
               <button id="populate-range" class="button">Populate</button>
@@ -1272,6 +1288,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const calendarRangeMonth = document.getElementById("calendar-range-month");
     const populateBtn = document.getElementById("populate-range");
     const populateStatus = document.createElement("div");
+    const POPULATE_LOG_KEY = "bc_populate_log_v1";
+    const populateLog = document.getElementById("populate-log");
     const CALENDAR_STATE_KEY = "bc_calendar_state_v1";
     const SCRAPE_STATUS_URL = API_ROOT ? `${{API_ROOT}}/scrape-status` : null;
 
@@ -1569,7 +1587,37 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         btn.textContent = "Populating…";
       }}
       populateStatus.textContent = "";
+
       async function runPopulate() {{
+        if (window.EventSource) {{
+          if (populateLog) populateLog.textContent = "";
+          try {{ localStorage.setItem(POPULATE_LOG_KEY, ""); }} catch (e) {{}}
+          const url = `${{API_ROOT}}/populate-range-stream?start=${{encodeURIComponent(startVal)}}&end=${{encodeURIComponent(endVal)}}`;
+          const es = new EventSource(url);
+          es.onmessage = (ev) => {{
+            if (!ev || !ev.data) return;
+            const current = populateLog ? populateLog.textContent : "";
+            const next = current ? `${{current}}\\n${{ev.data}}` : ev.data;
+            if (populateLog) populateLog.textContent = next;
+            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
+          }};
+          es.addEventListener("done", () => {{
+            populateStatus.textContent = "Done. Reloading…";
+            es.close();
+            window.location.reload();
+          }});
+          es.onerror = () => {{
+            es.close();
+            populateStatus.textContent = "";
+            alert("Populate failed (stream error)");
+            if (btn) {{
+              btn.disabled = false;
+              btn.textContent = original || "Populate";
+            }}
+          }};
+          return;
+        }}
+
         try {{
           const resp = await fetch(`${{API_ROOT}}/populate-range`, {{
             method: "POST",
@@ -1577,13 +1625,28 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
             body: JSON.stringify({{start: startVal, end: endVal}}),
           }});
           const data = await resp.json().catch(() => ({{}}));
+          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\\n") : "";
           if (!resp.ok) {{
+            if (populateLog && joinedLogs) {{
+              populateLog.textContent = joinedLogs;
+            }}
+            if (joinedLogs) {{
+              try {{ localStorage.setItem(POPULATE_LOG_KEY, joinedLogs); }} catch (e) {{}}
+            }}
             throw new Error(data.error || `HTTP ${{resp.status}}`);
+          }}
+          if (populateLog && joinedLogs) {{
+            populateLog.textContent = joinedLogs;
+          }}
+          if (joinedLogs) {{
+            try {{ localStorage.setItem(POPULATE_LOG_KEY, joinedLogs); }} catch (e) {{}}
           }}
           populateStatus.textContent = "Done. Reloading…";
           window.location.reload();
         }} catch (err) {{
           populateStatus.textContent = "";
+          if (populateLog) populateLog.textContent = String(err || "Error");
+          try {{ localStorage.setItem(POPULATE_LOG_KEY, String(err || "Error")); }} catch (e) {{}}
           alert(`Populate failed: ${{err.message || err}}`);
         }} finally {{
           if (btn) {{
@@ -1656,6 +1719,12 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           if (typeof data.to === "string") dateFilterTo.value = data.to;
         }}
       }} catch (err) {{}}
+      try {{
+        const savedLog = localStorage.getItem(POPULATE_LOG_KEY);
+        if (populateLog && savedLog) {{
+          populateLog.textContent = savedLog;
+        }}
+      }} catch (e) {{}}
       onDateFilterChange();
     }}
 
@@ -1664,6 +1733,9 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       const payload = {{
         from: (dateFilterFrom.value || "").trim(),
         to: (dateFilterTo.value || "").trim(),
+        populateLog: (() => {{
+          try {{ return localStorage.getItem(POPULATE_LOG_KEY) || ""; }} catch (e) {{ return ""; }}
+        }})(),
       }};
       try {{
         localStorage.setItem(CALENDAR_STATE_KEY, JSON.stringify(payload));

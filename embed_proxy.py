@@ -19,7 +19,8 @@ from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response, stream_with_context
+from queue import SimpleQueue
 from werkzeug.serving import make_server
 
 from util import get_data_dir
@@ -314,6 +315,90 @@ def populate_range():
         return _corsify(jsonify({"error": str(exc), "logs": logs})), 500
     finally:
         POPULATE_LOCK.release()
+
+
+@app.route("/populate-range-stream", methods=["GET", "OPTIONS"])
+def populate_range_stream():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    start_arg = request.args.get("start") or request.args.get("from")
+    end_arg = request.args.get("end") or start_arg
+    max_results = int(request.args.get("max_results") or 2000)
+    def error_stream(msg: str):
+        def gen():
+            yield f"event: error\ndata: {msg}\n\n"
+        headers = {
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control": "no-cache",
+        }
+        return Response(stream_with_context(gen()), mimetype="text/event-stream", headers=headers)
+
+    if not start_arg or not end_arg:
+        return error_stream("Missing start/end")
+    start = _parse_date(start_arg)
+    end = _parse_date(end_arg)
+    if not start or not end or start > end:
+        return error_stream("Invalid start/end")
+    if not _find_credentials_file():
+        return error_stream("Credentials not found. Reload credentials in the app.")
+    if not TOKEN_PATH.exists():
+        return error_stream("Gmail token missing. Reload credentials in the app to re-authenticate.")
+
+    if not POPULATE_LOCK.acquire(blocking=False):
+        return error_stream("Another populate is already running")
+
+    embed_proxy_url = request.host_url.rstrip("/") + "/embed-meta"
+
+    def event_stream():
+        q: SimpleQueue[str | None] = SimpleQueue()
+
+        def log(msg: str):
+            q.put(str(msg))
+
+        def worker():
+            try:
+                gather_releases_with_cache(
+                    start.strftime("%Y/%m/%d"),
+                    end.strftime("%Y/%m/%d"),
+                    max_results,
+                    batch_size=20,
+                    log=log,
+                )
+                releases = get_full_release_cache()
+                output_path = DATA_DIR / "output.html"
+                write_release_dashboard(
+                    releases=releases,
+                    output_path=output_path,
+                    title="bcfeed",
+                    fetch_missing_ids=False,
+                    embed_proxy_url=embed_proxy_url,
+                    log=log,
+                )
+                q.put("Regenerated dashboard.")
+            except Exception as exc:
+                q.put(f"ERROR: {exc}")
+            finally:
+                q.put(None)
+
+        thread = threading.Thread(target=worker, daemon=True)
+        thread.start()
+
+        try:
+            while True:
+                item = q.get()
+                if item is None:
+                    break
+                safe = str(item).replace("\n", " ")
+                yield f"data: {safe}\n\n"
+            yield "event: done\ndata: complete\n\n"
+        finally:
+            POPULATE_LOCK.release()
+
+    headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-cache",
+    }
+    return Response(stream_with_context(event_stream()), mimetype="text/event-stream", headers=headers)
 
 
 if __name__ == "__main__":

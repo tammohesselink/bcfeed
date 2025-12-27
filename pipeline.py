@@ -20,9 +20,10 @@ def parse_date(date_text: str) -> datetime.date:
         raise ValueError("Incorrect data format, should be YYYY/MM/DD")
 
 
-def construct_release_list(emails: Dict) -> list[dict]:
+def construct_release_list(emails: Dict, *, log=print) -> list[dict]:
     """Parse Gmail messages into release dicts."""
-    print("Parsing messages...")
+    if log:
+        log("Parsing messages...")
     releases_unsifted = []
     for _, email in emails.items():
         date_header = None
@@ -49,7 +50,8 @@ def construct_release_list(emails: Dict) -> list[dict]:
             )
 
     # Sift releases with identical urls
-    print("Checking for releases with identical URLS...")
+    if log:
+        log("Checking for releases with identical URLS...")
     releases = []
     release_urls = []
     for release in releases_unsifted:
@@ -120,8 +122,8 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
                 persist_empty_date_range(start_missing, end_missing, exclude_today=True)
                 continue
             log(f"Found {len(message_ids)} messages for {query_after} to {query_before}")
-            emails = get_messages(service, [msg["id"] for msg in message_ids], "full", batch_size)
-            new_releases = construct_release_list(emails)
+            emails = get_messages(service, [msg["id"] for msg in message_ids], "full", batch_size, log=log)
+            new_releases = construct_release_list(emails, log=log)
             log(f"Parsed {len(new_releases)} releases from Gmail for {query_after} to {query_before}.")
             releases.extend(new_releases)
             persist_release_metadata(new_releases, exclude_today=True)

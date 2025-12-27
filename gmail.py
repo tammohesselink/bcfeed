@@ -116,12 +116,13 @@ def search_messages(service, query, max_results=100):
     return messages
 
 # ------------------------------------------------------------------------ 
-def get_messages(service, ids, format, batch_size):
+def get_messages(service, ids, format, batch_size, log=print):
     idx = 0
     emails = {}
 
     while idx < len(ids):
-        print(f'Downloading messages {idx} to {min(idx+batch_size, len(ids))}')
+        if log:
+            log(f'Downloading messages {idx} to {min(idx+batch_size, len(ids))}')
         batch = service.new_batch_http_request()
         for id in ids[idx:idx+batch_size]:
             batch.add(service.users().messages().get(userId = 'me', id = id, format=format))
