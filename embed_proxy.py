@@ -23,7 +23,10 @@ from flask import Flask, jsonify, request
 from werkzeug.serving import make_server
 
 from util import get_data_dir
-from session_store import scrape_status_for_range
+from session_store import scrape_status_for_range, get_full_release_cache
+from pipeline import gather_releases_with_cache
+from dashboard import write_release_dashboard
+from gmail import _find_credentials_file
 
 app = Flask(__name__)
 
@@ -33,6 +36,8 @@ RELEASE_CACHE_PATH = DATA_DIR / "release_cache.json"
 EMPTY_DATES_PATH = DATA_DIR / "no_results_dates.json"
 SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
 EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
+TOKEN_PATH = DATA_DIR / "token.pickle"
+POPULATE_LOCK = threading.Lock()
 
 
 def _load_embed_cache() -> dict:
@@ -96,7 +101,10 @@ def _parse_date(val: str) -> datetime.date | None:
     try:
         return datetime.datetime.strptime(val, "%Y-%m-%d").date()
     except Exception:
-        return None
+        try:
+            return datetime.datetime.strptime(val, "%Y/%m/%d").date()
+        except Exception:
+            return None
 
 
 def _corsify(response):
@@ -238,6 +246,60 @@ def reset_caches():
             cleared.append(VIEWED_PATH.name)
 
     return _corsify(jsonify({"ok": True, "cleared": cleared, "errors": errors}))
+
+
+@app.route("/populate-range", methods=["POST", "OPTIONS"])
+def populate_range():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    data = request.get_json(silent=True) or {}
+    start_raw = data.get("start") or data.get("from")
+    end_raw = data.get("end") or start_raw
+    max_results = int(data.get("max_results") or 2000)
+    if not start_raw or not end_raw:
+        return _corsify(jsonify({"error": "Missing start/end"})), 400
+    start = _parse_date(start_raw)
+    end = _parse_date(end_raw)
+    if not start or not end or start > end:
+        return _corsify(jsonify({"error": "Invalid start/end date"})), 400
+
+    if not _find_credentials_file():
+        return _corsify(jsonify({"error": "Credentials not found. Reload credentials in the app."})), 400
+    if not TOKEN_PATH.exists():
+        return _corsify(jsonify({"error": "Gmail token missing. Reload credentials in the app to re-authenticate."})), 400
+
+    if not POPULATE_LOCK.acquire(blocking=False):
+        return _corsify(jsonify({"error": "Another populate is already running"})), 409
+    logs = []
+
+    def log(msg: str):
+        logs.append(str(msg))
+
+    try:
+        gather_releases_with_cache(
+            start.strftime("%Y/%m/%d"),
+            end.strftime("%Y/%m/%d"),
+            max_results,
+            batch_size=20,
+            log=log,
+        )
+        # Rebuild dashboard from full cache so reload shows new data.
+        releases = get_full_release_cache()
+        output_path = DATA_DIR / "output.html"
+        embed_proxy_url = request.host_url.rstrip("/") + "/embed-meta"
+        write_release_dashboard(
+            releases=releases,
+            output_path=output_path,
+            title="bcfeed",
+            fetch_missing_ids=False,
+            embed_proxy_url=embed_proxy_url,
+            log=log,
+        )
+        return _corsify(jsonify({"ok": True, "logs": logs, "count": len(releases)}))
+    except Exception as exc:
+        return _corsify(jsonify({"error": str(exc), "logs": logs})), 500
+    finally:
+        POPULATE_LOCK.release()
 
 
 if __name__ == "__main__":

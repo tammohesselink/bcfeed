@@ -1262,6 +1262,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const calendarStartMonth = document.getElementById("calendar-start-month");
     const calendarEndMonth = document.getElementById("calendar-end-month");
     const populateBtn = document.getElementById("populate-range");
+    const populateStatus = document.createElement("div");
     const SCRAPE_STATUS_URL = API_ROOT ? `${{API_ROOT}}/scrape-status` : null;
 
     function toggleSettings(open) {{
@@ -1541,6 +1542,40 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         dateFilterTo.value = calendars.end.selectedKey;
       }}
       onDateFilterChange();
+      const startVal = dateFilterFrom ? dateFilterFrom.value.trim() : "";
+      const endVal = dateFilterTo ? dateFilterTo.value.trim() : startVal;
+      if (!API_ROOT || !startVal || !endVal) return;
+      const btn = populateBtn;
+      const original = btn ? btn.textContent : "";
+      if (btn) {{
+        btn.disabled = true;
+        btn.textContent = "Populating…";
+      }}
+      populateStatus.textContent = "";
+      async function runPopulate() {{
+        try {{
+          const resp = await fetch(`${{API_ROOT}}/populate-range`, {{
+            method: "POST",
+            headers: {{"Content-Type": "application/json"}},
+            body: JSON.stringify({{start: startVal, end: endVal}}),
+          }});
+          const data = await resp.json().catch(() => ({{}}));
+          if (!resp.ok) {{
+            throw new Error(data.error || `HTTP ${{resp.status}}`);
+          }}
+          populateStatus.textContent = "Done. Reloading…";
+          window.location.reload();
+        }} catch (err) {{
+          populateStatus.textContent = "";
+          alert(`Populate failed: ${{err.message || err}}`);
+        }} finally {{
+          if (btn) {{
+            btn.disabled = false;
+            btn.textContent = original || "Populate";
+          }}
+        }}
+      }}
+      runPopulate();
     }}
     if (populateBtn) populateBtn.addEventListener("click", populateRangeFromCalendars);
 
