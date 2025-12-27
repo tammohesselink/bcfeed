@@ -21,6 +21,7 @@ DATA_ROOT = get_data_dir()
 CACHE_PATH = DATA_ROOT / "release_cache.json"
 EMPTY_PATH = DATA_ROOT / "no_results_dates.json"
 EMBED_CACHE_PATH = DATA_ROOT / "embed_cache.json"
+SCRAPE_STATUS_PATH = DATA_ROOT / "scrape_status.json"
 
 
 def _ensure_cache_dir() -> None:
@@ -87,6 +88,37 @@ def _load_empty_dates() -> Set[datetime.date]:
         return set()
 
 
+def _load_scrape_status() -> Set[datetime.date]:
+    _ensure_cache_dir()
+    if not SCRAPE_STATUS_PATH.exists():
+        return set()
+    try:
+        with open(SCRAPE_STATUS_PATH, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+            dates = set()
+            for item in raw if isinstance(raw, list) else []:
+                day = _to_date(item)
+                if day:
+                    dates.add(day)
+            return dates
+    except Exception:
+        return set()
+
+
+def _save_scrape_status(dates: Set[datetime.date]) -> None:
+    _ensure_cache_dir()
+    tmp_path = SCRAPE_STATUS_PATH.with_suffix(".tmp")
+    today = datetime.date.today()
+    # Always treat today as not-scraped.
+    if today in dates:
+        dates = set(dates)
+        dates.discard(today)
+    payload = sorted(day.isoformat() for day in dates)
+    with open(tmp_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+    tmp_path.replace(SCRAPE_STATUS_PATH)
+
+
 def _save_empty_dates(dates: Set[datetime.date]) -> None:
     _ensure_cache_dir()
     tmp_path = EMPTY_PATH.with_suffix(".tmp")
@@ -124,6 +156,62 @@ def _dedupe_by_url(items: Iterable[dict]) -> List[dict]:
     return deduped
 
 
+def mark_dates_scraped(dates: Iterable[datetime.date], *, exclude_today: bool = True) -> None:
+    """
+    Mark specific dates as having been scraped from Gmail.
+    """
+    scraped = _load_scrape_status()
+    today = datetime.date.today()
+    for day in dates:
+        if not isinstance(day, datetime.date):
+            continue
+        if exclude_today and day == today:
+            continue
+        scraped.add(day)
+    _save_scrape_status(scraped)
+
+
+def mark_date_range_scraped(start: datetime.date, end: datetime.date, *, exclude_today: bool = True) -> None:
+    """Mark a contiguous date range as scraped."""
+    if start > end:
+        return
+    scraped = _load_scrape_status()
+    today = datetime.date.today()
+    cursor = start
+    one_day = datetime.timedelta(days=1)
+    while cursor <= end:
+        if not (exclude_today and cursor == today):
+            scraped.add(cursor)
+        cursor += one_day
+    _save_scrape_status(scraped)
+
+
+def mark_dates_not_scraped(dates: Iterable[datetime.date]) -> None:
+    """Explicitly mark dates as not-scraped (removes from scraped set)."""
+    scraped = _load_scrape_status()
+    for day in dates:
+        if isinstance(day, datetime.date) and day in scraped:
+            scraped.discard(day)
+    _save_scrape_status(scraped)
+
+
+def scrape_status_for_range(start: datetime.date, end: datetime.date) -> Dict[str, bool]:
+    """
+    Return a mapping of ISO date -> scraped flag for the inclusive range.
+    Today's date is always False (not scraped).
+    """
+    status = {}
+    scraped = _load_scrape_status()
+    today = datetime.date.today()
+    cursor = start
+    one_day = datetime.timedelta(days=1)
+    while cursor <= end:
+        is_scraped = cursor in scraped and cursor != today
+        status[cursor.isoformat()] = is_scraped
+        cursor += one_day
+    return status
+
+
 def persist_release_metadata(releases: Iterable[dict], *, exclude_today: bool = True) -> None:
     """
     Save release metadata into the cache, keyed by release date.
@@ -132,6 +220,7 @@ def persist_release_metadata(releases: Iterable[dict], *, exclude_today: bool = 
     cache = _load_cache()
     empty_dates = _load_empty_dates()
     today = datetime.date.today()
+    scraped_days: Set[datetime.date] = set()
     for release in releases:
         day = _to_date(release.get("date"))
         if not day:
@@ -143,11 +232,14 @@ def persist_release_metadata(releases: Iterable[dict], *, exclude_today: bool = 
         # avoid duplicates for the same day by URL
         combined = _dedupe_by_url([*existing, release])
         cache[key] = combined
+        scraped_days.add(day)
         # if we now have data for a day that was previously marked empty, clear that marker
         if day in empty_dates:
             empty_dates.discard(day)
     _save_cache(cache)
     _save_empty_dates(empty_dates)
+    if scraped_days:
+        mark_dates_scraped(scraped_days, exclude_today=exclude_today)
 
 
 def cached_releases_for_range(start: datetime.date, end: datetime.date) -> Tuple[List[dict], List[datetime.date]]:
@@ -208,6 +300,7 @@ def persist_empty_date_range(start: datetime.date, end: datetime.date, *, exclud
             empty_dates.add(cursor)
         cursor += one_day
     _save_empty_dates(empty_dates)
+    mark_date_range_scraped(start, end, exclude_today=exclude_today)
 
 
 # --------------------------------------------------------------------------- #

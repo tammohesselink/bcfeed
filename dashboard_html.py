@@ -345,6 +345,26 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       background: linear-gradient(180deg, rgba(82,208,255,0.14), rgba(82,208,255,0.05));
       border-color: rgba(82,208,255,0.5);
     }}
+    .calendar-day .dot-strip {{
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 4px;
+      min-height: 8px;
+    }}
+    .calendar-day .dot {{
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.25);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+      background: transparent;
+    }}
+    .calendar-day .dot.scraped {{
+      background: #7adf85;
+      border-color: rgba(60,140,72,0.6);
+      box-shadow: 0 0 0 1px rgba(122,223,133,0.35);
+    }}
     .calendar-day:hover {{
       transform: translateY(-1px);
       border-color: rgba(82,208,255,0.6);
@@ -524,23 +544,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
 <body>
   <div class="layout">
     <aside>
-      <div class="filter-title">Filter by date</div>
-      <div style="margin-bottom: 12px;">
-        <label style="display:flex; align-items:center; gap:6px; font-size:13px;">
-          <input type="checkbox" id="date-filter-toggle" />
-          <span>Filter by date range</span>
-        </label>
-        <div style="display:grid; gap:6px; margin-top:6px; padding-left:4px;">
-          <label style="display:flex; align-items:center; gap:6px; font-size:13px;">
-            <span style="min-width:38px;">From:</span>
-            <input type="text" id="date-filter-from" placeholder="YYYY-MM-DD" style="width:120px;" />
-          </label>
-          <label style="display:flex; align-items:center; gap:6px; font-size:13px;">
-            <span style="min-width:38px;">To:</span>
-            <input type="text" id="date-filter-to" placeholder="YYYY-MM-DD" style="width:120px;" />
-          </label>
-        </div>
-      </div>
       <div class="filter-title">Filter by Label/Page</div>
       <div id="label-filters" class="filter-list"></div>
     </aside>
@@ -565,16 +568,12 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       <section class="wireframe-panel" id="scrape-wireframe">
         <div class="wireframe-header">
           <div class="wireframe-title">
-            <span>Scrape controls</span>
-            <strong>Scrape by date</strong>
+            <span>Date range</span>
           </div>
           <button id="scrape-wireframe-toggle" class="button" aria-expanded="false" aria-controls="scrape-wireframe-body">Expand</button>
         </div>
         <div class="wireframe-body" id="scrape-wireframe-body" hidden>
           <div class="date-range-panel">
-            <div class="date-range-header">
-              <h3>date range</h3>
-            </div>
             <div class="calendar-row">
               <div class="calendar-card">
                 <div class="calendar-label">
@@ -607,6 +606,10 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
             </div>
             <div style="display:flex; justify-content:flex-end;">
               <button id="populate-range" class="button">Populate</button>
+            </div>
+            <div style="display:none;">
+              <input type="text" id="date-filter-from" />
+              <input type="text" id="date-filter-to" />
             </div>
           </div>
         </div>
@@ -754,7 +757,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       hideViewed: false,
       hideViewedSnapshot: new Set(),
       expandedKey: null,
-      dateFilterEnabled: false,
       dateFilterFrom: "",
       dateFilterTo: "",
       showCachedBadges: true,
@@ -822,6 +824,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }}
 
     const highlightMap = buildHighlightMap(releases);
+    let scrapeStatus = {{ scraped: new Set(), notScraped: new Set() }};
 
     function buildEmbedUrl(id, isTrack) {{
       if (!id) return null;
@@ -1032,23 +1035,24 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       closeOpenDetailRows();
 
       const filtered = releases.filter(r => {{
+        const fromVal = state.dateFilterFrom;
+        const toVal = state.dateFilterTo;
+        const rowTs = Date.parse(r.date);
+        if (fromVal) {{
+          const fromTs = Date.parse(fromVal);
+          if (!isNaN(fromTs) && !isNaN(rowTs) && rowTs < fromTs) return false;
+        }}
+        if (toVal) {{
+          const toTs = Date.parse(toVal);
+          if (!isNaN(toTs) && !isNaN(rowTs) && rowTs > toTs) return false;
+        }}
+
         const useShowOnly = state.showOnlyLabels.size > 0;
         const activeSet = useShowOnly ? state.showOnlyLabels : state.showLabels;
-        if (activeSet.size === 0) return true;
-        if (!r.page_name) return true;
-        if (!activeSet.has(r.page_name)) return false;
-        if (state.dateFilterEnabled) {{
-          if (state.dateFilterFrom) {{
-            const fromTs = Date.parse(state.dateFilterFrom);
-            const rowTs = Date.parse(r.date);
-            if (!isNaN(fromTs) && !isNaN(rowTs) && rowTs < fromTs) return false;
-          }}
-          if (state.dateFilterTo) {{
-            const toTs = Date.parse(state.dateFilterTo);
-            const rowTs = Date.parse(r.date);
-            if (!isNaN(toTs) && !isNaN(rowTs) && rowTs > toTs) return false;
-          }}
+        if (activeSet.size > 0) {{
+          if (r.page_name && !activeSet.has(r.page_name)) return false;
         }}
+
         if (state.hideViewed && state.hideViewedSnapshot.size > 0) {{
           const key = releaseKey(r);
           if (state.expandedKey && key === state.expandedKey) return true;
@@ -1247,7 +1251,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const hideViewedToggle = document.getElementById("hide-viewed-toggle");
     const markSeenBtn = document.getElementById("mark-seen");
     const markUnseenBtn = document.getElementById("mark-unseen");
-    const dateFilterToggle = document.getElementById("date-filter-toggle");
     const dateFilterFrom = document.getElementById("date-filter-from");
     const dateFilterTo = document.getElementById("date-filter-to");
     const showCachedToggle = document.getElementById("show-cached-toggle");
@@ -1259,6 +1262,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const calendarStartMonth = document.getElementById("calendar-start-month");
     const calendarEndMonth = document.getElementById("calendar-end-month");
     const populateBtn = document.getElementById("populate-range");
+    const SCRAPE_STATUS_URL = API_ROOT ? `${{API_ROOT}}/scrape-status` : null;
 
     function toggleSettings(open) {{
       if (!settingsBackdrop) return;
@@ -1437,6 +1441,15 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           cell.classList.add("in-range");
         }}
         cell.textContent = String(cellDate.getDate());
+        const dots = document.createElement("div");
+        dots.className = "dot-strip";
+        const scraped = scrapeStatus.scraped.has(key);
+        if (scraped) {{
+          const dot = document.createElement("span");
+          dot.className = "dot scraped";
+          dots.appendChild(dot);
+        }}
+        cell.appendChild(dots);
 
         cell.addEventListener("click", () => {{
           if (isDisabled) return;
@@ -1449,6 +1462,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           }}
           renderCalendar("start");
           renderCalendar("end");
+          applyCalendarFiltersFromSelection();
         }});
         grid.appendChild(cell);
       }}
@@ -1520,7 +1534,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }});
 
     function populateRangeFromCalendars() {{
-      if (dateFilterToggle) dateFilterToggle.checked = true;
       if (dateFilterFrom && calendars.start.selectedKey) {{
         dateFilterFrom.value = calendars.start.selectedKey;
       }}
@@ -1531,6 +1544,53 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }}
     if (populateBtn) populateBtn.addEventListener("click", populateRangeFromCalendars);
 
+    function setDefaultDateFilters() {{
+      if (!releases.length) return;
+      const dates = releases
+        .map(entry => parseDateString(entry.date))
+        .filter(Boolean)
+        .sort((a, b) => a - b);
+      if (!dates.length) return;
+      const first = isoKeyFromDate(dates[0]);
+      const last = isoKeyFromDate(dates[dates.length - 1]);
+      if (dateFilterFrom && !dateFilterFrom.value) dateFilterFrom.value = first;
+      if (dateFilterTo && !dateFilterTo.value) dateFilterTo.value = last;
+      onDateFilterChange();
+    }}
+
+    function applyCalendarFiltersFromSelection() {{
+      const fromKey = calendars.start.selectedKey;
+      const toKey = calendars.end.selectedKey || calendars.start.selectedKey;
+      if (dateFilterFrom && fromKey) {{
+        dateFilterFrom.value = fromKey;
+      }}
+      if (dateFilterTo && toKey) {{
+        dateFilterTo.value = toKey;
+      }}
+      onDateFilterChange();
+    }}
+
+    async function fetchScrapeStatus() {{
+      if (!SCRAPE_STATUS_URL) return;
+      try {{
+        const params = new URLSearchParams();
+        const firstDate = releases[0]?.date;
+        const lastDate = releases[releases.length - 1]?.date;
+        if (firstDate) params.set("start", formatDate(firstDate));
+        if (lastDate) params.set("end", formatDate(lastDate));
+        const resp = await fetch(`${{SCRAPE_STATUS_URL}}?${{params.toString()}}`);
+        if (!resp.ok) throw new Error(`HTTP ${{resp.status}}`);
+        const data = await resp.json();
+        scrapeStatus.scraped = new Set(data.scraped || []);
+        const notScraped = data.not_scraped || data["not_scraped"] || [];
+        scrapeStatus.notScraped = new Set(notScraped || []);
+        renderCalendar("start");
+        renderCalendar("end");
+      }} catch (err) {{
+        console.warn("Failed to load scrape status", err);
+      }}
+    }}
+
     function setWireframeOpen(open) {{
       if (!wireframePanel || !wireframeBody || !wireframeToggle) return;
       wireframePanel.classList.toggle("open", open);
@@ -1539,7 +1599,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       wireframeToggle.textContent = open ? "Collapse" : "Expand";
     }}
     if (wireframeToggle) {{
-      setWireframeOpen(false);
+      setWireframeOpen(true);
       wireframeToggle.addEventListener("click", () => {{
         const isOpen = wireframePanel && wireframePanel.classList.contains("open");
         setWireframeOpen(!isOpen);
@@ -1547,17 +1607,19 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }}
 
     function onDateFilterChange() {{
-      state.dateFilterEnabled = !!(dateFilterToggle && dateFilterToggle.checked);
       state.dateFilterFrom = dateFilterFrom ? dateFilterFrom.value.trim() : "";
       state.dateFilterTo = dateFilterTo ? dateFilterTo.value.trim() : "";
       syncCalendarsFromInputs();
+      renderCalendar("start");
+      renderCalendar("end");
       renderTable();
     }}
-    if (dateFilterToggle) dateFilterToggle.addEventListener("change", onDateFilterChange);
     if (dateFilterFrom) dateFilterFrom.addEventListener("input", onDateFilterChange);
     if (dateFilterTo) dateFilterTo.addEventListener("input", onDateFilterChange);
 
     initializeCalendars();
+    setDefaultDateFilters();
+    fetchScrapeStatus();
 
     // Render after viewed state loads to keep persisted read dots and show date range
     loadViewedSet().then(set => {{

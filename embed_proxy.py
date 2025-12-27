@@ -10,6 +10,7 @@ Then configure the dashboard to use the proxy, e.g. embed_proxy_url="http://loca
 from __future__ import annotations
 
 import ast
+import datetime
 import json
 import os
 import threading
@@ -22,6 +23,7 @@ from flask import Flask, jsonify, request
 from werkzeug.serving import make_server
 
 from util import get_data_dir
+from session_store import scrape_status_for_range
 
 app = Flask(__name__)
 
@@ -87,6 +89,13 @@ def _save_viewed(items: set[str]) -> None:
     except FileNotFoundError:
         # If the temp file vanished between write and replace, fall back to writing directly.
         VIEWED_PATH.write_text(json.dumps(sorted(items)), encoding="utf-8")
+
+
+def _parse_date(val: str) -> datetime.date | None:
+    try:
+        return datetime.datetime.strptime(val, "%Y-%m-%d").date()
+    except Exception:
+        return None
 
 
 def _corsify(response):
@@ -178,6 +187,25 @@ def embed_meta():
         {"release_id": item_id, "is_track": is_track, "embed_url": embed_url}
     )
     return _corsify(response)
+
+
+@app.route("/scrape-status", methods=["GET", "OPTIONS"])
+def scrape_status():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    start_arg = request.args.get("start")
+    end_arg = request.args.get("end")
+    today = datetime.date.today()
+    default_start = today - datetime.timedelta(days=60)
+    start = _parse_date(start_arg) if start_arg else default_start
+    end = _parse_date(end_arg) if end_arg else today
+    if not start or not end or start > end:
+        return _corsify(jsonify({"error": "Invalid start/end date"})), 400
+
+    status = scrape_status_for_range(start, end)
+    scraped = [day for day, is_scraped in status.items() if is_scraped]
+    not_scraped = [day for day, is_scraped in status.items() if not is_scraped]
+    return _corsify(jsonify({"scraped": scraped, "not_scraped": not_scraped}))
 
 
 @app.route("/reset-caches", methods=["POST", "OPTIONS"])
