@@ -95,10 +95,10 @@ def start_proxy_thread():
     return server, thread, port
 
 
-def run_pipeline(after_date: str, before_date: str, max_results: int, proxy_port: int, preload_embeds: bool, *, log=print):
+def run_pipeline(after_date: str, before_date: str, max_results: int, proxy_port: int, preload_embeds: bool, cache_only: bool, *, log=print):
     output_path = DATA_DIR / "output.html"
 
-    releases = gather_releases_with_cache(after_date, before_date, max_results, batch_size=20, log=log)
+    releases = gather_releases_with_cache(after_date, before_date, max_results, batch_size=20, cache_only=cache_only, log=log)
     output_file = write_release_dashboard(
         releases=releases,
         output_path=output_path,
@@ -132,6 +132,7 @@ def main():
     end_date_var = StringVar(value=settings.get("end_date") or today.strftime("%Y/%m/%d"))
     max_results_var = StringVar(value=str(_coerce_max(settings.get("max_results"), 500)))
     preload_embeds_var = IntVar(value=1 if settings.get("preload_embeds") else 0)
+    cache_only_var = IntVar(value=1 if settings.get("cache_only") else 0)
 
     # Custom layout for date rows to fit compact buttons around the entry
     date_button_sets = []
@@ -282,12 +283,14 @@ def main():
                 "end_date": end_date_var.get(),
                 "max_results": max_val if max_val is not None else "",
                 "preload_embeds": bool(preload_embeds_var.get()),
+                "cache_only": bool(cache_only_var.get()),
             }
         )
 
     # Toggle defaults and actions
     from tkinter import Checkbutton  # localized import to avoid polluting top
     Checkbutton(root, text="Preload Bandcamp players (dashboard creation takes a while, but browsing is faster)", variable=preload_embeds_var).grid(row=3, column=0, columnspan=2, padx=8, sticky="w")
+    Checkbutton(root, text="Cache only (skip Gmail fetches)", variable=cache_only_var).grid(row=3, column=2, padx=8, sticky="w")
 
     # Run / Reload credentials buttons
     actions_frame = Frame(root)
@@ -334,7 +337,7 @@ def main():
     # Persist settings whenever inputs change
     for var in (start_date_var, end_date_var):
         var.trace_add("write", save_current_settings)
-    for var in (max_results_var, preload_embeds_var):
+    for var in (max_results_var, preload_embeds_var, cache_only_var):
         var.trace_add("write", save_current_settings)
 
     def on_run():
@@ -356,6 +359,7 @@ def main():
             return
 
         should_preload = bool(preload_embeds_var.get())
+        cache_only = bool(cache_only_var.get())
         if proxy_thread is None or not proxy_thread.is_alive():
             proxy_server, proxy_thread, proxy_port = start_proxy_thread()
 
@@ -369,10 +373,10 @@ def main():
                 log(f"Starting generation of Bandcamp release feed...")
                 log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 log(f"")
-                log(f"Running query from {start_date_var.get()} to {end_date_var.get()} with max {max_results} (proxy port {proxy_port}, preload {'on' if should_preload else 'off'})")
+                log(f"Running query from {start_date_var.get()} to {end_date_var.get()} with max {max_results} (proxy port {proxy_port}, preload {'on' if should_preload else 'off'}, cache_only {'on' if cache_only else 'off'})")
                 
                 try:
-                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, log=log)
+                    run_pipeline(start_date_var.get(), end_date_var.get(), max_results, proxy_port, should_preload, cache_only, log=log)
                     log("Dashboard generated and opened in browser.")
                     log("")
                     root.after(0, lambda: messagebox.showinfo("Done", "Dashboard generated and opened in browser."))

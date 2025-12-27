@@ -8,6 +8,7 @@ from session_store import (
     collapse_date_ranges,
     persist_empty_date_range,
     persist_release_metadata,
+    mark_date_range_scraped,
 )
 
 
@@ -69,7 +70,7 @@ def construct_release_list(emails: Dict) -> list[dict]:
     return releases
 
 
-def gather_releases_with_cache(after_date: str, before_date: str, max_results: int, batch_size: int, log=print):
+def gather_releases_with_cache(after_date: str, before_date: str, max_results: int, batch_size: int, cache_only: bool = False, log=print):
     """
     Use cached Gmail-scraped release metadata for previously seen dates.
     Only hit Gmail for dates in the requested range that have no cache entry.
@@ -83,7 +84,10 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
     missing_ranges: Iterable[Tuple[datetime.date, datetime.date]] = collapse_date_ranges(missing_dates)
     releases = list(cached_releases)
 
-    if missing_ranges:
+    if cache_only:
+        log(f"Cache-only mode enabled; skipping Gmail fetches. Cached releases available: {len(releases)}.")
+        missing_ranges = []
+    elif missing_ranges:
         log(f"Cached releases are available for {len(releases)} entries; {len(missing_ranges)} missing date span(s) will be fetched from Gmail.")
         log("")
         log("The following date ranges will be downloaded from Gmail:")
@@ -94,7 +98,7 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
 
     cap_reached = False
     remaining = max_results - len(releases)
-    if remaining <= 0:
+    if remaining <= 0 or cache_only:
         # Respect the user's cap: do not download more if cache already exceeds limit
         log(f"Maximum results of {max_results} already satisfied by cache; no Gmail download needed.")
         cap_reached = True
@@ -122,6 +126,8 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
             releases.extend(new_releases)
             persist_release_metadata(new_releases, exclude_today=True)
             remaining = max_results - len(releases)
+            # Mark the entire queried span as scraped so we do not re-fetch it.
+            mark_date_range_scraped(start_missing, end_missing, exclude_today=True)
 
     # Deduplicate on URL after combining cached + new
     seen_urls = set()

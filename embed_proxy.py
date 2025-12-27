@@ -31,6 +31,7 @@ DATA_DIR = get_data_dir()
 VIEWED_PATH = DATA_DIR / "viewed_state.json"
 RELEASE_CACHE_PATH = DATA_DIR / "release_cache.json"
 EMPTY_DATES_PATH = DATA_DIR / "no_results_dates.json"
+SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
 EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
 
 
@@ -229,7 +230,7 @@ def reset_caches():
         return False
 
     if clear_cache:
-        for p in (RELEASE_CACHE_PATH, EMPTY_DATES_PATH, EMBED_CACHE_PATH):
+        for p in (RELEASE_CACHE_PATH, EMPTY_DATES_PATH, SCRAPE_STATUS_PATH, EMBED_CACHE_PATH):
             if _safe_unlink(p):
                 cleared.append(p.name)
     if clear_viewed:

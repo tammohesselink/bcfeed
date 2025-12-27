@@ -245,10 +245,13 @@ def persist_release_metadata(releases: Iterable[dict], *, exclude_today: bool = 
 def cached_releases_for_range(start: datetime.date, end: datetime.date) -> Tuple[List[dict], List[datetime.date]]:
     """
     Return (cached_releases, missing_dates) for the inclusive date range.
-    missing_dates are days with no cached entries.
+    missing_dates are days that have not been scraped yet.
     """
     cache = _load_cache()
     empty_dates = _load_empty_dates()
+    scraped_dates = _load_scrape_status()
+    # Treat explicitly empty days as already scraped (so they are not missing).
+    scraped_dates.update(empty_dates)
     cursor = start
     cached: List[dict] = []
     missing: List[datetime.date] = []
@@ -258,10 +261,7 @@ def cached_releases_for_range(start: datetime.date, end: datetime.date) -> Tuple
         releases_for_day = cache.get(iso)
         if releases_for_day:
             cached.extend(releases_for_day)
-        elif cursor in empty_dates:
-            # known empty date; skip fetching in future sessions
-            pass
-        else:
+        elif cursor not in scraped_dates:
             missing.append(cursor)
         cursor += one_day
     return _dedupe_by_url(cached), missing
