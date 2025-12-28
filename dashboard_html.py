@@ -717,6 +717,10 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         <input type="checkbox" id="show-cached-toggle" checked />
         <label for="show-cached-toggle">Show cached badges</label>
       </div>
+      <div class="settings-row" style="gap:6px;">
+        <label for="max-results-input" style="min-width:90px;">Max results</label>
+        <input id="max-results-input" type="number" min="1" max="2000" step="50" value="2000" style="width:100px; padding:6px;" />
+      </div>
     </div>
   </div>
   <div id="server-down-backdrop" class="server-down-backdrop">
@@ -735,6 +739,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const serverDownBackdrop = document.getElementById("server-down-backdrop");
     let serverDownShown = false;
     const DEFAULT_THEME = {json.dumps(default_theme or "light")};
+    const MAX_RESULTS_KEY = "bc_max_results_v1";
+    const maxResultsInput = document.getElementById("max-results-input");
     function releaseKey(release) {{
       return release.url || [release.page_name, release.artist, release.title, release.date].filter(Boolean).join("|");
     }}
@@ -849,6 +855,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       dateFilterFrom: "",
       dateFilterTo: "",
       showCachedBadges: true,
+      maxResults: 2000,
     }};
     const THEME_KEY = "bc_dashboard_theme";
     const SHOW_CACHED_KEY = "bc_show_cached_badges";
@@ -868,6 +875,24 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       themeToggleBtn.addEventListener("change", () => {{
         const next = themeToggleBtn.checked ? "dark" : "light";
         applyTheme(next);
+      }});
+    }}
+
+    function normalizeMaxResults(val) {{
+      const n = parseInt(val, 10);
+      if (Number.isNaN(n) || n <= 0) return 2000;
+      if (n > 2000) return 2000;
+      return n;
+    }}
+    const storedMax = normalizeMaxResults(localStorage.getItem(MAX_RESULTS_KEY));
+    state.maxResults = storedMax;
+    if (maxResultsInput) {{
+      maxResultsInput.value = storedMax;
+      maxResultsInput.addEventListener("change", () => {{
+        const next = normalizeMaxResults(maxResultsInput.value);
+        state.maxResults = next;
+        maxResultsInput.value = next;
+        localStorage.setItem(MAX_RESULTS_KEY, String(next));
       }});
     }}
 
@@ -1698,6 +1723,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       let endVal = dateFilterTo ? dateFilterTo.value.trim() : "";
       if (startVal && !endVal) endVal = startVal;
       if (endVal && !startVal) startVal = endVal;
+      const maxResults = normalizeMaxResults(state.maxResults);
       if (!API_ROOT || !startVal || !endVal) return;
       const btn = populateBtn;
       const original = btn ? btn.textContent : "";
@@ -1711,7 +1737,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         if (window.EventSource) {{
           if (populateLog) populateLog.textContent = "";
           try {{ localStorage.setItem(POPULATE_LOG_KEY, ""); }} catch (e) {{}}
-          const url = `${{API_ROOT}}/populate-range-stream?start=${{encodeURIComponent(startVal)}}&end=${{encodeURIComponent(endVal)}}`;
+          const url = `${{API_ROOT}}/populate-range-stream?start=${{encodeURIComponent(startVal)}}&end=${{encodeURIComponent(endVal)}}&max_results=${{encodeURIComponent(maxResults)}}`;
           const es = new EventSource(url);
           es.onmessage = (ev) => {{
             if (!ev || !ev.data) return;
@@ -1741,7 +1767,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           const resp = await fetch(`${{API_ROOT}}/populate-range`, {{
             method: "POST",
             headers: {{"Content-Type": "application/json"}},
-            body: JSON.stringify({{start: startVal, end: endVal}}),
+            body: JSON.stringify({{start: startVal, end: endVal, max_results: maxResults}}),
           }});
           const data = await resp.json().catch(() => ({{}}));
           const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\\n") : "";
