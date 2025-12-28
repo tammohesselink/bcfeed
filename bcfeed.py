@@ -221,7 +221,6 @@ def main():
                     launch_from_cache(proxy_port, should_preload, log=log, launch_browser=True)
                     log("Dashboard generated from cache and opened in browser.")
                     log("")
-                    root.after(0, lambda: messagebox.showinfo("Done", "Dashboard generated from cache and opened in browser."))
                 finally:
                     sys.stdout = original_stdout
             except Exception as exc:
@@ -248,6 +247,8 @@ def main():
         # Prompt for credentials on first launch if missing
         root.after(50, lambda: load_credentials())
 
+    # Auto-launch on start
+    root.after(100, on_launch)
     root.protocol("WM_DELETE_WINDOW", on_close)
     root.mainloop()
 
