@@ -717,18 +717,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         <h2>Settings</h2>
         <button id="settings-close" class="button">Close</button>
       </div>
-      <div class="settings-row" style="padding-left:4px; color: var(--muted); font-size: 13px;">
-        Clear cache:
-      </div>
-      <div class="settings-row" style="padding-left:12px;">
-        <input type="checkbox" id="reset-clear-cache" checked />
-        <label for="reset-clear-cache">Clear cache</label>
-      </div>
-      <div class="settings-row" style="padding-left:12px;">
-        <input type="checkbox" id="reset-clear-viewed" />
-        <label for="reset-clear-viewed">Clear read/unread state</label>
-      </div>
-      <button id="settings-reset" class="button">Reset</button>
+      <button id="settings-reset" class="button">Clear cache</button>
       <div style="height:8px;"></div>
       <div class="settings-row">
         <input type="checkbox" id="theme-toggle" />
@@ -1395,8 +1384,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const settingsBtn = document.getElementById("settings-btn");
     const settingsClose = document.getElementById("settings-close");
     const settingsReset = document.getElementById("settings-reset");
-    const resetClearCache = document.getElementById("reset-clear-cache");
-    const resetClearViewed = document.getElementById("reset-clear-viewed");
+    const resetClearCache = null;
+    const resetClearViewed = null;
     const hideViewedToggle = document.getElementById("hide-viewed-toggle");
     const markSeenBtn = document.getElementById("mark-seen");
     const markUnseenBtn = document.getElementById("mark-unseen");
@@ -1429,12 +1418,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }});
 
     async function performReset() {{
-      const clearCache = resetClearCache ? !!resetClearCache.checked : false;
-      const clearViewed = resetClearViewed ? !!resetClearViewed.checked : false;
-      if (!clearCache && !clearViewed) {{
-        toggleSettings(false);
-        return;
-      }}
+      const clearCache = true;
+      const clearViewed = true;
       let hadError = false;
       if (API_ROOT) {{
         try {{
@@ -1451,23 +1436,18 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       }} else {{
         hadError = true; // cannot clear disk cache without API
       }}
-      if (clearViewed) {{
-        state.viewed = new Set();
-        persistViewedLocal(state.viewed);
-        renderTable();
-      }}
-      if (clearCache) {{
-        releases.forEach(r => {{
-          delete r.embed_url;
-          delete r.release_id;
-          delete r.is_track;
-        }});
-        renderTable();
-      }}
+      state.viewed = new Set();
+      persistViewedLocal(state.viewed);
+      releases.forEach(r => {{
+        delete r.embed_url;
+        delete r.release_id;
+        delete r.is_track;
+      }});
+      renderTable();
       toggleSettings(false);
       if (hadError && clearCache) {{
         alert("Could not clear disk cache (proxy not reachable). Run the app/proxy and try again.");
-      }} else if (clearCache) {{
+      }} else {{
         window.location.reload();
       }}
     }}
