@@ -556,6 +556,27 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       text-align: center;
       color: var(--muted);
     }}
+    .server-down-backdrop {{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }}
+    .server-down-modal {{
+      background: var(--surface);
+      color: var(--text);
+      padding: 24px 28px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      max-width: 420px;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.5;
+    }}
     @media (max-width: 900px) {{
       body {{ display: block; }}
       .layout {{ grid-template-columns: 1fr; }}
@@ -681,6 +702,9 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       </div>
     </div>
   </div>
+  <div id="server-down-backdrop" class="server-down-backdrop">
+    <div class="server-down-modal">Please restart the app to use bcfeed.</div>
+  </div>
   <script id="release-data" type="application/json">{data_json}</script>
   <script>
     const EMBED_PROXY_URL = {proxy_literal};
@@ -691,6 +715,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     releases.forEach(r => releaseMap.set(releaseKey(r), r));
     const VIEWED_KEY = "bc_viewed_releases_v1";
     const API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
+    const serverDownBackdrop = document.getElementById("server-down-backdrop");
+    let serverDownShown = false;
     const DEFAULT_THEME = {json.dumps(default_theme or "light")};
     function releaseKey(release) {{
       return release.url || [release.page_name, release.artist, release.title, release.date].filter(Boolean).join("|");
@@ -739,6 +765,30 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         return Array.isArray(parsed) ? new Set(parsed) : new Set();
       }} catch (err) {{
         return new Set();
+      }}
+    }}
+    function showServerDownModal() {{
+      if (serverDownShown) return;
+      serverDownShown = true;
+      if (serverDownBackdrop) {{
+        serverDownBackdrop.style.display = "flex";
+      }}
+    }}
+    async function checkServerAlive() {{
+      if (!API_ROOT || serverDownShown) return;
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 4000);
+      try {{
+        const resp = await fetch(`${{API_ROOT}}/viewed-state`, {{
+          method: "GET",
+          cache: "no-store",
+          signal: controller.signal,
+        }});
+        clearTimeout(timer);
+        if (!resp.ok) throw new Error(`HTTP ${{resp.status}}`);
+      }} catch (err) {{
+        clearTimeout(timer);
+        showServerDownModal();
       }}
     }}
     function persistViewedLocal(set) {{
@@ -1625,6 +1675,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }}
 
     function populateRangeFromCalendars() {{
+      checkServerAlive();
       applyCalendarFiltersFromSelection();
       let startVal = dateFilterFrom ? dateFilterFrom.value.trim() : "";
       let endVal = dateFilterTo ? dateFilterTo.value.trim() : "";
@@ -1828,6 +1879,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     loadCalendarState();
     setDefaultDateFilters();
     fetchScrapeStatus();
+    setTimeout(() => checkServerAlive(), 500);
+    setInterval(() => checkServerAlive(), 5000);
 
     // Render after viewed state loads to keep persisted read dots and show date range
     loadViewedSet().then(set => {{
