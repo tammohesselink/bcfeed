@@ -756,6 +756,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     releases.forEach(r => releaseMap.set(releaseKey(r), r));
     const VIEWED_KEY = "bc_viewed_releases_v1";
     const API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
+    const HEALTH_URL = API_ROOT ? `${{API_ROOT}}/health` : null;
     const serverDownBackdrop = document.getElementById("server-down-backdrop");
     const maxResultsBackdrop = document.getElementById("max-results-backdrop");
     let serverDownShown = false;
@@ -835,11 +836,11 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
     }}
     async function checkServerAlive() {{
-      if (!API_ROOT || serverDownShown) return;
+      if (!HEALTH_URL || serverDownShown) return;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 4000);
       try {{
-        const resp = await fetch(`${{API_ROOT}}/viewed-state`, {{
+        const resp = await fetch(HEALTH_URL, {{
           method: "GET",
           cache: "no-store",
           signal: controller.signal,

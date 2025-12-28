@@ -115,9 +115,16 @@ def _corsify(response):
     return response
 
 
+@app.route("/health", methods=["GET", "OPTIONS"])
+def health():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    return _corsify(jsonify({"ok": True}))
+
+
 def start_proxy_server(port: int = 5050):
     """Start the proxy in a background thread and return (server, thread)."""
-    server = make_server("0.0.0.0", port, app)
+    server = make_server("0.0.0.0", port, app, threaded=True)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     return server, thread
@@ -403,4 +410,4 @@ def populate_range_stream():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, threaded=True)
