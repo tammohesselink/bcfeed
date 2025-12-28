@@ -624,7 +624,8 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
                 <div id="populate-log" class="scrollbox"></div>
               </div>
             </div>
-            <div style="display:flex; justify-content:flex-end;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <button id="select-month-btn" class="button" style="background:var(--panel); border:1px solid var(--border); color:var(--text);">Select this month</button>
               <button id="populate-range" class="button">Populate</button>
             </div>
             <div style="display:none;">
@@ -1294,6 +1295,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const calendarRange = document.getElementById("calendar-range");
     const calendarRangeMonth = document.getElementById("calendar-range-month");
     const populateBtn = document.getElementById("populate-range");
+    const selectMonthBtn = document.getElementById("select-month-btn");
     const populateStatus = document.createElement("div");
     const POPULATE_LOG_KEY = "bc_populate_log_v1";
     const populateLog = document.getElementById("populate-log");
@@ -1599,6 +1601,28 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         applyCalendarFiltersFromSelection();
       }});
     }});
+
+    function selectVisibleMonthRange() {{
+      const cal = calendars.range;
+      if (!cal) return;
+      const current = cal.current || new Date();
+      const year = current.getFullYear();
+      const month = current.getMonth();
+      const startDate = new Date(year, month, 1);
+      const endDate = new Date(year, month + 1, 0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (today.getFullYear() === year && today.getMonth() === month) {{
+        endDate.setTime(today.getTime());
+      }}
+      cal.startKey = isoKeyFromDate(startDate);
+      cal.endKey = isoKeyFromDate(endDate);
+      renderCalendar("range");
+      applyCalendarFiltersFromSelection();
+    }}
+    if (selectMonthBtn) {{
+      selectMonthBtn.addEventListener("click", selectVisibleMonthRange);
+    }}
 
     function populateRangeFromCalendars() {{
       applyCalendarFiltersFromSelection();
