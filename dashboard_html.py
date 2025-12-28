@@ -725,13 +725,15 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         <input type="checkbox" id="show-cached-toggle" checked />
         <label for="show-cached-toggle">Show cached badges</label>
       </div>
-      <div class="settings-row">
-        <input type="checkbox" id="preload-embeds-toggle" />
-        <label for="preload-embeds-toggle">Preload Bandcamp players (faster browsing, slower generation)</label>
-      </div>
       <div style="height:12px;"></div>
       <div style="display:flex; justify-content:flex-start;">
         <button id="settings-reset" class="button" style="width:auto; padding:6px 10px;">Clear cache</button>
+      </div>
+      <div style="height:14px;"></div>
+      <div style="font-size:12px; font-weight:700; letter-spacing:0.3px; text-transform:uppercase; color:var(--muted);">Experimental</div>
+      <div class="settings-row">
+        <input type="checkbox" id="preload-embeds-toggle" />
+        <label for="preload-embeds-toggle">Preload Bandcamp players (faster browsing, slower generation)</label>
       </div>
     </div>
   </div>
