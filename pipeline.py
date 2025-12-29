@@ -90,13 +90,11 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
         log(f"Cache-only mode enabled; skipping Gmail fetches. Cached releases available: {len(releases)}.")
         missing_ranges = []
     elif missing_ranges:
-        log(f"Cached releases are available for {len(releases)} entries; {len(missing_ranges)} missing date span(s) will be fetched from Gmail.")
-        log("")
         log("The following date ranges will be downloaded from Gmail:")
         for start_missing, end_missing in missing_ranges:
             log(f"  {start_missing} to {end_missing}")
     else:
-        log(f"Cached releases are available for {len(releases)} entries; no Gmail download needed for this range.")
+        log(f"This date range has already been scraped; no Gmail download needed.")
 
     if not cache_only:
         service = gmail_authenticate()
@@ -134,9 +132,9 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
 
     log("")
     if cache_only:
-        log(f"Final total of {len(deduped)} unique releases loaded from cache).")
+        log(f"Loaded {len(deduped)} unique releases from cache).")
     else:
-        log(f"Total of {len(deduped)} unique releases after combining cache and Gmail downloads.")
+        log(f"Loaded {len(deduped)} unique releases including cache.")
 
     # Always persist the run results when a page will be generated, so cache is up to date.
     persist_release_metadata(deduped, exclude_today=True)

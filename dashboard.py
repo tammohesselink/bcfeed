@@ -176,7 +176,8 @@ def build_release_dashboard_html(
     EMBED_CACHE.update(load_embed_cache())
     releases_list = list(releases)
     total = len(releases_list)
-    log(f'Prefetching Bandcamp players not already in cache...')
+    if fetch_missing_ids:
+        log(f'Prefetching Bandcamp players not already in cache...')
     normalized: List[Dict[str, str]] = [
         _normalize_release(entry, fetch_missing_ids, log, idx, total)
         for idx, entry in enumerate(releases_list, start=1)
