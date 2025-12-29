@@ -668,7 +668,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
             </label>
             <button id="mark-seen" class="button" style="padding:6px 10px; font-size:12px;">Mark filtered as viewed</button>
             <button id="mark-unseen" class="button" style="padding:6px 10px; font-size:12px;">Mark filtered as unviewed</button>
-            <button id="settings-btn" class="button">Settings</button>
+            <button id="settings-btn" class="button" aria-label="Settings" title="Settings" style="padding:6px 10px; font-size:18px;">⚙️</button>
           </div>
         </div>
       </header>
