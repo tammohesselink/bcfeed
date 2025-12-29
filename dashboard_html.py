@@ -776,14 +776,15 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
     const HEALTH_URL = API_ROOT ? `${{API_ROOT}}/health` : null;
     const POPULATE_LOG_KEY = "bc_populate_log_v1";
-    const DEFAULT_THEME = {json.dumps(default_theme or "light")};
-    const PRELOAD_KEY = "bc_preload_embeds_v1";
     const populateLog = document.getElementById("populate-log");
-    const clearedLogOnInit = true;
+    let clearedLogOnInit = false;
     if (populateLog) {{
       populateLog.textContent = "";
       try {{ localStorage.removeItem(POPULATE_LOG_KEY); }} catch (e) {{}}
+      clearedLogOnInit = true;
     }}
+    const DEFAULT_THEME = {json.dumps(default_theme or "light")};
+    const PRELOAD_KEY = "bc_preload_embeds_v1";
     function releaseKey(release) {{
       return release.url || [release.page_name, release.artist, release.title, release.date].filter(Boolean).join("|");
     }}
@@ -1499,8 +1500,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const populateBtn = document.getElementById("populate-range");
     const selectMonthBtn = document.getElementById("select-month-btn");
     const populateStatus = document.createElement("div");
-    const POPULATE_LOG_KEY = "bc_populate_log_v1";
-    const populateLog = document.getElementById("populate-log");
     const CALENDAR_STATE_KEY = "bc_calendar_state_v1";
     const headerRangeLabel = document.getElementById("header-range-label");
     const headerCountLabel = document.getElementById("header-count-label");
