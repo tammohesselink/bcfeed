@@ -1018,7 +1018,11 @@ def render_dashboard_html(
       }}
       localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
     }}
-    const savedTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME || "light";
+    const savedThemeValue = localStorage.getItem(THEME_KEY);
+    let savedTheme = savedThemeValue || DEFAULT_THEME || "light";
+    if (!SHOW_DEV_SETTINGS && !savedThemeValue) {{
+      savedTheme = "dark";
+    }}
     applyTheme(savedTheme);
     if (themeToggleBtn) {{
       themeToggleBtn.checked = savedTheme !== "light";
@@ -1026,6 +1030,12 @@ def render_dashboard_html(
         const next = themeToggleBtn.checked ? "dark" : "light";
         applyTheme(next);
       }});
+    }}
+    if (!SHOW_DEV_SETTINGS) {{
+      state.showCachedBadges = false;
+      try {{ localStorage.setItem(SHOW_CACHED_KEY, "false"); }} catch (e) {{}}
+      const cachedToggle = document.getElementById("show-cached-toggle");
+      if (cachedToggle) cachedToggle.checked = false;
     }}
     if (maxResultsBackdrop) {{
       maxResultsBackdrop.addEventListener("click", hideMaxResultsModal);
