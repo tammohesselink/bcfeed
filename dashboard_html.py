@@ -58,6 +58,9 @@ def render_dashboard_html(
       --row-unseen-bg: #e8ecf4;
     }}
     * {{ box-sizing: border-box; }}
+    html, body {{
+      height: 100%;
+    }}
     body {{
       margin: 0;
       min-height: 100vh;
@@ -67,6 +70,7 @@ def render_dashboard_html(
       color: var(--text);
       font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
       display: flex;
+      overflow: hidden;
     }}
     body.theme-light {{
       background: radial-gradient(circle at 20% 20%, rgba(31, 122, 255, 0.08), transparent 25%),
@@ -159,6 +163,7 @@ def render_dashboard_html(
       grid-template-columns: 260px 1fr;
       gap: 0;
       width: 100%;
+      height: calc(100vh - 70px);
     }}
     aside {{
       background: var(--panel);
@@ -218,7 +223,11 @@ def render_dashboard_html(
       font-size: 12px;
     }}
     main {{
-      padding: 0 16px 32px 16px;
+      padding: 0 16px 8px 16px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
     }}
     .wireframe-panel {{
       margin: 16px 0;
@@ -514,6 +523,8 @@ def render_dashboard_html(
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: auto;
+      flex: 1;
+      min-height: 0;
     }}
     .status-bar {{
       margin-top: 8px;
@@ -526,9 +537,7 @@ def render_dashboard_html(
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      bottom: 0;
-      z-index: 6;
+      flex-shrink: 0;
     }}
     table {{
       width: 100%;
