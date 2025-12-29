@@ -815,22 +815,23 @@ def render_dashboard_html(
       <div style="display:flex; justify-content:flex-start;">
         <button id="settings-reset" class="button" style="width:auto; padding:6px 10px;">Clear cache</button>
       </div>
+      <div style="height:12px;"></div>
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.2px; color:var(--muted);">Credentials:</div>
+      <div style="display:flex; justify-content:flex-start; margin-top:6px;">
+        <button id="clear-creds-btn" class="button" style="padding:6px 10px;">Clear credentials</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:6px;">
+        <input type="file" id="load-creds-file" accept="application/json" style="display:none;" />
+        <button id="load-creds-btn" class="button" style="padding:6px 10px;">Load credentials</button>
+      </div>
+      <div style="display:flex; justify-content:flex-start; margin-top:6px;">
+        <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" class="button" style="border-color:#b83a3a; color:#b83a3a; padding:6px 10px; font-size:12px;">Revoke Gmail authorization (external link)</a>
+      </div>
       <div class="dev-setting" style="height:14px;"></div>
       <div class="dev-setting" style="font-size:12px; font-weight:700; letter-spacing:0.3px; text-transform:uppercase; color:var(--muted);">Experimental</div>
       <div class="settings-row dev-setting">
         <input type="checkbox" id="preload-embeds-toggle" />
         <label for="preload-embeds-toggle">Preload Bandcamp players (faster browsing, slower generation)</label>
-      </div>
-      <div style="height:12px;"></div>
-      <div style="display:flex; justify-content:flex-start;">
-        <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" class="button" style="background:#b83a3a; border-color:#b83a3a; color:#fff; padding:6px 10px; font-size:12px;">Revoke Gmail access</a>
-      </div>
-      <div style="display:flex; justify-content:flex-start;">
-        <button id="clear-creds-btn" class="button" style="padding:6px 10px;">Clear credentials</button>
-      </div>
-      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-        <input type="file" id="load-creds-file" accept="application/json" style="display:none;" />
-        <button id="load-creds-btn" class="button" style="padding:6px 10px;">Load credentials</button>
       </div>
     </div>
   </div>
