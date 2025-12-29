@@ -22,13 +22,13 @@ import requests
 from bs4 import BeautifulSoup
 from flask import Flask, jsonify, request, Response, stream_with_context
 from queue import SimpleQueue
-from werkzeug.serving import make_server
+from werkzeug.serving import make_server, WSGIRequestHandler
 
 from util import get_data_dir
 from session_store import scrape_status_for_range, get_full_release_cache
 from pipeline import gather_releases_with_cache
 from dashboard import write_release_dashboard
-from gmail import _find_credentials_file
+from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
 
 app = Flask(__name__)
 
@@ -39,6 +39,7 @@ EMPTY_DATES_PATH = DATA_DIR / "no_results_dates.json"
 SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
 EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
 TOKEN_PATH = DATA_DIR / "token.pickle"
+CREDENTIALS_PATH = DATA_DIR / "credentials.json"
 POPULATE_LOCK = threading.Lock()
 
 
@@ -172,10 +173,17 @@ def health():
         return _corsify(app.response_class(status=204))
     return _corsify(jsonify({"ok": True}))
 
+# Suppress noisy logging for health checks
+class QuietHealthHandler(WSGIRequestHandler):
+    def log_request(self, code="-", size="-"):
+        if getattr(self, "path", "") == "/health":
+            return
+        super().log_request(code, size)
+
 
 def start_proxy_server(port: int = 5050):
     """Start the proxy in a background thread and return (server, thread)."""
-    server = make_server("0.0.0.0", port, app, threaded=True)
+    server = make_server("0.0.0.0", port, app, threaded=True, request_handler=QuietHealthHandler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     return server, thread
@@ -312,6 +320,7 @@ def reset_caches():
                 title="bcfeed",
                 fetch_missing_ids=False,
                 embed_proxy_url=embed_proxy_url,
+                clear_status_on_load=False,
                 log=lambda msg: None,
             )
         except Exception as exc:
@@ -340,9 +349,9 @@ def populate_range():
         return _corsify(jsonify({"error": "Invalid start/end date"})), 400
 
     if not _find_credentials_file():
-        return _corsify(jsonify({"error": "Credentials not found. Reload credentials in the app."})), 400
+        return _corsify(jsonify({"error": "Credentials not found. Reload credentials in the settings panel."})), 400
     if not TOKEN_PATH.exists():
-        return _corsify(jsonify({"error": "Gmail token missing. Reload credentials in the app to re-authenticate."})), 400
+        return _corsify(jsonify({"error": "Gmail token missing. Reload credentials in the settings panel to re-authenticate."})), 400
 
     if not POPULATE_LOCK.acquire(blocking=False):
         return _corsify(jsonify({"error": "Another populate is already running"})), 409
@@ -369,13 +378,69 @@ def populate_range():
             title="bcfeed",
             fetch_missing_ids=preload_embeds,
             embed_proxy_url=embed_proxy_url,
+            clear_status_on_load=False,
             log=log,
         )
         return _corsify(jsonify({"ok": True, "logs": logs, "count": len(releases)}))
+    except GmailAuthError as exc:
+        return _corsify(jsonify({"error": str(exc), "logs": logs})), 401
     except Exception as exc:
         return _corsify(jsonify({"error": str(exc), "logs": logs})), 500
     finally:
         POPULATE_LOCK.release()
+
+
+@app.route("/clear-credentials", methods=["POST", "OPTIONS"])
+def clear_credentials():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    logs: list[str] = []
+
+    def log(msg: str):
+        logs.append(str(msg))
+        app.logger.info(msg)
+
+    try:
+        if TOKEN_PATH.exists():
+            TOKEN_PATH.unlink()
+            log("Removed saved Gmail token.")
+        log("Credentials cleared.")
+        return _corsify(jsonify({"ok": True, "logs": logs}))
+    except Exception as exc:
+        log(f"ERROR: {exc}")
+        return _corsify(jsonify({"error": str(exc), "logs": logs})), 500
+
+
+@app.route("/load-credentials", methods=["POST", "OPTIONS"])
+def load_credentials():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    logs: list[str] = []
+
+    def log(msg: str):
+        logs.append(str(msg))
+        app.logger.info(msg)
+
+    try:
+        if "file" not in request.files:
+            return _corsify(jsonify({"error": "No file uploaded"})), 400
+        file = request.files["file"]
+        if not file.filename:
+            return _corsify(jsonify({"error": "Empty filename"})), 400
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        tmp = CREDENTIALS_PATH.with_suffix(".tmp")
+        file.save(tmp)
+        tmp.replace(CREDENTIALS_PATH)
+        if TOKEN_PATH.exists():
+            TOKEN_PATH.unlink()
+            log("Removed existing Gmail token.")
+        log("Saved credentials file. Authenticating…")
+        gmail_authenticate()
+        log("Credentials uploaded and authenticated.")
+        return _corsify(jsonify({"ok": True, "logs": logs}))
+    except Exception as exc:
+        log(f"ERROR: {exc}")
+        return _corsify(jsonify({"error": str(exc), "logs": logs})), 500
 
 
 @app.route("/populate-range-stream", methods=["GET", "OPTIONS"])
@@ -393,6 +458,8 @@ def populate_range_stream():
             "Access-Control-Allow-Origin": "*",
             "Cache-Control": "no-cache",
         }
+        # Also emit a one-line log-friendly version for browser status box
+        app.logger.error(msg)
         return Response(stream_with_context(gen()), mimetype="text/event-stream", headers=headers)
 
     if not start_arg or not end_arg:
@@ -402,9 +469,9 @@ def populate_range_stream():
     if not start or not end or start > end:
         return error_stream("Invalid start/end")
     if not _find_credentials_file():
-        return error_stream("Credentials not found. Reload credentials in the app.")
+        return error_stream("Credentials not found. Reload credentials in the settings panel.")
     if not TOKEN_PATH.exists():
-        return error_stream("Gmail token missing. Reload credentials in the app to re-authenticate.")
+        return error_stream("Gmail token missing. Reload credentials in the settings panel to re-authenticate.")
 
     if not POPULATE_LOCK.acquire(blocking=False):
         return error_stream("Another populate is already running")
@@ -434,10 +501,11 @@ def populate_range_stream():
                     title="bcfeed",
                     fetch_missing_ids=preload_embeds,
                     embed_proxy_url=embed_proxy_url,
+                    clear_status_on_load=False,
                     log=log,
                 )
                 q.put("Regenerated dashboard.")
-            except Exception as exc:
+            except GmailAuthError as exc:
                 q.put(f"ERROR: {exc}")
             finally:
                 q.put(None)

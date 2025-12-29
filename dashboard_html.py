@@ -10,12 +10,21 @@ import html
 import json
 
 
-def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | None = None, default_theme: str | None = None) -> str:
+def render_dashboard_html(
+    *,
+    title: str,
+    data_json: str,
+    embed_proxy_url: str | None = None,
+    default_theme: str | None = None,
+    clear_status_on_load: bool = False,
+    show_dev_settings: bool = False,
+) -> str:
     """
     Build the full dashboard HTML document.
     """
     escaped_title = html.escape(title)
     proxy_literal = json.dumps(embed_proxy_url)
+    clear_status_literal = "true" if clear_status_on_load else "false"
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -97,6 +106,13 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     .button:hover {{
       transform: translateY(-1px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }}
+    .button:disabled {{
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+      filter: grayscale(0.2);
+      box-shadow: none;
     }}
     h1 {{
       margin: 0;
@@ -217,6 +233,25 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       border-style: solid;
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }}
+    .wireframe-panel > summary {{
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }}
+    .wireframe-panel > summary::-webkit-details-marker {{
+      display: none;
+    }}
+    .wireframe-carat {{
+      font-size: 28px;
+      color: var(--muted);
+      margin-left: 8px;
+      transition: transform 0.2s ease;
+    }}
+    details[open] .wireframe-carat {{
+      transform: rotate(180deg);
+    }}
     .wireframe-header {{
       display: flex;
       align-items: center;
@@ -258,21 +293,21 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }}
     .calendar-row {{
       display: grid;
-      grid-template-columns: 270px 1fr;
-      gap: 12px;
+      grid-template-columns: 240px 1fr;
+      gap: 10px;
       align-items: start;
     }}
     .calendar-card {{
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface);
-      padding: 10px;
+      padding: 7px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-      width: 270px;
-      height: 460px;
+      width: 240px;
+      height: 290px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }}
     .calendar-label {{
       display: flex;
@@ -285,11 +320,11 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     .calendar-meta {{
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }}
     .calendar-nav {{
       display: flex;
-      gap: 6px;
+      gap: 5px;
       align-items: center;
     }}
     .calendar-nav button {{
@@ -297,14 +332,14 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       background: rgba(255,255,255,0.04);
       color: var(--text);
       border-radius: 6px;
-      padding: 4px 8px;
+      padding: 3px 7px;
       cursor: pointer;
     }}
     .calendar-month {{
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
-      width: 120px;
-      min-width: 120px;
+      width: 110px;
+      min-width: 110px;
       display: inline-block;
       text-align: center;
       letter-spacing: 0.4px;
@@ -315,28 +350,28 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       background: rgba(255,255,255,0.06);
       color: var(--text);
       border-radius: 6px;
-      padding: 4px 8px;
+      padding: 3px 7px;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 10px;
       letter-spacing: 0.3px;
     }}
     .calendar-grid {{
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      font-size: 12px;
+      gap: 3px;
+      font-size: 11px;
       flex: 1;
-      min-height: 340px;
+      min-height: 187px;
     }}
     .calendar-log {{
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface);
-      padding: 10px;
-      height: 460px;
+      padding: 7px;
+      height: 290px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 5px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
     }}
     .scrollbox {{
@@ -355,11 +390,21 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       border: 1px solid var(--border);
       border-radius: 8px;
       text-align: center;
-      padding: 8px 0;
-      min-height: 40px;
+      padding: 2px 0;
+      min-height: 16px;
       cursor: pointer;
       background: rgba(255,255,255,0.02);
       transition: transform 0.1s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+    }}
+    .calendar-day .date-label {{
+      display: inline-block;
+      padding: 0 4px;
+      border-radius: 999px;
+      min-width: 12px;
+    }}
+    .calendar-day.unseen-day .date-label {{
+      background: #64a8ff;
+      color: #0b0d11;
     }}
     .calendar-day.in-range {{
       background: linear-gradient(180deg, rgba(82,208,255,0.14), rgba(82,208,255,0.05));
@@ -368,17 +413,20 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     .calendar-day .dot-strip {{
       display: flex;
       justify-content: center;
-      gap: 4px;
-      margin-top: 4px;
-      min-height: 8px;
+      gap: 3px;
+      margin-top: 3px;
+      min-height: 6px;
     }}
     .calendar-day .dot {{
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       border: 1px solid rgba(0,0,0,0.25);
       box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
       background: transparent;
+    }}
+    .calendar-day .dot.unseen {{
+      display: none;
     }}
     .calendar-day.scraped {{
       background: rgba(255,255,255,0.12);
@@ -466,6 +514,21 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: auto;
+    }}
+    .status-bar {{
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      bottom: 0;
+      z-index: 6;
     }}
     table {{
       width: 100%;
@@ -667,18 +730,17 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
             </label>
             <button id="mark-seen" class="button" style="padding:6px 10px; font-size:12px;">Mark filtered as viewed</button>
             <button id="mark-unseen" class="button" style="padding:6px 10px; font-size:12px;">Mark filtered as unviewed</button>
-            <button id="settings-btn" class="button">Settings</button>
+            <button id="settings-btn" class="button" aria-label="Settings" title="Settings" style="padding:6px 10px; font-size:18px;">⚙️</button>
           </div>
         </div>
       </header>
-      <section class="wireframe-panel" id="scrape-wireframe">
-        <div class="wireframe-header">
+      <details class="wireframe-panel" id="scrape-wireframe" open>
+        <summary class="wireframe-header" title="Click to expand/collapse">
           <div class="wireframe-title" style="display:flex; align-items:center; gap:6px; white-space:nowrap;">
             <span id="header-range-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
-            <span id="header-count-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
           </div>
-          <button id="scrape-wireframe-toggle" class="button" aria-expanded="false" aria-controls="scrape-wireframe-body">Expand</button>
-        </div>
+          <span class="wireframe-carat">▾</span>
+        </summary>
         <div class="wireframe-body" id="scrape-wireframe-body">
           <div class="date-range-panel">
             <div class="calendar-row">
@@ -714,7 +776,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
             </div>
           </div>
         </div>
-      </section>
+      </details>
       <div class="table-wrapper">
         <table aria-label="Bandcamp releases">
           <thead>
@@ -730,29 +792,44 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         </table>
         <div id="empty-state" class="empty-state" style="display: none;">No releases match the current filter.</div>
       </div>
+      <div class="status-bar">
+        <span id="header-count-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
+      </div>
     </main>
   </div>
   <div id="settings-backdrop" class="settings-backdrop">
     <div class="settings-panel">
       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
         <h2>Settings</h2>
-        <button id="settings-close" class="button">Close</button>
+        <button id="settings-close" class="button" aria-label="Close settings">✕</button>
       </div>
-      <div class="settings-row">
+      <div class="settings-row dev-setting">
         <input type="checkbox" id="theme-toggle" />
         <label for="theme-toggle">Dark mode</label>
       </div>
-      <div class="settings-row">
+      <div class="settings-row dev-setting">
         <input type="checkbox" id="show-cached-toggle" checked />
         <label for="show-cached-toggle">Show cached badges</label>
       </div>
-      <div style="height:12px;"></div>
+      <div class="dev-setting" style="height:12px;"></div>
       <div style="display:flex; justify-content:flex-start;">
         <button id="settings-reset" class="button" style="width:auto; padding:6px 10px;">Clear cache</button>
       </div>
-      <div style="height:14px;"></div>
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.3px; text-transform:uppercase; color:var(--muted);">Experimental</div>
-      <div class="settings-row">
+      <div style="height:12px;"></div>
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.2px; color:var(--muted);">Credentials:</div>
+      <div style="display:flex; justify-content:flex-start; margin-top:6px;">
+        <button id="clear-creds-btn" class="button" style="padding:6px 10px;">Clear credentials</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:6px;">
+        <input type="file" id="load-creds-file" accept="application/json" style="display:none;" />
+        <button id="load-creds-btn" class="button" style="padding:6px 10px;">Load credentials</button>
+      </div>
+      <div style="display:flex; justify-content:flex-start; margin-top:6px;">
+        <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" class="button" style="border-color:#b83a3a; color:#b83a3a; padding:6px 10px; font-size:12px;">Revoke Gmail authorization (external link)</a>
+      </div>
+      <div class="dev-setting" style="height:14px;"></div>
+      <div class="dev-setting" style="font-size:12px; font-weight:700; letter-spacing:0.3px; text-transform:uppercase; color:var(--muted);">Experimental</div>
+      <div class="settings-row dev-setting">
         <input type="checkbox" id="preload-embeds-toggle" />
         <label for="preload-embeds-toggle">Preload Bandcamp players (faster browsing, slower generation)</label>
       </div>
@@ -775,6 +852,11 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const VIEWED_KEY = "bc_viewed_releases_v1";
     const API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
     const HEALTH_URL = API_ROOT ? `${{API_ROOT}}/health` : null;
+    const CLEAR_CREDS_URL = API_ROOT ? `${{API_ROOT}}/clear-credentials` : null;
+    const LOAD_CREDS_URL = API_ROOT ? `${{API_ROOT}}/load-credentials` : null;
+    const POPULATE_LOG_KEY = "bc_populate_log_v1";
+    const CLEAR_STATUS_ON_LOAD = {clear_status_literal};
+    const SHOW_DEV_SETTINGS = {"true" if show_dev_settings else "false"};
     const serverDownBackdrop = document.getElementById("server-down-backdrop");
     const maxResultsBackdrop = document.getElementById("max-results-backdrop");
     const preloadEmbedsToggle = document.getElementById("preload-embeds-toggle");
@@ -782,6 +864,33 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     let maxNoticeShown = false;
     const DEFAULT_THEME = {json.dumps(default_theme or "light")};
     const PRELOAD_KEY = "bc_preload_embeds_v1";
+    const populateLog = document.getElementById("populate-log");
+    const clearCredsBtn = document.getElementById("clear-creds-btn");
+    const loadCredsBtn = document.getElementById("load-creds-btn");
+    const loadCredsFile = document.getElementById("load-creds-file");
+    let clearedLogOnInit = false;
+    function applyDevSettingsVisibility() {{
+      const devEls = document.querySelectorAll(".dev-setting");
+      devEls.forEach((el) => {{
+        el.style.display = SHOW_DEV_SETTINGS ? "" : "none";
+      }});
+    }}
+    if (populateLog) {{
+      if (CLEAR_STATUS_ON_LOAD) {{
+        const initialMsg = "Select a date range to display.";
+        populateLog.textContent = initialMsg;
+        try {{ localStorage.setItem(POPULATE_LOG_KEY, initialMsg); }} catch (e) {{}}
+        clearedLogOnInit = true;
+      }} else {{
+        try {{
+          const savedLog = localStorage.getItem(POPULATE_LOG_KEY);
+          if (savedLog) {{
+            populateLog.textContent = savedLog;
+          }}
+        }} catch (e) {{}}
+      }}
+    }}
+    applyDevSettingsVisibility();
     function releaseKey(release) {{
       return release.url || [release.page_name, release.artist, release.title, release.date].filter(Boolean).join("|");
     }}
@@ -926,13 +1035,104 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       }}
       localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
     }}
-    const savedTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME || "light";
+    const savedThemeValue = localStorage.getItem(THEME_KEY);
+    let savedTheme = savedThemeValue || DEFAULT_THEME || "light";
+    if (!SHOW_DEV_SETTINGS && !savedThemeValue) {{
+      savedTheme = "dark";
+    }}
     applyTheme(savedTheme);
     if (themeToggleBtn) {{
       themeToggleBtn.checked = savedTheme !== "light";
       themeToggleBtn.addEventListener("change", () => {{
         const next = themeToggleBtn.checked ? "dark" : "light";
         applyTheme(next);
+      }});
+    }}
+    if (!SHOW_DEV_SETTINGS) {{
+      state.showCachedBadges = false;
+      try {{ localStorage.setItem(SHOW_CACHED_KEY, "false"); }} catch (e) {{}}
+      const cachedToggle = document.getElementById("show-cached-toggle");
+      if (cachedToggle) cachedToggle.checked = false;
+    }}
+    if (clearCredsBtn && CLEAR_CREDS_URL) {{
+      clearCredsBtn.addEventListener("click", async () => {{
+        clearCredsBtn.disabled = true;
+        const original = clearCredsBtn.textContent;
+        clearCredsBtn.textContent = "Clearing…";
+        try {{
+          const resp = await fetch(CLEAR_CREDS_URL, {{ method: "POST" }});
+          const data = await resp.json().catch(() => ({{}}));
+          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\\n") : "";
+          if (!resp.ok) {{
+            const msg = data.error || "Failed to clear credentials.";
+            const next = joinedLogs ? `${{msg}}\\n${{joinedLogs}}` : msg;
+            if (populateLog) populateLog.textContent = next;
+            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
+            alert(msg);
+          }} else {{
+            const msg = joinedLogs || "Credentials reloaded.";
+            if (populateLog) populateLog.textContent = msg;
+            try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
+          }}
+        }} catch (err) {{
+          const msg = String(err || "Failed to load credentials.");
+          if (populateLog) populateLog.textContent = msg;
+          try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
+          alert(msg);
+        }} finally {{
+          clearCredsBtn.disabled = false;
+          clearCredsBtn.textContent = original || "Clear credentials";
+        }}
+      }});
+    }}
+    if (loadCredsBtn && loadCredsFile && LOAD_CREDS_URL) {{
+      const doLoadCreds = async () => {{
+        const file = loadCredsFile.files && loadCredsFile.files[0];
+        if (!file) return;
+        loadCredsBtn.disabled = true;
+        const original = loadCredsBtn.textContent;
+        loadCredsBtn.textContent = "Loading…";
+        try {{
+          const form = new FormData();
+          form.append("file", file, file.name);
+          const resp = await fetch(LOAD_CREDS_URL, {{
+            method: "POST",
+            body: form,
+          }});
+          const data = await resp.json().catch(() => ({{}}));
+          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\\n") : "";
+          if (!resp.ok) {{
+            const msg = data.error || "Failed to load credentials.";
+            const next = joinedLogs ? `${{msg}}\\n${{joinedLogs}}` : msg;
+            if (populateLog) populateLog.textContent = next;
+            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
+            alert(msg);
+          }} else {{
+            const msg = joinedLogs || "Credentials loaded and authenticated.";
+            if (populateLog) populateLog.textContent = msg;
+            try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
+            alert("Credentials loaded.");
+          }}
+        }} catch (err) {{
+          const msg = String(err || "Failed to load credentials.");
+          if (populateLog) populateLog.textContent = msg;
+          try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
+          alert(msg);
+        }} finally {{
+          loadCredsBtn.disabled = false;
+          loadCredsBtn.textContent = original || "Load credentials";
+        }}
+      }};
+      loadCredsBtn.addEventListener("click", () => {{
+        if (loadCredsFile) {{
+          loadCredsFile.value = "";
+          loadCredsFile.click();
+        }}
+      }});
+      loadCredsFile.addEventListener("change", () => {{
+        if (loadCredsFile.files && loadCredsFile.files[0]) {{
+          doLoadCreds();
+        }}
       }});
     }}
     if (maxResultsBackdrop) {{
@@ -1168,6 +1368,52 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     }}
 
     function updateRangePreview() {{}}
+    function updateSelectionStatusLog() {{
+      let fromVal = state.dateFilterFrom || "";
+      let toVal = state.dateFilterTo || "";
+      if (fromVal && !toVal) toVal = fromVal;
+      if (toVal && !fromVal) fromVal = toVal;
+      if (!fromVal || !toVal) return;
+
+      let startDate = parseDateString(fromVal);
+      let endDate = parseDateString(toVal);
+      if (!startDate || !endDate) return;
+      if (endDate < startDate) {{
+        [startDate, endDate] = [endDate, startDate];
+        [fromVal, toVal] = [toVal, fromVal];
+      }}
+
+      const msPerDay = 24 * 60 * 60 * 1000;
+      const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / msPerDay) + 1;
+      let cachedDays = 0;
+      const cursor = new Date(startDate);
+      while (cursor.getTime() <= endDate.getTime()) {{
+        const key = isoKeyFromDate(cursor);
+        if (scrapeStatus.scraped.has(key)) cachedDays += 1;
+        cursor.setDate(cursor.getDate() + 1);
+      }}
+
+      const allCached = totalDays > 0 && cachedDays >= totalDays;
+      const msg = allCached
+        ? `Selected time period:\\n\\n${{fromVal}} to ${{toVal}}\\n\\nDisplaying all releases in this range; all dates are already downloaded.`
+        : `Selected time period:\\n\\n${{fromVal}} to ${{toVal}}\\n\\n${{totalDays-cachedDays}} of ${{totalDays}} selected days not yet downloaded.\\n\\nClick \"Get releases\" to download all dates in the selected range.`;
+      if (populateLog) {{
+        populateLog.textContent = msg;
+        populateLog.style.color = allCached ? "var(--muted)" : "#ff6b6b";
+      }}
+      try {{
+        localStorage.setItem(POPULATE_LOG_KEY, msg);
+      }} catch (e) {{}}
+
+      if (populateBtn) {{
+        populateBtn.disabled = allCached;
+        populateBtn.title = allCached ? "All dates in this range are already cached" : "";
+      }}
+      if (populateBtn && !allCached) {{
+        populateBtn.disabled = false;
+        populateBtn.title = "";
+      }}
+    }}
 
     function updateHeaderRange(count = null) {{
       const fromVal = state.dateFilterFrom || "";
@@ -1490,16 +1736,22 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const dateFilterTo = document.getElementById("date-filter-to");
     const showCachedToggle = document.getElementById("show-cached-toggle");
     const wireframePanel = document.getElementById("scrape-wireframe");
-    const wireframeToggle = document.getElementById("scrape-wireframe-toggle");
     const wireframeBody = document.getElementById("scrape-wireframe-body");
     const calendarRange = document.getElementById("calendar-range");
     const calendarRangeMonth = document.getElementById("calendar-range-month");
     const populateBtn = document.getElementById("populate-range");
     const selectMonthBtn = document.getElementById("select-month-btn");
     const populateStatus = document.createElement("div");
-    const POPULATE_LOG_KEY = "bc_populate_log_v1";
-    const populateLog = document.getElementById("populate-log");
     const CALENDAR_STATE_KEY = "bc_calendar_state_v1";
+    // Reset load credentials button when settings panel is toggled
+    const resetLoadCredsBtn = () => {{
+      if (loadCredsBtn) {{
+        loadCredsBtn.disabled = false;
+        loadCredsBtn.textContent = "Load credentials";
+      }}
+    }};
+    if (settingsBtn) settingsBtn.addEventListener("click", resetLoadCredsBtn);
+    if (settingsClose) settingsClose.addEventListener("click", resetLoadCredsBtn);
     const headerRangeLabel = document.getElementById("header-range-label");
     const headerCountLabel = document.getElementById("header-count-label");
     const SCRAPE_STATUS_URL = API_ROOT ? `${{API_ROOT}}/scrape-status` : null;
@@ -1541,6 +1793,11 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         delete r.is_track;
       }});
       renderTable();
+      if (populateLog) {{
+        const msg = "Cache has been reset.";
+        populateLog.textContent = msg;
+        try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
+      }}
       toggleSettings(false);
       if (hadError && clearCache) {{
         alert("Could not clear disk cache (proxy not reachable). Run the app/proxy and try again.");
@@ -1684,7 +1941,10 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         if (startSelectedDate && endSelectedDate && cellDate >= startSelectedDate && cellDate <= endSelectedDate) {{
           cell.classList.add("in-range");
         }}
-        cell.textContent = String(cellDate.getDate());
+        cell.textContent = "";
+        const dateLabel = document.createElement("span");
+        dateLabel.className = "date-label";
+        dateLabel.textContent = String(cellDate.getDate());
         const dots = document.createElement("div");
         dots.className = "dot-strip";
         const scraped = scrapeStatus.scraped.has(key);
@@ -1698,10 +1958,9 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           return !state.viewed.has(relKey);
         }});
         if (hasUnseen) {{
-          const unseenDot = document.createElement("span");
-          unseenDot.className = "dot unseen";
-          dots.appendChild(unseenDot);
+          cell.classList.add("unseen-day");
         }}
+        cell.appendChild(dateLabel);
         cell.appendChild(dots);
 
         cell.addEventListener("click", () => {{
@@ -1824,6 +2083,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       if (endVal && !startVal) startVal = endVal;
       const preloadEmbeds = !!(preloadEmbedsToggle && preloadEmbedsToggle.checked);
       if (!API_ROOT || !startVal || !endVal) return;
+      if (populateLog) populateLog.style.color = "";
       const btn = populateBtn;
       const original = btn ? btn.textContent : "";
       if (btn) {{
@@ -1838,6 +2098,20 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           try {{ localStorage.setItem(POPULATE_LOG_KEY, ""); }} catch (e) {{}}
           const url = `${{API_ROOT}}/populate-range-stream?start=${{encodeURIComponent(startVal)}}&end=${{encodeURIComponent(endVal)}}&preload_embeds=${{preloadEmbeds ? "true" : "false"}}`;
           const es = new EventSource(url);
+          const handleError = (ev) => {{
+            es.close();
+            const msg = (ev && ev.data) ? String(ev.data) : "Populate failed (stream error)";
+            const current = populateLog ? populateLog.textContent : "";
+            const next = current ? `${{current}}\\n${{msg}}` : msg;
+            if (populateLog) populateLog.textContent = next;
+            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
+            populateStatus.textContent = "";
+            alert(msg);
+            if (btn) {{
+              btn.disabled = false;
+              btn.textContent = original || "Populate";
+            }}
+          }};
           es.onmessage = (ev) => {{
             if (!ev || !ev.data) return;
             if (!maxNoticeShown && ev.data.includes("Maximum results")) {{
@@ -1849,21 +2123,16 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
             const next = current ? `${{current}}\\n${{ev.data}}` : ev.data;
             if (populateLog) populateLog.textContent = next;
             try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
+            if (String(ev.data || "").startsWith("ERROR:")) {{
+              handleError({{ data: ev.data }});
+            }}
           }};
+          es.addEventListener("error", handleError);
           es.addEventListener("done", () => {{
             populateStatus.textContent = "Done. Reloading…";
             es.close();
             window.location.reload();
           }});
-          es.onerror = () => {{
-            es.close();
-            populateStatus.textContent = "";
-            alert("Populate failed (stream error)");
-            if (btn) {{
-              btn.disabled = false;
-              btn.textContent = original || "Populate";
-            }}
-          }};
           return;
         }}
 
@@ -1940,6 +2209,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       }}
       onDateFilterChange();
       updateRangePreview();
+      updateSelectionStatusLog();
     }}
 
     async function fetchScrapeStatus() {{
@@ -1957,6 +2227,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         const notScraped = data.not_scraped || data["not_scraped"] || [];
         scrapeStatus.notScraped = new Set(notScraped || []);
         renderCalendar("range");
+        updateSelectionStatusLog();
       }} catch (err) {{
         console.warn("Failed to load scrape status", err);
       }}
@@ -1971,15 +2242,17 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         if (data && typeof data === "object") {{
           if (typeof data.from === "string") dateFilterFrom.value = data.from;
           if (typeof data.to === "string") dateFilterTo.value = data.to;
-          if (populateLog && typeof data.populateLog === "string") {{
+          if (!clearedLogOnInit && populateLog && typeof data.populateLog === "string") {{
             populateLog.textContent = data.populateLog;
           }}
         }}
       }} catch (err) {{}}
       try {{
-        const savedLog = localStorage.getItem(POPULATE_LOG_KEY);
-        if (populateLog && savedLog) {{
-          populateLog.textContent = savedLog;
+        if (!clearedLogOnInit) {{
+          const savedLog = localStorage.getItem(POPULATE_LOG_KEY);
+          if (populateLog && savedLog) {{
+            populateLog.textContent = savedLog;
+          }}
         }}
       }} catch (e) {{}}
       onDateFilterChange();
@@ -1999,18 +2272,10 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       }} catch (err) {{}}
     }}
 
-    function setWireframeOpen(open) {{
-      if (!wireframePanel || !wireframeBody || !wireframeToggle) return;
-      wireframePanel.classList.toggle("open", open);
-      wireframeBody.hidden = !open;
-      wireframeToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      wireframeToggle.textContent = open ? "Collapse" : "Expand";
-    }}
-    setWireframeOpen(true);
-    if (wireframeToggle) {{
-      wireframeToggle.addEventListener("click", () => {{
-        const isOpen = wireframePanel && wireframePanel.classList.contains("open");
-        setWireframeOpen(!isOpen);
+    if (wireframePanel && wireframeBody) {{
+      wireframeBody.hidden = !wireframePanel.open;
+      wireframePanel.addEventListener("toggle", () => {{
+        wireframeBody.hidden = !wireframePanel.open;
       }});
     }}
 
@@ -2020,6 +2285,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       syncCalendarsFromInputs();
       renderCalendar("range");
       updateRangePreview();
+      updateSelectionStatusLog();
       updateHeaderRange();
       persistCalendarState();
       renderTable();

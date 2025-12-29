@@ -97,7 +97,11 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
         log(f"This date range has already been scraped; no Gmail download needed.")
 
     if not cache_only:
-        service = gmail_authenticate()
+        try:
+            service = gmail_authenticate()
+        except Exception as exc:
+            log(f"ERROR: {exc}")
+            raise
 
         for start_missing, end_missing in missing_ranges:
             query_after = start_missing.strftime("%Y/%m/%d")
@@ -105,13 +109,21 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
             search_query = f"from:noreply@bandcamp.com subject:'New release from' before:{query_before} after:{query_after}"
             log("")
             log(f"Querying Gmail for {query_after} to {query_before}...")
-            message_ids = search_messages(service, search_query)
+            try:
+                message_ids = search_messages(service, search_query)
+            except Exception as exc:
+                log(f"ERROR: {exc}")
+                raise
             if not message_ids:
                 log(f"No messages found for {query_after} to {query_before}")
                 persist_empty_date_range(start_missing, end_missing, exclude_today=True)
                 continue
             log(f"Found {len(message_ids)} messages for {query_after} to {query_before}")
-            emails = get_messages(service, [msg["id"] for msg in message_ids], "full", batch_size, log=log)
+            try:
+                emails = get_messages(service, [msg["id"] for msg in message_ids], "full", batch_size, log=log)
+            except Exception as exc:
+                log(f"ERROR: {exc}")
+                raise
             new_releases = construct_release_list(emails, log=log)
             log(f"Parsed {len(new_releases)} releases from Gmail for {query_after} to {query_before}.")
             releases.extend(new_releases)

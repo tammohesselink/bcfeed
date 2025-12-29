@@ -68,14 +68,19 @@ def load_credentials() -> bool:
         try:
             # Remove any existing credentials/token so we always replace with the selected file
             shutil.copy(Path(path), CREDENTIALS_PATH)
-            messagebox.showinfo("Loaded", "Credentials loaded.")
             if TOKEN_PATH.exists():
                 TOKEN_PATH.unlink()
+            try:
+                from gmail import gmail_authenticate  # local import to avoid cycle
+                gmail_authenticate()
+            except Exception as exc:
+                messagebox.showerror("Error", f"Failed to authenticate with Gmail: {exc}")
+                return False
             return True
         except Exception as exc:
             messagebox.showerror("Error loading credentials", str(exc))
             return False
-
+        
 
 def save_settings(settings: dict):
     SETTINGS_PATH.parent.mkdir(exist_ok=True)
@@ -84,16 +89,12 @@ def save_settings(settings: dict):
     tmp.replace(SETTINGS_PATH)
 
 
-def reload_credentials():
-    load_credentials()
-
-
 def start_proxy_thread():
     port = find_free_port(PROXY_PORT)
     server, thread = start_proxy_server(port)
     return server, thread, port
 
-def launch_from_cache(proxy_port: int, preload_embeds: bool, *, log=print, launch_browser: bool = True):
+def launch_from_cache(proxy_port: int, preload_embeds: bool, *, log=print, launch_browser: bool = True, clear_status_on_load: bool = False):
     """
     Generate dashboard from all cached releases (no Gmail fetch).
     """
@@ -107,6 +108,7 @@ def launch_from_cache(proxy_port: int, preload_embeds: bool, *, log=print, launc
         title="bcfeed",
         fetch_missing_ids=preload_embeds,
         embed_proxy_url=f"http://localhost:{proxy_port}/embed-meta",
+        clear_status_on_load=clear_status_on_load,
         log=log,
     )
     if launch_browser:
@@ -149,15 +151,12 @@ def main():
     # Toggle defaults and actions
     # (Preload Bandcamp players option moved to browser UI)
 
-    # Run / Reload credentials buttons
+    # Run / Clear credentials buttons
     actions_frame = Frame(root)
     actions_frame.grid(row=0, column=0, padx=8, pady=(8, 4), sticky="w")
 
     launch_btn = ttk.Button(actions_frame, text="Launch", width=14, style="Action.TButton", command=lambda: on_launch())
     launch_btn.grid(row=0, column=0, padx=(0, 6), sticky="w")
-
-    reload_credentials_btn = ttk.Button(actions_frame, text="Reload credentials", width=18, style="Action.TButton", command=reload_credentials)
-    reload_credentials_btn.grid(row=0, column=1, sticky="w")
 
     # Status box
     status_box = ScrolledText(root, width=80, height=12, state="disabled")
@@ -218,7 +217,7 @@ def main():
                 log(f"Building page from cached releases (proxy port {proxy_port}, preload {'on' if should_preload else 'off'})")
 
                 try:
-                    launch_from_cache(proxy_port, should_preload, log=log, launch_browser=True)
+                    launch_from_cache(proxy_port, should_preload, log=log, launch_browser=True, clear_status_on_load=True)
                     log("Dashboard generated from cache and opened in browser.")
                     log("")
                 finally:
@@ -242,10 +241,6 @@ def main():
                 proxy_thread.join(timeout=1)
         finally:
             root.destroy()
-
-    if not CREDENTIALS_PATH.exists():
-        # Prompt for credentials on first launch if missing
-        root.after(50, lambda: load_credentials())
 
     # Auto-launch on start
     root.after(100, on_launch)
