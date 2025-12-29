@@ -2083,6 +2083,7 @@ def render_dashboard_html(
       if (endVal && !startVal) startVal = endVal;
       const preloadEmbeds = !!(preloadEmbedsToggle && preloadEmbedsToggle.checked);
       if (!API_ROOT || !startVal || !endVal) return;
+      if (populateLog) populateLog.style.color = "";
       const btn = populateBtn;
       const original = btn ? btn.textContent : "";
       if (btn) {{
