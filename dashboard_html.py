@@ -231,7 +231,7 @@ def render_dashboard_html(
     }}
     .wireframe-panel {{
       margin: 16px 0;
-      padding: 14px 16px;
+      padding: 10px 12px;
       background: var(--surface);
       border: 1px dashed var(--border);
       border-radius: var(--radius);
@@ -248,14 +248,16 @@ def render_dashboard_html(
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 4px 0;
+      min-height: 24px;
     }}
     .wireframe-panel > summary::-webkit-details-marker {{
       display: none;
     }}
     .wireframe-carat {{
-      font-size: 28px;
+      font-size: 20px;
       color: var(--muted);
-      margin-left: 8px;
+      margin-left: 6px;
       transition: transform 0.2s ease;
     }}
     details[open] .wireframe-carat {{
