@@ -218,6 +218,25 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       border-style: solid;
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }}
+    .wireframe-panel > summary {{
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }}
+    .wireframe-panel > summary::-webkit-details-marker {{
+      display: none;
+    }}
+    .wireframe-carat {{
+      font-size: 28px;
+      color: var(--muted);
+      margin-left: 8px;
+      transition: transform 0.2s ease;
+    }}
+    details[open] .wireframe-carat {{
+      transform: rotate(180deg);
+    }}
     .wireframe-header {{
       display: flex;
       align-items: center;
@@ -672,14 +691,14 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           </div>
         </div>
       </header>
-      <section class="wireframe-panel" id="scrape-wireframe">
-        <div class="wireframe-header">
+      <details class="wireframe-panel" id="scrape-wireframe" open>
+        <summary class="wireframe-header" title="Click to expand/collapse">
           <div class="wireframe-title" style="display:flex; align-items:center; gap:6px; white-space:nowrap;">
             <span id="header-range-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
             <span id="header-count-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
           </div>
-          <button id="scrape-wireframe-toggle" class="button" aria-expanded="false" aria-controls="scrape-wireframe-body">Expand</button>
-        </div>
+          <span class="wireframe-carat">▾</span>
+        </summary>
         <div class="wireframe-body" id="scrape-wireframe-body">
           <div class="date-range-panel">
             <div class="calendar-row">
@@ -715,7 +734,7 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
             </div>
           </div>
         </div>
-      </section>
+      </details>
       <div class="table-wrapper">
         <table aria-label="Bandcamp releases">
           <thead>
@@ -1509,7 +1528,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
     const dateFilterTo = document.getElementById("date-filter-to");
     const showCachedToggle = document.getElementById("show-cached-toggle");
     const wireframePanel = document.getElementById("scrape-wireframe");
-    const wireframeToggle = document.getElementById("scrape-wireframe-toggle");
     const wireframeBody = document.getElementById("scrape-wireframe-body");
     const calendarRange = document.getElementById("calendar-range");
     const calendarRangeMonth = document.getElementById("calendar-range-month");
@@ -2023,18 +2041,10 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       }} catch (err) {{}}
     }}
 
-    function setWireframeOpen(open) {{
-      if (!wireframePanel || !wireframeBody || !wireframeToggle) return;
-      wireframePanel.classList.toggle("open", open);
-      wireframeBody.hidden = !open;
-      wireframeToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      wireframeToggle.textContent = open ? "Collapse" : "Expand";
-    }}
-    setWireframeOpen(true);
-    if (wireframeToggle) {{
-      wireframeToggle.addEventListener("click", () => {{
-        const isOpen = wireframePanel && wireframePanel.classList.contains("open");
-        setWireframeOpen(!isOpen);
+    if (wireframePanel && wireframeBody) {{
+      wireframeBody.hidden = !wireframePanel.open;
+      wireframePanel.addEventListener("toggle", () => {{
+        wireframeBody.hidden = !wireframePanel.open;
       }});
     }}
 
