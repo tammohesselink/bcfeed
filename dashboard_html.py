@@ -487,6 +487,21 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
       box-shadow: var(--shadow);
       overflow: auto;
     }}
+    .status-bar {{
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      bottom: 0;
+      z-index: 6;
+    }}
     table {{
       width: 100%;
       border-collapse: collapse;
@@ -695,7 +710,6 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
         <summary class="wireframe-header" title="Click to expand/collapse">
           <div class="wireframe-title" style="display:flex; align-items:center; gap:6px; white-space:nowrap;">
             <span id="header-range-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
-            <span id="header-count-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
           </div>
           <span class="wireframe-carat">▾</span>
         </summary>
@@ -749,6 +763,9 @@ def render_dashboard_html(*, title: str, data_json: str, embed_proxy_url: str | 
           <tbody id="release-rows"></tbody>
         </table>
         <div id="empty-state" class="empty-state" style="display: none;">No releases match the current filter.</div>
+      </div>
+      <div class="status-bar">
+        <span id="header-count-label" class="detail-meta" style="font-size:12px; white-space:nowrap;"></span>
       </div>
     </main>
   </div>
