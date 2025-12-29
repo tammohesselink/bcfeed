@@ -109,14 +109,14 @@ def gmail_authenticate():
                 creds.refresh(Request())
             except RefreshError as exc:
                 _clear_token()
-                raise GmailAuthError("Gmail access was revoked or expired. Reload credentials to re-authorize.") from exc
+                raise GmailAuthError("Gmail access was revoked or expired. Reload credentials in the settings panel to re-authorize.") from exc
             except Exception as exc:
                 _clear_token()
                 raise GmailAuthError(f"Gmail refresh failed: {exc}") from exc
         else:
             cred_file = _find_credentials_file()
             if not cred_file:
-                raise FileNotFoundError(f"Could not find {k_gmail_credentials_file}. Reload credentials file to regenerate it.")
+                raise FileNotFoundError(f"Could not find {k_gmail_credentials_file}. Reload credentials file in the settings panel to regenerate it.")
             flow = InstalledAppFlow.from_client_secrets_file(str(cred_file), SCOPES)
             creds = flow.run_local_server(port=0)
         # save the credentials for the next run
@@ -142,10 +142,14 @@ def search_messages(service, query):
             if 'messages' in result:
                 messages.extend(result['messages'])
         return messages
-    except HttpError as exc:
-        if getattr(exc, "status_code", None) == 401 or (exc.resp and exc.resp.status == 401):
+    except Exception as exc:
+        if type(exc) == HttpError:
+            if getattr(exc, "status_code", None) == 401 or (exc.resp and exc.resp.status == 401):
+                _clear_token()
+                raise GmailAuthError("Gmail access revoked. Re-load the credentials in the settings and re-authorize.") from exc
+        elif type(exc) == RefreshError:
             _clear_token()
-            raise GmailAuthError("Gmail access revoked; please reauthorize.") from exc
+            raise GmailAuthError("Gmail access revoked. Re-load the credentials in the settings and re-authorize.") from exc
         raise
 
 # ------------------------------------------------------------------------ 

@@ -341,9 +341,9 @@ def populate_range():
         return _corsify(jsonify({"error": "Invalid start/end date"})), 400
 
     if not _find_credentials_file():
-        return _corsify(jsonify({"error": "Credentials not found. Reload credentials in the app."})), 400
+        return _corsify(jsonify({"error": "Credentials not found. Reload credentials in the settings panel."})), 400
     if not TOKEN_PATH.exists():
-        return _corsify(jsonify({"error": "Gmail token missing. Reload credentials in the app to re-authenticate."})), 400
+        return _corsify(jsonify({"error": "Gmail token missing. Reload credentials in the settings panel to re-authenticate."})), 400
 
     if not POPULATE_LOCK.acquire(blocking=False):
         return _corsify(jsonify({"error": "Another populate is already running"})), 409
@@ -408,9 +408,9 @@ def populate_range_stream():
     if not start or not end or start > end:
         return error_stream("Invalid start/end")
     if not _find_credentials_file():
-        return error_stream("Credentials not found. Reload credentials in the app.")
+        return error_stream("Credentials not found. Reload credentials in the settings panel.")
     if not TOKEN_PATH.exists():
-        return error_stream("Gmail token missing. Reload credentials in the app to re-authenticate.")
+        return error_stream("Gmail token missing. Reload credentials in the settings panel to re-authenticate.")
 
     if not POPULATE_LOCK.acquire(blocking=False):
         return error_stream("Another populate is already running")

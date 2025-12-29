@@ -68,14 +68,19 @@ def load_credentials() -> bool:
         try:
             # Remove any existing credentials/token so we always replace with the selected file
             shutil.copy(Path(path), CREDENTIALS_PATH)
-            messagebox.showinfo("Loaded", "Credentials loaded.")
             if TOKEN_PATH.exists():
                 TOKEN_PATH.unlink()
+            try:
+                from gmail import gmail_authenticate  # local import to avoid cycle
+                gmail_authenticate()
+            except Exception as exc:
+                messagebox.showerror("Error", f"Failed to authenticate with Gmail: {exc}")
+                return False
             return True
         except Exception as exc:
             messagebox.showerror("Error loading credentials", str(exc))
             return False
-
+        
 
 def save_settings(settings: dict):
     SETTINGS_PATH.parent.mkdir(exist_ok=True)
@@ -85,15 +90,7 @@ def save_settings(settings: dict):
 
 
 def reload_credentials():
-    if load_credentials():
-        try:
-            from gmail import gmail_authenticate  # local import to avoid cycle
-            gmail_authenticate()
-        except Exception as exc:
-            messagebox.showerror("Error", f"Failed to authenticate with Gmail: {exc}")
-        else:
-            messagebox.showinfo("Gmail", "Credentials reloaded and authenticated.")
-
+    load_credentials()
 
 def start_proxy_thread():
     port = find_free_port(PROXY_PORT)
