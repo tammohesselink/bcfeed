@@ -821,6 +821,10 @@ def render_dashboard_html(
         <input type="checkbox" id="preload-embeds-toggle" />
         <label for="preload-embeds-toggle">Preload Bandcamp players (faster browsing, slower generation)</label>
       </div>
+      <div style="height:12px;"></div>
+      <div style="display:flex; justify-content:flex-start;">
+        <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" class="button" style="background:#b83a3a; border-color:#b83a3a; color:#fff;">Revoke Gmail access</a>
+      </div>
     </div>
   </div>
   <div id="server-down-backdrop" class="server-down-backdrop">
