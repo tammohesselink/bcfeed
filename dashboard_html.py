@@ -136,6 +136,36 @@ def render_dashboard_html(
     .row-dot.read {{
       opacity: 0;
     }}
+    .star-btn {{
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }}
+    .star-btn:hover {{
+      transform: translateY(-1px);
+      color: var(--accent);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+    }}
+    .star-btn.starred {{
+      color: #f2d45c;
+      background: rgba(242, 212, 92, 0.12);
+      border-color: rgba(242, 212, 92, 0.45);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.25);
+    }}
+    .star-btn svg {{
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      pointer-events: none;
+    }}
     .cached-badge {{
       display: inline-flex;
       align-items: center;
@@ -583,6 +613,9 @@ def render_dashboard_html(
     tr.data-row.unseen {{
       background: var(--row-unseen-bg);
     }}
+    tr.data-row.starred {{
+      box-shadow: inset 0 0 0 1px rgba(242, 212, 92, 0.16);
+    }}
     tr.data-row:hover {{
       background: rgba(82, 208, 255, 0.02);
     }}
@@ -734,10 +767,14 @@ def render_dashboard_html(
           <div style="display:flex; flex-direction:column; gap:4px;">
             <h1>{escaped_title}</h1>
           </div>
-          <div style="display:flex; gap:8px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
             <label style="display:flex; align-items:center; gap:4px; font-size:12px;">
               <input type="checkbox" id="hide-viewed-toggle" />
               <span>Hide already seen releases</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:4px; font-size:12px;">
+              <input type="checkbox" id="show-starred-toggle" />
+              <span>Show only starred releases</span>
             </label>
             <button id="mark-seen" class="button" style="padding:6px 10px; font-size:12px;">Mark filtered as viewed</button>
             <button id="mark-unseen" class="button" style="padding:6px 10px; font-size:12px;">Mark filtered as unviewed</button>
@@ -793,6 +830,7 @@ def render_dashboard_html(
           <thead>
             <tr>
               <th style="width:24px;"></th>
+              <th style="width:34px; text-align:center;">Star</th>
               <th data-sort="page_name" style="min-width:100px; max-width:180px;">Label/Page <span class="sort-indicator"></span></th>
               <th data-sort="artist" style="min-width:120px; max-width:180px;">Artist <span class="sort-indicator"></span></th>
               <th data-sort="title" style="min-width:280px; max-width:560px;">Title <span class="sort-indicator"></span></th>
@@ -861,10 +899,12 @@ def render_dashboard_html(
     const releaseMap = new Map();
     releases.forEach(r => releaseMap.set(releaseKey(r), r));
     const VIEWED_KEY = "bc_viewed_releases_v1";
+    const STARRED_KEY = "bc_starred_releases_v1";
     const API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
     const HEALTH_URL = API_ROOT ? `${{API_ROOT}}/health` : null;
     const CLEAR_CREDS_URL = API_ROOT ? `${{API_ROOT}}/clear-credentials` : null;
     const LOAD_CREDS_URL = API_ROOT ? `${{API_ROOT}}/load-credentials` : null;
+    const STARRED_API = API_ROOT ? `${{API_ROOT}}/starred-state` : null;
     const POPULATE_LOG_KEY = "bc_populate_log_v1";
     const CLEAR_STATUS_ON_LOAD = {clear_status_literal};
     const SHOW_DEV_SETTINGS = {"true" if show_dev_settings else "false"};
@@ -951,6 +991,29 @@ def render_dashboard_html(
         return new Set();
       }}
     }}
+    async function loadStarredSet() {{
+      if (STARRED_API) {{
+        try {{
+          const resp = await fetch(STARRED_API);
+          if (resp.ok) {{
+            const data = await resp.json();
+            if (data && Array.isArray(data.starred)) {{
+              return new Set(data.starred);
+            }}
+          }}
+        }} catch (err) {{
+          console.warn("Failed to load starred state from API; falling back to localStorage", err);
+        }}
+      }}
+      try {{
+        const raw = localStorage.getItem(STARRED_KEY);
+        if (!raw) return new Set();
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? new Set(parsed) : new Set();
+      }} catch (err) {{
+        return new Set();
+      }}
+    }}
     function showServerDownModal() {{
       if (serverDownShown) return;
       serverDownShown = true;
@@ -1009,6 +1072,23 @@ def render_dashboard_html(
         console.warn("Failed to persist viewed state to API", err);
       }}
     }}
+    function persistStarredLocal(set) {{
+      try {{
+        localStorage.setItem(STARRED_KEY, JSON.stringify(Array.from(set)));
+      }} catch (err) {{}}
+    }}
+    async function persistStarredRemote(url, starred) {{
+      if (!STARRED_API || !url) return;
+      try {{
+        await fetch(STARRED_API, {{
+          method: "POST",
+          headers: {{"Content-Type": "application/json"}},
+          body: JSON.stringify({{url, starred}}),
+        }});
+      }} catch (err) {{
+        console.warn("Failed to persist starred state to API", err);
+      }}
+    }}
     function setViewed(release, isRead) {{
       const key = releaseKey(release);
       if (!key) return;
@@ -1021,12 +1101,54 @@ def render_dashboard_html(
       persistViewedRemote(release.url || key, isRead);
       renderCalendar("range");
     }}
+    function updateStarButton(button, isStarred) {{
+      if (!button) return;
+      button.classList.toggle("starred", isStarred);
+      button.setAttribute("aria-pressed", String(isStarred));
+      button.title = isStarred ? "Unstar this release" : "Star this release";
+      button.setAttribute("aria-label", button.title);
+    }}
+    function markCachedBadge(row, release) {{
+      if (!row || !state.showCachedBadges) return;
+      const titleCell = row.querySelector("[data-title-cell]");
+      if (titleCell && release.embed_url && !titleCell.querySelector(".cached-badge")) {{
+        titleCell.insertAdjacentHTML("beforeend", ' <span class="cached-badge">cached</span>');
+      }}
+    }}
+    function setStarred(release, isStarred, opts = {{ row: null, button: null }}) {{
+      const rowEl = opts.row || null;
+      const btn = opts.button || null;
+      const key = releaseKey(release);
+      if (!key) return;
+      if (isStarred) {{
+        state.starred.add(key);
+      }} else {{
+        state.starred.delete(key);
+      }}
+      persistStarredLocal(state.starred);
+      persistStarredRemote(release.url || key, isStarred);
+      if (rowEl) {{
+        rowEl.classList.toggle("starred", isStarred);
+      }}
+      if (btn) {{
+        updateStarButton(btn, isStarred);
+      }}
+      if (isStarred) {{
+        ensureEmbed(release).then((embedUrl) => {{
+          if (embedUrl && rowEl) {{
+            markCachedBadge(rowEl, release);
+          }}
+        }});
+      }}
+    }}
     const state = {{
       sortKey: "date",
       direction: "desc",
       showLabels: new Set(),
       showOnlyLabels: new Set(),
       viewed: new Set(),
+      starred: new Set(),
+      showOnlyStarred: false,
       hideViewed: false,
       hideViewedSnapshot: new Set(),
       expandedKey: null,
@@ -1492,7 +1614,7 @@ def render_dashboard_html(
       const tr = document.createElement("tr");
       tr.className = "detail-row";
       const td = document.createElement("td");
-      td.colSpan = 5;
+      td.colSpan = 6;
 
       td.innerHTML = `
         <div class="detail-card">
@@ -1523,14 +1645,17 @@ def render_dashboard_html(
 
       const dateFiltered = releases.filter(r => withinSelectedRange(r));
       const filtered = dateFiltered.filter(r => {{
+        const key = releaseKey(r);
         const useShowOnly = state.showOnlyLabels.size > 0;
         const activeSet = useShowOnly ? state.showOnlyLabels : state.showLabels;
         if (activeSet.size > 0) {{
           if (r.page_name && !activeSet.has(r.page_name)) return false;
         }}
+        if (state.showOnlyStarred) {{
+          if (!key || !state.starred.has(key)) return false;
+        }}
 
         if (state.hideViewed && state.hideViewedSnapshot.size > 0) {{
-          const key = releaseKey(r);
           if (state.expandedKey && key === state.expandedKey) return true;
           return !state.hideViewedSnapshot.has(key);
         }}
@@ -1542,21 +1667,44 @@ def render_dashboard_html(
 
       sorted.forEach(release => {{
         const tr = document.createElement("tr");
+        const key = releaseKey(release) || "";
         tr.className = "data-row";
-        tr.dataset.key = releaseKey(release);
+        tr.dataset.key = key;
         tr.dataset.page = release.page_name || "";
         tr.tabIndex = 0;
         tr.innerHTML = `
           <td style="width:24px;"><span class="row-dot"></span></td>
+          <td style="width:34px; text-align:center;">
+            <button type="button" class="star-btn" data-star-btn aria-label="Star this release" aria-pressed="false" title="Star this release">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+              </svg>
+            </button>
+          </td>
           <td><a class="link" href="${{pageUrlFor(release)}}" target="_blank" rel="noopener">${{release.page_name || "Unknown"}}</a></td>
           <td><a class="link" href="${{pageUrlFor(release)}}" target="_blank" rel="noopener">${{release.artist || "—"}}</a></td>
-          <td><a class="link" href="${{release.url || "#"}}" target="_blank" rel="noopener" data-title-link>${{release.title || "—"}}</a>${{state.showCachedBadges && release.embed_url ? ' <span class="cached-badge">cached</span>' : ''}}</td>
+          <td data-title-cell><a class="link" href="${{release.url || "#"}}" target="_blank" rel="noopener" data-title-link>${{release.title || "—"}}</a>${{state.showCachedBadges && release.embed_url ? ' <span class="cached-badge">cached</span>' : ''}}</td>
           <td>${{formatDate(release.date)}}</td>
         `;
-        const existingRead = state.viewed.has(releaseKey(release));
+        const existingRead = state.viewed.has(key);
         const initialDot = tr.querySelector(".row-dot");
         if (initialDot) initialDot.classList.toggle("read", existingRead);
         tr.classList.toggle("unseen", !existingRead);
+        if (state.starred.has(key)) {{
+          tr.classList.add("starred");
+        }}
+        const starBtn = tr.querySelector("[data-star-btn]");
+        updateStarButton(starBtn, state.starred.has(key));
+        if (starBtn) {{
+          starBtn.addEventListener("click", (evt) => {{
+            evt.stopPropagation();
+            const next = !state.starred.has(key);
+            setStarred(release, next, {{row: tr, button: starBtn}});
+          }});
+        }}
+        if (state.starred.has(key)) {{
+          ensureEmbed(release).then(() => markCachedBadge(tr, release));
+        }}
 
         tr.addEventListener("click", (evt) => {{
           if (evt.target && evt.target.matches("a[data-title-link]")) {{
@@ -1591,14 +1739,14 @@ def render_dashboard_html(
             detail.style.display = "";
           }}
           tr.classList.add("expanded");
-          state.expandedKey = releaseKey(release);
+          state.expandedKey = key;
 
           const embedTarget = detail.querySelector("[data-embed-target]");
           const descTarget = detail.querySelector("[data-desc-target]");
           const dot = tr.querySelector(".row-dot");
           if (dot) dot.classList.add("read");
           tr.classList.remove("unseen");
-          const cachedUrl = releaseKey(release);
+          const cachedUrl = key;
           if (cachedUrl) {{
             state.viewed.add(cachedUrl);
           }}
@@ -1613,10 +1761,7 @@ def render_dashboard_html(
               }}
             const height = release.is_track ? 320 : 480;
             embedTarget.innerHTML = `<iframe title="Bandcamp player" style="border:0; width:100%; height:${{height}}px;" src="${{embedUrl}}" seamless></iframe>`;
-            const titleCell = tr.children[3];
-            if (titleCell && embedUrl && state.showCachedBadges && !titleCell.querySelector(".cached-badge")) {{
-              titleCell.insertAdjacentHTML("beforeend", ' <span class="cached-badge">cached</span>');
-            }}
+            markCachedBadge(tr, release);
             if (descTarget) {{
               descTarget.textContent = release.description || "No description available.";
             }}
@@ -1662,6 +1807,12 @@ def render_dashboard_html(
               }}
               setViewed(release, false);
             }}
+          }}
+          if (evt.key.toLowerCase() === "s") {{
+            evt.preventDefault();
+            const next = !state.starred.has(key);
+            const btn = tr.querySelector("[data-star-btn]");
+            setStarred(release, next, {{row: tr, button: btn}});
           }}
         }});
 
@@ -1741,6 +1892,7 @@ def render_dashboard_html(
     const resetClearCache = null;
     const resetClearViewed = null;
     const hideViewedToggle = document.getElementById("hide-viewed-toggle");
+    const showStarredToggle = document.getElementById("show-starred-toggle");
     const markSeenBtn = document.getElementById("mark-seen");
     const markUnseenBtn = document.getElementById("mark-unseen");
     const dateFilterFrom = document.getElementById("date-filter-from");
@@ -1780,13 +1932,14 @@ def render_dashboard_html(
     async function performReset() {{
       const clearCache = true;
       const clearViewed = true;
+      const clearStarred = true;
       let hadError = false;
       if (API_ROOT) {{
         try {{
           const resp = await fetch(`${{API_ROOT}}/reset-caches`, {{
             method: "POST",
             headers: {{"Content-Type": "application/json"}},
-            body: JSON.stringify({{clear_cache: clearCache, clear_viewed: clearViewed}}),
+            body: JSON.stringify({{clear_cache: clearCache, clear_viewed: clearViewed, clear_starred: clearStarred}}),
           }});
           if (!resp.ok) throw new Error(`HTTP ${{resp.status}}`);
         }} catch (err) {{
@@ -1798,6 +1951,8 @@ def render_dashboard_html(
       }}
       state.viewed = new Set();
       persistViewedLocal(state.viewed);
+      state.starred = new Set();
+      persistStarredLocal(state.starred);
       releases.forEach(r => {{
         delete r.embed_url;
         delete r.release_id;
@@ -1833,6 +1988,12 @@ def render_dashboard_html(
     }}
     if (hideViewedToggle) {{
       hideViewedToggle.addEventListener("change", () => applyHideViewed(hideViewedToggle.checked));
+    }}
+    if (showStarredToggle) {{
+      showStarredToggle.addEventListener("change", () => {{
+        state.showOnlyStarred = !!showStarredToggle.checked;
+        renderTable();
+      }});
     }}
 
     function markVisibleRows(viewed) {{
@@ -2311,9 +2472,13 @@ def render_dashboard_html(
     setTimeout(() => checkServerAlive(), 500);
     setInterval(() => checkServerAlive(), 5000);
 
-    // Render after viewed state loads to keep persisted read dots and show date range
-    loadViewedSet().then(set => {{
-      state.viewed = set;
+    // Render after persisted state loads to keep dots/stars and show date range
+    Promise.all([
+      loadViewedSet().catch(() => new Set()),
+      loadStarredSet().catch(() => new Set()),
+    ]).then(([viewed, starred]) => {{
+      state.viewed = viewed || new Set();
+      state.starred = starred || new Set();
       renderDateRangeLabel();
       renderTable();
       renderCalendar("range");

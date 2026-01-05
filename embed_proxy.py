@@ -34,6 +34,7 @@ app = Flask(__name__)
 
 DATA_DIR = get_data_dir()
 VIEWED_PATH = DATA_DIR / "viewed_state.json"
+STARRED_PATH = DATA_DIR / "starred_state.json"
 RELEASE_CACHE_PATH = DATA_DIR / "release_cache.json"
 EMPTY_DATES_PATH = DATA_DIR / "no_results_dates.json"
 SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
@@ -101,6 +102,26 @@ def _save_viewed(items: set[str]) -> None:
     except FileNotFoundError:
         # If the temp file vanished between write and replace, fall back to writing directly.
         VIEWED_PATH.write_text(json.dumps(sorted(items)), encoding="utf-8")
+
+
+def _load_starred() -> set[str]:
+    if not STARRED_PATH.exists():
+        return set()
+    try:
+        data = json.loads(STARRED_PATH.read_text(encoding="utf-8"))
+        return set(data) if isinstance(data, list) else set()
+    except Exception:
+        return set()
+
+
+def _save_starred(items: set[str]) -> None:
+    tmp = STARRED_PATH.with_suffix(".tmp")
+    tmp.parent.mkdir(parents=True, exist_ok=True)
+    tmp.write_text(json.dumps(sorted(items)), encoding="utf-8")
+    try:
+        tmp.replace(STARRED_PATH)
+    except FileNotFoundError:
+        STARRED_PATH.write_text(json.dumps(sorted(items)), encoding="utf-8")
 
 
 def _extract_description(html_text: str) -> str | None:
@@ -231,6 +252,28 @@ def viewed_state():
     return _corsify(jsonify({"ok": True}))
 
 
+@app.route("/starred-state", methods=["GET", "POST", "OPTIONS"])
+def starred_state():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    if request.method == "GET":
+        items = sorted(_load_starred())
+        return _corsify(jsonify({"starred": items}))
+
+    data = request.get_json(silent=True) or {}
+    url = data.get("url")
+    starred = data.get("starred")
+    if not url or not isinstance(starred, bool):
+        return _corsify(jsonify({"error": "Missing url or starred flag"})), 400
+    items = _load_starred()
+    if starred:
+        items.add(url)
+    else:
+        items.discard(url)
+    _save_starred(items)
+    return _corsify(jsonify({"ok": True}))
+
+
 @app.route("/embed-meta", methods=["GET", "OPTIONS"])
 def embed_meta():
     if request.method == "OPTIONS":
@@ -293,6 +336,7 @@ def reset_caches():
     data = request.get_json(silent=True) or {}
     clear_cache = bool(data.get("clear_cache", False))
     clear_viewed = bool(data.get("clear_viewed", False))
+    clear_starred = bool(data.get("clear_starred", False))
 
     cleared = []
     errors = []
@@ -325,9 +369,11 @@ def reset_caches():
             )
         except Exception as exc:
             errors.append(f"regen: {exc}")
-    if clear_viewed:
+    if clear_viewed or clear_starred:
         if _safe_unlink(VIEWED_PATH):
             cleared.append(VIEWED_PATH.name)
+        if _safe_unlink(STARRED_PATH):
+            cleared.append(STARRED_PATH.name)
 
     return _corsify(jsonify({"ok": True, "cleared": cleared, "errors": errors}))
 
