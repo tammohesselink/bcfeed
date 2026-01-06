@@ -871,6 +871,13 @@
     const releaseMap = new Map();
     let EMBED_PROXY_URL = "http://localhost:5050/embed-meta";
     let API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
+    const API_HOST = (() => {
+      try {
+        return API_ROOT ? new URL(API_ROOT).hostname : null;
+      } catch {
+        return null;
+      }
+    })();
     let HEALTH_URL = API_ROOT ? `${API_ROOT}/health` : null;
     let CLEAR_CREDS_URL = API_ROOT ? `${API_ROOT}/clear-credentials` : null;
     let LOAD_CREDS_URL = API_ROOT ? `${API_ROOT}/load-credentials` : null;
@@ -880,6 +887,7 @@
     const serverDownBackdrop = document.getElementById("server-down-backdrop");
     const maxResultsBackdrop = document.getElementById("max-results-backdrop");
     let serverDownShown = false;
+    let serverDownFailures = 0;
     let maxNoticeShown = false;
     let DEFAULT_THEME = "light";
     const populateLog = document.getElementById("populate-log");
@@ -1023,6 +1031,7 @@
     }
     async function checkServerAlive() {
       if (!HEALTH_URL || serverDownShown) return;
+      const online = typeof navigator === "undefined" ? true : navigator.onLine;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 4000);
       try {
@@ -1033,8 +1042,19 @@
         });
         clearTimeout(timer);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        serverDownFailures = 0;
       } catch (err) {
         clearTimeout(timer);
+        if (!online) {
+          // Ignore offline blips; try again on next interval.
+          return;
+        }
+        const isLocalHost = API_HOST && ["localhost", "127.0.0.1", location.hostname].includes(API_HOST);
+        if (!isLocalHost) {
+          // Only count failures for remote hosts if the response was non-OK.
+          return;
+        }
+        serverDownFailures += 1;
         showServerDownModal();
       }
     }
