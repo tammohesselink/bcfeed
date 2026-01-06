@@ -1,38 +1,11 @@
-"""
-HTML template generator for the Bandcamp release dashboard.
-This module isolates the large HTML/JS/CSS document so the main logic in
-dashboard.py remains focused on data normalization and file I/O.
-"""
-
-from __future__ import annotations
-
-import html
-import json
-
-
-def render_dashboard_html(
-    *,
-    title: str,
-    data_json: str,
-    embed_proxy_url: str | None = None,
-    default_theme: str | None = None,
-    clear_status_on_load: bool = False,
-    show_dev_settings: bool = False,
-) -> str:
-    """
-    Build the full dashboard HTML document.
-    """
-    escaped_title = html.escape(title)
-    proxy_literal = json.dumps(embed_proxy_url)
-    clear_status_literal = "true" if clear_status_on_load else "false"
-    return f"""<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{escaped_title}</title>
+  <title>bcfeed</title>
   <style>
-    :root {{
+    :root {
       --bg: #0f1116;
       --surface: #181b22;
       --panel: #0b0d11;
@@ -44,8 +17,8 @@ def render_dashboard_html(
       --radius: 10px;
       --row-bg: #181b22;
       --row-unseen-bg: #1f2430;
-    }}
-    .theme-light {{
+    }
+    .theme-light {
       --bg: #f5f7fb;
       --surface: #ffffff;
       --panel: #f1f3f7;
@@ -56,12 +29,12 @@ def render_dashboard_html(
       --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       --row-bg: #f6f7fb;
       --row-unseen-bg: #e8ecf4;
-    }}
-    * {{ box-sizing: border-box; }}
-    html, body {{
+    }
+    * { box-sizing: border-box; }
+    html, body {
       height: 100%;
-    }}
-    body {{
+    }
+    body {
       margin: 0;
       min-height: 100vh;
       background: radial-gradient(circle at 20% 20%, rgba(82, 208, 255, 0.08), transparent 25%),
@@ -71,23 +44,23 @@ def render_dashboard_html(
       font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
       display: flex;
       overflow: hidden;
-    }}
-    body.theme-light {{
+    }
+    body.theme-light {
       background: radial-gradient(circle at 20% 20%, rgba(31, 122, 255, 0.08), transparent 25%),
                   radial-gradient(circle at 80% 0%, rgba(255, 171, 64, 0.1), transparent 25%),
                   var(--bg);
-    }}
-    a.link {{
+    }
+    a.link {
       color: var(--text);
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: color 0.12s ease, border-color 0.12s ease;
-    }}
-    a.link:hover {{
+    }
+    a.link:hover {
       color: var(--accent);
       border-color: rgba(82, 208, 255, 0.6);
-    }}
-    header {{
+    }
+    header {
       padding: 18px 24px;
       border-bottom: 1px solid var(--border);
       background: var(--header-bg);
@@ -95,8 +68,8 @@ def render_dashboard_html(
       position: sticky;
       top: 0;
       z-index: 20;
-    }}
-    .button {{
+    }
+    .button {
       padding: 8px 12px;
       border-radius: 8px;
       border: 1px solid var(--border);
@@ -106,24 +79,24 @@ def render_dashboard_html(
       transition: all 0.12s ease;
       font-weight: 600;
       letter-spacing: 0.2px;
-    }}
-    .button:hover {{
+    }
+    .button:hover {
       transform: translateY(-1px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    }}
-    .button:disabled {{
+    }
+    .button:disabled {
       opacity: 0.45;
       cursor: not-allowed;
       pointer-events: none;
       filter: grayscale(0.2);
       box-shadow: none;
-    }}
-    h1 {{
+    }
+    h1 {
       margin: 0;
       font-size: 22px;
       letter-spacing: 0.3px;
-    }}
-    .row-dot {{
+    }
+    .row-dot {
       display: inline-block;
       width: 10px;
       height: 10px;
@@ -132,11 +105,11 @@ def render_dashboard_html(
       opacity: 0.7;
       cursor: pointer;
       transition: opacity 0.12s ease;
-    }}
-    .row-dot.read {{
+    }
+    .row-dot.read {
       opacity: 0;
-    }}
-    .star-btn {{
+    }
+    .star-btn {
       width: 30px;
       height: 30px;
       display: inline-flex;
@@ -148,25 +121,25 @@ def render_dashboard_html(
       color: var(--muted);
       cursor: pointer;
       transition: all 0.12s ease;
-    }}
-    .star-btn:hover {{
+    }
+    .star-btn:hover {
       transform: translateY(-1px);
       color: var(--accent);
       box-shadow: 0 6px 12px rgba(0,0,0,0.18);
-    }}
-    .star-btn.starred {{
+    }
+    .star-btn.starred {
       color: #f2d45c;
       background: rgba(242, 212, 92, 0.12);
       border-color: rgba(242, 212, 92, 0.45);
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.25);
-    }}
-    .star-btn svg {{
+    }
+    .star-btn svg {
       width: 16px;
       height: 16px;
       fill: currentColor;
       pointer-events: none;
-    }}
-    .cached-badge {{
+    }
+    .cached-badge {
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -181,21 +154,21 @@ def render_dashboard_html(
       margin-left: 6px;
       border: 1px solid rgba(82, 208, 255, 0.25);
       white-space: nowrap;
-    }}
-    .header-bar {{
+    }
+    .header-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-    }}
-    .layout {{
+    }
+    .layout {
       display: grid;
       grid-template-columns: 260px 1fr;
       gap: 0;
       width: 100%;
       height: calc(100vh - 70px);
-    }}
-    aside {{
+    }
+    aside {
       background: var(--panel);
       border-right: 1px solid var(--border);
       padding: 20px;
@@ -204,19 +177,19 @@ def render_dashboard_html(
       align-self: start;
       height: 100vh;
       overflow-y: auto;
-    }}
-    .filter-title {{
+    }
+    .filter-title {
       font-size: 14px;
       letter-spacing: 0.5px;
       color: var(--muted);
       text-transform: uppercase;
       margin-bottom: 10px;
-    }}
-    .filter-list {{
+    }
+    .filter-list {
       display: grid;
       gap: 4px;
-    }}
-    .filter-item {{
+    }
+    .filter-item {
       display: grid;
       grid-template-columns: auto auto 1fr auto;
       align-items: center;
@@ -227,39 +200,39 @@ def render_dashboard_html(
       border-radius: 0;
       line-height: 1.05;
       font-size: 13px;
-    }}
-    .filter-checkbox {{
+    }
+    .filter-checkbox {
       width: 16px;
       height: 16px;
       cursor: pointer;
-    }}
-    .filter-checkbox.show {{
+    }
+    .filter-checkbox.show {
       accent-color: var(--accent);
-    }}
-    .filter-checkbox.show-only {{
+    }
+    .filter-checkbox.show-only {
       accent-color: #ff6b6b;
-    }}
-    .filter-checkbox:disabled {{
+    }
+    .filter-checkbox:disabled {
       opacity: 0.5;
       cursor: not-allowed;
-    }}
-    .filter-item.show-only-active .filter-checkbox.show {{
+    }
+    .filter-item.show-only-active .filter-checkbox.show {
       opacity: 0.5;
-    }}
-    .filter-count {{
+    }
+    .filter-count {
       margin-left: auto;
       justify-self: end;
       color: var(--muted);
       font-size: 12px;
-    }}
-    main {{
+    }
+    main {
       padding: 0 16px 8px 16px;
       display: flex;
       flex-direction: column;
       height: 100%;
       overflow: hidden;
-    }}
-    .wireframe-panel {{
+    }
+    .wireframe-panel {
       margin: 16px 0;
       padding: 10px 12px;
       background: var(--surface);
@@ -267,12 +240,12 @@ def render_dashboard_html(
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }}
-    .wireframe-panel.open {{
+    }
+    .wireframe-panel.open {
       border-style: solid;
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    }}
-    .wireframe-panel > summary {{
+    }
+    .wireframe-panel > summary {
       list-style: none;
       cursor: pointer;
       display: flex;
@@ -280,42 +253,42 @@ def render_dashboard_html(
       justify-content: space-between;
       padding: 4px 0;
       min-height: 24px;
-    }}
-    .wireframe-panel > summary::-webkit-details-marker {{
+    }
+    .wireframe-panel > summary::-webkit-details-marker {
       display: none;
-    }}
-    .wireframe-carat {{
+    }
+    .wireframe-carat {
       font-size: 20px;
       color: var(--muted);
       margin-left: 6px;
       transition: transform 0.2s ease;
-    }}
-    details[open] .wireframe-carat {{
+    }
+    details[open] .wireframe-carat {
       transform: rotate(180deg);
-    }}
-    .wireframe-header {{
+    }
+    .wireframe-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
       padding: 4px 0;
-    }}
-    .wireframe-title {{
+    }
+    .wireframe-title {
       display: flex;
       flex-direction: column;
       gap: 4px;
-    }}
-    .wireframe-title strong {{
+    }
+    .wireframe-title strong {
       font-size: 15px;
       letter-spacing: 0.2px;
-    }}
-    .wireframe-title span {{
+    }
+    .wireframe-title span {
       color: var(--muted);
       font-size: 12px;
       letter-spacing: 0.4px;
       text-transform: uppercase;
-    }}
-    .wireframe-body {{
+    }
+    .wireframe-body {
       margin-top: 12px;
       border: 1px dashed var(--border);
       border-radius: calc(var(--radius) - 2px);
@@ -327,18 +300,18 @@ def render_dashboard_html(
         rgba(255,255,255,0.02) 12px,
         rgba(255,255,255,0.02) 24px
       );
-    }}
-    .date-range-panel {{
+    }
+    .date-range-panel {
       display: grid;
       gap: 8px;
-    }}
-    .calendar-row {{
+    }
+    .calendar-row {
       display: grid;
       grid-template-columns: 240px 1fr;
       gap: 10px;
       align-items: start;
-    }}
-    .calendar-card {{
+    }
+    .calendar-card {
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface);
@@ -349,34 +322,34 @@ def render_dashboard_html(
       display: flex;
       flex-direction: column;
       gap: 7px;
-    }}
-    .calendar-label {{
+    }
+    .calendar-label {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 6px;
       font-weight: 600;
       letter-spacing: 0.3px;
-    }}
-    .calendar-meta {{
+    }
+    .calendar-meta {
       display: flex;
       align-items: center;
       gap: 7px;
-    }}
-    .calendar-nav {{
+    }
+    .calendar-nav {
       display: flex;
       gap: 5px;
       align-items: center;
-    }}
-    .calendar-nav button {{
+    }
+    .calendar-nav button {
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.04);
       color: var(--text);
       border-radius: 6px;
       padding: 3px 7px;
       cursor: pointer;
-    }}
-    .calendar-month {{
+    }
+    .calendar-month {
       font-size: 11px;
       color: var(--muted);
       width: 110px;
@@ -385,8 +358,8 @@ def render_dashboard_html(
       text-align: center;
       letter-spacing: 0.4px;
       text-transform: uppercase;
-    }}
-    .calendar-today-btn {{
+    }
+    .calendar-today-btn {
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.06);
       color: var(--text);
@@ -395,16 +368,16 @@ def render_dashboard_html(
       cursor: pointer;
       font-size: 10px;
       letter-spacing: 0.3px;
-    }}
-    .calendar-grid {{
+    }
+    .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 3px;
       font-size: 11px;
       flex: 1;
       min-height: 187px;
-    }}
-    .calendar-log {{
+    }
+    .calendar-log {
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface);
@@ -414,8 +387,8 @@ def render_dashboard_html(
       flex-direction: column;
       gap: 5px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-    }}
-    .scrollbox {{
+    }
+    .scrollbox {
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px;
@@ -425,8 +398,8 @@ def render_dashboard_html(
       font-size: 12px;
       color: var(--muted);
       white-space: pre-line;
-    }}
-    .calendar-day {{
+    }
+    .calendar-day {
       position: relative;
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -436,91 +409,91 @@ def render_dashboard_html(
       cursor: pointer;
       background: rgba(255,255,255,0.02);
       transition: transform 0.1s ease, border-color 0.12s ease, box-shadow 0.12s ease;
-    }}
-    .calendar-day .date-label {{
+    }
+    .calendar-day .date-label {
       display: inline-block;
       padding: 0 4px;
       border-radius: 999px;
       min-width: 12px;
-    }}
-    .calendar-day.unseen-day .date-label {{
+    }
+    .calendar-day.unseen-day .date-label {
       background: #64a8ff;
       color: #0b0d11;
-    }}
-    .calendar-day.in-range {{
+    }
+    .calendar-day.in-range {
       background: linear-gradient(180deg, rgba(82,208,255,0.14), rgba(82,208,255,0.05));
       border-color: rgba(82,208,255,0.5);
-    }}
-    .calendar-day .dot-strip {{
+    }
+    .calendar-day .dot-strip {
       display: flex;
       justify-content: center;
       gap: 3px;
       margin-top: 3px;
       min-height: 6px;
-    }}
-    .calendar-day .dot {{
+    }
+    .calendar-day .dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       border: 1px solid rgba(0,0,0,0.25);
       box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
       background: transparent;
-    }}
-    .calendar-day .dot.unseen {{
+    }
+    .calendar-day .dot.unseen {
       display: none;
-    }}
-    .calendar-day.scraped {{
+    }
+    .calendar-day.scraped {
       background: rgba(255,255,255,0.12);
       border-color: rgba(255,255,255,0.28);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-    }}
-    body.theme-light .calendar-day.scraped {{
+    }
+    body.theme-light .calendar-day.scraped {
       background: rgba(0,0,0,0.08);
       border-color: rgba(0,0,0,0.16);
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
-    }}
+    }
     .calendar-day.scraped.in-range,
-    .calendar-day.scraped.selected {{
+    .calendar-day.scraped.selected {
       background: linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,255,255,0.22));
       border-color: rgba(82,208,255,0.7);
       box-shadow: 0 0 0 1px rgba(82,208,255,0.4), 0 8px 18px rgba(0,0,0,0.2);
-    }}
+    }
     body.theme-light .calendar-day.scraped.in-range,
-    body.theme-light .calendar-day.scraped.selected {{
+    body.theme-light .calendar-day.scraped.selected {
       background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.12));
       border-color: rgba(64,150,210,0.65);
       box-shadow: 0 0 0 1px rgba(64,150,210,0.35), 0 6px 12px rgba(0,0,0,0.1);
-    }}
-    .calendar-day .dot.scraped {{
+    }
+    .calendar-day .dot.scraped {
       display: none;
-    }}
-    .calendar-day .dot.unseen {{
+    }
+    .calendar-day .dot.unseen {
       background: #64a8ff;
       border-color: rgba(50,120,200,0.6);
       box-shadow: 0 0 0 1px rgba(100,168,255,0.35);
-    }}
-    .calendar-day:hover {{
+    }
+    .calendar-day:hover {
       transform: translateY(-1px);
       border-color: rgba(82,208,255,0.6);
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-    }}
-    .calendar-day.other-month {{
+    }
+    .calendar-day.other-month {
       visibility: hidden;
       pointer-events: none;
-    }}
-    .calendar-day.disabled {{
+    }
+    .calendar-day.disabled {
       opacity: 0.35;
       cursor: not-allowed;
       background: rgba(255,255,255,0.02);
       border-style: dashed;
       pointer-events: none;
-    }}
-    .calendar-day.selected {{
+    }
+    .calendar-day.selected {
       background: linear-gradient(180deg, rgba(82,208,255,0.14), rgba(82,208,255,0.05));
       border-color: rgba(82,208,255,0.5);
       box-shadow: none;
-    }}
-    .max-results-backdrop {{
+    }
+    .max-results-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.75);
@@ -528,8 +501,8 @@ def render_dashboard_html(
       align-items: center;
       justify-content: center;
       z-index: 9999;
-    }}
-    .max-results-modal {{
+    }
+    .max-results-modal {
       background: var(--surface);
       color: var(--text);
       padding: 22px 26px;
@@ -540,15 +513,15 @@ def render_dashboard_html(
       text-align: center;
       font-size: 15px;
       line-height: 1.5;
-    }}
-    .calendar-weekday {{
+    }
+    .calendar-weekday {
       text-align: center;
       font-size: 11px;
       color: var(--muted);
       padding: 4px 0;
       letter-spacing: 0.4px;
-    }}
-    .table-wrapper {{
+    }
+    .table-wrapper {
       margin-top: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -557,8 +530,8 @@ def render_dashboard_html(
       overflow: auto;
       flex: 1;
       min-height: 0;
-    }}
-    .status-bar {{
+    }
+    .status-bar {
       margin-top: 8px;
       padding: 8px 12px;
       background: var(--surface);
@@ -570,25 +543,25 @@ def render_dashboard_html(
       justify-content: space-between;
       align-items: center;
       flex-shrink: 0;
-    }}
-    table {{
+    }
+    table {
       width: 100%;
       border-collapse: collapse;
       font-size: 14px;
-    }}
-    thead {{
+    }
+    thead {
       background: var(--panel);
       position: sticky;
       top: 0;
       z-index: 5;
-    }}
-    th, td {{
+    }
+    th, td {
       padding: 6px 8px;
       text-align: left;
       border-bottom: 1px solid var(--border);
       line-height: 1.05;
-    }}
-    th {{
+    }
+    th {
       user-select: none;
       cursor: pointer;
       text-transform: uppercase;
@@ -599,30 +572,30 @@ def render_dashboard_html(
       top: 0;
       background: var(--panel);
       z-index: 6;
-    }}
-    th .sort-indicator {{
+    }
+    th .sort-indicator {
       position: absolute;
       right: 10px;
       opacity: 0.7;
       font-size: 10px;
-    }}
-    tr.data-row {{
+    }
+    tr.data-row {
       transition: background 0.15s ease;
       background: var(--row-bg);
-    }}
-    tr.data-row.unseen {{
+    }
+    tr.data-row.unseen {
       background: var(--row-unseen-bg);
-    }}
-    tr.data-row.starred {{
+    }
+    tr.data-row.starred {
       box-shadow: inset 0 0 0 1px rgba(242, 212, 92, 0.16);
-    }}
-    tr.data-row:hover {{
+    }
+    tr.data-row:hover {
       background: rgba(82, 208, 255, 0.02);
-    }}
-    tr.expanded {{
+    }
+    tr.expanded {
       background: var(--row-bg);
-    }}
-    .pill {{
+    }
+    .pill {
       padding: 6px 10px;
       border-radius: 999px;
       background: rgba(82, 208, 255, 0.12);
@@ -632,31 +605,31 @@ def render_dashboard_html(
       display: inline-flex;
       align-items: center;
       gap: 6px;
-    }}
-    .pill small {{
+    }
+    .pill small {
       color: var(--muted);
       font-weight: 600;
       letter-spacing: 0.3px;
-    }}
-    .detail-row td {{
+    }
+    .detail-row td {
       padding: 0;
       border: none;
       background: var(--surface);
-    }}
-    .detail-card {{
+    }
+    .detail-card {
       padding: 16px;
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
       background: var(--surface);
-    }}
-    .detail-body {{
+    }
+    .detail-body {
       display: grid;
       grid-template-columns: minmax(260px, 520px) 1fr;
       gap: 16px;
       align-items: stretch;
-    }}
-    .detail-desc {{
+    }
+    .detail-desc {
       font-size: 13px;
       line-height: 1.5;
       color: var(--muted);
@@ -668,18 +641,18 @@ def render_dashboard_html(
       max-height: 480px;
       min-height: 320px;
       overflow: auto;
-    }}
-    .detail-header {{
+    }
+    .detail-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-    }}
-    .detail-meta {{
+    }
+    .detail-meta {
       color: var(--muted);
       font-size: 13px;
-    }}
-    .settings-backdrop {{
+    }
+    .settings-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.45);
@@ -687,8 +660,8 @@ def render_dashboard_html(
       align-items: center;
       justify-content: center;
       z-index: 50;
-    }}
-    .settings-panel {{
+    }
+    .settings-panel {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -697,30 +670,30 @@ def render_dashboard_html(
       box-shadow: var(--shadow);
       display: grid;
       gap: 12px;
-    }}
-    .settings-panel h2 {{
+    }
+    .settings-panel h2 {
       margin: 0;
       font-size: 16px;
-    }}
-    .settings-row {{
+    }
+    .settings-row {
       display: flex;
       align-items: center;
       gap: 8px;
-    }}
-    .embed-wrapper {{
+    }
+    .embed-wrapper {
       width: 100%;
       max-width: 550px;
       border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-    }}
-    .empty-state {{
+    }
+    .empty-state {
       padding: 30px;
       text-align: center;
       color: var(--muted);
-    }}
-    .server-down-backdrop {{
+    }
+    .server-down-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.75);
@@ -728,8 +701,8 @@ def render_dashboard_html(
       align-items: center;
       justify-content: center;
       z-index: 9999;
-    }}
-    .server-down-modal {{
+    }
+    .server-down-modal {
       background: var(--surface);
       color: var(--text);
       padding: 24px 28px;
@@ -740,19 +713,19 @@ def render_dashboard_html(
       text-align: center;
       font-size: 15px;
       line-height: 1.5;
-    }}
-    @media (max-width: 900px) {{
-      body {{ display: block; }}
-      .layout {{ grid-template-columns: 1fr; }}
-      aside {{
+    }
+    @media (max-width: 900px) {
+      body { display: block; }
+      .layout { grid-template-columns: 1fr; }
+      aside {
         position: static;
         height: auto;
         border-right: none;
         border-bottom: 1px solid var(--border);
-      }}
-      header {{ position: static; }}
-      .detail-card {{ padding: 12px; }}
-    }}
+      }
+      header { position: static; }
+      .detail-card { padding: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -765,7 +738,7 @@ def render_dashboard_html(
       <header>
         <div class="header-bar">
           <div style="display:flex; flex-direction:column; gap:4px;">
-            <h1>{escaped_title}</h1>
+            <h1>bcfeed</h1>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
             <label style="display:flex; align-items:center; gap:4px; font-size:12px;">
@@ -782,6 +755,8 @@ def render_dashboard_html(
           </div>
         </div>
       </header>
+      <div id="loading-state" class="status-bar" style="justify-content:center;">Loading releases…</div>
+      <div id="error-state" class="status-bar" style="display:none; border-color:#b83a3a; color:#ffc5c5; background:rgba(184,58,58,0.1); justify-content:center;"></div>
       <details class="wireframe-panel" id="scrape-wireframe" open>
         <summary class="wireframe-header" title="Click to expand/collapse">
           <div class="wireframe-title" style="display:flex; align-items:center; gap:6px; white-space:nowrap;">
@@ -876,12 +851,6 @@ def render_dashboard_html(
       <div style="display:flex; justify-content:flex-start; margin-top:6px;">
         <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" class="button" style="border-color:#b83a3a; color:#b83a3a; padding:6px 10px; font-size:12px;">Revoke Gmail authorization (external link)</a>
       </div>
-      <div class="dev-setting" style="height:14px;"></div>
-      <div class="dev-setting" style="font-size:12px; font-weight:700; letter-spacing:0.3px; text-transform:uppercase; color:var(--muted);">Experimental</div>
-      <div class="settings-row dev-setting">
-        <input type="checkbox" id="preload-embeds-toggle" />
-        <label for="preload-embeds-toggle">Preload Bandcamp players (faster browsing, slower generation)</label>
-      </div>
     </div>
   </div>
   <div id="server-down-backdrop" class="server-down-backdrop">
@@ -890,62 +859,93 @@ def render_dashboard_html(
   <div id="max-results-backdrop" class="max-results-backdrop">
     <div class="max-results-modal">Maximum number of results reached. Try again with a shorter date range.</div>
   </div>
-  <script id="release-data" type="application/json">{data_json}</script>
   <script>
-    const EMBED_PROXY_URL = {proxy_literal};
+    // Fetch runtime config before bootstrapping the app.
+    window.BC_CONFIG_PROMISE = fetch("config.json", { cache: "no-store" })
+      .then(resp => resp.ok ? resp.json() : {})
+      .catch(() => ({}));
   </script>
   <script>
-    const releases = JSON.parse(document.getElementById("release-data").textContent);
+    (async () => {
+    let releases = [];
     const releaseMap = new Map();
-    releases.forEach(r => releaseMap.set(releaseKey(r), r));
-    const VIEWED_KEY = "bc_viewed_releases_v1";
-    const STARRED_KEY = "bc_starred_releases_v1";
-    const API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
-    const HEALTH_URL = API_ROOT ? `${{API_ROOT}}/health` : null;
-    const CLEAR_CREDS_URL = API_ROOT ? `${{API_ROOT}}/clear-credentials` : null;
-    const LOAD_CREDS_URL = API_ROOT ? `${{API_ROOT}}/load-credentials` : null;
-    const STARRED_API = API_ROOT ? `${{API_ROOT}}/starred-state` : null;
-    const POPULATE_LOG_KEY = "bc_populate_log_v1";
-    const CLEAR_STATUS_ON_LOAD = {clear_status_literal};
-    const SHOW_DEV_SETTINGS = {"true" if show_dev_settings else "false"};
+    let EMBED_PROXY_URL = "http://localhost:5050/embed-meta";
+    let API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
+    let HEALTH_URL = API_ROOT ? `${API_ROOT}/health` : null;
+    let CLEAR_CREDS_URL = API_ROOT ? `${API_ROOT}/clear-credentials` : null;
+    let LOAD_CREDS_URL = API_ROOT ? `${API_ROOT}/load-credentials` : null;
+    let STARRED_API = API_ROOT ? `${API_ROOT}/starred-state` : null;
+    let CLEAR_STATUS_ON_LOAD = false;
+    let SHOW_DEV_SETTINGS = false;
     const serverDownBackdrop = document.getElementById("server-down-backdrop");
     const maxResultsBackdrop = document.getElementById("max-results-backdrop");
-    const preloadEmbedsToggle = document.getElementById("preload-embeds-toggle");
     let serverDownShown = false;
     let maxNoticeShown = false;
-    const DEFAULT_THEME = {json.dumps(default_theme or "light")};
-    const PRELOAD_KEY = "bc_preload_embeds_v1";
+    let DEFAULT_THEME = "light";
     const populateLog = document.getElementById("populate-log");
     const clearCredsBtn = document.getElementById("clear-creds-btn");
     const loadCredsBtn = document.getElementById("load-creds-btn");
     const loadCredsFile = document.getElementById("load-creds-file");
-    let clearedLogOnInit = false;
-    function applyDevSettingsVisibility() {{
+    const asBool = (val) => {
+      if (typeof val === "boolean") return val;
+      if (val == null) return false;
+      if (typeof val === "number") return !!val;
+      if (typeof val === "string") return ["1","true","yes","on"].includes(val.trim().toLowerCase());
+      return false;
+    };
+    const config = await (window.BC_CONFIG_PROMISE || Promise.resolve({}));
+    const proxyCandidate = (config && config.embed_proxy_url) ? String(config.embed_proxy_url) : EMBED_PROXY_URL;
+    const normalizedProxy = proxyCandidate ? proxyCandidate.replace(/\/+$/, "") : "";
+    EMBED_PROXY_URL = normalizedProxy || null;
+    API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
+    HEALTH_URL = API_ROOT ? `${API_ROOT}/health` : null;
+    CLEAR_CREDS_URL = API_ROOT ? `${API_ROOT}/clear-credentials` : null;
+    LOAD_CREDS_URL = API_ROOT ? `${API_ROOT}/load-credentials` : null;
+    STARRED_API = API_ROOT ? `${API_ROOT}/starred-state` : null;
+    if (config && config.default_theme) DEFAULT_THEME = config.default_theme;
+    if (config && typeof config.clear_status_on_load !== "undefined") {
+      CLEAR_STATUS_ON_LOAD = asBool(config.clear_status_on_load);
+    }
+    if (config && typeof config.show_dev_settings !== "undefined") {
+      SHOW_DEV_SETTINGS = asBool(config.show_dev_settings);
+    }
+    const loadingState = document.getElementById("loading-state");
+    const errorState = document.getElementById("error-state");
+    function applyDevSettingsVisibility() {
       const devEls = document.querySelectorAll(".dev-setting");
-      devEls.forEach((el) => {{
+      devEls.forEach((el) => {
         el.style.display = SHOW_DEV_SETTINGS ? "" : "none";
-      }});
-    }}
-    if (populateLog) {{
-      if (CLEAR_STATUS_ON_LOAD) {{
-        const initialMsg = "Select a date range to display.";
-        populateLog.textContent = initialMsg;
-        try {{ localStorage.setItem(POPULATE_LOG_KEY, initialMsg); }} catch (e) {{}}
-        clearedLogOnInit = true;
-      }} else {{
-        try {{
-          const savedLog = localStorage.getItem(POPULATE_LOG_KEY);
-          if (savedLog) {{
-            populateLog.textContent = savedLog;
-          }}
-        }} catch (e) {{}}
-      }}
-    }}
+      });
+    }
+    if (populateLog && CLEAR_STATUS_ON_LOAD) {
+      populateLog.textContent = "Select a date range to display.";
+    }
     applyDevSettingsVisibility();
-    function releaseKey(release) {{
+    function releaseKey(release) {
       return release.url || [release.page_name, release.artist, release.title, release.date].filter(Boolean).join("|");
-    }}
-    function renderDateRangeLabel() {{
+    }
+    function setLoading(message = "Loading releases…") {
+      if (loadingState) {
+        loadingState.textContent = message;
+        loadingState.style.display = "flex";
+      }
+      if (errorState) errorState.style.display = "none";
+    }
+    function hideLoading() {
+      if (loadingState) loadingState.style.display = "none";
+    }
+    function showError(message) {
+      hideLoading();
+      if (errorState) {
+        errorState.textContent = message || "Failed to load releases. Is the bcfeed proxy running?";
+        errorState.style.display = "flex";
+      }
+      const tableWrapper = document.querySelector(".table-wrapper");
+      if (tableWrapper) tableWrapper.style.display = "none";
+      const wireframe = document.getElementById("scrape-wireframe");
+      if (wireframe) wireframe.style.display = "none";
+    }
+    function renderDateRangeLabel() {
       const el = document.getElementById("date-range");
       if (!el || !releases.length) return;
       const dates = releases
@@ -954,194 +954,165 @@ def render_dashboard_html(
         .map(d => new Date(d))
         .filter(d => !isNaN(d.getTime()))
         .sort((a, b) => a - b);
-      if (!dates.length) {{
+      if (!dates.length) {
         el.textContent = "";
         return;
-      }}
-      const fmt = d => {{
+      }
+      const fmt = d => {
         const y = d.getFullYear();
-        const m = `${{d.getMonth() + 1}}`.padStart(2, "0");
-        const day = `${{d.getDate()}}`.padStart(2, "0");
-        return `${{y}}-${{m}}-${{day}}`;
-      }};
+        const m = `${d.getMonth() + 1}`.padStart(2, "0");
+        const day = `${d.getDate()}`.padStart(2, "0");
+        return `${y}-${m}-${day}`;
+      };
       const first = dates[0];
       const last = dates[dates.length - 1];
-      el.textContent = `Date range: ${{fmt(first)}} to ${{fmt(last)}}`;
-    }}
-    async function loadViewedSet() {{
-      if (API_ROOT) {{
-        try {{
-          const resp = await fetch(`${{API_ROOT}}/viewed-state`);
-          if (resp.ok) {{
-            const data = await resp.json();
-            if (data && Array.isArray(data.viewed)) {{
-              return new Set(data.viewed);
-            }}
-          }}
-        }} catch (err) {{
-          console.warn("Failed to load viewed state from API; falling back to localStorage", err);
-        }}
-      }}
-      try {{
-        const raw = localStorage.getItem(VIEWED_KEY);
-        if (!raw) return new Set();
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? new Set(parsed) : new Set();
-      }} catch (err) {{
-        return new Set();
-      }}
-    }}
-    async function loadStarredSet() {{
-      if (STARRED_API) {{
-        try {{
-          const resp = await fetch(STARRED_API);
-          if (resp.ok) {{
-            const data = await resp.json();
-            if (data && Array.isArray(data.starred)) {{
-              return new Set(data.starred);
-            }}
-          }}
-        }} catch (err) {{
-          console.warn("Failed to load starred state from API; falling back to localStorage", err);
-        }}
-      }}
-      try {{
-        const raw = localStorage.getItem(STARRED_KEY);
-        if (!raw) return new Set();
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? new Set(parsed) : new Set();
-      }} catch (err) {{
-        return new Set();
-      }}
-    }}
-    function showServerDownModal() {{
+      el.textContent = `Date range: ${fmt(first)} to ${fmt(last)}`;
+    }
+    async function loadViewedSet() {
+      if (!API_ROOT) throw new Error("Proxy not configured");
+      const resp = await fetch(`${API_ROOT}/viewed-state`);
+      if (!resp.ok) throw new Error(`Viewed state unavailable (HTTP ${resp.status})`);
+      const data = await resp.json();
+      if (data && Array.isArray(data.viewed)) {
+        return new Set(data.viewed);
+      }
+      return new Set();
+    }
+    async function loadStarredSet() {
+      if (!STARRED_API) throw new Error("Proxy not configured");
+      const resp = await fetch(STARRED_API);
+      if (!resp.ok) throw new Error(`Starred state unavailable (HTTP ${resp.status})`);
+      const data = await resp.json();
+      if (data && Array.isArray(data.starred)) {
+        return new Set(data.starred);
+      }
+      return new Set();
+    }
+    async function fetchReleases() {
+      if (!API_ROOT) throw new Error("Proxy not configured");
+      const resp = await fetch(`${API_ROOT}/releases`, { cache: "no-store" });
+      if (!resp.ok) throw new Error(`Failed to load releases (HTTP ${resp.status})`);
+      const data = await resp.json();
+      const list = Array.isArray(data.releases) ? data.releases : [];
+      releases = list;
+      releaseMap.clear();
+      list.forEach(r => releaseMap.set(releaseKey(r), r));
+    }
+    function showServerDownModal() {
       if (serverDownShown) return;
       serverDownShown = true;
-      if (serverDownBackdrop) {{
+      if (serverDownBackdrop) {
         serverDownBackdrop.style.display = "flex";
-      }}
-    }}
-    function showMaxResultsModal() {{
-      if (maxResultsBackdrop) {{
+      }
+    }
+    function showMaxResultsModal() {
+      if (maxResultsBackdrop) {
         maxResultsBackdrop.style.display = "flex";
-      }}
-    }}
-    function hideMaxResultsModal() {{
-      if (maxResultsBackdrop) {{
+      }
+    }
+    function hideMaxResultsModal() {
+      if (maxResultsBackdrop) {
         maxResultsBackdrop.style.display = "none";
-      }}
-    }}
-    function appendPopulateLogLine(msg) {{
+      }
+    }
+    function appendPopulateLogLine(msg) {
       if (!populateLog) return;
       const current = populateLog.textContent || "";
-      const next = current ? `${{current}}\\n${{msg}}` : msg;
+      const next = current ? `${current}\n${msg}` : msg;
       populateLog.textContent = next;
-      try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
-    }}
-    async function checkServerAlive() {{
+    }
+    async function checkServerAlive() {
       if (!HEALTH_URL || serverDownShown) return;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 4000);
-      try {{
-        const resp = await fetch(HEALTH_URL, {{
+      try {
+        const resp = await fetch(HEALTH_URL, {
           method: "GET",
           cache: "no-store",
           signal: controller.signal,
-        }});
+        });
         clearTimeout(timer);
-        if (!resp.ok) throw new Error(`HTTP ${{resp.status}}`);
-      }} catch (err) {{
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      } catch (err) {
         clearTimeout(timer);
         showServerDownModal();
-      }}
-    }}
-    function persistViewedLocal(set) {{
-      try {{
-        localStorage.setItem(VIEWED_KEY, JSON.stringify(Array.from(set)));
-      }} catch (err) {{}}
-    }}
-    async function persistViewedRemote(url, isRead) {{
+      }
+    }
+    async function persistViewedRemote(url, isRead) {
       if (!API_ROOT || !url) return;
-      try {{
-        await fetch(`${{API_ROOT}}/viewed-state`, {{
+      try {
+        await fetch(`${API_ROOT}/viewed-state`, {
           method: "POST",
-          headers: {{"Content-Type": "application/json"}},
-          body: JSON.stringify({{url, read: isRead}}),
-        }});
-      }} catch (err) {{
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({url, read: isRead}),
+        });
+      } catch (err) {
         console.warn("Failed to persist viewed state to API", err);
-      }}
-    }}
-    function persistStarredLocal(set) {{
-      try {{
-        localStorage.setItem(STARRED_KEY, JSON.stringify(Array.from(set)));
-      }} catch (err) {{}}
-    }}
-    async function persistStarredRemote(url, starred) {{
+      }
+    }
+    async function persistStarredRemote(url, starred) {
       if (!STARRED_API || !url) return;
-      try {{
-        await fetch(STARRED_API, {{
+      try {
+        await fetch(STARRED_API, {
           method: "POST",
-          headers: {{"Content-Type": "application/json"}},
-          body: JSON.stringify({{url, starred}}),
-        }});
-      }} catch (err) {{
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({url, starred}),
+        });
+      } catch (err) {
         console.warn("Failed to persist starred state to API", err);
-      }}
-    }}
-    function setViewed(release, isRead) {{
+      }
+    }
+    function setViewed(release, isRead) {
       const key = releaseKey(release);
       if (!key) return;
-      if (isRead) {{
+      if (isRead) {
         state.viewed.add(key);
-      }} else {{
+      } else {
         state.viewed.delete(key);
-      }}
-      persistViewedLocal(state.viewed);
+      }
       persistViewedRemote(release.url || key, isRead);
       renderCalendar("range");
-    }}
-    function updateStarButton(button, isStarred) {{
+    }
+    function updateStarButton(button, isStarred) {
       if (!button) return;
       button.classList.toggle("starred", isStarred);
       button.setAttribute("aria-pressed", String(isStarred));
       button.title = isStarred ? "Unstar this release" : "Star this release";
       button.setAttribute("aria-label", button.title);
-    }}
-    function markCachedBadge(row, release) {{
+    }
+    function markCachedBadge(row, release) {
       if (!row || !state.showCachedBadges) return;
       const titleCell = row.querySelector("[data-title-cell]");
-      if (titleCell && release.embed_url && !titleCell.querySelector(".cached-badge")) {{
+      if (titleCell && release.embed_url && !titleCell.querySelector(".cached-badge")) {
         titleCell.insertAdjacentHTML("beforeend", ' <span class="cached-badge">cached</span>');
-      }}
-    }}
-    function setStarred(release, isStarred, opts = {{ row: null, button: null }}) {{
+      }
+    }
+    function setStarred(release, isStarred, opts = { row: null, button: null }) {
       const rowEl = opts.row || null;
       const btn = opts.button || null;
       const key = releaseKey(release);
       if (!key) return;
-      if (isStarred) {{
+      if (isStarred) {
         state.starred.add(key);
-      }} else {{
+      } else {
         state.starred.delete(key);
-      }}
-      persistStarredLocal(state.starred);
+      }
       persistStarredRemote(release.url || key, isStarred);
-      if (rowEl) {{
+      if (rowEl) {
         rowEl.classList.toggle("starred", isStarred);
-      }}
-      if (btn) {{
+      }
+      if (btn) {
         updateStarButton(btn, isStarred);
-      }}
-      if (isStarred) {{
-        ensureEmbed(release).then((embedUrl) => {{
-          if (embedUrl && rowEl) {{
+      }
+      if (isStarred) {
+        ensureEmbed(release).then((embedUrl) => {
+          if (embedUrl && rowEl) {
             markCachedBadge(rowEl, release);
-          }}
-        }});
-      }}
-    }}
-    const state = {{
+          }
+        });
+      }
+    }
+    const state = {
       sortKey: "date",
       direction: "desc",
       showLabels: new Set(),
@@ -1155,302 +1126,264 @@ def render_dashboard_html(
       dateFilterFrom: "",
       dateFilterTo: "",
       showCachedBadges: true,
-      preloadEmbeds: false,
-    }};
+    };
     const THEME_KEY = "bc_dashboard_theme";
     const SHOW_CACHED_KEY = "bc_show_cached_badges";
     const themeToggleBtn = document.getElementById("theme-toggle");
-    function applyTheme(theme) {{
+    function applyTheme(theme) {
       const isLight = theme === "light";
       document.body.classList.toggle("theme-light", isLight);
-      if (themeToggleBtn) {{
+      if (themeToggleBtn) {
         themeToggleBtn.checked = !isLight;
-      }}
+      }
       localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
-    }}
+    }
     const savedThemeValue = localStorage.getItem(THEME_KEY);
     let savedTheme = savedThemeValue || DEFAULT_THEME || "light";
-    if (!SHOW_DEV_SETTINGS && !savedThemeValue) {{
+    if (!SHOW_DEV_SETTINGS && !savedThemeValue) {
       savedTheme = "dark";
-    }}
+    }
     applyTheme(savedTheme);
-    if (themeToggleBtn) {{
+    if (themeToggleBtn) {
       themeToggleBtn.checked = savedTheme !== "light";
-      themeToggleBtn.addEventListener("change", () => {{
+      themeToggleBtn.addEventListener("change", () => {
         const next = themeToggleBtn.checked ? "dark" : "light";
         applyTheme(next);
-      }});
-    }}
-    if (!SHOW_DEV_SETTINGS) {{
+      });
+    }
+    if (!SHOW_DEV_SETTINGS) {
       state.showCachedBadges = false;
-      try {{ localStorage.setItem(SHOW_CACHED_KEY, "false"); }} catch (e) {{}}
+      try { localStorage.setItem(SHOW_CACHED_KEY, "false"); } catch (e) {}
       const cachedToggle = document.getElementById("show-cached-toggle");
       if (cachedToggle) cachedToggle.checked = false;
-    }}
-    if (clearCredsBtn && CLEAR_CREDS_URL) {{
-      clearCredsBtn.addEventListener("click", async () => {{
+    }
+    if (clearCredsBtn && CLEAR_CREDS_URL) {
+      clearCredsBtn.addEventListener("click", async () => {
         clearCredsBtn.disabled = true;
         const original = clearCredsBtn.textContent;
         clearCredsBtn.textContent = "Clearing…";
-        try {{
-          const resp = await fetch(CLEAR_CREDS_URL, {{ method: "POST" }});
-          const data = await resp.json().catch(() => ({{}}));
-          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\\n") : "";
-          if (!resp.ok) {{
+        try {
+          const resp = await fetch(CLEAR_CREDS_URL, { method: "POST" });
+          const data = await resp.json().catch(() => ({}));
+          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\n") : "";
+          if (!resp.ok) {
             const msg = data.error || "Failed to clear credentials.";
-            const next = joinedLogs ? `${{msg}}\\n${{joinedLogs}}` : msg;
+            const next = joinedLogs ? `${msg}\n${joinedLogs}` : msg;
             if (populateLog) populateLog.textContent = next;
-            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
             alert(msg);
-          }} else {{
+          } else {
             const msg = joinedLogs || "Credentials reloaded.";
             if (populateLog) populateLog.textContent = msg;
-            try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
-          }}
-        }} catch (err) {{
+          }
+        } catch (err) {
           const msg = String(err || "Failed to load credentials.");
           if (populateLog) populateLog.textContent = msg;
-          try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
           alert(msg);
-        }} finally {{
+        } finally {
           clearCredsBtn.disabled = false;
           clearCredsBtn.textContent = original || "Clear credentials";
-        }}
-      }});
-    }}
-    if (loadCredsBtn && loadCredsFile && LOAD_CREDS_URL) {{
-      const doLoadCreds = async () => {{
+        }
+      });
+    }
+    if (loadCredsBtn && loadCredsFile && LOAD_CREDS_URL) {
+      const doLoadCreds = async () => {
         const file = loadCredsFile.files && loadCredsFile.files[0];
         if (!file) return;
         loadCredsBtn.disabled = true;
         const original = loadCredsBtn.textContent;
         loadCredsBtn.textContent = "Loading…";
-        try {{
+        try {
           const form = new FormData();
           form.append("file", file, file.name);
-          const resp = await fetch(LOAD_CREDS_URL, {{
+          const resp = await fetch(LOAD_CREDS_URL, {
             method: "POST",
             body: form,
-          }});
-          const data = await resp.json().catch(() => ({{}}));
-          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\\n") : "";
-          if (!resp.ok) {{
+          });
+          const data = await resp.json().catch(() => ({}));
+          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\n") : "";
+          if (!resp.ok) {
             const msg = data.error || "Failed to load credentials.";
-            const next = joinedLogs ? `${{msg}}\\n${{joinedLogs}}` : msg;
+            const next = joinedLogs ? `${msg}\n${joinedLogs}` : msg;
             if (populateLog) populateLog.textContent = next;
-            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
             alert(msg);
-          }} else {{
+          } else {
             const msg = joinedLogs || "Credentials loaded and authenticated.";
             if (populateLog) populateLog.textContent = msg;
-            try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
             alert("Credentials loaded.");
-          }}
-        }} catch (err) {{
+          }
+        } catch (err) {
           const msg = String(err || "Failed to load credentials.");
           if (populateLog) populateLog.textContent = msg;
-          try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
           alert(msg);
-        }} finally {{
+        } finally {
           loadCredsBtn.disabled = false;
           loadCredsBtn.textContent = original || "Load credentials";
-        }}
-      }};
-      loadCredsBtn.addEventListener("click", () => {{
-        if (loadCredsFile) {{
+        }
+      };
+      loadCredsBtn.addEventListener("click", () => {
+        if (loadCredsFile) {
           loadCredsFile.value = "";
           loadCredsFile.click();
-        }}
-      }});
-      loadCredsFile.addEventListener("change", () => {{
-        if (loadCredsFile.files && loadCredsFile.files[0]) {{
+        }
+      });
+      loadCredsFile.addEventListener("change", () => {
+        if (loadCredsFile.files && loadCredsFile.files[0]) {
           doLoadCreds();
-        }}
-      }});
-    }}
-    if (maxResultsBackdrop) {{
+        }
+      });
+    }
+    if (maxResultsBackdrop) {
       maxResultsBackdrop.addEventListener("click", hideMaxResultsModal);
-    }}
-    if (preloadEmbedsToggle) {{
-      const stored = localStorage.getItem(PRELOAD_KEY);
-      state.preloadEmbeds = stored === null ? false : stored === "true";
-      preloadEmbedsToggle.checked = state.preloadEmbeds;
-      preloadEmbedsToggle.addEventListener("change", () => {{
-        state.preloadEmbeds = !!preloadEmbedsToggle.checked;
-        try {{ localStorage.setItem(PRELOAD_KEY, String(state.preloadEmbeds)); }} catch (e) {{}}
-      }});
-    }}
-
-    function formatDate(value) {{
+    }
+    function formatDate(value) {
       if (!value) return "";
       const parsed = new Date(value);
       if (isNaN(parsed.getTime())) return value;
       const y = parsed.getFullYear();
-      const m = `${{parsed.getMonth() + 1}}`.padStart(2, "0");
-      const d = `${{parsed.getDate()}}`.padStart(2, "0");
-      return `${{y}}-${{m}}-${{d}}`;
-    }}
+      const m = `${parsed.getMonth() + 1}`.padStart(2, "0");
+      const d = `${parsed.getDate()}`.padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
 
-    function pageUrlFor(release) {{
+    function pageUrlFor(release) {
       const url = release.url || "";
       if (!url) return "#";
       if (url.includes("/album/")) return url.split("/album/")[0];
       if (url.includes("/track/")) return url.split("/track/")[0];
       return url;
-    }}
+    }
 
     const HIGHLIGHT_PALETTE = ["#52d0ff", "#ff8b52", "#7cde8c", "#ff6b9f", "#c18fff", "#f2d45c", "#8fd8ff", "#ffa34f"];
     const labelColorMap = new Map();
-    function colorForLabel(label) {{
+    function colorForLabel(label) {
       const key = label || "default";
       if (labelColorMap.has(key)) return labelColorMap.get(key);
       const color = HIGHLIGHT_PALETTE[labelColorMap.size % HIGHLIGHT_PALETTE.length];
       labelColorMap.set(key, color);
       return color;
-    }}
+    }
 
-    function buildHighlightMap(items) {{
+    function buildHighlightMap(items) {
       const map = new Map();
-      items.forEach(entry => {{
+      items.forEach(entry => {
         if (!entry.date) return;
         const dateKey = formatDate(entry.date);
         if (!dateKey) return;
         const color = colorForLabel(entry.page_name || entry.artist || "");
         if (!map.has(dateKey)) map.set(dateKey, new Set());
         map.get(dateKey).add(color);
-      }});
+      });
       return map;
-    }}
+    }
 
     const highlightMap = buildHighlightMap(releases);
-    let scrapeStatus = {{ scraped: new Set(), notScraped: new Set() }};
+    let scrapeStatus = { scraped: new Set(), notScraped: new Set() };
 
-    function buildEmbedUrl(id, isTrack) {{
+    function buildEmbedUrl(id, isTrack) {
       if (!id) return null;
       const kind = isTrack ? "track" : "album";
-      return `https://bandcamp.com/EmbeddedPlayer/${{kind}}=${{id}}/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=true/artwork=small/transparent=true/`;
-    }}
+      return `https://bandcamp.com/EmbeddedPlayer/${kind}=${id}/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=true/artwork=small/transparent=true/`;
+    }
 
-    function parseEmbedMeta(htmlText) {{
+    function parseEmbedMeta(htmlText) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(htmlText, "text/html");
       const meta = doc.querySelector('meta[name="bc-page-properties"]');
       if (!meta || !meta.content) return null;
-      try {{
+      try {
         return JSON.parse(meta.content);
-      }} catch (err) {{
-        try {{
-          return eval(`(${{meta.content}})`);
-        }} catch (e) {{
+      } catch (err) {
+        try {
+          return eval(`(${meta.content})`);
+        } catch (e) {
           return null;
-        }}
-      }}
-    }}
+        }
+      }
+    }
 
-    function parseDescriptionFromHtml(htmlText) {{
-      try {{
+    function parseDescriptionFromHtml(htmlText) {
+      try {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText, "text/html");
         const about = doc.querySelector("#tralbum-about, .tralbum-about");
         const credits = doc.querySelector(".tralbum-credits, #tralbum-credits");
         const parts = [];
-        const collect = (el) => {{
+        const collect = (el) => {
           if (!el) return "";
-          const txt = (el.textContent || "").replace(/\\r\\n/g, "\\n");
-          const lines = txt.split("\\n").map(t => t.trim());
-          const joined = lines.join("\\n").replace(/\\n{3,}/g, "\\n\\n");
+          const txt = (el.textContent || "").replace(/\r\n/g, "\n");
+          const lines = txt.split("\n").map(t => t.trim());
+          const joined = lines.join("\n").replace(/\n(3,)/g, "\n\n");
           return joined.trim();
-        }};
+        };
         const aboutText = collect(about);
         const creditsText = collect(credits);
         if (aboutText) parts.push(aboutText);
         if (creditsText) parts.push(creditsText);
-        if (parts.length) return parts.join("\\n\\n");
+        if (parts.length) return parts.join("\n\n");
         const og = doc.querySelector('meta[property="og:description"]');
         if (og && og.content) return og.content.trim();
         const desc = doc.querySelector('meta[name="description"]');
         if (desc && desc.content) return desc.content.trim();
-      }} catch (err) {{
+      } catch (err) {
         return null;
-      }}
+      }
       return null;
-    }}
+    }
 
-    async function ensureEmbed(release) {{
-      if (release.embed_url && release.description) {{
+    async function ensureEmbed(release) {
+      if (release.embed_url && release.description) {
         return release.embed_url;
-      }}
-      if (!release.url) return null;
+      }
+      if (!release.url || !EMBED_PROXY_URL) return null;
 
-      const applyEmbedData = (data) => {{
+      const applyEmbedData = (data) => {
         if (!data) return null;
         const embedUrl = data.embed_url || buildEmbedUrl(data.release_id, data.is_track);
         if (embedUrl) release.embed_url = embedUrl;
         if (data.release_id) release.release_id = data.release_id;
-        if (typeof data.is_track === "boolean") {{
+        if (typeof data.is_track === "boolean") {
           release.is_track = data.is_track;
-        }}
-        if (data.description) {{
+        }
+        if (data.description) {
           release.description = data.description;
-        }}
+        }
         return embedUrl;
-      }};
+      };
 
-      const tryDirect = async () => {{
-        const response = await fetch(release.url, {{ method: "GET" }});
-        const text = await response.text();
-        const meta = parseEmbedMeta(text);
-        const embedUrl = meta ? buildEmbedUrl(meta.item_id, meta.item_type === "track") : null;
-        if (embedUrl) release.embed_url = embedUrl;
-        if (meta && meta.item_id) release.release_id = meta.item_id;
-        if (meta) release.is_track = meta.item_type === "track";
-        const desc = parseDescriptionFromHtml(text);
-        if (desc) release.description = desc;
-        return embedUrl;
-      }};
-
-      try {{
-        if (EMBED_PROXY_URL && (!release.embed_url || !release.description)) {{
-          try {{
-            const response = await fetch(`${{EMBED_PROXY_URL}}?url=${{encodeURIComponent(release.url)}}`);
-            if (!response.ok) throw new Error(`Proxy fetch failed: ${{response.status}}`);
-            const data = await response.json();
-            const embedUrl = applyEmbedData(data);
-            if (embedUrl) return embedUrl;
-          }} catch (proxyErr) {{
-            console.warn("Proxy embed fetch failed, falling back to direct fetch", proxyErr);
-          }}
-        }}
-        return await tryDirect();
-      }} catch (err) {{
+      try {
+        const response = await fetch(`${EMBED_PROXY_URL}?url=${encodeURIComponent(release.url)}`);
+        if (!response.ok) throw new Error(`Proxy fetch failed: ${response.status}`);
+        const data = await response.json();
+        return applyEmbedData(data);
+      } catch (err) {
         console.warn("Failed to fetch embed info", err);
         return null;
-      }}
-    }}
+      }
+    }
 
-    function renderFilters(sourceList = releases) {{
-      const counts = sourceList.reduce((acc, r) => {{
+    function renderFilters(sourceList = releases) {
+      const counts = sourceList.reduce((acc, r) => {
         if (!r.page_name) return acc;
         acc[r.page_name] = (acc[r.page_name] || 0) + 1;
         return acc;
-      }}, {{}});
+      }, {});
       const labels = Object.keys(counts)
         .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
       const container = document.getElementById("label-filters");
       container.innerHTML = "";
 
-      if (labels.length === 0) {{
+      if (labels.length === 0) {
         container.innerHTML = "<div class='detail-meta'>No label/page data available.</div>";
         return;
-      }}
+      }
 
-      if (state.showLabels.size === 0) {{
+      if (state.showLabels.size === 0) {
         labels.forEach(label => state.showLabels.add(label));
-      }}
+      }
 
       const showOnlyMode = state.showOnlyLabels.size > 0;
 
-      labels.forEach(label => {{
+      labels.forEach(label => {
         const wrapper = document.createElement("div");
         wrapper.className = "filter-item";
         if (showOnlyMode) wrapper.classList.add("show-only-active");
@@ -1461,47 +1394,47 @@ def render_dashboard_html(
         showCheckbox.dataset.filterRole = "show";
         showCheckbox.checked = state.showLabels.has(label);
         showCheckbox.disabled = showOnlyMode;
-        showCheckbox.addEventListener("change", () => {{
-          if (showCheckbox.checked) {{
+        showCheckbox.addEventListener("change", () => {
+          if (showCheckbox.checked) {
             state.showLabels.add(label);
-          }} else {{
+          } else {
             state.showLabels.delete(label);
-          }}
+          }
           renderTable();
-        }});
+        });
 
         const showOnlyCheckbox = document.createElement("input");
         showOnlyCheckbox.type = "checkbox";
         showOnlyCheckbox.className = "filter-checkbox show-only";
         showOnlyCheckbox.dataset.filterRole = "show-only";
         showOnlyCheckbox.checked = state.showOnlyLabels.has(label);
-        showOnlyCheckbox.addEventListener("change", () => {{
-          if (showOnlyCheckbox.checked) {{
+        showOnlyCheckbox.addEventListener("change", () => {
+          if (showOnlyCheckbox.checked) {
             state.showOnlyLabels.add(label);
-          }} else {{
+          } else {
             state.showOnlyLabels.delete(label);
-          }}
+          }
           syncShowCheckboxAvailability();
           renderTable();
-        }});
+        });
 
         const text = document.createElement("span");
         text.textContent = label;
         const count = document.createElement("span");
         count.className = "filter-count";
-        count.textContent = `(${{counts[label]}})`;
+        count.textContent = `(${counts[label]})`;
         wrapper.appendChild(showCheckbox);
         wrapper.appendChild(showOnlyCheckbox);
         wrapper.appendChild(text);
         wrapper.appendChild(count);
         container.appendChild(wrapper);
-      }});
+      });
 
       syncShowCheckboxAvailability();
-    }}
+    }
 
-    function updateRangePreview() {{}}
-    function updateSelectionStatusLog() {{
+    function updateRangePreview() {}
+    function updateSelectionStatusLog() {
       let fromVal = state.dateFilterFrom || "";
       let toVal = state.dateFilterTo || "";
       if (fromVal && !toVal) toVal = fromVal;
@@ -1511,106 +1444,103 @@ def render_dashboard_html(
       let startDate = parseDateString(fromVal);
       let endDate = parseDateString(toVal);
       if (!startDate || !endDate) return;
-      if (endDate < startDate) {{
+      if (endDate < startDate) {
         [startDate, endDate] = [endDate, startDate];
         [fromVal, toVal] = [toVal, fromVal];
-      }}
+      }
 
       const msPerDay = 24 * 60 * 60 * 1000;
       const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / msPerDay) + 1;
       let cachedDays = 0;
       const cursor = new Date(startDate);
-      while (cursor.getTime() <= endDate.getTime()) {{
+      while (cursor.getTime() <= endDate.getTime()) {
         const key = isoKeyFromDate(cursor);
         if (scrapeStatus.scraped.has(key)) cachedDays += 1;
         cursor.setDate(cursor.getDate() + 1);
-      }}
+      }
 
       const allCached = totalDays > 0 && cachedDays >= totalDays;
       const msg = allCached
-        ? `Selected time period:\\n\\n${{fromVal}} to ${{toVal}}\\n\\nDisplaying all releases in this range; all dates are already downloaded.`
-        : `Selected time period:\\n\\n${{fromVal}} to ${{toVal}}\\n\\n${{totalDays-cachedDays}} of ${{totalDays}} selected days not yet downloaded.\\n\\nClick \"Get releases\" to download all dates in the selected range.`;
-      if (populateLog) {{
+        ? `Selected time period:\n\n${fromVal} to ${toVal}\n\nDisplaying all releases in this range; all dates are already downloaded.`
+        : `Selected time period:\n\n${fromVal} to ${toVal}\n\n${totalDays-cachedDays} of ${totalDays} selected days not yet downloaded.\n\nClick "Get releases" to download all dates in the selected range.`;
+      if (populateLog) {
         populateLog.textContent = msg;
         populateLog.style.color = allCached ? "var(--muted)" : "#ff6b6b";
-      }}
-      try {{
-        localStorage.setItem(POPULATE_LOG_KEY, msg);
-      }} catch (e) {{}}
+      }
 
-      if (populateBtn) {{
+      if (populateBtn) {
         populateBtn.disabled = allCached;
         populateBtn.title = allCached ? "All dates in this range are already cached" : "";
-      }}
-      if (populateBtn && !allCached) {{
+      }
+      if (populateBtn && !allCached) {
         populateBtn.disabled = false;
         populateBtn.title = "";
-      }}
-    }}
+      }
+    }
 
-    function updateHeaderRange(count = null) {{
+    function updateHeaderRange(count = null) {
       const fromVal = state.dateFilterFrom || "";
       const toVal = state.dateFilterTo || "";
       const start = fromVal || toVal;
       const end = toVal || fromVal;
-      if (headerRangeLabel) {{
-        if (!start && !end) {{
+      if (headerRangeLabel) {
+        if (!start && !end) {
           headerRangeLabel.textContent = "";
-        }} else if (start === end) {{
-          headerRangeLabel.textContent = `Date range: ${{start}}`;
-        }} else {{
-          headerRangeLabel.textContent = `Date range: ${{start}} to ${{end}}`;
-        }}
-      }}
-      if (headerCountLabel) {{
-        const label = count == null ? "" : `${{count}} release${{count === 1 ? "" : "s"}} shown`;
+        } else if (start === end) {
+          headerRangeLabel.textContent = `Date range: ${start}`;
+        } else {
+          headerRangeLabel.textContent = `Date range: ${start} to ${end}`;
+        }
+      }
+      if (headerCountLabel) {
+        const label = count == null ? "" : `${count} release${count === 1 ? "" : "s"} shown`;
         headerCountLabel.textContent = label;
-      }}
-    }}
+      }
+    }
 
-    function syncShowCheckboxAvailability() {{
+    function syncShowCheckboxAvailability() {
       const disableShow = state.showOnlyLabels.size > 0;
-      document.querySelectorAll("#label-filters .filter-item").forEach(item => {{
+      document.querySelectorAll("#label-filters .filter-item").forEach(item => {
         const show = item.querySelector('input[data-filter-role="show"]');
-        if (show) {{
+        if (show) {
           show.disabled = disableShow;
-        }}
+        }
         item.classList.toggle("show-only-active", disableShow);
-      }});
-    }}
+      });
+    }
 
-    function sortData(items) {{
-      const {{sortKey, direction}} = state;
+    function sortData(items) {
+      const {sortKey, direction} = state;
       const dir = direction === "asc" ? 1 : -1;
-      return items.slice().sort((a, b) => {{
-        if (sortKey === "date") {{
+      return items.slice().sort((a, b) => {
+        if (sortKey === "date") {
           const da = new Date(a.date);
           const db = new Date(b.date);
           const aTime = isNaN(da) ? 0 : da.getTime();
           const bTime = isNaN(db) ? 0 : db.getTime();
           return (aTime - bTime) * dir;
-        }}
+        }
         const av = (a[sortKey] || "").toLowerCase();
         const bv = (b[sortKey] || "").toLowerCase();
         if (av === bv) return 0;
         return av > bv ? dir : -dir;
-      }});
-    }}
+      });
+    }
 
-    function closeOpenDetailRows() {{
-      document.querySelectorAll(".detail-row").forEach(node => {{
+    function closeOpenDetailRows() {
+      document.querySelectorAll(".detail-row").forEach(node => {
         const iframe = node.querySelector("iframe");
         if (iframe) iframe.remove();
         node.remove();
-      }});
+      });
       document.querySelectorAll("tr.data-row").forEach(row => row.classList.remove("expanded"));
-    }}
+    }
 
-    function attachRowActions(row, release) {{
+    function attachRowActions(row, release) {
       // no-op; buttons removed
-    }}
+    }
 
-    function createDetailRow(release) {{
+    function createDetailRow(release) {
       const tr = document.createElement("tr");
       tr.className = "detail-row";
       const td = document.createElement("td");
@@ -1626,46 +1556,46 @@ def render_dashboard_html(
           </div>
         </div>`;
       tr.appendChild(td);
-      td.addEventListener("click", (evt) => {{
+      td.addEventListener("click", (evt) => {
         // Ignore clicks directly on the iframe
         if (evt.target.tagName.toLowerCase() === "iframe") return;
         // Focus the parent data row without toggling collapse
         const dataRow = tr.previousElementSibling;
-        if (dataRow && dataRow.classList.contains("data-row")) {{
+        if (dataRow && dataRow.classList.contains("data-row")) {
           dataRow.focus();
-        }}
-      }});
+        }
+      });
       return tr;
-    }}
+    }
 
-    function renderTable() {{
+    function renderTable() {
       const tbody = document.getElementById("release-rows");
       tbody.innerHTML = "";
       closeOpenDetailRows();
 
       const dateFiltered = releases.filter(r => withinSelectedRange(r));
-      const filtered = dateFiltered.filter(r => {{
+      const filtered = dateFiltered.filter(r => {
         const key = releaseKey(r);
         const useShowOnly = state.showOnlyLabels.size > 0;
         const activeSet = useShowOnly ? state.showOnlyLabels : state.showLabels;
-        if (activeSet.size > 0) {{
+        if (activeSet.size > 0) {
           if (r.page_name && !activeSet.has(r.page_name)) return false;
-        }}
-        if (state.showOnlyStarred) {{
+        }
+        if (state.showOnlyStarred) {
           if (!key || !state.starred.has(key)) return false;
-        }}
+        }
 
-        if (state.hideViewed && state.hideViewedSnapshot.size > 0) {{
+        if (state.hideViewed && state.hideViewedSnapshot.size > 0) {
           if (state.expandedKey && key === state.expandedKey) return true;
           return !state.hideViewedSnapshot.has(key);
-        }}
+        }
         return true;
-      }});
+      });
 
       const sorted = sortData(filtered);
       document.getElementById("empty-state").style.display = sorted.length ? "none" : "block";
 
-      sorted.forEach(release => {{
+      sorted.forEach(release => {
         const tr = document.createElement("tr");
         const key = releaseKey(release) || "";
         tr.className = "data-row";
@@ -1681,63 +1611,63 @@ def render_dashboard_html(
               </svg>
             </button>
           </td>
-          <td><a class="link" href="${{pageUrlFor(release)}}" target="_blank" rel="noopener">${{release.page_name || "Unknown"}}</a></td>
-          <td><a class="link" href="${{pageUrlFor(release)}}" target="_blank" rel="noopener">${{release.artist || "—"}}</a></td>
-          <td data-title-cell><a class="link" href="${{release.url || "#"}}" target="_blank" rel="noopener" data-title-link>${{release.title || "—"}}</a>${{state.showCachedBadges && release.embed_url ? ' <span class="cached-badge">cached</span>' : ''}}</td>
-          <td>${{formatDate(release.date)}}</td>
+          <td><a class="link" href="${pageUrlFor(release)}" target="_blank" rel="noopener">${release.page_name || "Unknown"}</a></td>
+          <td><a class="link" href="${pageUrlFor(release)}" target="_blank" rel="noopener">${release.artist || "—"}</a></td>
+          <td data-title-cell><a class="link" href="${release.url || "#"}" target="_blank" rel="noopener" data-title-link>${release.title || "—"}</a>${state.showCachedBadges && release.embed_url ? ' <span class="cached-badge">cached</span>' : ''}</td>
+          <td>${formatDate(release.date)}</td>
         `;
         const existingRead = state.viewed.has(key);
         const initialDot = tr.querySelector(".row-dot");
         if (initialDot) initialDot.classList.toggle("read", existingRead);
         tr.classList.toggle("unseen", !existingRead);
-        if (state.starred.has(key)) {{
+        if (state.starred.has(key)) {
           tr.classList.add("starred");
-        }}
+        }
         const starBtn = tr.querySelector("[data-star-btn]");
         updateStarButton(starBtn, state.starred.has(key));
-        if (starBtn) {{
-          starBtn.addEventListener("click", (evt) => {{
+        if (starBtn) {
+          starBtn.addEventListener("click", (evt) => {
             evt.stopPropagation();
             const next = !state.starred.has(key);
-            setStarred(release, next, {{row: tr, button: starBtn}});
-          }});
-        }}
-        if (state.starred.has(key)) {{
+            setStarred(release, next, {row: tr, button: starBtn});
+          });
+        }
+        if (state.starred.has(key)) {
           ensureEmbed(release).then(() => markCachedBadge(tr, release));
-        }}
+        }
 
-        tr.addEventListener("click", (evt) => {{
-          if (evt.target && evt.target.matches("a[data-title-link]")) {{
+        tr.addEventListener("click", (evt) => {
+          if (evt.target && evt.target.matches("a[data-title-link]")) {
             // Allow middle/cmd click without toggling rows
-            if (evt.metaKey || evt.ctrlKey || evt.button === 1) {{
+            if (evt.metaKey || evt.ctrlKey || evt.button === 1) {
               return;
-            }}
+            }
             evt.preventDefault();
-          }}
+          }
           tr.focus();
           const existingDetail = tr.nextElementSibling;
           const hasDetail = existingDetail && existingDetail.classList.contains("detail-row");
           const wasVisible = hasDetail && existingDetail.style.display !== "none";
 
           // If already visible, toggle closed.
-          if (wasVisible) {{
+          if (wasVisible) {
             closeOpenDetailRows();
             state.expandedKey = null;
             return;
-          }}
+          }
 
           // Hide others
           closeOpenDetailRows();
 
           let detail = existingDetail;
-          if (!hasDetail) {{
+          if (!hasDetail) {
             detail = createDetailRow(release);
             tr.after(detail);
-          }} else {{
+          } else {
             // ensure adjacency and show
             tr.after(detail);
             detail.style.display = "";
-          }}
+          }
           tr.classList.add("expanded");
           state.expandedKey = key;
 
@@ -1747,100 +1677,100 @@ def render_dashboard_html(
           if (dot) dot.classList.add("read");
           tr.classList.remove("unseen");
           const cachedUrl = key;
-          if (cachedUrl) {{
+          if (cachedUrl) {
             state.viewed.add(cachedUrl);
-          }}
+          }
           setViewed(release, true);
-          if (descTarget) {{
+          if (descTarget) {
             descTarget.textContent = release.description || "Loading description…";
-          }}
-          ensureEmbed(release).then(embedUrl => {{
-              if (!embedUrl) {{
-                embedTarget.innerHTML = `<div class="detail-meta">No embed available. Is the app still running? <br><a class="link" href="${{release.url || "#"}}" target="_blank" rel="noopener">Open on Bandcamp</a>.</div>`;
+          }
+          ensureEmbed(release).then(embedUrl => {
+              if (!embedUrl) {
+                embedTarget.innerHTML = `<div class="detail-meta">No embed available. Is the app still running? <br><a class="link" href="${release.url || "#"}" target="_blank" rel="noopener">Open on Bandcamp</a>.</div>`;
                 return;
-              }}
+              }
             const height = release.is_track ? 320 : 480;
-            embedTarget.innerHTML = `<iframe title="Bandcamp player" style="border:0; width:100%; height:${{height}}px;" src="${{embedUrl}}" seamless></iframe>`;
+            embedTarget.innerHTML = `<iframe title="Bandcamp player" style="border:0; width:100%; height:${height}px;" src="${embedUrl}" seamless></iframe>`;
             markCachedBadge(tr, release);
-            if (descTarget) {{
+            if (descTarget) {
               descTarget.textContent = release.description || "No description available.";
-            }}
-          }});
-        }});
+            }
+          });
+        });
 
-        tr.addEventListener("keydown", (evt) => {{
-          if (evt.key === "Escape") {{
+        tr.addEventListener("keydown", (evt) => {
+          if (evt.key === "Escape") {
             evt.preventDefault();
             closeOpenDetailRows();
             return;
-          }}
-          if (evt.key === " " || evt.key === "Spacebar" || evt.key === "Space") {{
+          }
+          if (evt.key === " " || evt.key === "Spacebar" || evt.key === "Space") {
             evt.preventDefault();
             tr.click();
             return;
-          }}
-          if (evt.key === "Enter") {{
+          }
+          if (evt.key === "Enter") {
             evt.preventDefault();
             tr.click();
             return;
-          }}
-          if (evt.key === "ArrowDown" || evt.key === "ArrowUp") {{
+          }
+          if (evt.key === "ArrowDown" || evt.key === "ArrowUp") {
             evt.preventDefault();
             const rows = Array.from(document.querySelectorAll("tr.data-row"));
             const idx = rows.indexOf(tr);
             const nextIdx = evt.key === "ArrowDown" ? idx + 1 : idx - 1;
-            if (nextIdx >= 0 && nextIdx < rows.length) {{
+            if (nextIdx >= 0 && nextIdx < rows.length) {
               rows[nextIdx].focus();
-            }}
+            }
             return;
-          }}
-          if (evt.key.toLowerCase() === "u") {{
+          }
+          if (evt.key.toLowerCase() === "u") {
             evt.preventDefault();
             const markerCell = tr.querySelector("td:first-child");
-            if (markerCell) {{
+            if (markerCell) {
               const dot = markerCell.querySelector(".row-dot");
               if (dot) dot.classList.toggle("read", false);
-              else {{
+              else {
                 const newDot = document.createElement("span");
                 newDot.className = "row-dot";
                 markerCell.appendChild(newDot);
-              }}
+              }
               setViewed(release, false);
-            }}
-          }}
-          if (evt.key.toLowerCase() === "s") {{
+            }
+          }
+          if (evt.key.toLowerCase() === "s") {
             evt.preventDefault();
             const next = !state.starred.has(key);
             const btn = tr.querySelector("[data-star-btn]");
-            setStarred(release, next, {{row: tr, button: btn}});
-          }}
-        }});
+            setStarred(release, next, {row: tr, button: btn});
+          }
+        });
 
         const markerCell = tr.querySelector("td:first-child");
-        if (markerCell) {{
-          markerCell.addEventListener("click", (evt) => {{
+        if (markerCell) {
+          markerCell.addEventListener("click", (evt) => {
             evt.stopPropagation();
             const dot = markerCell.querySelector(".row-dot");
-            if (dot) {{
+            if (dot) {
               const willBeRead = !dot.classList.contains("read");
               dot.classList.toggle("read");
               tr.classList.toggle("unseen", !willBeRead);
               setViewed(release, willBeRead);
-            }}
-          }});
-        }}
+            }
+          });
+        }
 
         // Hover/focus-based preload with debounce (0.2s)
         let preloadTimer;
-        const schedulePreload = () => {{
+        const schedulePreload = () => {
           preloadTimer = setTimeout(() => ensureEmbed(release), 200);
-        }};
-        const cancelPreload = () => {{
-          if (preloadTimer) {{
+        };
+        const cancelPreload = () => {
+          if (preloadTimer) {
             clearTimeout(preloadTimer);
             preloadTimer = null;
-          }}
-        }};
+          }
+        };
         tr.addEventListener("mouseenter", schedulePreload);
         tr.addEventListener("mouseleave", cancelPreload);
         tr.addEventListener("focus", schedulePreload);
@@ -1848,40 +1778,40 @@ def render_dashboard_html(
 
         attachRowActions(tr, release);
         tbody.appendChild(tr);
-      }});
+      });
       refreshSortIndicators();
       renderFilters(dateFiltered);
       updateHeaderRange(sorted.length);
-    }}
+    }
 
-    function refreshSortIndicators() {{
-      document.querySelectorAll("th[data-sort]").forEach(th => {{
+    function refreshSortIndicators() {
+      document.querySelectorAll("th[data-sort]").forEach(th => {
         const indicator = th.querySelector(".sort-indicator");
         const key = th.dataset.sort;
-        if (state.sortKey === key) {{
+        if (state.sortKey === key) {
           indicator.textContent = state.direction === "asc" ? "▲" : "▼";
           th.style.color = "var(--text)";
-        }} else {{
+        } else {
           indicator.textContent = "";
           th.style.color = "var(--muted)";
-        }}
-      }});
-    }}
+        }
+      });
+    }
 
-    function attachHeaderSorting() {{
-      document.querySelectorAll("th[data-sort]").forEach(th => {{
-        th.addEventListener("click", () => {{
+    function attachHeaderSorting() {
+      document.querySelectorAll("th[data-sort]").forEach(th => {
+        th.addEventListener("click", () => {
           const key = th.dataset.sort;
-          if (state.sortKey === key) {{
+          if (state.sortKey === key) {
             state.direction = state.direction === "asc" ? "desc" : "asc";
-          }} else {{
+          } else {
             state.sortKey = key;
             state.direction = key === "date" ? "desc" : "asc";
-          }}
+          }
           renderTable();
-        }});
-      }});
-    }}
+        });
+      });
+    }
 
     renderFilters();
     attachHeaderSorting();
@@ -1907,144 +1837,141 @@ def render_dashboard_html(
     const populateStatus = document.createElement("div");
     const CALENDAR_STATE_KEY = "bc_calendar_state_v1";
     // Reset load credentials button when settings panel is toggled
-    const resetLoadCredsBtn = () => {{
-      if (loadCredsBtn) {{
+    const resetLoadCredsBtn = () => {
+      if (loadCredsBtn) {
         loadCredsBtn.disabled = false;
         loadCredsBtn.textContent = "Load credentials";
-      }}
-    }};
+      }
+    };
     if (settingsBtn) settingsBtn.addEventListener("click", resetLoadCredsBtn);
     if (settingsClose) settingsClose.addEventListener("click", resetLoadCredsBtn);
     const headerRangeLabel = document.getElementById("header-range-label");
     const headerCountLabel = document.getElementById("header-count-label");
-    const SCRAPE_STATUS_URL = API_ROOT ? `${{API_ROOT}}/scrape-status` : null;
+    const SCRAPE_STATUS_URL = API_ROOT ? `${API_ROOT}/scrape-status` : null;
 
-    function toggleSettings(open) {{
+    function toggleSettings(open) {
       if (!settingsBackdrop) return;
       settingsBackdrop.style.display = open ? "flex" : "none";
-    }}
+    }
     if (settingsBtn) settingsBtn.addEventListener("click", () => toggleSettings(true));
     if (settingsClose) settingsClose.addEventListener("click", () => toggleSettings(false));
-    if (settingsBackdrop) settingsBackdrop.addEventListener("click", (e) => {{
+    if (settingsBackdrop) settingsBackdrop.addEventListener("click", (e) => {
       if (e.target === settingsBackdrop) toggleSettings(false);
-    }});
+    });
 
-    async function performReset() {{
+    async function performReset() {
       const clearCache = true;
       const clearViewed = true;
       const clearStarred = true;
       let hadError = false;
-      if (API_ROOT) {{
-        try {{
-          const resp = await fetch(`${{API_ROOT}}/reset-caches`, {{
+      if (API_ROOT) {
+        try {
+          const resp = await fetch(`${API_ROOT}/reset-caches`, {
             method: "POST",
-            headers: {{"Content-Type": "application/json"}},
-            body: JSON.stringify({{clear_cache: clearCache, clear_viewed: clearViewed, clear_starred: clearStarred}}),
-          }});
-          if (!resp.ok) throw new Error(`HTTP ${{resp.status}}`);
-        }} catch (err) {{
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({clear_cache: clearCache, clear_viewed: clearViewed, clear_starred: clearStarred}),
+          });
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        } catch (err) {
           console.warn("Failed to reset via API", err);
           hadError = true;
-        }}
-      }} else {{
+        }
+      } else {
         hadError = true; // cannot clear disk cache without API
-      }}
+      }
       state.viewed = new Set();
-      persistViewedLocal(state.viewed);
       state.starred = new Set();
-      persistStarredLocal(state.starred);
-      releases.forEach(r => {{
+      releases.forEach(r => {
         delete r.embed_url;
         delete r.release_id;
         delete r.is_track;
-      }});
+      });
       renderTable();
-      if (populateLog) {{
+      if (populateLog) {
         const msg = "Cache has been reset.";
         populateLog.textContent = msg;
-        try {{ localStorage.setItem(POPULATE_LOG_KEY, msg); }} catch (e) {{}}
-      }}
+      }
       toggleSettings(false);
-      if (hadError && clearCache) {{
+      if (hadError && clearCache) {
         alert("Could not clear disk cache (proxy not reachable). Run the app/proxy and try again.");
-      }} else {{
+      } else {
         window.location.reload();
-      }}
-    }}
+      }
+    }
     if (settingsReset) settingsReset.addEventListener("click", performReset);
 
-    function applyHideViewed(checked) {{
+    function applyHideViewed(checked) {
       const expandedRow = document.querySelector("tr.data-row.expanded");
-      if (expandedRow && expandedRow.dataset.key) {{
+      if (expandedRow && expandedRow.dataset.key) {
         state.expandedKey = expandedRow.dataset.key;
-      }}
+      }
       state.hideViewed = checked;
-      if (checked) {{
+      if (checked) {
         state.hideViewedSnapshot = new Set(state.viewed);
-      }} else {{
+      } else {
         state.hideViewedSnapshot = new Set();
-      }}
+      }
       renderTable();
-    }}
-    if (hideViewedToggle) {{
+    }
+    if (hideViewedToggle) {
       hideViewedToggle.addEventListener("change", () => applyHideViewed(hideViewedToggle.checked));
-    }}
-    if (showStarredToggle) {{
-      showStarredToggle.addEventListener("change", () => {{
+    }
+    if (showStarredToggle) {
+      showStarredToggle.addEventListener("change", () => {
         state.showOnlyStarred = !!showStarredToggle.checked;
         renderTable();
-      }});
-    }}
+      });
+    }
 
-    function markVisibleRows(viewed) {{
+    function markVisibleRows(viewed) {
       const rows = Array.from(document.querySelectorAll("#release-rows tr.data-row"));
-      rows.forEach(row => {{
+      rows.forEach(row => {
         const key = row.dataset.key;
         const release = key ? releaseMap.get(key) : null;
         if (!release) return;
         setViewed(release, viewed);
         const dot = row.querySelector(".row-dot");
-        if (dot) {{
+        if (dot) {
           dot.classList.toggle("read", viewed);
-        }}
+        }
         row.classList.toggle("unseen", !viewed);
-      }});
-      if (state.hideViewed) {{
+      });
+      if (state.hideViewed) {
         state.hideViewedSnapshot = new Set(state.viewed);
-      }}
+      }
       renderTable();
       renderCalendar("range");
-    }}
+    }
     if (markSeenBtn) markSeenBtn.addEventListener("click", () => markVisibleRows(true));
     if (markUnseenBtn) markUnseenBtn.addEventListener("click", () => markVisibleRows(false));
 
-    if (showCachedToggle) {{
+    if (showCachedToggle) {
       const savedShowCached = localStorage.getItem(SHOW_CACHED_KEY);
-      if (savedShowCached !== null) {{
+      if (savedShowCached !== null) {
         state.showCachedBadges = savedShowCached === "true";
-      }}
+      }
       showCachedToggle.checked = state.showCachedBadges;
-      showCachedToggle.addEventListener("change", () => {{
+      showCachedToggle.addEventListener("change", () => {
         state.showCachedBadges = !!showCachedToggle.checked;
         localStorage.setItem(SHOW_CACHED_KEY, String(state.showCachedBadges));
         renderTable();
-      }});
-    }}
+      });
+    }
 
     const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const calendars = {{
-      range: {{ container: calendarRange, current: new Date(), startKey: null, endKey: null }},
-    }};
+    const calendars = {
+      range: { container: calendarRange, current: new Date(), startKey: null, endKey: null },
+    };
 
-    function isoKeyFromDate(dateObj) {{
+    function isoKeyFromDate(dateObj) {
       if (!(dateObj instanceof Date) || isNaN(dateObj.getTime())) return "";
       const y = dateObj.getFullYear();
       const m = String(dateObj.getMonth() + 1).padStart(2, "0");
       const d = String(dateObj.getDate()).padStart(2, "0");
-      return `${{y}}-${{m}}-${{d}}`;
-    }}
+      return `${y}-${m}-${d}`;
+    }
 
-    function parseDateString(value) {{
+    function parseDateString(value) {
       if (!value) return null;
       const parts = value.split("-");
       if (parts.length !== 3) return null;
@@ -2053,43 +1980,43 @@ def render_dashboard_html(
       if (isNaN(parsed.getTime())) return null;
       if (parsed.getFullYear() !== y || parsed.getMonth() !== m - 1 || parsed.getDate() !== d) return null;
       return parsed;
-    }}
+    }
 
-    function withinSelectedRange(release) {{
+    function withinSelectedRange(release) {
       let fromVal = state.dateFilterFrom || "";
       let toVal = state.dateFilterTo || "";
       if (fromVal && !toVal) toVal = fromVal;
       if (toVal && !fromVal) fromVal = toVal;
       const rowTs = Date.parse(release.date);
-      if (fromVal) {{
+      if (fromVal) {
         const fromTs = Date.parse(fromVal);
         if (!isNaN(fromTs) && !isNaN(rowTs) && rowTs < fromTs) return false;
-      }}
-      if (toVal) {{
+      }
+      if (toVal) {
         const toTs = Date.parse(toVal);
         if (!isNaN(toTs) && !isNaN(rowTs) && rowTs > toTs) return false;
-      }}
+      }
       return true;
-    }}
+    }
 
-    function renderCalendar(type) {{
+    function renderCalendar(type) {
       const cal = calendars[type];
       if (!cal || !cal.container) return;
       const grid = cal.container;
       grid.innerHTML = "";
 
       const monthLabel = calendarRangeMonth;
-      if (monthLabel) {{
-        const monthName = cal.current.toLocaleString("en-US", {{ month: "short", year: "numeric" }});
+      if (monthLabel) {
+        const monthName = cal.current.toLocaleString("en-US", { month: "short", year: "numeric" });
         monthLabel.textContent = monthName;
-      }}
+      }
 
-      WEEKDAYS.forEach(day => {{
+      WEEKDAYS.forEach(day => {
         const label = document.createElement("div");
         label.className = "calendar-weekday";
         label.textContent = day;
         grid.appendChild(label);
-      }});
+      });
 
       const monthStart = new Date(cal.current.getFullYear(), cal.current.getMonth(), 1);
       const startOffset = monthStart.getDay();
@@ -2099,7 +2026,7 @@ def render_dashboard_html(
       const startSelectedDate = cal.startKey ? parseDateString(cal.startKey) : null;
       const endSelectedDate = cal.endKey ? parseDateString(cal.endKey) : null;
 
-      for (let idx = 0; idx < totalCells; idx++) {{
+      for (let idx = 0; idx < totalCells; idx++) {
         const dayNumber = idx - startOffset + 1;
         const cellDate = new Date(cal.current.getFullYear(), cal.current.getMonth(), dayNumber);
         const isOtherMonth = cellDate.getMonth() !== cal.current.getMonth();
@@ -2110,9 +2037,9 @@ def render_dashboard_html(
         if (isOtherMonth) cell.classList.add("other-month");
         if (isDisabled) cell.classList.add("disabled");
         if (cal.startKey === key || cal.endKey === key) cell.classList.add("selected");
-        if (startSelectedDate && endSelectedDate && cellDate >= startSelectedDate && cellDate <= endSelectedDate) {{
+        if (startSelectedDate && endSelectedDate && cellDate >= startSelectedDate && cellDate <= endSelectedDate) {
           cell.classList.add("in-range");
-        }}
+        }
         cell.textContent = "";
         const dateLabel = document.createElement("span");
         dateLabel.className = "date-label";
@@ -2120,48 +2047,48 @@ def render_dashboard_html(
         const dots = document.createElement("div");
         dots.className = "dot-strip";
         const scraped = scrapeStatus.scraped.has(key);
-        if (scraped) {{
+        if (scraped) {
           cell.classList.add("scraped");
-        }}
-        const hasUnseen = releases.some(rel => {{
+        }
+        const hasUnseen = releases.some(rel => {
           const relDate = formatDate(rel.date);
           const relKey = releaseKey(rel);
           if (!relDate || relDate !== key) return false;
           return !state.viewed.has(relKey);
-        }});
-        if (hasUnseen) {{
+        });
+        if (hasUnseen) {
           cell.classList.add("unseen-day");
-        }}
+        }
         cell.appendChild(dateLabel);
         cell.appendChild(dots);
 
-        cell.addEventListener("click", () => {{
+        cell.addEventListener("click", () => {
           if (isDisabled) return;
           const startKey = cal.startKey;
           const endKey = cal.endKey;
           const clickedKey = key;
-          if (!startKey || (startKey && endKey)) {{
+          if (!startKey || (startKey && endKey)) {
             // Start a new selection
             cal.startKey = clickedKey;
             cal.endKey = null;
-          }} else if (startKey && !endKey) {{
+          } else if (startKey && !endKey) {
             const startDate = parseDateString(startKey);
             const clickedDate = cellDate;
-            if (startDate && clickedDate < startDate) {{
+            if (startDate && clickedDate < startDate) {
               cal.endKey = startKey;
               cal.startKey = clickedKey;
-            }} else {{
+            } else {
               cal.endKey = clickedKey;
-            }}
-          }}
+            }
+          }
           renderCalendar("range");
           applyCalendarFiltersFromSelection();
-        }});
+        });
         grid.appendChild(cell);
-      }}
-    }}
+      }
+    }
 
-    function shiftCalendarMonth(type, delta) {{
+    function shiftCalendarMonth(type, delta) {
       const cal = calendars[type];
       if (!cal) return;
       const next = new Date(cal.current.getFullYear(), cal.current.getMonth() + delta, 1);
@@ -2169,24 +2096,24 @@ def render_dashboard_html(
       const maxMonth = new Date(now.getFullYear(), now.getMonth(), 1);
       cal.current = next > maxMonth ? maxMonth : next;
       renderCalendar(type);
-    }}
+    }
 
-    function initializeCalendars() {{
+    function initializeCalendars() {
       const dateValues = releases
         .map(entry => parseDateString(entry.date))
         .filter(Boolean)
         .sort((a, b) => a - b);
       const today = new Date();
-      if (dateValues.length) {{
+      if (dateValues.length) {
         calendars.range.current = new Date(dateValues[0].getFullYear(), dateValues[0].getMonth(), 1);
-      }} else {{
+      } else {
         calendars.range.current = new Date(today.getFullYear(), today.getMonth(), 1);
-      }}
+      }
       syncCalendarsFromInputs();
       renderCalendar("range");
-    }}
+    }
 
-    function syncCalendarsFromInputs() {{
+    function syncCalendarsFromInputs() {
       const fromVal = dateFilterFrom ? dateFilterFrom.value.trim() : "";
       const toVal = dateFilterTo ? dateFilterTo.value.trim() : "";
       const parsedFrom = parseDateString(fromVal);
@@ -2194,37 +2121,37 @@ def render_dashboard_html(
       calendars.range.startKey = parsedFrom ? isoKeyFromDate(parsedFrom) : null;
       calendars.range.endKey = parsedTo ? isoKeyFromDate(parsedTo) : null;
       const target = parsedTo || parsedFrom;
-      if (target) {{
+      if (target) {
         calendars.range.current = new Date(target.getFullYear(), target.getMonth(), 1);
-      }}
-    }}
+      }
+    }
 
-    document.querySelectorAll("[data-cal-nav]").forEach(btn => {{
-      btn.addEventListener("click", () => {{
+    document.querySelectorAll("[data-cal-nav]").forEach(btn => {
+      btn.addEventListener("click", () => {
         const role = btn.getAttribute("data-cal-nav") || "";
         if (role.startsWith("range")) shiftCalendarMonth("range", role.endsWith("prev") ? -1 : 1);
-      }});
-    }});
+      });
+    });
 
-    document.querySelectorAll("[data-cal-today]").forEach(btn => {{
-      btn.addEventListener("click", () => {{
+    document.querySelectorAll("[data-cal-today]").forEach(btn => {
+      btn.addEventListener("click", () => {
         const cal = calendars.range;
         if (!cal) return;
         const today = new Date();
         const todayKey = isoKeyFromDate(today);
         cal.current = new Date(today.getFullYear(), today.getMonth(), 1);
-        if (!cal.startKey || (cal.startKey && cal.endKey)) {{
+        if (!cal.startKey || (cal.startKey && cal.endKey)) {
           cal.startKey = todayKey;
           cal.endKey = null;
-        }} else {{
+        } else {
           cal.endKey = todayKey;
-        }}
+        }
         renderCalendar("range");
         applyCalendarFiltersFromSelection();
-      }});
-    }});
+      });
+    });
 
-    function selectVisibleMonthRange() {{
+    function selectVisibleMonthRange() {
       const cal = calendars.range;
       if (!cal) return;
       const current = cal.current || new Date();
@@ -2234,127 +2161,116 @@ def render_dashboard_html(
       const endDate = new Date(year, month + 1, 0);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      if (today.getFullYear() === year && today.getMonth() === month) {{
+      if (today.getFullYear() === year && today.getMonth() === month) {
         endDate.setTime(today.getTime());
-      }}
+      }
       cal.startKey = isoKeyFromDate(startDate);
       cal.endKey = isoKeyFromDate(endDate);
       renderCalendar("range");
       applyCalendarFiltersFromSelection();
-    }}
-    if (selectMonthBtn) {{
+    }
+    if (selectMonthBtn) {
       selectMonthBtn.addEventListener("click", selectVisibleMonthRange);
-    }}
+    }
 
-    function populateRangeFromCalendars() {{
+    function populateRangeFromCalendars() {
       checkServerAlive();
       applyCalendarFiltersFromSelection();
       let startVal = dateFilterFrom ? dateFilterFrom.value.trim() : "";
       let endVal = dateFilterTo ? dateFilterTo.value.trim() : "";
       if (startVal && !endVal) endVal = startVal;
       if (endVal && !startVal) startVal = endVal;
-      const preloadEmbeds = !!(preloadEmbedsToggle && preloadEmbedsToggle.checked);
       if (!API_ROOT || !startVal || !endVal) return;
       if (populateLog) populateLog.style.color = "";
       const btn = populateBtn;
       const original = btn ? btn.textContent : "";
-      if (btn) {{
+      if (btn) {
         btn.disabled = true;
         btn.textContent = "Populating…";
-      }}
+      }
       populateStatus.textContent = "";
 
-      async function runPopulate() {{
-        if (window.EventSource) {{
+      async function runPopulate() {
+        if (window.EventSource) {
           if (populateLog) populateLog.textContent = "";
-          try {{ localStorage.setItem(POPULATE_LOG_KEY, ""); }} catch (e) {{}}
-          const url = `${{API_ROOT}}/populate-range-stream?start=${{encodeURIComponent(startVal)}}&end=${{encodeURIComponent(endVal)}}&preload_embeds=${{preloadEmbeds ? "true" : "false"}}`;
+          const url = `${API_ROOT}/populate-range-stream?start=${encodeURIComponent(startVal)}&end=${encodeURIComponent(endVal)}&preload_embeds=false`;
           const es = new EventSource(url);
-          const handleError = (ev) => {{
+          const handleError = (ev) => {
             es.close();
             const msg = (ev && ev.data) ? String(ev.data) : "Populate failed (stream error)";
             const current = populateLog ? populateLog.textContent : "";
-            const next = current ? `${{current}}\\n${{msg}}` : msg;
+            const next = current ? `${current}\n${msg}` : msg;
             if (populateLog) populateLog.textContent = next;
-            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
             populateStatus.textContent = "";
             alert(msg);
-            if (btn) {{
+            if (btn) {
               btn.disabled = false;
               btn.textContent = original || "Populate";
-            }}
-          }};
-          es.onmessage = (ev) => {{
+            }
+          };
+          es.onmessage = (ev) => {
             if (!ev || !ev.data) return;
-            if (!maxNoticeShown && ev.data.includes("Maximum results")) {{
+            if (!maxNoticeShown && ev.data.includes("Maximum results")) {
               maxNoticeShown = true;
               showMaxResultsModal();
               appendPopulateLogLine("Maximum number of results reached. Stopping download.");
-            }}
+            }
             const current = populateLog ? populateLog.textContent : "";
-            const next = current ? `${{current}}\\n${{ev.data}}` : ev.data;
+            const next = current ? `${current}\n${ev.data}` : ev.data;
             if (populateLog) populateLog.textContent = next;
-            try {{ localStorage.setItem(POPULATE_LOG_KEY, next); }} catch (e) {{}}
-            if (String(ev.data || "").startsWith("ERROR:")) {{
-              handleError({{ data: ev.data }});
-            }}
-          }};
+            if (String(ev.data || "").startsWith("ERROR:")) {
+              handleError({ data: ev.data });
+            }
+          };
           es.addEventListener("error", handleError);
-          es.addEventListener("done", () => {{
+          es.addEventListener("done", () => {
             populateStatus.textContent = "Done. Reloading…";
             es.close();
             window.location.reload();
-          }});
+          });
           return;
-        }}
+        }
 
-        try {{
-          const resp = await fetch(`${{API_ROOT}}/populate-range`, {{
+        try {
+          const resp = await fetch(`${API_ROOT}/populate-range`, {
             method: "POST",
-            headers: {{"Content-Type": "application/json"}},
-            body: JSON.stringify({{start: startVal, end: endVal, preload_embeds: preloadEmbeds}}),
-          }});
-          const data = await resp.json().catch(() => ({{}}));
-          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\\n") : "";
-          if (!resp.ok) {{
-            if (populateLog && joinedLogs) {{
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({start: startVal, end: endVal, preload_embeds: false}),
+          });
+          const data = await resp.json().catch(() => ({}));
+          const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\n") : "";
+          if (!resp.ok) {
+            if (populateLog && joinedLogs) {
               populateLog.textContent = joinedLogs;
-            }}
-            if (joinedLogs) {{
-              try {{ localStorage.setItem(POPULATE_LOG_KEY, joinedLogs); }} catch (e) {{}}
-            }}
-            throw new Error(data.error || `HTTP ${{resp.status}}`);
-          }}
-          if (populateLog && joinedLogs) {{
+            }
+            throw new Error(data.error || `HTTP ${resp.status}`);
+          }
+          if (populateLog && joinedLogs) {
             populateLog.textContent = joinedLogs;
-          }}
-          if (joinedLogs) {{
-            try {{ localStorage.setItem(POPULATE_LOG_KEY, joinedLogs); }} catch (e) {{}}
-          }}
-          if (!maxNoticeShown && joinedLogs.includes("Maximum results")) {{
+          }
+          if (!maxNoticeShown && joinedLogs.includes("Maximum results")) {
             maxNoticeShown = true;
             showMaxResultsModal();
             appendPopulateLogLine("Maximum number of results reached. Stopping download.");
-          }}
+          }
           populateStatus.textContent = "Done. Reloading…";
           window.location.reload();
-        }} catch (err) {{
+        } catch (err) {
           populateStatus.textContent = "";
           if (populateLog) populateLog.textContent = String(err || "Error");
-          try {{ localStorage.setItem(POPULATE_LOG_KEY, String(err || "Error")); }} catch (e) {{}}
-          alert(`Populate failed: ${{err.message || err}}`);
-        }} finally {{
-          if (btn) {{
+          alert(`Populate failed: ${err.message || err}`);
+        } finally {
+          if (btn) {
             btn.disabled = false;
             btn.textContent = original || "Populate";
-          }}
-        }}
-      }}
+          }
+        }
+      }
       runPopulate();
-    }}
+    }
     if (populateBtn) populateBtn.addEventListener("click", populateRangeFromCalendars);
 
-    function setDefaultDateFilters() {{
+    function setDefaultDateFilters() {
       if ((dateFilterFrom && dateFilterFrom.value) || (dateFilterTo && dateFilterTo.value)) return;
       if (!releases.length) return;
       const dates = releases
@@ -2367,91 +2283,77 @@ def render_dashboard_html(
       if (dateFilterFrom && !dateFilterFrom.value) dateFilterFrom.value = first;
       if (dateFilterTo && !dateFilterTo.value) dateFilterTo.value = last;
       onDateFilterChange();
-    }}
+    }
 
-    function applyCalendarFiltersFromSelection() {{
+    function applyCalendarFiltersFromSelection() {
       const cal = calendars.range;
       const fromKey = cal.startKey;
       const toKey = cal.endKey || "";
-      if (dateFilterFrom && fromKey) {{
+      if (dateFilterFrom && fromKey) {
         dateFilterFrom.value = fromKey;
-      }}
-      if (dateFilterTo) {{
+      }
+      if (dateFilterTo) {
         dateFilterTo.value = toKey;
-      }}
+      }
       onDateFilterChange();
       updateRangePreview();
       updateSelectionStatusLog();
-    }}
+    }
 
-    async function fetchScrapeStatus() {{
+    async function fetchScrapeStatus() {
       if (!SCRAPE_STATUS_URL) return;
-      try {{
+      try {
         const params = new URLSearchParams();
         const firstDate = releases[0]?.date;
         const lastDate = releases[releases.length - 1]?.date;
         if (firstDate) params.set("start", formatDate(firstDate));
         if (lastDate) params.set("end", formatDate(lastDate));
-        const resp = await fetch(`${{SCRAPE_STATUS_URL}}?${{params.toString()}}`);
-        if (!resp.ok) throw new Error(`HTTP ${{resp.status}}`);
+        const resp = await fetch(`${SCRAPE_STATUS_URL}?${params.toString()}`);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         scrapeStatus.scraped = new Set(data.scraped || []);
         const notScraped = data.not_scraped || data["not_scraped"] || [];
         scrapeStatus.notScraped = new Set(notScraped || []);
         renderCalendar("range");
         updateSelectionStatusLog();
-      }} catch (err) {{
+      } catch (err) {
         console.warn("Failed to load scrape status", err);
-      }}
-    }}
+      }
+    }
 
-    function loadCalendarState() {{
+    function loadCalendarState() {
       if (!dateFilterFrom || !dateFilterTo) return;
-      try {{
+      try {
         const raw = localStorage.getItem(CALENDAR_STATE_KEY);
         if (!raw) return;
         const data = JSON.parse(raw);
-        if (data && typeof data === "object") {{
+        if (data && typeof data === "object") {
           if (typeof data.from === "string") dateFilterFrom.value = data.from;
           if (typeof data.to === "string") dateFilterTo.value = data.to;
-          if (!clearedLogOnInit && populateLog && typeof data.populateLog === "string") {{
-            populateLog.textContent = data.populateLog;
-          }}
-        }}
-      }} catch (err) {{}}
-      try {{
-        if (!clearedLogOnInit) {{
-          const savedLog = localStorage.getItem(POPULATE_LOG_KEY);
-          if (populateLog && savedLog) {{
-            populateLog.textContent = savedLog;
-          }}
-        }}
-      }} catch (e) {{}}
+        }
+      } catch (err) {}
       onDateFilterChange();
-    }}
+    }
 
-    function persistCalendarState() {{
+    function persistCalendarState() {
       if (!dateFilterFrom || !dateFilterTo) return;
-      const payload = {{
+      const payload = {
         from: (dateFilterFrom.value || "").trim(),
         to: (dateFilterTo.value || "").trim(),
-        populateLog: (() => {{
-          try {{ return localStorage.getItem(POPULATE_LOG_KEY) || ""; }} catch (e) {{ return ""; }}
-        }})(),
-      }};
-      try {{
+      };
+      try {
         localStorage.setItem(CALENDAR_STATE_KEY, JSON.stringify(payload));
-      }} catch (err) {{}}
-    }}
+      } catch (err) {}
+    }
 
-    if (wireframePanel && wireframeBody) {{
+    if (wireframePanel && wireframeBody) {
       wireframeBody.hidden = !wireframePanel.open;
-      wireframePanel.addEventListener("toggle", () => {{
+      wireframePanel.addEventListener("toggle", () => {
         wireframeBody.hidden = !wireframePanel.open;
-      }});
-    }}
+      });
+    }
 
-    function onDateFilterChange() {{
+    function onDateFilterChange() {
       state.dateFilterFrom = dateFilterFrom ? dateFilterFrom.value.trim() : "";
       state.dateFilterTo = dateFilterTo ? dateFilterTo.value.trim() : "";
       syncCalendarsFromInputs();
@@ -2461,33 +2363,38 @@ def render_dashboard_html(
       updateHeaderRange();
       persistCalendarState();
       renderTable();
-    }}
+    }
     if (dateFilterFrom) dateFilterFrom.addEventListener("input", onDateFilterChange);
     if (dateFilterTo) dateFilterTo.addEventListener("input", onDateFilterChange);
 
     initializeCalendars();
     loadCalendarState();
-    setDefaultDateFilters();
-    fetchScrapeStatus();
     setTimeout(() => checkServerAlive(), 500);
     setInterval(() => checkServerAlive(), 5000);
 
-    // Render after persisted state loads to keep dots/stars and show date range
-    Promise.all([
-      loadViewedSet().catch(() => new Set()),
-      loadStarredSet().catch(() => new Set()),
-    ]).then(([viewed, starred]) => {{
-      state.viewed = viewed || new Set();
-      state.starred = starred || new Set();
-      renderDateRangeLabel();
-      renderTable();
-      renderCalendar("range");
-    }}).catch(() => {{
-      renderDateRangeLabel();
-      renderTable();
-      renderCalendar("range");
-    }});
+    async function initData() {
+      try {
+        setLoading("Loading releases…");
+        await fetchReleases();
+        const [viewed, starred] = await Promise.all([
+          loadViewedSet(),
+          loadStarredSet(),
+        ]);
+        state.viewed = viewed || new Set();
+        state.starred = starred || new Set();
+        setDefaultDateFilters();
+        renderDateRangeLabel();
+        renderTable();
+        renderCalendar("range");
+        fetchScrapeStatus();
+        hideLoading();
+      } catch (err) {
+        console.warn(err);
+        showError((err && err.message) || "Failed to load releases. Is the bcfeed proxy running?");
+      }
+    }
+    initData();
+    })();
   </script>
 </body>
 </html>
-"""

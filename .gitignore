@@ -1,5 +1,5 @@
 *.pkl
-*.html
+output.html
 *.json
 .DS_Store
 *.data

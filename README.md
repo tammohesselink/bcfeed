@@ -14,6 +14,12 @@ If you're familiar with Python and CLI tools, you can simply create a virtual en
 
 Alternatively, you can download the **bcfeed** executable from GitHub; note, however, that this suffers from long startup times because it's not notarized and codesigned.
 
+## Dashboard HTML
+
+- The UI shell served by the proxy is the static file `dashboard.html`. The proxy exposes it at `/dashboard` (e.g., http://localhost:5050/dashboard).
+- At runtime the page fetches `config.json` from the proxy to learn the embed proxy URL and flags.
+- Edit `dashboard.html` directly to change the UI; the template helper has been removed.
+
 
 ## 📘 Setup Guide
 

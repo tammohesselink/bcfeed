@@ -16,9 +16,7 @@ from tkinter import Tk, Button, Frame, messagebox, filedialog, ttk
 from tkinter.scrolledtext import ScrolledText
 
 from embed_proxy import app as proxy_app, start_proxy_server
-from dashboard import write_release_dashboard
 from util import get_data_dir
-from session_store import get_full_release_cache
 
 MULTITHREADING = True
 PROXY_PORT = 5050
@@ -96,24 +94,11 @@ def start_proxy_thread():
 
 def launch_from_cache(proxy_port: int, preload_embeds: bool, *, log=print, launch_browser: bool = True, clear_status_on_load: bool = False):
     """
-    Generate dashboard from all cached releases (no Gmail fetch).
+    Start the proxy and open the static dashboard, which will load releases from the proxy.
     """
-    output_path = DATA_DIR / "output.html"
-    releases = get_full_release_cache()
-    if not releases:
-        log("No cached releases found.")
-    output_file = write_release_dashboard(
-        releases=releases,
-        output_path=output_path,
-        title="bcfeed",
-        fetch_missing_ids=preload_embeds,
-        embed_proxy_url=f"http://localhost:{proxy_port}/embed-meta",
-        clear_status_on_load=clear_status_on_load,
-        log=log,
-    )
     if launch_browser:
-        webbrowser.open_new_tab(output_file.resolve().as_uri())
-    return output_file
+        webbrowser.open_new_tab(f"http://localhost:{proxy_port}/dashboard")
+    return None
 
 
 def main():

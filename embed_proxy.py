@@ -20,14 +20,13 @@ from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask, jsonify, request, Response, stream_with_context
+from flask import Flask, jsonify, request, Response, stream_with_context, send_file
 from queue import SimpleQueue
 from werkzeug.serving import make_server, WSGIRequestHandler
 
 from util import get_data_dir
 from session_store import scrape_status_for_range, get_full_release_cache
 from pipeline import gather_releases_with_cache
-from dashboard import write_release_dashboard
 from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
 
 app = Flask(__name__)
@@ -41,6 +40,7 @@ SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
 EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
 TOKEN_PATH = DATA_DIR / "token.pickle"
 CREDENTIALS_PATH = DATA_DIR / "credentials.json"
+DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 POPULATE_LOCK = threading.Lock()
 
 
@@ -252,6 +252,17 @@ def viewed_state():
     return _corsify(jsonify({"ok": True}))
 
 
+@app.route("/releases", methods=["GET", "OPTIONS"])
+def releases_endpoint():
+    if request.method == "OPTIONS":
+        return _corsify(app.response_class(status=204))
+    try:
+        releases = get_full_release_cache()
+    except Exception as exc:
+        return _corsify(jsonify({"error": f"Failed to load releases: {exc}"})), 500
+    return _corsify(jsonify({"releases": releases}))
+
+
 @app.route("/starred-state", methods=["GET", "POST", "OPTIONS"])
 def starred_state():
     if request.method == "OPTIONS":
@@ -272,6 +283,26 @@ def starred_state():
         items.discard(url)
     _save_starred(items)
     return _corsify(jsonify({"ok": True}))
+
+
+@app.route("/config.json", methods=["GET"])
+def config_json():
+    embed_proxy_url = request.host_url.rstrip("/") + "/embed-meta"
+    payload = {
+        "title": "bcfeed",
+        "embed_proxy_url": embed_proxy_url,
+        "default_theme": "light",
+        "clear_status_on_load": False,
+        "show_dev_settings": False,
+    }
+    return _corsify(jsonify(payload))
+
+
+@app.route("/dashboard", methods=["GET"])
+def dashboard_page():
+    if not DASHBOARD_PATH.exists():
+        return _corsify(jsonify({"error": f"dashboard not found at {DASHBOARD_PATH}"})), 500
+    return send_file(DASHBOARD_PATH, mimetype="text/html")
 
 
 @app.route("/embed-meta", methods=["GET", "OPTIONS"])
@@ -354,21 +385,6 @@ def reset_caches():
         for p in (RELEASE_CACHE_PATH, EMPTY_DATES_PATH, SCRAPE_STATUS_PATH, EMBED_CACHE_PATH):
             if _safe_unlink(p):
                 cleared.append(p.name)
-        # Rebuild an empty dashboard so the browser can reload cleanly.
-        try:
-            output_path = DATA_DIR / "output.html"
-            embed_proxy_url = request.host_url.rstrip("/") + "/embed-meta"
-            write_release_dashboard(
-                releases=[],
-                output_path=output_path,
-                title="bcfeed",
-                fetch_missing_ids=False,
-                embed_proxy_url=embed_proxy_url,
-                clear_status_on_load=False,
-                log=lambda msg: None,
-            )
-        except Exception as exc:
-            errors.append(f"regen: {exc}")
     if clear_viewed or clear_starred:
         if _safe_unlink(VIEWED_PATH):
             cleared.append(VIEWED_PATH.name)
@@ -414,19 +430,7 @@ def populate_range():
             batch_size=20,
             log=log,
         )
-        # Rebuild dashboard from full cache so reload shows new data.
         releases = get_full_release_cache()
-        output_path = DATA_DIR / "output.html"
-        embed_proxy_url = request.host_url.rstrip("/") + "/embed-meta"
-        write_release_dashboard(
-            releases=releases,
-            output_path=output_path,
-            title="bcfeed",
-            fetch_missing_ids=preload_embeds,
-            embed_proxy_url=embed_proxy_url,
-            clear_status_on_load=False,
-            log=log,
-        )
         return _corsify(jsonify({"ok": True, "logs": logs, "count": len(releases)}))
     except GmailAuthError as exc:
         return _corsify(jsonify({"error": str(exc), "logs": logs})), 401
@@ -539,18 +543,7 @@ def populate_range_stream():
                     batch_size=20,
                     log=log,
                 )
-                releases = get_full_release_cache()
-                output_path = DATA_DIR / "output.html"
-                write_release_dashboard(
-                    releases=releases,
-                    output_path=output_path,
-                    title="bcfeed",
-                    fetch_missing_ids=preload_embeds,
-                    embed_proxy_url=embed_proxy_url,
-                    clear_status_on_load=False,
-                    log=log,
-                )
-                q.put("Regenerated dashboard.")
+                q.put("Populate completed.")
             except GmailAuthError as exc:
                 q.put(f"ERROR: {exc}")
             finally:

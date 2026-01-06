@@ -31,7 +31,7 @@ from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
 
-from dashboard_html import render_dashboard_html
+from dashboard_template import render_dashboard_html
 from session_store import load_embed_cache, persist_embed_metadata
 from util import get_data_dir
 
@@ -203,11 +203,9 @@ def build_release_dashboard_html(
         _normalize_release(entry, fetch_missing_ids, log, idx, total)
         for idx, entry in enumerate(releases_list, start=1)
     ]
-    data_json = json.dumps(normalized, ensure_ascii=True)
     dev_settings = _dev_settings_enabled()
     return render_dashboard_html(
         title=title,
-        data_json=data_json,
         embed_proxy_url=embed_proxy_url,
         default_theme=default_theme,
         clear_status_on_load=clear_status_on_load,
