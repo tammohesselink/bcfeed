@@ -91,6 +91,11 @@
       filter: grayscale(0.2);
       box-shadow: none;
     }
+    .toggle-button.toggle-active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
     h1 {
       margin: 0;
       font-size: 22px;
@@ -743,14 +748,9 @@
             <h1>bcfeed</h1>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-            <label style="display:flex; align-items:center; gap:4px; font-size:12px;">
-              <input type="checkbox" id="hide-viewed-toggle" />
-              <span>Hide already seen releases</span>
-            </label>
-            <label style="display:flex; align-items:center; gap:4px; font-size:12px;">
-              <input type="checkbox" id="show-starred-toggle" />
-              <span>Show only starred releases</span>
-            </label>
+            <span style="font-size:12px; color:var(--muted); font-weight:600; letter-spacing:0.2px;">SHOW ONLY:</span>
+            <button id="hide-viewed-btn" class="button toggle-button" aria-pressed="false">Unseen</button>
+            <button id="show-starred-btn" class="button toggle-button" aria-pressed="false">Starred</button>
             <button id="settings-btn" class="button" aria-label="Settings" title="Settings" style="padding:6px 10px; font-size:18px;">⚙️</button>
           </div>
         </div>
@@ -789,8 +789,8 @@
                     <div style="font-size:12px; color:var(--muted);">SELECTED DATE RANGE:</div>
                     <button id="populate-range" class="button" style="background:#b83a3a; border-color:#b83a3a;">Populate release list</button>
                     <button id="preload-range" class="button">Preload release data</button>
-                    <button id="mark-seen" class="button" style="padding:6px 10px; font-size:12px;">Mark as viewed</button>
-                    <button id="mark-unseen" class="button" style="padding:6px 10px; font-size:12px;">Mark as unviewed</button>
+                    <button id="mark-seen" class="button" style="padding:6px 10px; font-size:12px;">Mark as seen</button>
+                    <button id="mark-unseen" class="button" style="padding:6px 10px; font-size:12px;">Mark as unseen</button>
                   </div>
                 </div>
                 <div class="calendar-log" style="width:100%;">
@@ -1851,8 +1851,8 @@
     const settingsReset = document.getElementById("settings-reset");
     const resetClearCache = null;
     const resetClearViewed = null;
-    const hideViewedToggle = document.getElementById("hide-viewed-toggle");
-    const showStarredToggle = document.getElementById("show-starred-toggle");
+    const hideViewedBtn = document.getElementById("hide-viewed-btn");
+    const showStarredBtn = document.getElementById("show-starred-btn");
     const markSeenBtn = document.getElementById("mark-seen");
     const markUnseenBtn = document.getElementById("mark-unseen");
     const dateFilterFrom = document.getElementById("date-filter-from");
@@ -1938,6 +1938,19 @@
     }
     if (settingsReset) settingsReset.addEventListener("click", performReset);
 
+    function refreshToggleButtons() {
+      if (hideViewedBtn) {
+        hideViewedBtn.classList.toggle("toggle-active", state.hideViewed);
+        hideViewedBtn.setAttribute("aria-pressed", String(state.hideViewed));
+        hideViewedBtn.title = state.hideViewed ? "Showing only unseen releases" : "Show all releases";
+      }
+      if (showStarredBtn) {
+        showStarredBtn.classList.toggle("toggle-active", state.showOnlyStarred);
+        showStarredBtn.setAttribute("aria-pressed", String(state.showOnlyStarred));
+        showStarredBtn.title = state.showOnlyStarred ? "Showing only starred releases" : "Show all releases";
+      }
+    }
+
     function applyHideViewed(checked) {
       const expandedRow = document.querySelector("tr.data-row.expanded");
       if (expandedRow && expandedRow.dataset.key) {
@@ -1949,14 +1962,16 @@
       } else {
         state.hideViewedSnapshot = new Set();
       }
+      refreshToggleButtons();
       renderTable();
     }
-    if (hideViewedToggle) {
-      hideViewedToggle.addEventListener("change", () => applyHideViewed(hideViewedToggle.checked));
+    if (hideViewedBtn) {
+      hideViewedBtn.addEventListener("click", () => applyHideViewed(!state.hideViewed));
     }
-    if (showStarredToggle) {
-      showStarredToggle.addEventListener("change", () => {
-        state.showOnlyStarred = !!showStarredToggle.checked;
+    if (showStarredBtn) {
+      showStarredBtn.addEventListener("click", () => {
+        state.showOnlyStarred = !state.showOnlyStarred;
+        refreshToggleButtons();
         renderTable();
       });
     }
@@ -2485,6 +2500,7 @@
         renderDateRangeLabel();
         renderTable();
         renderCalendar("range");
+        refreshToggleButtons();
         fetchScrapeStatus();
         hideLoading();
       } catch (err) {
