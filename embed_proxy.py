@@ -42,7 +42,7 @@ TOKEN_PATH = DATA_DIR / "token.pickle"
 CREDENTIALS_PATH = DATA_DIR / "credentials.json"
 DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 POPULATE_LOCK = threading.Lock()
-MAX_RESULTS_HARD = 100
+MAX_RESULTS_HARD = 2000
 
 
 def _load_embed_cache() -> dict:
