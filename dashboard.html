@@ -1175,6 +1175,7 @@
       dateFilterTo: "",
       showCachedBadges: true,
     };
+    let lastLabelSignature = "";
     const THEME_KEY = "bc_dashboard_theme";
     const SHOW_CACHED_KEY = "bc_show_cached_badges";
     const themeToggleBtn = document.getElementById("theme-toggle");
@@ -1422,9 +1423,13 @@
         return;
       }
 
-      if (state.showLabels.size === 0) {
+      const labelSignature = labels.join("||");
+      if (state.showOnlyLabels.size === 0 && labelSignature !== lastLabelSignature) {
+        state.showLabels = new Set(labels);
+      } else if (state.showLabels.size === 0) {
         labels.forEach(label => state.showLabels.add(label));
       }
+      lastLabelSignature = labelSignature;
 
       const showOnlyMode = state.showOnlyLabels.size > 0;
 
