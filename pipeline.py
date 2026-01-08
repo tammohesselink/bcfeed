@@ -12,6 +12,13 @@ from session_store import (
 )
 
 
+class MaxResultsExceeded(Exception):
+    def __init__(self, max_results: int, found: int):
+        super().__init__(f"Exceeded maximum number of results per Gmail search (max={max_results}, num results={found})")
+        self.max_results = max_results
+        self.found = found
+
+
 def parse_date(date_text: str) -> datetime.date:
     """Parse a YYYY/MM/DD string into a date, raising on failure."""
     try:
@@ -111,6 +118,9 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
             log(f"Querying Gmail for {query_after} to {query_before}...")
             try:
                 message_ids = search_messages(service, search_query)
+                # Enforce max_results limit explicitly so callers can surface the condition.
+                if max_results and len(message_ids) > max_results:
+                    raise MaxResultsExceeded(max_results, len(message_ids))
             except Exception as exc:
                 log(f"ERROR: {exc}")
                 raise

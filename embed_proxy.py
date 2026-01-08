@@ -26,7 +26,7 @@ from werkzeug.serving import make_server, WSGIRequestHandler
 
 from util import get_data_dir
 from session_store import scrape_status_for_range, get_full_release_cache
-from pipeline import gather_releases_with_cache
+from pipeline import gather_releases_with_cache, MaxResultsExceeded
 from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
 
 app = Flask(__name__)
@@ -42,6 +42,7 @@ TOKEN_PATH = DATA_DIR / "token.pickle"
 CREDENTIALS_PATH = DATA_DIR / "credentials.json"
 DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 POPULATE_LOCK = threading.Lock()
+MAX_RESULTS_HARD = 100
 
 
 def _load_embed_cache() -> dict:
@@ -416,7 +417,7 @@ def populate_range():
     data = request.get_json(silent=True) or {}
     start_raw = data.get("start") or data.get("from")
     end_raw = data.get("end") or start_raw
-    max_results = int(data.get("max_results") or 2000)
+    max_results = int(data.get("max_results") or MAX_RESULTS_HARD)
     preload_embeds = _as_bool(data.get("preload_embeds"))
     if not start_raw or not end_raw:
         return _corsify(jsonify({"error": "Missing start/end"})), 400
@@ -447,6 +448,9 @@ def populate_range():
         )
         releases = get_full_release_cache()
         return _corsify(jsonify({"ok": True, "logs": logs, "count": len(releases)}))
+    except MaxResultsExceeded as exc:
+        logs.append(str(exc))
+        return _corsify(jsonify({"error": str(exc), "logs": logs})), 413
     except GmailAuthError as exc:
         return _corsify(jsonify({"error": str(exc), "logs": logs})), 401
     except Exception as exc:
@@ -514,7 +518,7 @@ def populate_range_stream():
         return _corsify(app.response_class(status=204))
     start_arg = request.args.get("start") or request.args.get("from")
     end_arg = request.args.get("end") or start_arg
-    max_results = int(request.args.get("max_results") or 2000)
+    max_results = int(request.args.get("max_results") or MAX_RESULTS_HARD)
     preload_embeds = _as_bool(request.args.get("preload_embeds"))
     def error_stream(msg: str):
         def gen():
@@ -561,6 +565,8 @@ def populate_range_stream():
                 q.put("Populate completed.")
             except GmailAuthError as exc:
                 q.put(f"ERROR: {exc}")
+            except MaxResultsExceeded as exc:
+                q.put(f"Maximum results reached ({exc.found}/{exc.max_results}).")
             finally:
                 q.put(None)
 
