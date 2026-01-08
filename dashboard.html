@@ -1501,19 +1501,19 @@
 
       const msPerDay = 24 * 60 * 60 * 1000;
       const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / msPerDay) + 1;
-      let cachedDays = 0;
+      let populatedDays = 0;
       const cursor = new Date(startDate);
       while (cursor.getTime() <= endDate.getTime()) {
         const key = isoKeyFromDate(cursor);
-        if (scrapeStatus.scraped.has(key)) cachedDays += 1;
+        if (scrapeStatus.scraped.has(key)) populatedDays += 1;
         cursor.setDate(cursor.getDate() + 1);
       }
 
-      const allPopulated = totalDays > 0 && cachedDays >= totalDays;
+      const allPopulated = totalDays > 0 && populatedDays >= totalDays;
       if (populateLog) {
         msg = allPopulated
         ? `Selected time period:\n\n${fromVal} to ${toVal}\n\nDate range fully populated. Displaying all releases in this date range.`
-        : `Selected time period:\n\n${fromVal} to ${toVal}\n\n${totalDays-cachedDays} of ${totalDays} selected days not yet populated.\n\nClick "Populate release list" to populate all dates in the selected range.`; 
+        : `Selected time period:\n\n${fromVal} to ${toVal}\n\n${totalDays-populatedDays} of ${totalDays} selected days not yet populated.\n\nClick "Populate release list" to populate all dates in the selected range.`; 
 
         populateLog.innerHTML = msg.replace(/\n/g, "<br>");
         populateLog.style.color = allPopulated ? "var(--muted)" : "#64a8ff";
@@ -1529,7 +1529,7 @@
       if (populateBtn) {
         populateBtn.disabled = allPopulated;
         populateBtn.textContent = allPopulated ? "Release list populated" : "Populate release list";
-        populateBtn.title = allPopulated ? "All dates in this range are already cached" : "";
+        populateBtn.title = allPopulated ? "All dates in this range are already populated" : "";
       }
     }
 
