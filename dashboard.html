@@ -1200,10 +1200,10 @@
       });
     }
     if (!SHOW_DEV_SETTINGS) {
-      state.showCachedBadges = false;
-      try { localStorage.setItem(SHOW_CACHED_KEY, "false"); } catch (e) {}
+      state.showCachedBadges = true;
+      try { localStorage.setItem(SHOW_CACHED_KEY, "true"); } catch (e) {}
       const cachedToggle = document.getElementById("show-cached-toggle");
-      if (cachedToggle) cachedToggle.checked = false;
+      if (cachedToggle) cachedToggle.checked = true;
     }
     if (clearCredsBtn && CLEAR_CREDS_URL) {
       clearCredsBtn.addEventListener("click", async () => {
