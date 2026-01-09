@@ -27,7 +27,7 @@ from werkzeug.serving import make_server, WSGIRequestHandler
 from util import get_data_dir
 from session_store import scrape_status_for_range, get_full_release_cache
 from pipeline import gather_releases_with_cache, MaxResultsExceeded
-from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
+from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate, k_gmail_credentials_file, k_gmail_token_file
 
 app = Flask(__name__)
 
@@ -39,7 +39,7 @@ EMPTY_DATES_PATH = DATA_DIR / "no_results_dates.json"
 SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
 EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
 TOKEN_PATH = DATA_DIR / "token.pickle"
-CREDENTIALS_PATH = DATA_DIR / "credentials.json"
+CREDENTIALS_PATH = DATA_DIR / k_gmail_credentials_file
 DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 POPULATE_LOCK = threading.Lock()
 MAX_RESULTS_HARD = 2000

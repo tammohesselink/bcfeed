@@ -20,7 +20,7 @@ from util import get_data_dir
 # ------------------------------------------------------------------------ 
 
 k_gmail_credentials_file = "credentials.json"
-k_client_secret_file = "client_secret_XXXXXXX.json"
+k_gmail_token_file = "token.pickle"
 
 
 class GmailAuthError(Exception):
@@ -30,7 +30,7 @@ class GmailAuthError(Exception):
 def _clear_token() -> None:
     """Remove saved token file to force a new auth flow next run."""
     try:
-        token_path = get_data_dir() / "token.pickle"
+        token_path = get_data_dir() / k_gmail_token_file
         if token_path.exists():
             token_path.unlink()
     except Exception:
@@ -38,7 +38,7 @@ def _clear_token() -> None:
 
 def _find_credentials_file() -> Path | None:
     """
-    Look for credentials.json in writable data dir, bundled resources, or CWD.
+    Look for credentials file in writable data dir, bundled resources, or CWD.
     """
     data_dir = get_data_dir()
     candidates = [
@@ -95,7 +95,7 @@ def gmail_authenticate():
 
     creds = None
     data_dir = get_data_dir()
-    token_path = data_dir / "token.pickle"
+    token_path = data_dir / k_gmail_token_file
 
     # the file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first time

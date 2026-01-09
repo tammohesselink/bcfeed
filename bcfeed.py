@@ -17,13 +17,14 @@ from tkinter.scrolledtext import ScrolledText
 
 from embed_proxy import app as proxy_app, start_proxy_server
 from util import get_data_dir
+from gmail import k_gmail_credentials_file, k_gmail_token_file
 
 MULTITHREADING = True
 PROXY_PORT = 5050
 DATA_DIR = get_data_dir()
 SETTINGS_PATH = DATA_DIR / "gui_settings.json"
-CREDENTIALS_PATH = DATA_DIR / "credentials.json"
-TOKEN_PATH = DATA_DIR / "token.pickle"
+CREDENTIALS_PATH = DATA_DIR / k_gmail_credentials_file
+TOKEN_PATH = DATA_DIR / k_gmail_token_file
 
 
 def find_free_port(preferred: int = 5050) -> int:
