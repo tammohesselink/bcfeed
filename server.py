@@ -19,23 +19,25 @@ from flask import Flask, jsonify, request, Response, stream_with_context, send_f
 from queue import SimpleQueue
 from werkzeug.serving import make_server, WSGIRequestHandler
 
-from util import get_data_dir, parse_date
+from util import parse_date
+from paths import (
+    DATA_DIR,
+    VIEWED_PATH,
+    STARRED_PATH,
+    RELEASE_CACHE_PATH,
+    EMPTY_DATES_PATH,
+    SCRAPE_STATUS_PATH,
+    EMBED_CACHE_PATH,
+    TOKEN_PATH,
+    CREDENTIALS_PATH,
+    DASHBOARD_PATH,
+)
 from session_store import scrape_status_for_range, get_full_release_cache
 from pipeline import populate_release_cache, MaxResultsExceeded
-from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate, k_gmail_credentials_file, k_gmail_token_file
+from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
 
 app = Flask(__name__)
 
-DATA_DIR = get_data_dir()
-VIEWED_PATH = DATA_DIR / "viewed_state.json"
-STARRED_PATH = DATA_DIR / "starred_state.json"
-RELEASE_CACHE_PATH = DATA_DIR / "release_cache.json"
-EMPTY_DATES_PATH = DATA_DIR / "no_results_dates.json"
-SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
-EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
-TOKEN_PATH = DATA_DIR / k_gmail_token_file
-CREDENTIALS_PATH = DATA_DIR / k_gmail_credentials_file
-DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 POPULATE_LOCK = threading.Lock()
 MAX_RESULTS_HARD = 2000
 

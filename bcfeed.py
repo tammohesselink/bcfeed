@@ -16,15 +16,14 @@ from tkinter import Tk, Button, Frame, messagebox, filedialog, ttk
 from tkinter.scrolledtext import ScrolledText
 
 from server import app as proxy_app, start_proxy_server
-from util import get_data_dir
-from gmail import k_gmail_credentials_file, k_gmail_token_file
+from paths import get_data_dir, GMAIL_CREDENTIALS_FILE, GMAIL_TOKEN_FILE
 
 MULTITHREADING = True
 PROXY_PORT = 5050
 DATA_DIR = get_data_dir()
 SETTINGS_PATH = DATA_DIR / "gui_settings.json"
-CREDENTIALS_PATH = DATA_DIR / k_gmail_credentials_file
-TOKEN_PATH = DATA_DIR / k_gmail_token_file
+CREDENTIALS_PATH = DATA_DIR / GMAIL_CREDENTIALS_FILE
+TOKEN_PATH = DATA_DIR / GMAIL_TOKEN_FILE
 
 
 def find_free_port(preferred: int = 5050) -> int:

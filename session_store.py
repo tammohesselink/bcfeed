@@ -13,7 +13,7 @@ import datetime
 from pathlib import Path
 from typing import Dict, Iterable, List, Set, Tuple
 
-from util import get_data_dir
+from paths import get_data_dir
 
 CacheType = Dict[str, List[dict]]
 

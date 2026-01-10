@@ -15,12 +15,7 @@ from google.auth.exceptions import RefreshError
 from bs4 import BeautifulSoup
 import re
 
-from util import get_data_dir
-
-# ------------------------------------------------------------------------ 
-
-k_gmail_credentials_file = "credentials.json"
-k_gmail_token_file = "token.pickle"
+from paths import get_data_dir, GMAIL_CREDENTIALS_FILE, GMAIL_TOKEN_FILE
 
 
 class GmailAuthError(Exception):
@@ -30,7 +25,7 @@ class GmailAuthError(Exception):
 def _clear_token() -> None:
     """Remove saved token file to force a new auth flow next run."""
     try:
-        token_path = get_data_dir() / k_gmail_token_file
+        token_path = get_data_dir() / GMAIL_TOKEN_FILE
         if token_path.exists():
             token_path.unlink()
     except Exception:
@@ -42,12 +37,12 @@ def _find_credentials_file() -> Path | None:
     """
     data_dir = get_data_dir()
     candidates = [
-        data_dir / k_gmail_credentials_file,
+        data_dir / GMAIL_CREDENTIALS_FILE,
     ]
     bundle_root = getattr(sys, "_MEIPASS", None)
     if bundle_root:
-        candidates.append(Path(bundle_root) / k_gmail_credentials_file)
-    candidates.append(Path.cwd() / k_gmail_credentials_file)
+        candidates.append(Path(bundle_root) / GMAIL_CREDENTIALS_FILE)
+    candidates.append(Path.cwd() / GMAIL_CREDENTIALS_FILE)
     for path in candidates:
         if path.exists():
             return path
@@ -95,7 +90,7 @@ def gmail_authenticate():
 
     creds = None
     data_dir = get_data_dir()
-    token_path = data_dir / k_gmail_token_file
+    token_path = data_dir / GMAIL_TOKEN_FILE
 
     # the file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first time
@@ -116,7 +111,7 @@ def gmail_authenticate():
         else:
             cred_file = _find_credentials_file()
             if not cred_file:
-                raise FileNotFoundError(f"Could not find {k_gmail_credentials_file}. Reload credentials file in the settings panel to regenerate it.")
+                raise FileNotFoundError(f"Could not find {GMAIL_CREDENTIALS_FILE}. Reload credentials file in the settings panel to regenerate it.")
             flow = InstalledAppFlow.from_client_secrets_file(str(cred_file), SCOPES)
             creds = flow.run_local_server(port=0)
         # save the credentials for the next run
