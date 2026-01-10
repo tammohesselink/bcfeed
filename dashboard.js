@@ -141,6 +141,7 @@
       const current = populateLog.textContent || "";
       const next = current ? `${current}\n${msg}` : msg;
       populateLog.textContent = next;
+      populateLog.scrollTop = populateLog.scrollHeight;
     }
     async function checkServerAlive() {
       if (!healthUrl || serverDownShown) return;
@@ -1376,6 +1377,7 @@
               const current = populateLog ? populateLog.textContent : "";
               const next = current ? `${current}\n${msg}` : msg;
               if (populateLog) populateLog.textContent = next;
+              if (populateLog) populateLog.scrollTop = populateLog.scrollHeight;
               alert(msg);
               if (btn) {
                 btn.disabled = false;
@@ -1391,7 +1393,10 @@
               }
               const current = populateLog ? populateLog.textContent : "";
               const next = current ? `${current}\n${ev.data}` : ev.data;
-              if (populateLog) populateLog.textContent = next;
+              if (populateLog) {
+                populateLog.textContent = next;
+                populateLog.scrollTop = populateLog.scrollHeight;
+              }
               if (String(ev.data || "").startsWith("ERROR:")) {
                 handleError({ data: ev.data });
               }
@@ -1429,6 +1434,7 @@
         populateLog.textContent = total
           ? `Preloading embeds for ${total} releases…`
           : "Nothing to preload for this range.";
+        populateLog.scrollTop = populateLog.scrollHeight;
       }
       let success = 0;
       let failures = 0;
