@@ -1352,7 +1352,7 @@
       preloadBtn.addEventListener("click", preloadEmbedsForRange);
     }
 
-    function populateRangeFromCalendars(preloadEmbeds = false, triggerBtn = null) {
+    function populateRangeFromCalendars(triggerBtn = null) {
       checkServerAlive();
       applyCalendarFiltersFromSelection();
       let startVal = dateFilterFrom ? dateFilterFrom.value.trim() : "";
@@ -1365,19 +1365,19 @@
       const original = btn ? btn.textContent : "";
       if (btn) {
         btn.disabled = true;
-        btn.textContent = preloadEmbeds ? "Preloading…" : "Populating…";
+        btn.textContent = "Populating…";
       }
           async function runPopulate() {
             if (!window.EventSource) {
               alert("Populate requires EventSource support. Please use a modern browser.");
               if (btn) {
                 btn.disabled = false;
-                btn.textContent = original || (preloadEmbeds ? "Preload release data" : "Populate");
+                btn.textContent = original || "Populate";
               }
               return;
             }
             if (populateLog) populateLog.textContent = "";
-            const url = `${apiRoot}/populate-range-stream?start=${encodeURIComponent(startVal)}&end=${encodeURIComponent(endVal)}&preload_embeds=${preloadEmbeds ? "true" : "false"}`;
+            const url = `${apiRoot}/populate-range-stream?start=${encodeURIComponent(startVal)}&end=${encodeURIComponent(endVal)}`;
             const es = new EventSource(url);
             const handleError = (ev) => {
               es.close();
@@ -1422,7 +1422,7 @@
           }
           runPopulate();
     }
-    if (populateBtn) populateBtn.addEventListener("click", () => populateRangeFromCalendars(false, populateBtn));
+    if (populateBtn) populateBtn.addEventListener("click", () => populateRangeFromCalendars(populateBtn));
 
     async function preloadEmbedsForRange() {
       if (!embedProxyUrl) {
