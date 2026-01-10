@@ -892,26 +892,26 @@
     (async () => {
     let releases = [];
     const releaseMap = new Map();
-    let EMBED_PROXY_URL = "http://localhost:5050/embed-meta";
-    let API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
-    const API_HOST = (() => {
+    let embedProxyUrl = "http://localhost:5050/embed-meta";
+    let apiRoot = embedProxyUrl ? embedProxyUrl.replace(/\/embed-meta.*$/, "") : null;
+    const apiHost = (() => {
       try {
-        return API_ROOT ? new URL(API_ROOT).hostname : null;
+        return apiRoot ? new URL(apiRoot).hostname : null;
       } catch {
         return null;
       }
     })();
-    let HEALTH_URL = API_ROOT ? `${API_ROOT}/health` : null;
-    let CLEAR_CREDS_URL = API_ROOT ? `${API_ROOT}/clear-credentials` : null;
-    let LOAD_CREDS_URL = API_ROOT ? `${API_ROOT}/load-credentials` : null;
-    let STARRED_API = API_ROOT ? `${API_ROOT}/starred-state` : null;
-    let CLEAR_STATUS_ON_LOAD = false;
-    let SHOW_DEV_SETTINGS = false;
+    let healthUrl = apiRoot ? `${apiRoot}/health` : null;
+    let clearCredsUrl = apiRoot ? `${apiRoot}/clear-credentials` : null;
+    let loadCredsUrl = apiRoot ? `${apiRoot}/load-credentials` : null;
+    let starredApi = apiRoot ? `${apiRoot}/starred-state` : null;
+    let clearStatusOnLoad = false;
+    let showDevSettings = false;
     const serverDownBackdrop = document.getElementById("server-down-backdrop");
     const maxResultsBackdrop = document.getElementById("max-results-backdrop");
     let serverDownShown = false;
     let maxNoticeShown = false;
-    let DEFAULT_THEME = "light";
+    let defaultTheme = "light";
     const populateLog = document.getElementById("populate-log");
     const clearCredsBtn = document.getElementById("clear-creds-btn");
     const loadCredsBtn = document.getElementById("load-creds-btn");
@@ -924,30 +924,30 @@
       return false;
     };
     const config = await (window.BC_CONFIG_PROMISE || Promise.resolve({}));
-    const proxyCandidate = (config && config.embed_proxy_url) ? String(config.embed_proxy_url) : EMBED_PROXY_URL;
+    const proxyCandidate = (config && config.embed_proxy_url) ? String(config.embed_proxy_url) : embedProxyUrl;
     const normalizedProxy = proxyCandidate ? proxyCandidate.replace(/\/+$/, "") : "";
-    EMBED_PROXY_URL = normalizedProxy || null;
-    API_ROOT = EMBED_PROXY_URL ? EMBED_PROXY_URL.replace(/\/embed-meta.*$/, "") : null;
-    HEALTH_URL = API_ROOT ? `${API_ROOT}/health` : null;
-    CLEAR_CREDS_URL = API_ROOT ? `${API_ROOT}/clear-credentials` : null;
-    LOAD_CREDS_URL = API_ROOT ? `${API_ROOT}/load-credentials` : null;
-    STARRED_API = API_ROOT ? `${API_ROOT}/starred-state` : null;
-    if (config && config.default_theme) DEFAULT_THEME = config.default_theme;
+    embedProxyUrl = normalizedProxy || null;
+    apiRoot = embedProxyUrl ? embedProxyUrl.replace(/\/embed-meta.*$/, "") : null;
+    healthUrl = apiRoot ? `${apiRoot}/health` : null;
+    clearCredsUrl = apiRoot ? `${apiRoot}/clear-credentials` : null;
+    loadCredsUrl = apiRoot ? `${apiRoot}/load-credentials` : null;
+    starredApi = apiRoot ? `${apiRoot}/starred-state` : null;
+    if (config && config.default_theme) defaultTheme = config.default_theme;
     if (config && typeof config.clear_status_on_load !== "undefined") {
-      CLEAR_STATUS_ON_LOAD = asBool(config.clear_status_on_load);
+      clearStatusOnLoad = asBool(config.clear_status_on_load);
     }
     if (config && typeof config.show_dev_settings !== "undefined") {
-      SHOW_DEV_SETTINGS = asBool(config.show_dev_settings);
+      showDevSettings = asBool(config.show_dev_settings);
     }
     const loadingState = document.getElementById("loading-state");
     const errorState = document.getElementById("error-state");
     function applyDevSettingsVisibility() {
       const devEls = document.querySelectorAll(".dev-setting");
       devEls.forEach((el) => {
-        el.style.display = SHOW_DEV_SETTINGS ? "" : "none";
+        el.style.display = showDevSettings ? "" : "none";
       });
     }
-    if (populateLog && CLEAR_STATUS_ON_LOAD) {
+    if (populateLog && clearStatusOnLoad) {
       populateLog.textContent = "Select a date range to display.";
     }
     applyDevSettingsVisibility();
@@ -976,8 +976,8 @@
       if (wireframe) wireframe.style.display = "none";
     }
     async function loadViewedSet() {
-      if (!API_ROOT) throw new Error("Proxy not configured");
-      const resp = await fetch(`${API_ROOT}/viewed-state`);
+      if (!apiRoot) throw new Error("Proxy not configured");
+      const resp = await fetch(`${apiRoot}/viewed-state`);
       if (!resp.ok) throw new Error(`Viewed state unavailable (HTTP ${resp.status})`);
       const data = await resp.json();
       if (data && Array.isArray(data.viewed)) {
@@ -986,8 +986,8 @@
       return new Set();
     }
     async function loadStarredSet() {
-      if (!STARRED_API) throw new Error("Proxy not configured");
-      const resp = await fetch(STARRED_API);
+      if (!starredApi) throw new Error("Proxy not configured");
+      const resp = await fetch(starredApi);
       if (!resp.ok) throw new Error(`Starred state unavailable (HTTP ${resp.status})`);
       const data = await resp.json();
       if (data && Array.isArray(data.starred)) {
@@ -996,8 +996,8 @@
       return new Set();
     }
     async function fetchReleases() {
-      if (!API_ROOT) throw new Error("Proxy not configured");
-      const resp = await fetch(`${API_ROOT}/releases`, { cache: "no-store" });
+      if (!apiRoot) throw new Error("Proxy not configured");
+      const resp = await fetch(`${apiRoot}/releases`, { cache: "no-store" });
       if (!resp.ok) throw new Error(`Failed to load releases (HTTP ${resp.status})`);
       const data = await resp.json();
       const list = Array.isArray(data.releases) ? data.releases : [];
@@ -1029,12 +1029,12 @@
       populateLog.textContent = next;
     }
     async function checkServerAlive() {
-      if (!HEALTH_URL || serverDownShown) return;
+      if (!healthUrl || serverDownShown) return;
       const online = typeof navigator === "undefined" ? true : navigator.onLine;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 4000);
       try {
-        const resp = await fetch(HEALTH_URL, {
+        const resp = await fetch(healthUrl, {
           method: "GET",
           cache: "no-store",
           signal: controller.signal,
@@ -1047,7 +1047,7 @@
           // Ignore offline blips; try again on next interval.
           return;
         }
-        const isLocalHost = API_HOST && ["localhost", "127.0.0.1", location.hostname].includes(API_HOST);
+        const isLocalHost = apiHost && ["localhost", "127.0.0.1", location.hostname].includes(apiHost);
         if (!isLocalHost) {
           // Only count failures for remote hosts if the response was non-OK.
           return;
@@ -1056,9 +1056,9 @@
       }
     }
     async function persistViewedRemote(url, isRead) {
-      if (!API_ROOT || !url) return;
+      if (!apiRoot || !url) return;
       try {
-        await fetch(`${API_ROOT}/viewed-state`, {
+        await fetch(`${apiRoot}/viewed-state`, {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({url, read: isRead}),
@@ -1068,9 +1068,9 @@
       }
     }
     async function persistStarredRemote(url, starred) {
-      if (!STARRED_API || !url) return;
+      if (!starredApi || !url) return;
       try {
-        await fetch(STARRED_API, {
+        await fetch(starredApi, {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({url, starred}),
@@ -1157,8 +1157,8 @@
       localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
     }
     const savedThemeValue = localStorage.getItem(THEME_KEY);
-    let savedTheme = savedThemeValue || DEFAULT_THEME || "light";
-    if (!SHOW_DEV_SETTINGS && !savedThemeValue) {
+    let savedTheme = savedThemeValue || defaultTheme || "light";
+    if (!showDevSettings && !savedThemeValue) {
       savedTheme = "dark";
     }
     applyTheme(savedTheme);
@@ -1169,19 +1169,19 @@
         applyTheme(next);
       });
     }
-    if (!SHOW_DEV_SETTINGS) {
+    if (!showDevSettings) {
       state.showCachedBadges = true;
       try { localStorage.setItem(SHOW_CACHED_KEY, "true"); } catch (e) {}
       const cachedToggle = document.getElementById("show-cached-toggle");
       if (cachedToggle) cachedToggle.checked = true;
     }
-    if (clearCredsBtn && CLEAR_CREDS_URL) {
+    if (clearCredsBtn && clearCredsUrl) {
       clearCredsBtn.addEventListener("click", async () => {
         clearCredsBtn.disabled = true;
         const original = clearCredsBtn.textContent;
         clearCredsBtn.textContent = "Clearing…";
         try {
-          const resp = await fetch(CLEAR_CREDS_URL, { method: "POST" });
+          const resp = await fetch(clearCredsUrl, { method: "POST" });
           const data = await resp.json().catch(() => ({}));
           const joinedLogs = Array.isArray(data.logs) ? data.logs.join("\n") : "";
           if (!resp.ok) {
@@ -1203,7 +1203,7 @@
         }
       });
     }
-    if (loadCredsBtn && loadCredsFile && LOAD_CREDS_URL) {
+    if (loadCredsBtn && loadCredsFile && loadCredsUrl) {
       const doLoadCreds = async () => {
         const file = loadCredsFile.files && loadCredsFile.files[0];
         if (!file) return;
@@ -1213,7 +1213,7 @@
         try {
           const form = new FormData();
           form.append("file", file, file.name);
-          const resp = await fetch(LOAD_CREDS_URL, {
+          const resp = await fetch(loadCredsUrl, {
             method: "POST",
             body: form,
           });
@@ -1280,7 +1280,7 @@
       if (release.embed_url && release.description) {
         return release.embed_url;
       }
-      if (!release.url || !EMBED_PROXY_URL) return null;
+      if (!release.url || !embedProxyUrl) return null;
 
       const applyEmbedData = (data) => {
         if (!data) return null;
@@ -1297,7 +1297,7 @@
       };
 
       try {
-        const response = await fetch(`${EMBED_PROXY_URL}?url=${encodeURIComponent(release.url)}`);
+        const response = await fetch(`${embedProxyUrl}?url=${encodeURIComponent(release.url)}`);
         if (!response.ok) throw new Error(`Proxy fetch failed: ${response.status}`);
         const data = await response.json();
         return applyEmbedData(data);
@@ -1837,7 +1837,7 @@
     if (settingsClose) settingsClose.addEventListener("click", resetLoadCredsBtn);
     const headerRangeLabel = document.getElementById("header-range-label");
     const headerCountLabel = document.getElementById("header-count-label");
-    const SCRAPE_STATUS_URL = API_ROOT ? `${API_ROOT}/scrape-status` : null;
+    const scrapeStatusUrl = apiRoot ? `${apiRoot}/scrape-status` : null;
     function normalizeDateString(value) {
       if (!value) return null;
       const match = String(value).match(/(\d{4})[-/](\d{2})[-/](\d{2})/);
@@ -1861,9 +1861,9 @@
       const clearViewed = true;
       const clearStarred = true;
       let hadError = false;
-      if (API_ROOT) {
+      if (apiRoot) {
         try {
-          const resp = await fetch(`${API_ROOT}/reset-caches`, {
+          const resp = await fetch(`${apiRoot}/reset-caches`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({clear_cache: clearCache, clear_viewed: clearViewed, clear_starred: clearStarred}),
@@ -2226,7 +2226,7 @@
       let endVal = dateFilterTo ? dateFilterTo.value.trim() : "";
       if (startVal && !endVal) endVal = startVal;
       if (endVal && !startVal) startVal = endVal;
-      if (!API_ROOT || !startVal || !endVal) return;
+      if (!apiRoot || !startVal || !endVal) return;
       if (populateLog) populateLog.style.color = "";
       const btn = triggerBtn || populateBtn;
       const original = btn ? btn.textContent : "";
@@ -2244,7 +2244,7 @@
               return;
             }
             if (populateLog) populateLog.textContent = "";
-            const url = `${API_ROOT}/populate-range-stream?start=${encodeURIComponent(startVal)}&end=${encodeURIComponent(endVal)}&preload_embeds=${preloadEmbeds ? "true" : "false"}`;
+            const url = `${apiRoot}/populate-range-stream?start=${encodeURIComponent(startVal)}&end=${encodeURIComponent(endVal)}&preload_embeds=${preloadEmbeds ? "true" : "false"}`;
             const es = new EventSource(url);
             const handleError = (ev) => {
               es.close();
@@ -2288,7 +2288,7 @@
     if (populateBtn) populateBtn.addEventListener("click", () => populateRangeFromCalendars(false, populateBtn));
 
     async function preloadEmbedsForRange() {
-      if (!EMBED_PROXY_URL) {
+      if (!embedProxyUrl) {
         alert("Embed proxy not configured.");
         return;
       }
@@ -2368,14 +2368,14 @@
     }
 
     async function fetchScrapeStatus() {
-      if (!SCRAPE_STATUS_URL) return;
+      if (!scrapeStatusUrl) return;
       try {
         const params = new URLSearchParams();
         const firstDate = releases[0]?.date;
         const lastDate = releases[releases.length - 1]?.date;
         if (firstDate) params.set("start", formatDate(firstDate));
         if (lastDate) params.set("end", formatDate(lastDate));
-        const resp = await fetch(`${SCRAPE_STATUS_URL}?${params.toString()}`);
+        const resp = await fetch(`${scrapeStatusUrl}?${params.toString()}`);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         scrapeStatus.scraped = new Set(data.scraped || []);
