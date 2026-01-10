@@ -536,7 +536,7 @@
         const rangeReleases = releases.filter(r => withinSelectedRange(r) && r.url);
         const hasPreloadableReleases = rangeReleases.some(r => !(r.embed_url && r.description));
         if (allPopulated && hasPreloadableReleases) {
-          msg = `\n\n<span style="color:#64a8ff;">For faster browsing, you can click 'Preload release data' to pre-fetch Bandcamp players for releases in this range.</span>`;
+          msg = `\n\n<span style="color:#64a8ff;">For faster browsing, "Star" the releases you're interested in to pre-load their Bandcamp player widgets, then filter using the "Starred" button at the top right.\n\nYou can also click 'Preload release data' to pre-fetch Bandcamp players for all releases in this date range.</span>`;
           populateLog.innerHTML += msg.replace(/\n/g, "<br>");
         }
       }
