@@ -15,7 +15,7 @@ from pathlib import Path
 from tkinter import Tk, Button, Frame, messagebox, filedialog, ttk
 from tkinter.scrolledtext import ScrolledText
 
-from server import app as proxy_app, start_proxy_server
+from server import app as proxy_app, start_server
 from paths import get_data_dir, GMAIL_CREDENTIALS_FILE, GMAIL_TOKEN_FILE
 
 MULTITHREADING = True
@@ -35,7 +35,6 @@ def find_free_port(preferred: int = 5050) -> int:
         except OSError:
             s.bind(("", 0))
             return s.getsockname()[1]
-MAX_RESULTS_HARD = 2000
 OUTPUT_DIR = Path("output")
 
 
@@ -89,7 +88,7 @@ def save_settings(settings: dict):
 
 def start_proxy_thread():
     port = find_free_port(PROXY_PORT)
-    server, thread = start_proxy_server(port)
+    server, thread = start_server(port)
     return server, thread, port
 
 def launch_from_cache(proxy_port: int, preload_embeds: bool, *, log=print, launch_browser: bool = True, clear_status_on_load: bool = False):

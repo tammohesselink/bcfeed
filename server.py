@@ -39,7 +39,7 @@ from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
 app = Flask(__name__)
 
 POPULATE_LOCK = threading.Lock()
-MAX_RESULTS_HARD = 2000
+GMAIL_MAX_RESULTS_HARD = 2000
 
 
 def _corsify(response):
@@ -102,7 +102,7 @@ def _save_embed_cache(cache: dict) -> None:
     tmp.replace(EMBED_CACHE_PATH)
 
 
-def _persist_embed_meta(url: str, *, release_id=None, is_track=None, embed_url=None, description=None) -> None:
+def _save_embed_metadata(url: str, *, release_id=None, is_track=None, embed_url=None, description=None) -> None:
     if not url:
         return
     cache = _load_embed_cache()
@@ -125,7 +125,7 @@ def _persist_embed_meta(url: str, *, release_id=None, is_track=None, embed_url=N
     _save_embed_cache(cache)
 
 
-def _extract_description(html_text: str) -> str | None:
+def extract_bandcamp_description(html_text: str) -> str | None:
     if not html_text:
         return None
     try:
@@ -174,8 +174,8 @@ class QuietHealthHandler(WSGIRequestHandler):
         super().log_request(code, size)
 
 
-def start_proxy_server(port: int = 5050):
-    """Start the proxy in a background thread and return (server, thread)."""
+def start_server(port: int = 5050):
+    """Start the server in a background thread and return (server, thread)."""
     server = make_server("0.0.0.0", port, app, threaded=True, request_handler=QuietHealthHandler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -311,7 +311,7 @@ def embed_meta():
 
     html_text = resp.text
     data = extract_bc_meta(html_text)
-    description = _extract_description(html_text)
+    description = extract_bandcamp_description(html_text)
     if not data:
         return _corsify(jsonify({"error": "Unable to find bc-page-properties meta"})), 404
 
@@ -320,7 +320,7 @@ def embed_meta():
     embed_url = build_embed_url(item_id, is_track)
 
     # Persist embed metadata for future sessions.
-    _persist_embed_meta(release_url, release_id=item_id, is_track=is_track, embed_url=embed_url, description=description)
+    _save_embed_metadata(release_url, release_id=item_id, is_track=is_track, embed_url=embed_url, description=description)
 
     response = jsonify(
         {"release_id": item_id, "is_track": is_track, "embed_url": embed_url, "description": description}
@@ -440,7 +440,7 @@ def populate_range_stream():
         return _corsify(app.response_class(status=204))
     start_arg = request.args.get("start") or request.args.get("from")
     end_arg = request.args.get("end") or start_arg
-    max_results = int(request.args.get("max_results") or MAX_RESULTS_HARD)
+    max_results = int(request.args.get("max_results") or GMAIL_MAX_RESULTS_HARD)
     def error_stream(msg: str):
         def gen():
             yield f"event: error\ndata: {msg}\n\n"
