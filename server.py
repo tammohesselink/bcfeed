@@ -19,7 +19,7 @@ from flask import Flask, jsonify, request, Response, stream_with_context, send_f
 from queue import SimpleQueue
 from werkzeug.serving import make_server, WSGIRequestHandler
 
-from util import get_data_dir
+from util import get_data_dir, parse_date
 from session_store import scrape_status_for_range, get_full_release_cache
 from pipeline import populate_release_cache, MaxResultsExceeded
 from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate, k_gmail_credentials_file, k_gmail_token_file
@@ -38,16 +38,6 @@ CREDENTIALS_PATH = DATA_DIR / k_gmail_credentials_file
 DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 POPULATE_LOCK = threading.Lock()
 MAX_RESULTS_HARD = 2000
-
-
-def _parse_date(val: str) -> datetime.date | None:
-    try:
-        return datetime.datetime.strptime(val, "%Y-%m-%d").date()
-    except Exception:
-        try:
-            return datetime.datetime.strptime(val, "%Y/%m/%d").date()
-        except Exception:
-            return None
 
 
 def _corsify(response):
@@ -344,8 +334,8 @@ def scrape_status():
     end_arg = request.args.get("end")
     today = datetime.date.today()
     default_start = today - datetime.timedelta(days=60)
-    start = _parse_date(start_arg) if start_arg else default_start
-    end = _parse_date(end_arg) if end_arg else today
+    start = parse_date(start_arg, allow_none=True) if start_arg else default_start
+    end = parse_date(end_arg, allow_none=True) if end_arg else today
     if not start or not end or start > end:
         return _corsify(jsonify({"error": "Invalid start/end date"})), 400
 
@@ -462,8 +452,8 @@ def populate_range_stream():
 
     if not start_arg or not end_arg:
         return error_stream("Missing start/end")
-    start = _parse_date(start_arg)
-    end = _parse_date(end_arg)
+    start = parse_date(start_arg, allow_none=True)
+    end = parse_date(end_arg, allow_none=True)
     if not start or not end or start > end:
         return error_stream("Invalid start/end")
     if not _find_credentials_file():
@@ -483,8 +473,8 @@ def populate_range_stream():
         def worker():
             try:
                 populate_release_cache(
-                    start.strftime("%Y/%m/%d"),
-                    end.strftime("%Y/%m/%d"),
+                    start.strftime("%Y-%m-%d"),
+                    end.strftime("%Y-%m-%d"),
                     max_results,
                     batch_size=20,
                     log=log,

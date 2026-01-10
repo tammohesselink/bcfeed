@@ -122,7 +122,7 @@ def main():
         # clamp to today
         if new_date > today:
             new_date = today
-        var.set(new_date.strftime("%Y/%m/%d"))
+        var.set(new_date.strftime("%Y-%m-%d"))
 
     proxy_thread = None
     proxy_server = None

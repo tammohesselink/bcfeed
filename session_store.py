@@ -129,7 +129,7 @@ def _save_empty_dates(dates: Set[datetime.date]) -> None:
 
 
 def _to_date(val) -> datetime.date | None:
-    """Normalize string or date into a date object (YYYY-MM-DD or YYYY/MM/DD)."""
+    """Normalize string or date into a date object (YYYY-MM-DD; legacy YYYY/MM/DD)."""
     if val is None:
         return None
     if isinstance(val, datetime.date):

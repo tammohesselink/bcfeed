@@ -2,7 +2,7 @@ import datetime
 from typing import Dict, Iterable, Tuple
 
 from gmail import gmail_authenticate, search_messages, get_messages, scrape_info_from_email
-from util import construct_release
+from util import construct_release, parse_date
 from session_store import (
     _dedupe_by_url,
     cached_releases_for_range,
@@ -20,16 +20,6 @@ class MaxResultsExceeded(Exception):
         self.found = found
 
 
-def _parse_date(date_text: str) -> datetime.date:
-    """Parse a YYYY/MM/DD or YYYY-MM-DD string into a date, raising on failure."""
-    for fmt in ("%Y/%m/%d", "%Y-%m-%d"):
-        try:
-            return datetime.datetime.strptime(date_text, fmt).date()
-        except ValueError:
-            continue
-    raise ValueError("Incorrect date format, should be YYYY/MM/DD or YYYY-MM-DD")
-
-
 def _dedupe_by_date(items: Iterable[dict], *, keep: str = "last") -> list[dict]:
     """Deduplicate by URL, keeping the first/last entry based on release date."""
     if keep not in {"first", "last"}:
@@ -43,7 +33,7 @@ def _dedupe_by_date(items: Iterable[dict], *, keep: str = "last") -> list[dict]:
         if not url:
             without_url.append(item)
             continue
-        date = _parse_date(item.get("date"))
+        date = parse_date(item.get("date"))
         if url not in kept:
             kept[url] = (date, item)
             continue
@@ -70,7 +60,7 @@ def construct_release_list(emails: Dict, *, log=print) -> list[dict]:
         html_text = email
         if isinstance(email, dict):
             html_text = email.get("html")
-            date = _parse_date(email.get("date")).strftime("%Y/%m/%d")
+            date = parse_date(email.get("date")).strftime("%Y-%m-%d")
 
         img_url, release_url, is_track, artist_name, release_title, page_name = scrape_info_from_email(
             html_text, email.get("subject")
@@ -102,8 +92,8 @@ def populate_release_cache(after_date: str, before_date: str, max_results: int, 
     Use cached Gmail-scraped release metadata for previously seen dates.
     Only hit Gmail for dates in the requested range that have no cache entry.
     """
-    start_date = _parse_date(after_date)
-    end_date = _parse_date(before_date)
+    start_date = parse_date(after_date)
+    end_date = parse_date(before_date)
     if start_date > end_date:
         raise ValueError("Start date must be on or before end date")
 
@@ -125,8 +115,8 @@ def populate_release_cache(after_date: str, before_date: str, max_results: int, 
         raise
 
     for start_missing, end_missing in missing_ranges:
-        query_after = start_missing.strftime("%Y/%m/%d")
-        query_before = (end_missing+datetime.timedelta(days=1)).strftime("%Y/%m/%d")
+        query_after = start_missing.strftime("%Y-%m-%d")
+        query_before = (end_missing+datetime.timedelta(days=1)).strftime("%Y-%m-%d")
         search_query = f"from:noreply@bandcamp.com subject:'New release from' before:{query_before} after:{query_after}"
         log("")
         log(f"Querying Gmail for {query_after} to {query_before}...")
