@@ -1,10 +1,5 @@
 """
-bcfeed proxy to fetch Bandcamp release metadata and embed URLs to avoid CORS in the browser.
-
-Run locally:
-    python server.py
-
-Then configure the dashboard to use the proxy, e.g. embed_proxy_url="http://localhost:5000/embed-meta".
+bcfeed local server that powers the dashboard, cache population, and embed metadata proxying.
 """
 
 from __future__ import annotations
@@ -38,11 +33,65 @@ RELEASE_CACHE_PATH = DATA_DIR / "release_cache.json"
 EMPTY_DATES_PATH = DATA_DIR / "no_results_dates.json"
 SCRAPE_STATUS_PATH = DATA_DIR / "scrape_status.json"
 EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
-TOKEN_PATH = DATA_DIR / "token.pickle"
+TOKEN_PATH = DATA_DIR / k_gmail_token_file
 CREDENTIALS_PATH = DATA_DIR / k_gmail_credentials_file
 DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 POPULATE_LOCK = threading.Lock()
 MAX_RESULTS_HARD = 2000
+
+
+def _parse_date(val: str) -> datetime.date | None:
+    try:
+        return datetime.datetime.strptime(val, "%Y-%m-%d").date()
+    except Exception:
+        try:
+            return datetime.datetime.strptime(val, "%Y/%m/%d").date()
+        except Exception:
+            return None
+
+
+def _corsify(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    return response
+
+
+def _load_set(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return set(data) if isinstance(data, list) else set()
+    except Exception:
+        return set()
+
+
+def _save_set(path: Path, items: set[str]) -> None:
+    tmp = path.with_suffix(".tmp")
+    tmp.parent.mkdir(parents=True, exist_ok=True)
+    tmp.write_text(json.dumps(sorted(items)), encoding="utf-8")
+    try:
+        tmp.replace(path)
+    except FileNotFoundError:
+        # If the temp file vanished between write and replace, fall back to writing directly.
+        path.write_text(json.dumps(sorted(items)), encoding="utf-8")
+
+
+def _load_viewed() -> set[str]:
+    return _load_set(VIEWED_PATH)
+
+
+def _save_viewed(items: set[str]) -> None:
+    _save_set(VIEWED_PATH, items)
+
+
+def _load_starred() -> set[str]:
+    return _load_set(STARRED_PATH)
+
+
+def _save_starred(items: set[str]) -> None:
+    _save_set(STARRED_PATH, items)
 
 
 def _load_embed_cache() -> dict:
@@ -84,47 +133,6 @@ def _persist_embed_meta(url: str, *, release_id=None, is_track=None, embed_url=N
     _save_embed_cache(cache)
 
 
-def _load_viewed() -> set[str]:
-    if not VIEWED_PATH.exists():
-        return set()
-    try:
-        data = json.loads(VIEWED_PATH.read_text(encoding="utf-8"))
-        return set(data) if isinstance(data, list) else set()
-    except Exception:
-        return set()
-
-
-def _save_viewed(items: set[str]) -> None:
-    tmp = VIEWED_PATH.with_suffix(".tmp")
-    tmp.parent.mkdir(parents=True, exist_ok=True)
-    tmp.write_text(json.dumps(sorted(items)), encoding="utf-8")
-    try:
-        tmp.replace(VIEWED_PATH)
-    except FileNotFoundError:
-        # If the temp file vanished between write and replace, fall back to writing directly.
-        VIEWED_PATH.write_text(json.dumps(sorted(items)), encoding="utf-8")
-
-
-def _load_starred() -> set[str]:
-    if not STARRED_PATH.exists():
-        return set()
-    try:
-        data = json.loads(STARRED_PATH.read_text(encoding="utf-8"))
-        return set(data) if isinstance(data, list) else set()
-    except Exception:
-        return set()
-
-
-def _save_starred(items: set[str]) -> None:
-    tmp = STARRED_PATH.with_suffix(".tmp")
-    tmp.parent.mkdir(parents=True, exist_ok=True)
-    tmp.write_text(json.dumps(sorted(items)), encoding="utf-8")
-    try:
-        tmp.replace(STARRED_PATH)
-    except FileNotFoundError:
-        STARRED_PATH.write_text(json.dumps(sorted(items)), encoding="utf-8")
-
-
 def _extract_description(html_text: str) -> str | None:
     if not html_text:
         return None
@@ -158,35 +166,6 @@ def _extract_description(html_text: str) -> str | None:
     except Exception:
         return None
     return None
-
-
-def _parse_date(val: str) -> datetime.date | None:
-    try:
-        return datetime.datetime.strptime(val, "%Y-%m-%d").date()
-    except Exception:
-        try:
-            return datetime.datetime.strptime(val, "%Y/%m/%d").date()
-        except Exception:
-            return None
-
-
-def _corsify(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-    return response
-
-
-def _as_bool(value) -> bool:
-    if isinstance(value, bool):
-        return value
-    if value is None:
-        return False
-    if isinstance(value, (int, float)):
-        return bool(value)
-    if isinstance(value, str):
-        return value.strip().lower() in ("1", "true", "yes", "y", "on")
-    return False
 
 
 @app.route("/health", methods=["GET", "OPTIONS"])
@@ -470,7 +449,6 @@ def populate_range_stream():
     start_arg = request.args.get("start") or request.args.get("from")
     end_arg = request.args.get("end") or start_arg
     max_results = int(request.args.get("max_results") or MAX_RESULTS_HARD)
-    preload_embeds = _as_bool(request.args.get("preload_embeds"))
     def error_stream(msg: str):
         def gen():
             yield f"event: error\ndata: {msg}\n\n"
@@ -495,8 +473,6 @@ def populate_range_stream():
 
     if not POPULATE_LOCK.acquire(blocking=False):
         return error_stream("Another populate is already running")
-
-    embed_proxy_url = request.host_url.rstrip("/") + "/embed-meta"
 
     def event_stream():
         q: SimpleQueue[str | None] = SimpleQueue()
