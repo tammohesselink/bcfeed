@@ -934,6 +934,9 @@
     const showCachedToggle = document.getElementById("show-cached-toggle");
     const scrapePanel = document.getElementById("scrape-wireframe");
     const scrapePanelBody = document.getElementById("scrape-wireframe-body");
+    const sidebar = document.querySelector("aside");
+    const calendarCard = document.getElementById("calendar-card");
+    const backToTopBtn = document.getElementById("back-to-top");
     const calendarRange = document.getElementById("calendar-range");
     const calendarRangeMonth = document.getElementById("calendar-range-month");
     const populateBtn = document.getElementById("populate-range");
@@ -1533,6 +1536,42 @@
       scrapePanel.addEventListener("toggle", () => {
         scrapePanelBody.hidden = !scrapePanel.open;
       });
+    }
+
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener("click", () => {
+        if (sidebar && typeof sidebar.scrollTo === "function") {
+          sidebar.scrollTo({ top: 0, behavior: "auto" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "auto" });
+        }
+      });
+    }
+
+    if (sidebar && calendarCard && backToTopBtn) {
+      const toggleBackToTop = (visible) => {
+        backToTopBtn.classList.toggle("is-visible", !visible);
+      };
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => toggleBackToTop(entry.isIntersecting));
+          },
+          { root: sidebar, threshold: 0.2 }
+        );
+        observer.observe(calendarCard);
+      } else {
+        const updateBackToTop = () => {
+          const sidebarRect = sidebar.getBoundingClientRect();
+          const cardRect = calendarCard.getBoundingClientRect();
+          const visible = cardRect.bottom > sidebarRect.top && cardRect.top < sidebarRect.bottom;
+          toggleBackToTop(visible);
+        };
+        sidebar.addEventListener("scroll", updateBackToTop);
+        window.addEventListener("resize", updateBackToTop);
+        updateBackToTop();
+      }
     }
 
     function onDateFilterChange() {
