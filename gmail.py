@@ -205,8 +205,7 @@ def get_messages(service, ids, format, batch_size, log=print):
 
 # ------------------------------------------------------------------------ 
 # Scrape Bandcamp URL and light metadata from one email
-def scrape_info_from_email(email_text, date_header=None, subject=None):
-    date = date_header
+def scrape_info_from_email(email_text, subject=None):
     img_url = None
     release_url = None
     is_track = None
@@ -222,7 +221,7 @@ def scrape_info_from_email(email_text, date_header=None, subject=None):
 
     # Only accept messages whose subject starts with the expected release prefix.
     if subject and not subject.lower().startswith("new release from"):
-        return None, None, None, None, None, None, None
+        return None, None, None, None, None, None
     
     # release url
     soup = BeautifulSoup(email_text, "html.parser") if email_text else None
@@ -239,7 +238,7 @@ def scrape_info_from_email(email_text, date_header=None, subject=None):
     release_url = _find_bandcamp_release_url()
 
     if release_url == None:
-        return None, None, None, None, None, None, None
+        return None, None, None, None, None, None
 
     # track (vs release) flag
     is_track = "bandcamp.com/track" in release_url
@@ -283,4 +282,4 @@ def scrape_info_from_email(email_text, date_header=None, subject=None):
                     artist_name = artist_name or m.group(1).strip()
 
 
-    return date, img_url, release_url, is_track, artist_name, release_title, page_name
+    return img_url, release_url, is_track, artist_name, release_title, page_name

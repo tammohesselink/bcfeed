@@ -4,6 +4,7 @@ from typing import Dict, Iterable, Tuple
 from gmail import gmail_authenticate, search_messages, get_messages, scrape_info_from_email
 from util import construct_release
 from session_store import (
+    _dedupe_by_url,
     cached_releases_for_range,
     collapse_date_ranges,
     persist_empty_date_range,
@@ -19,28 +20,60 @@ class MaxResultsExceeded(Exception):
         self.found = found
 
 
-def parse_date(date_text: str) -> datetime.date:
-    """Parse a YYYY/MM/DD string into a date, raising on failure."""
-    try:
-        return datetime.datetime.strptime(date_text, "%Y/%m/%d").date()
-    except ValueError:
-        raise ValueError("Incorrect data format, should be YYYY/MM/DD")
+def _parse_date(date_text: str) -> datetime.date:
+    """Parse a YYYY/MM/DD or YYYY-MM-DD string into a date, raising on failure."""
+    for fmt in ("%Y/%m/%d", "%Y-%m-%d"):
+        try:
+            return datetime.datetime.strptime(date_text, fmt).date()
+        except ValueError:
+            continue
+    raise ValueError("Incorrect date format, should be YYYY/MM/DD or YYYY-MM-DD")
+
+
+def _dedupe_by_date(items: Iterable[dict], *, keep: str = "last") -> list[dict]:
+    """Deduplicate by URL, keeping the first/last entry based on release date."""
+    if keep not in {"first", "last"}:
+        raise ValueError("keep must be 'first' or 'last'")
+
+    kept: dict[str, tuple[datetime.date, dict]] = {}
+    without_url: list[dict] = []
+
+    for item in items:
+        url = item.get("url")
+        if not url:
+            without_url.append(item)
+            continue
+        date = _parse_date(item.get("date"))
+        if url not in kept:
+            kept[url] = (date, item)
+            continue
+        existing_date, _ = kept[url]
+        if keep == "last":
+            replace = date >= existing_date
+        else:
+            replace = date <= existing_date
+        if replace:
+            kept[url] = (date, item)
+
+    deduped = [item for _, item in kept.values()]
+    deduped.extend(without_url)
+    return deduped
 
 
 def construct_release_list(emails: Dict, *, log=print) -> list[dict]:
-    """Parse Gmail messages into release dicts."""
+    """Parse Gmail messages into release lists."""
     if log:
         log("Parsing messages...")
     releases_unsifted = []
     for _, email in emails.items():
-        date_header = None
+        date = None
         html_text = email
         if isinstance(email, dict):
             html_text = email.get("html")
-            date_header = email.get("date")
+            date = _parse_date(email.get("date")).strftime("%Y/%m/%d")
 
-        date, img_url, release_url, is_track, artist_name, release_title, page_name = scrape_info_from_email(
-            html_text, date_header, email.get("subject")
+        img_url, release_url, is_track, artist_name, release_title, page_name = scrape_info_from_email(
+            html_text, email.get("subject")
         )
 
         if not all(x is None for x in [date, img_url, release_url, is_track, artist_name, release_title, page_name]):
@@ -59,33 +92,18 @@ def construct_release_list(emails: Dict, *, log=print) -> list[dict]:
     # Sift releases with identical urls
     if log:
         log("Checking for releases with identical URLS...")
-    releases = []
-    release_urls = []
-    for release in releases_unsifted:
-        if release["url"] not in release_urls:
-            release_urls.append(release["url"])
-            releases.append(
-                construct_release(
-                    is_track=release["is_track"],
-                    date=release["date"],
-                    img_url=release["img_url"],
-                    release_url=release["url"],
-                    artist_name=release.get("artist"),
-                    release_title=release.get("title"),
-                    page_name=release.get("page_name"),
-                )
-            )
+    releases = _dedupe_by_url(releases_unsifted)
 
     return releases
 
 
-def gather_releases_with_cache(after_date: str, before_date: str, max_results: int, batch_size: int, cache_only: bool = False, log=print):
+def gather_releases_with_cache(after_date: str, before_date: str, max_results: int, batch_size: int, cache_only: bool = False, log=print) -> None:
     """
     Use cached Gmail-scraped release metadata for previously seen dates.
     Only hit Gmail for dates in the requested range that have no cache entry.
     """
-    start_date = parse_date(after_date)
-    end_date = parse_date(before_date)
+    start_date = _parse_date(after_date)
+    end_date = _parse_date(before_date)
     if start_date > end_date:
         raise ValueError("Start date must be on or before end date")
 
@@ -137,20 +155,11 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
             new_releases = construct_release_list(emails, log=log)
             log(f"Parsed {len(new_releases)} releases from Gmail for {query_after} to {query_before}.")
             releases.extend(new_releases)
-            persist_release_metadata(new_releases, exclude_today=True)
             # Mark the entire queried span as scraped so we do not re-fetch it.
             mark_date_range_scraped(start_missing, end_missing, exclude_today=True)
 
     # Deduplicate on URL after combining cached + new
-    seen_urls = set()
-    deduped = []
-    for release in releases:
-        url = release.get("url")
-        if url and url in seen_urls:
-            continue
-        if url:
-            seen_urls.add(url)
-        deduped.append(release)
+    deduped = _dedupe_by_date(releases, keep="last")
 
     log("")
     if cache_only:
@@ -160,5 +169,3 @@ def gather_releases_with_cache(after_date: str, before_date: str, max_results: i
 
     # Always persist the run results when a page will be generated, so cache is up to date.
     persist_release_metadata(deduped, exclude_today=True)
-
-    return deduped[:max_results] if max_results else deduped
