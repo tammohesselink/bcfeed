@@ -223,11 +223,13 @@ def scrape_info_from_email(email_text, subject=None):
     release_url = None
 
     def _find_bandcamp_release_url() -> str | None:
-        for a in soup.find_all('a', href=True):
-            href = a['href']
-            # Basic heuristic for Bandcamp release pages
-            if "bandcamp.com" in href and ("/album/" in href or "/track/" in href):
-                return furl(href).remove(args=True, fragment=True).url
+        for a in soup.find_all("a", href=True):
+            href = a["href"]
+            parsed = furl(href)
+            path = str(parsed.path).lower()
+            # Accept custom domains as long as the path looks like a release page.
+            if "/album/" in path or "/track/" in path:
+                return parsed.remove(args=True, fragment=True).url
         return None
     
     release_url = _find_bandcamp_release_url()
@@ -236,7 +238,8 @@ def scrape_info_from_email(email_text, subject=None):
         return None, None, None, None, None, None
 
     # track (vs release) flag
-    is_track = "bandcamp.com/track" in release_url
+    release_path = str(furl(release_url).path).lower()
+    is_track = "/track/" in release_path
 
 
     # attempt to scrape artist/release/page from the email itself
@@ -245,14 +248,6 @@ def scrape_info_from_email(email_text, subject=None):
     # "artist_name just released release_title, check it out here"
     if soup:
         
-        # release title – it's the only italicized text in the email
-        parts = []
-        for span in soup.find_all("span", style=True):
-            if "font-style: italic" in span["style"]:
-                parts.append(span.get_text(" ", strip=True))
-                break # only first italicized part
-        release_title = " ".join(parts)
-    
         full_text = soup.get_text(" ", strip=True)
         # Remove the leading greeting which always starts with "Greetings <username>, "
         if full_text.lower().startswith("greetings "):
@@ -267,14 +262,34 @@ def scrape_info_from_email(email_text, subject=None):
         # 2) "<page_name> just released <release_title> by <artist_name>"
         # or with "just announced" instead of "just released"
         release_phrase = r"just\s+(?:released|announced)"
-        if re.search(release_phrase, full_text, flags=re.IGNORECASE):
+        release_match = re.search(release_phrase, full_text, flags=re.IGNORECASE)
+        after = ""
+        if release_match:
             before, after = re.split(release_phrase, full_text, maxsplit=1, flags=re.IGNORECASE)
             page_name = (page_name or before).strip() if before else page_name
             after = after.strip()
-            if release_title:
-                m = re.search(re.escape(release_title) + r"\s+by\s+(.+)$", after, flags=re.IGNORECASE)
-                if m:
-                    artist_name = artist_name or m.group(1).strip()
+
+        italic_texts = []
+        for tag in soup.find_all(["span", "i", "em"]):
+            style = tag.get("style", "").lower()
+            if tag.name in {"i", "em"} or "italic" in style:
+                text = tag.get_text(" ", strip=True)
+                if text:
+                    italic_texts.append(text)
+
+        if italic_texts:
+            if after:
+                for text in italic_texts:
+                    if text in after:
+                        release_title = text
+                        break
+            if not release_title:
+                release_title = italic_texts[0]
+
+        if after and release_title:
+            m = re.search(re.escape(release_title) + r"\s+by\s+(.+)$", after, flags=re.IGNORECASE)
+            if m:
+                artist_name = artist_name or m.group(1).strip()
 
 
     return img_url, release_url, is_track, artist_name, release_title, page_name
