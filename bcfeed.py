@@ -37,61 +37,12 @@ def find_free_port(preferred: int = 5050) -> int:
             return s.getsockname()[1]
 OUTPUT_DIR = Path("output")
 
-
-def load_settings():
-    try:
-        if SETTINGS_PATH.exists():
-            return json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
-    except Exception:
-        pass
-    return {}
-
-
-def load_credentials() -> bool:
-    """
-    Ensure credentials.json is present in the data directory.
-    If missing and prompt_on_missing is True, ask the user to locate it.
-    """
-    has_credentials = CREDENTIALS_PATH.exists()
-
-    path = filedialog.askopenfilename(
-        title="Load client_secret_XXXXXXXX.json",
-        filetypes=[("JSON files", "*.json")],
-    )
-    if not path and not has_credentials:
-        messagebox.showwarning("Credentials required", "No credentials file selected. Gmail will not work until you load it.")
-        return False
-    if path:
-        try:
-            # Remove any existing credentials/token so we always replace with the selected file
-            shutil.copy(Path(path), CREDENTIALS_PATH)
-            if TOKEN_PATH.exists():
-                TOKEN_PATH.unlink()
-            try:
-                from gmail import gmail_authenticate  # local import to avoid cycle
-                gmail_authenticate()
-            except Exception as exc:
-                messagebox.showerror("Error", f"Failed to authenticate with Gmail: {exc}")
-                return False
-            return True
-        except Exception as exc:
-            messagebox.showerror("Error loading credentials", str(exc))
-            return False
-        
-
-def save_settings(settings: dict):
-    SETTINGS_PATH.parent.mkdir(exist_ok=True)
-    tmp = SETTINGS_PATH.with_suffix(".tmp")
-    tmp.write_text(json.dumps(settings, indent=2), encoding="utf-8")
-    tmp.replace(SETTINGS_PATH)
-
-
 def start_proxy_thread():
     port = find_free_port(PROXY_PORT)
     server, thread = start_server(port)
     return server, thread, port
 
-def launch_from_cache(proxy_port: int, preload_embeds: bool, *, log=print, launch_browser: bool = True, clear_status_on_load: bool = False):
+def launch_from_cache(proxy_port: int, *, log=print, launch_browser: bool = True, clear_status_on_load: bool = False):
     """
     Start the proxy and open the static dashboard, which will load releases from the proxy.
     """
@@ -108,10 +59,6 @@ def main():
     style.configure("Run.TButton", padding=(8, 4))
     style.configure("Action.TButton", padding=(8, 4))
 
-    settings = load_settings()
-    start_date_var = None
-    end_date_var = None
-
     def adjust_date(var: StringVar, is_start: bool, delta: datetime.timedelta):
         if not can_adjust(is_start, delta):
             return
@@ -125,15 +72,8 @@ def main():
     proxy_thread = None
     proxy_server = None
     proxy_port = PROXY_PORT
-    def save_current_settings(*_args):
-        save_settings(
-            {
-                "preload_embeds": False
-            }
-        )
 
     # Toggle defaults and actions
-    # (Preload Bandcamp players option moved to browser UI)
 
     # Run / Clear credentials buttons
     actions_frame = Frame(root)
@@ -180,12 +120,8 @@ def main():
             proxy_server, proxy_thread, proxy_port = start_proxy_thread()
         return proxy_port
 
-    # Persist settings whenever inputs change (currently only placeholder)
-    save_current_settings()
-
     def on_launch():
         nonlocal proxy_thread, proxy_port
-        should_preload = False  # browser UI controls preload behaviour for embeds
         _ensure_proxy()
 
         def worker():
@@ -198,10 +134,10 @@ def main():
                 log(f"Launching dashboard from cache...")
                 log(f"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 log(f"")
-                log(f"Building page from cached releases (proxy port {proxy_port}, preload {'on' if should_preload else 'off'})")
+                log(f"Building page from cached releases (proxy port {proxy_port})...")
 
                 try:
-                    launch_from_cache(proxy_port, should_preload, log=log, launch_browser=True, clear_status_on_load=True)
+                    launch_from_cache(proxy_port, log=log, launch_browser=True, clear_status_on_load=True)
                     log("Dashboard generated from cache and opened in browser.")
                     log("")
                 finally:
