@@ -28,6 +28,8 @@ from paths import (
     TOKEN_PATH,
     CREDENTIALS_PATH,
     DASHBOARD_PATH,
+    DASHBOARD_CSS_PATH,
+    DASHBOARD_JS_PATH,
 )
 from session_store import scrape_status_for_range, get_full_release_cache
 from pipeline import populate_release_cache, MaxResultsExceeded
@@ -248,6 +250,20 @@ def dashboard_page():
     if not DASHBOARD_PATH.exists():
         return _corsify(jsonify({"error": f"dashboard not found at {DASHBOARD_PATH}"})), 500
     return send_file(DASHBOARD_PATH, mimetype="text/html")
+
+
+@app.route("/dashboard.css", methods=["GET"])
+def dashboard_css():
+    if not DASHBOARD_CSS_PATH.exists():
+        return _corsify(jsonify({"error": f"dashboard css not found at {DASHBOARD_CSS_PATH}"})), 500
+    return send_file(DASHBOARD_CSS_PATH, mimetype="text/css")
+
+
+@app.route("/dashboard.js", methods=["GET"])
+def dashboard_js():
+    if not DASHBOARD_JS_PATH.exists():
+        return _corsify(jsonify({"error": f"dashboard js not found at {DASHBOARD_JS_PATH}"})), 500
+    return send_file(DASHBOARD_JS_PATH, mimetype="application/javascript")
 
 
 @app.route("/embed-meta", methods=["GET", "OPTIONS"])

@@ -28,3 +28,5 @@ EMBED_CACHE_PATH = DATA_DIR / "embed_cache.json"
 TOKEN_PATH = DATA_DIR / GMAIL_TOKEN_FILE
 CREDENTIALS_PATH = DATA_DIR / GMAIL_CREDENTIALS_FILE
 DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
+DASHBOARD_CSS_PATH = Path(__file__).resolve().with_name("dashboard.css")
+DASHBOARD_JS_PATH = Path(__file__).resolve().with_name("dashboard.js")
