@@ -1672,6 +1672,7 @@
       closeOpenDetailRows();
 
       const dateFiltered = releases.filter(r => withinSelectedRange(r));
+      renderFilters(dateFiltered);
       const filtered = dateFiltered.filter(r => {
         const key = releaseKey(r);
         const useShowOnly = state.showOnlyLabels.size > 0;
@@ -1878,7 +1879,6 @@
         tbody.appendChild(tr);
       });
       refreshSortIndicators();
-      renderFilters(dateFiltered);
       updateHeaderRange(sorted.length);
     }
 
