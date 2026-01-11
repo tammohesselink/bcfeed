@@ -150,6 +150,30 @@
   <div id="max-results-backdrop" class="max-results-backdrop">
     <div class="max-results-modal">Exceeded the maximum number of results per Gmail search. Try again with a shorter date range.</div>
   </div>
+  <div id="missing-token-backdrop" class="settings-backdrop">
+    <div class="missing-token-modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+        <h2>Credentials Needed</h2>
+        <button id="missing-token-close" class="button" aria-label="Close">✕</button>
+      </div>
+      <p>Gmail token missing. Load credentials in the Settings panel to continue.</p>
+      <div style="display:flex; justify-content:flex-end;">
+        <button id="missing-token-continue" class="button">Continue</button>
+      </div>
+    </div>
+  </div>
+  <div id="load-creds-backdrop" class="settings-backdrop">
+    <div class="missing-token-modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+        <h2>Load Credentials</h2>
+        <button id="load-creds-close" class="button" aria-label="Close">✕</button>
+      </div>
+      <p>Load your "client_secret_XXXXXXX.json" credentials file downloaded from Google Cloud. For instructions on how to get this file, please refer to the setup instructions in <a class="link" href="setup" target="_blank" rel="noopener">SETUP.md</a>.</p>
+      <div style="display:flex; justify-content:flex-end;">
+        <button id="load-creds-continue" class="button">Continue</button>
+      </div>
+    </div>
+  </div>
   
   
   <script src="dashboard.js" defer></script>

@@ -21,8 +21,12 @@
     let starredApi = apiRoot ? `${apiRoot}/starred-state` : null;
     let clearStatusOnLoad = false;
     let showDevSettings = false;
+    let missingToken = false;
     const serverDownBackdrop = document.getElementById("server-down-backdrop");
     const maxResultsBackdrop = document.getElementById("max-results-backdrop");
+    const missingTokenBackdrop = document.getElementById("missing-token-backdrop");
+    const missingTokenClose = document.getElementById("missing-token-close");
+    const missingTokenContinue = document.getElementById("missing-token-continue");
     let serverDownShown = false;
     let maxNoticeShown = false;
     let defaultTheme = "light";
@@ -30,6 +34,9 @@
     const clearCredsBtn = document.getElementById("clear-creds-btn");
     const loadCredsBtn = document.getElementById("load-creds-btn");
     const loadCredsFile = document.getElementById("load-creds-file");
+    const loadCredsBackdrop = document.getElementById("load-creds-backdrop");
+    const loadCredsClose = document.getElementById("load-creds-close");
+    const loadCredsContinue = document.getElementById("load-creds-continue");
     const asBool = (val) => {
       if (typeof val === "boolean") return val;
       if (val == null) return false;
@@ -52,6 +59,9 @@
     }
     if (config && typeof config.show_dev_settings !== "undefined") {
       showDevSettings = asBool(config.show_dev_settings);
+    }
+    if (config && typeof config.has_token !== "undefined") {
+      missingToken = !asBool(config.has_token);
     }
     const loadingState = document.getElementById("loading-state");
     const errorState = document.getElementById("error-state");
@@ -354,12 +364,33 @@
           loadCredsBtn.textContent = original || "Load credentials";
         }
       };
-      loadCredsBtn.addEventListener("click", () => {
+      const openLoadCredsFile = () => {
         if (loadCredsFile) {
           loadCredsFile.value = "";
           loadCredsFile.click();
         }
-      });
+      };
+      const showLoadCredsModal = () => {
+        if (loadCredsBackdrop) {
+          loadCredsBackdrop.style.display = "flex";
+        } else {
+          openLoadCredsFile();
+        }
+      };
+      const hideLoadCredsModal = () => {
+        if (loadCredsBackdrop) {
+          loadCredsBackdrop.style.display = "none";
+        }
+        openLoadCredsFile();
+      };
+      if (loadCredsClose) loadCredsClose.addEventListener("click", hideLoadCredsModal);
+      if (loadCredsContinue) loadCredsContinue.addEventListener("click", hideLoadCredsModal);
+      if (loadCredsBackdrop) {
+        loadCredsBackdrop.addEventListener("click", (e) => {
+          if (e.target === loadCredsBackdrop) hideLoadCredsModal();
+        });
+      }
+      loadCredsBtn.addEventListener("click", showLoadCredsModal);
       loadCredsFile.addEventListener("change", () => {
         if (loadCredsFile.files && loadCredsFile.files[0]) {
           doLoadCreds();
@@ -987,6 +1018,27 @@
     if (settingsBackdrop) settingsBackdrop.addEventListener("click", (e) => {
       if (e.target === settingsBackdrop) toggleSettings(false);
     });
+    const showMissingTokenModal = () => {
+      if (missingTokenBackdrop) {
+        missingTokenBackdrop.style.display = "flex";
+      }
+    };
+    const hideMissingTokenModal = () => {
+      if (missingTokenBackdrop) {
+        missingTokenBackdrop.style.display = "none";
+      }
+      toggleSettings(true);
+    };
+    if (missingTokenClose) missingTokenClose.addEventListener("click", hideMissingTokenModal);
+    if (missingTokenContinue) missingTokenContinue.addEventListener("click", hideMissingTokenModal);
+    if (missingTokenBackdrop) {
+      missingTokenBackdrop.addEventListener("click", (e) => {
+        if (e.target === missingTokenBackdrop) hideMissingTokenModal();
+      });
+    }
+    if (missingToken) {
+      showMissingTokenModal();
+    }
 
     async function performReset() {
       const clearCache = true;

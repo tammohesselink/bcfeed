@@ -5,7 +5,9 @@ bcfeed local server that powers the dashboard, cache population, and embed metad
 from __future__ import annotations
 
 import datetime
+import html
 import json
+import re
 import socket
 import threading
 from pathlib import Path
@@ -30,6 +32,7 @@ from paths import (
     DASHBOARD_PATH,
     DASHBOARD_CSS_PATH,
     DASHBOARD_JS_PATH,
+    SETUP_PATH,
 )
 from session_store import scrape_status_for_range, get_full_release_cache
 from pipeline import populate_release_cache, MaxResultsExceeded
@@ -39,6 +42,90 @@ app = Flask(__name__)
 
 POPULATE_LOCK = threading.Lock()
 GMAIL_MAX_RESULTS_HARD = 2000
+
+
+def _format_setup_inline(text: str) -> str:
+    parts = text.split("`")
+    out = []
+    for idx, part in enumerate(parts):
+        escaped = html.escape(part)
+        if idx % 2 == 1:
+            out.append(f"<code>{escaped}</code>")
+        else:
+            escaped = re.sub(
+                r"(https?://[\\w\\-./?&#=%:+~]+)",
+                r'<a href="\\1" target="_blank" rel="noopener">\\1</a>',
+                escaped,
+            )
+            out.append(escaped)
+    return "".join(out)
+
+
+def _render_setup_html(markdown_text: str) -> str:
+    lines = markdown_text.splitlines()
+    out = []
+    in_ul = False
+    in_ol = False
+    in_code = False
+
+    def close_lists():
+        nonlocal in_ul, in_ol
+        if in_ul:
+            out.append("</ul>")
+            in_ul = False
+        if in_ol:
+            out.append("</ol>")
+            in_ol = False
+
+    for line in lines:
+        stripped = line.rstrip()
+        if stripped.strip().startswith("```"):
+            if in_code:
+                out.append("</code></pre>")
+            else:
+                close_lists()
+                out.append("<pre><code>")
+            in_code = not in_code
+            continue
+        if in_code:
+            out.append(html.escape(stripped))
+            continue
+        if not stripped.strip():
+            close_lists()
+            continue
+        if stripped.strip() in {"---", "***", "___"}:
+            close_lists()
+            out.append("<hr />")
+            continue
+        heading = re.match(r"^(#{1,6})\\s+(.*)$", stripped)
+        if heading:
+            close_lists()
+            level = len(heading.group(1))
+            out.append(f"<h{level}>{_format_setup_inline(heading.group(2))}</h{level}>")
+            continue
+        unordered = re.match(r"^\\s*[-*]\\s+(.*)$", stripped)
+        if unordered:
+            if not in_ul:
+                close_lists()
+                out.append("<ul>")
+                in_ul = True
+            out.append(f"<li>{_format_setup_inline(unordered.group(1))}</li>")
+            continue
+        ordered = re.match(r"^\\s*\\d+\\.\\s+(.*)$", stripped)
+        if ordered:
+            if not in_ol:
+                close_lists()
+                out.append("<ol>")
+                in_ol = True
+            out.append(f"<li>{_format_setup_inline(ordered.group(1))}</li>")
+            continue
+        close_lists()
+        out.append(f"<p>{_format_setup_inline(stripped)}</p>")
+
+    close_lists()
+    if in_code:
+        out.append("</code></pre>")
+    return "\n".join(out)
 
 
 def _corsify(response):
@@ -238,6 +325,7 @@ def config_json():
     payload = {
         "title": "bcfeed",
         "embed_proxy_url": embed_proxy_url,
+        "has_token": TOKEN_PATH.exists(),
         "default_theme": "light",
         "clear_status_on_load": False,
         "show_dev_settings": False,
@@ -264,6 +352,85 @@ def dashboard_js():
     if not DASHBOARD_JS_PATH.exists():
         return _corsify(jsonify({"error": f"dashboard js not found at {DASHBOARD_JS_PATH}"})), 500
     return send_file(DASHBOARD_JS_PATH, mimetype="application/javascript")
+
+
+@app.route("/setup", methods=["GET"])
+def setup_doc():
+    if not SETUP_PATH.exists():
+        return _corsify(jsonify({"error": f"SETUP.md not found at {SETUP_PATH}"})), 500
+    markdown_text = SETUP_PATH.read_text(encoding="utf-8")
+    body = _render_setup_html(markdown_text)
+    doc = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>bcfeed setup</title>
+  <style>
+    :root {{
+      color-scheme: light dark;
+    }}
+    body {{
+      margin: 0;
+      padding: 32px 18px 60px;
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      background: #f7f8fb;
+      color: #0a0f1a;
+      line-height: 1.6;
+    }}
+    .wrap {{
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #d9e2ef;
+      border-radius: 12px;
+      padding: 28px 28px 36px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }}
+    h1, h2, h3, h4, h5, h6 {{
+      margin: 18px 0 10px;
+      line-height: 1.25;
+    }}
+    h1 {{ font-size: 28px; }}
+    h2 {{ font-size: 22px; }}
+    h3 {{ font-size: 18px; }}
+    p {{ margin: 10px 0; }}
+    ul, ol {{ margin: 8px 0 12px 20px; }}
+    li {{ margin: 4px 0; }}
+    code {{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #f1f4f8;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }}
+    pre {{
+      background: #0f1116;
+      color: #f4f6fb;
+      padding: 12px 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }}
+    pre code {{
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }}
+    a {{ color: #1f7aff; }}
+    hr {{
+      border: none;
+      border-top: 1px solid #e3e8f2;
+      margin: 18px 0;
+    }}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    {body}
+  </div>
+</body>
+</html>"""
+    return Response(doc, mimetype="text/html")
 
 
 @app.route("/embed-meta", methods=["GET", "OPTIONS"])

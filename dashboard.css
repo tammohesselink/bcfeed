@@ -754,6 +754,26 @@
       display: grid;
       gap: 12px;
     }
+    .missing-token-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      min-width: 320px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 12px;
+    }
+    .missing-token-modal h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .missing-token-modal p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .settings-panel h2 {
       margin: 0;
       font-size: 16px;
