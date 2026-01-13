@@ -4,4 +4,4 @@ requests
 bs4
 flask
 furl
-tkinter
+requests
