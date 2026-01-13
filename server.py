@@ -52,9 +52,11 @@ def _format_setup_inline(text: str) -> str:
         if idx % 2 == 1:
             out.append(f"<code>{escaped}</code>")
         else:
+            escaped = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+            escaped = re.sub(r"\*(.+?)\*", r"<em>\1</em>", escaped)
             escaped = re.sub(
-                r"(https?://[\\w\\-./?&#=%:+~]+)",
-                r'<a href="\\1" target="_blank" rel="noopener">\\1</a>',
+                r"(https?://[\w./?&#=%:+~-]+)",
+                r'<a href="\1" target="_blank" rel="noopener">\1</a>',
                 escaped,
             )
             out.append(escaped)
@@ -97,13 +99,13 @@ def _render_setup_html(markdown_text: str) -> str:
             close_lists()
             out.append("<hr />")
             continue
-        heading = re.match(r"^(#{1,6})\\s+(.*)$", stripped)
+        heading = re.match(r"^(#{1,6})\s+(.*)$", stripped)
         if heading:
             close_lists()
             level = len(heading.group(1))
             out.append(f"<h{level}>{_format_setup_inline(heading.group(2))}</h{level}>")
             continue
-        unordered = re.match(r"^\\s*[-*]\\s+(.*)$", stripped)
+        unordered = re.match(r"^\s*[-*]\s+(.*)$", stripped)
         if unordered:
             if not in_ul:
                 close_lists()
@@ -111,7 +113,7 @@ def _render_setup_html(markdown_text: str) -> str:
                 in_ul = True
             out.append(f"<li>{_format_setup_inline(unordered.group(1))}</li>")
             continue
-        ordered = re.match(r"^\\s*\\d+\\.\\s+(.*)$", stripped)
+        ordered = re.match(r"^\s*\d+\.\s+(.*)$", stripped)
         if ordered:
             if not in_ol:
                 close_lists()
@@ -375,55 +377,59 @@ def setup_doc():
     }}
     body {{
       margin: 0;
-      padding: 32px 18px 60px;
+      padding: 40px 20px 70px;
       font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-      background: #f7f8fb;
+      background: radial-gradient(circle at 10% 10%, rgba(31,122,255,0.08), transparent 45%),
+                  radial-gradient(circle at 90% 0%, rgba(255,171,64,0.08), transparent 40%),
+                  #f7f8fb;
       color: #0a0f1a;
-      line-height: 1.6;
+      line-height: 1.7;
     }}
     .wrap {{
       max-width: 900px;
       margin: 0 auto;
       background: #ffffff;
       border: 1px solid #d9e2ef;
-      border-radius: 12px;
-      padding: 28px 28px 36px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 34px 32px 42px;
+      box-shadow: 0 20px 45px rgba(15, 17, 22, 0.1);
     }}
     h1, h2, h3, h4, h5, h6 {{
-      margin: 18px 0 10px;
-      line-height: 1.25;
+      margin: 24px 0 12px;
+      line-height: 1.2;
     }}
-    h1 {{ font-size: 28px; }}
-    h2 {{ font-size: 22px; }}
-    h3 {{ font-size: 18px; }}
-    p {{ margin: 10px 0; }}
-    ul, ol {{ margin: 8px 0 12px 20px; }}
-    li {{ margin: 4px 0; }}
+    h1 {{ font-size: 30px; letter-spacing: 0.2px; }}
+    h2 {{ font-size: 22px; border-left: 3px solid #1f7aff; padding-left: 10px; }}
+    h3 {{ font-size: 18px; color: #1f1f2e; }}
+    p {{ margin: 12px 0; }}
+    ul, ol {{ margin: 10px 0 16px 22px; }}
+    li {{ margin: 6px 0; }}
     code {{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       background: #f1f4f8;
-      padding: 1px 4px;
-      border-radius: 4px;
+      padding: 2px 5px;
+      border-radius: 6px;
       font-size: 0.95em;
     }}
     pre {{
       background: #0f1116;
       color: #f4f6fb;
-      padding: 12px 14px;
-      border-radius: 8px;
+      padding: 14px 16px;
+      border-radius: 10px;
       overflow-x: auto;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
     }}
     pre code {{
       background: transparent;
       padding: 0;
       color: inherit;
     }}
-    a {{ color: #1f7aff; }}
+    a {{ color: #1f7aff; text-decoration: none; border-bottom: 1px solid rgba(31,122,255,0.3); }}
+    a:hover {{ border-bottom-color: rgba(31,122,255,0.8); }}
     hr {{
       border: none;
       border-top: 1px solid #e3e8f2;
-      margin: 18px 0;
+      margin: 22px 0;
     }}
   </style>
 </head>
