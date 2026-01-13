@@ -16,25 +16,25 @@ If you're familiar with Python and CLI tools, simply create a virtual environmen
 
 ## Python setup (beginners' walkthrough)
 
-1. Download and unzip the **bcfeed** source code into your Documents folder. Make sure the folder is called **bcfeed**.
-2. Download and install **homebrew**: https://brew.sh/
-3. Use Homebrew to install **Pyenv**. **Pyenv*** lets you easily select the right Python version:
-  - Open a Terminal window and type `brew install pyenv`
-4. Install Python 3.11:
-  - In Terminal, type `pyenv install 3.11`
-5. Tell Pyenv to use Python 3.11 for **bcfeed**:
-  - In Terminal, navigate to the **bcfeed** directory: type `cd ~/Documents/bcfeed`
-  - Type `pyenv local 3.11`
-6. Install Virtualenv. This allows you to set up a virtual environment – an isolated directory containing all the packages bcfeed needs to run. 
-  - Type `pip install virtualenv`
-7. Create a virtual environment in the bcfeed folder.
-  - Type `virtualenv .venv`
-8. Activate the virtual environment you just created.
-  - Type `source .venv/bin/activate`
-9. Install the Python dependencies required by **bcfeed** to run.
-  - Type `pip install -r requirements.txt`
-10. You should now be ready to run **bcfeed**:
-  - Type `python3 bcfeed.py`
+1) Download and unzip the **bcfeed** source code into your Documents folder. Make sure the folder is called **bcfeed**.
+2) Download and install **homebrew**: https://brew.sh/
+3) Use Homebrew to install **Pyenv**. **Pyenv*** lets you easily select the right Python version:
+   - Open a Terminal window and type `brew install pyenv`
+4) Install Python 3.11:
+   - In Terminal, type `pyenv install 3.11`
+5) Tell Pyenv to use Python 3.11 for **bcfeed**:
+   - In Terminal, navigate to the **bcfeed** directory: type `cd ~/Documents/bcfeed`
+   - Type `pyenv local 3.11`
+6) Install Virtualenv. This allows you to set up a virtual environment – an isolated directory containing all the packages bcfeed needs to run. 
+   - Type `pip install virtualenv`
+7) Create a virtual environment in the bcfeed folder.
+   - Type `virtualenv .venv`
+8) Activate the virtual environment you just created.
+   - Type `source .venv/bin/activate`
+9)  Install the Python dependencies required by **bcfeed** to run.
+   - Type `pip install -r requirements.txt`
+10) You should now be ready to run **bcfeed**:
+   - Type `python3 bcfeed.py`
 
 
 
@@ -42,13 +42,13 @@ If you're familiar with Python and CLI tools, simply create a virtual environmen
 
 Once the Python setup has been completed you can run **bcfeed** with much fewer steps in future:
 
-1. Open a Terminal window
-2. Navigate to the **bcfeed** directory:
-   `cd ~/Documents/bcfeed`
-3. Activate the virtual environment:
-   `source .venv/bin/activate`
-4. Run the app:
-   `python3 bcfeed.py`
+1) Open a Terminal window
+2) Navigate to the **bcfeed** directory:
+   - `cd ~/Documents/bcfeed`
+3) Activate the virtual environment:
+   - `source .venv/bin/activate`
+4) Run the app:
+   - `python3 bcfeed.py`
 
 This will launch the server app, which in turn will open the dashboard in your web browser.
 
