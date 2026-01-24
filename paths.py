@@ -30,4 +30,4 @@ CREDENTIALS_PATH = DATA_DIR / GMAIL_CREDENTIALS_FILE
 DASHBOARD_PATH = Path(__file__).resolve().with_name("dashboard.html")
 DASHBOARD_CSS_PATH = Path(__file__).resolve().with_name("dashboard.css")
 DASHBOARD_JS_PATH = Path(__file__).resolve().with_name("dashboard.js")
-SETUP_PATH = Path(__file__).resolve().with_name("SETUP.md")
+SETUP_PATH = Path(__file__).resolve().with_name("GMAIL_SETUP.md")

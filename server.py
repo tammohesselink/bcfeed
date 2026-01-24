@@ -359,7 +359,7 @@ def dashboard_js():
 @app.route("/setup", methods=["GET"])
 def setup_doc():
     if not SETUP_PATH.exists():
-        return _corsify(jsonify({"error": f"SETUP.md not found at {SETUP_PATH}"})), 500
+        return _corsify(jsonify({"error": f"GMAIL_SETUP.md not found at {SETUP_PATH}"})), 500
     markdown_text = SETUP_PATH.read_text(encoding="utf-8")
     try:
         body = _render_setup_html(markdown_text)

@@ -1,61 +1,8 @@
-# bcfeed
-
-A macOS desktop app that reads Bandcamp release emails from your Gmail, caches them locally, and generates an interactive dashboard of releases that is much easier to browse.
-
-
-## Installation
-
-### For power users (Homebrew already installed)
-
-To install, open a Terminal and type the following:
-`brew tap keinobjekt/bcfeed`
-`brew install bcfeed`
-
-Then to run simply type:
-`bcfeed`
-
-This will launch the server from the Terminal and open the dashboard in your web browser. You must keep the Terminal window open in the background in order to use **bcfeed**.
-
-
-### For beginners
-
-1) Download and install **Homebrew**: https://brew.sh
-2) Use Homebrew to install **bcfeed**:
-   - Open a Terminal window.
-   - Type `brew tap keinobjekt/bcfeed` and hit enter.
-   - Type `brew install bcfeed` and hit enter. This will begin the installation. 
-
-To run **bcfeed**:
-   - Type `bcfeed` into Terminal and hit enter
-   - This will launch the server from the Terminal and open the dashboard in your web browser. 
-
-You only need to install **bcfeed** once. 
-You must keep the Terminal window open in the background in order to use **bcfeed**.
-
-
-### Running from Python source (developers and advanced users)
-
-If you're familiar with Python and CLI tools, you can create a virtual environment, install the dependencies and run the script from the CLI:
-
-- Download **bcfeed** source code
-- Ensure Python 3.10 or newer is installed and selected as the local python version
-- In the project directory, run `virtualenv .venv`
-- Run `source .venv/bin/activate`
-- Download dependencies: `pip install -r requirements.txt`
-- Run `python3 bcfeed.py`
-
-This will launch the server from the CLI and open the dashboard in your web browser.
-
-You must keep the CLI process running in order to use **bcfeed**.
-
-
 ## 📘 Gmail Setup Guide
 
 This application uses the Gmail API.
 To keep your data private and avoid Google’s OAuth verification requirements, **you must create your own Google Cloud OAuth client**.
 This setup is required only once and takes a few minutes.
-
-Instructions on how to do this can be found in [GMAIL_SETUP.md].
 
 ---
 
@@ -137,6 +84,8 @@ Download the resulting JSON file, usually named:
 `client_secret_XXXXXXXXX.json`
 
 You will import this file into the application.
+
+Keep this file safe – if you ever need to clear and re-load your credentials, you can skip all the steps above if you still have this file somewhere.
 
 ---
 
