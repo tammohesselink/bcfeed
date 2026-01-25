@@ -44,6 +44,18 @@ app = Flask(__name__)
 
 POPULATE_LOCK = threading.Lock()
 GMAIL_MAX_RESULTS_HARD = 2000
+DOC_LINK_MAP = {
+    "SETUP.md": "setup",
+    "GMAIL_SETUP.md": "setup-gmail",
+    "README.md": "readme",
+}
+
+
+def _rewrite_doc_link(match: re.Match) -> str:
+    label = match.group(1)
+    href = match.group(2)
+    href = DOC_LINK_MAP.get(href, href)
+    return f'<a href="{href}" target="_blank" rel="noopener">{label}</a>'
 
 
 def _format_setup_inline(text: str) -> str:
@@ -56,18 +68,7 @@ def _format_setup_inline(text: str) -> str:
         else:
             escaped = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
             escaped = re.sub(r"\*(.+?)\*", r"<em>\1</em>", escaped)
-            def _link_rewrite(match: re.Match) -> str:
-                label = match.group(1)
-                href = match.group(2)
-                link_map = {
-                    "SETUP.md": "setup",
-                    "GMAIL_SETUP.md": "setup-gmail",
-                    "README.md": "readme",
-                }
-                href = link_map.get(href, href)
-                return f'<a href="{href}" target="_blank" rel="noopener">{label}</a>'
-
-            escaped = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _link_rewrite, escaped)
+            escaped = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _rewrite_doc_link, escaped)
             escaped = re.sub(
                 r"(https?://[\w./?&#=%:+~-]+)",
                 r'<a href="\1" target="_blank" rel="noopener">\1</a>',
@@ -77,7 +78,7 @@ def _format_setup_inline(text: str) -> str:
     return "".join(out)
 
 
-def _render_setup_html(markdown_text: str) -> str:
+def _render_markdown_html(markdown_text: str) -> str:
     lines = markdown_text.splitlines()
     out = []
     in_ul = False
@@ -370,30 +371,41 @@ def dashboard_js():
     return send_file(DASHBOARD_JS_PATH, mimetype="application/javascript")
 
 
+# Docs routes and helpers.
 def _serve_markdown_doc(path: Path, title: str) -> Response:
     if not path.exists():
         return _corsify(jsonify({"error": f"{path.name} not found at {path}"})), 500
     markdown_text = path.read_text(encoding="utf-8")
     try:
-        body = _render_setup_html(markdown_text)
+        body = _render_markdown_html(markdown_text)
     except Exception:
         body = f"<pre>{html.escape(markdown_text)}</pre>"
     return render_template("docs.html", title=title, body=body)
 
 
+DOC_ROUTES = {
+    "setup": (SETUP_PATH, "bcfeed setup"),
+    "setup-gmail": (GMAIL_SETUP_PATH, "bcfeed gmail setup"),
+    "readme": (README_PATH, "bcfeed README"),
+}
+
+
 @app.route("/setup", methods=["GET"])
 def setup_doc():
-    return _serve_markdown_doc(SETUP_PATH, "bcfeed setup")
+    path, title = DOC_ROUTES["setup"]
+    return _serve_markdown_doc(path, title)
 
 
 @app.route("/setup-gmail", methods=["GET"])
 def setup_gmail_doc():
-    return _serve_markdown_doc(GMAIL_SETUP_PATH, "bcfeed gmail setup")
+    path, title = DOC_ROUTES["setup-gmail"]
+    return _serve_markdown_doc(path, title)
 
 
 @app.route("/readme", methods=["GET"])
 def readme_doc():
-    return _serve_markdown_doc(README_PATH, "bcfeed README")
+    path, title = DOC_ROUTES["readme"]
+    return _serve_markdown_doc(path, title)
 
 
 @app.route("/embed-meta", methods=["GET", "OPTIONS"])
