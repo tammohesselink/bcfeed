@@ -13,7 +13,7 @@ import threading
 from pathlib import Path
 
 import requests
-from flask import Flask, jsonify, request, Response, stream_with_context, send_file
+from flask import Flask, jsonify, request, Response, stream_with_context, send_file, render_template
 from queue import SimpleQueue
 from werkzeug.serving import make_server, WSGIRequestHandler
 
@@ -378,82 +378,7 @@ def _serve_markdown_doc(path: Path, title: str) -> Response:
         body = _render_setup_html(markdown_text)
     except Exception:
         body = f"<pre>{html.escape(markdown_text)}</pre>"
-    doc = f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{title}</title>
-  <style>
-    :root {{
-      color-scheme: dark;
-    }}
-    body {{
-      margin: 0;
-      padding: 40px 20px 70px;
-      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-      background: radial-gradient(circle at 10% 10%, rgba(85,140,255,0.2), transparent 45%),
-                  radial-gradient(circle at 90% 0%, rgba(255,170,80,0.15), transparent 40%),
-                  #0c0f16;
-      color: #f2f4fb;
-      line-height: 1.7;
-    }}
-    .wrap {{
-      max-width: 900px;
-      margin: 0 auto;
-      background: #141924;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 34px 32px 42px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
-    }}
-    h1, h2, h3, h4, h5, h6 {{
-      margin: 24px 0 12px;
-      line-height: 1.2;
-    }}
-    h1 {{ font-size: 30px; letter-spacing: 0.2px; }}
-    h2 {{ font-size: 22px; border-left: 3px solid #1f7aff; padding-left: 10px; }}
-    h3 {{ font-size: 18px; color: #e7ebf7; }}
-    p {{ margin: 12px 0; }}
-    ul, ol {{ margin: 10px 0 16px 22px; }}
-    li {{ margin: 6px 0; }}
-    code {{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background: rgba(255,255,255,0.08);
-      padding: 2px 5px;
-      border-radius: 6px;
-      font-size: 0.95em;
-      color: #f2f6ff;
-    }}
-    pre {{
-      background: #0f1116;
-      color: #f4f6fb;
-      padding: 14px 16px;
-      border-radius: 10px;
-      overflow-x: auto;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
-    }}
-    pre code {{
-      background: transparent;
-      padding: 0;
-      color: inherit;
-    }}
-    a {{ color: #7db0ff; text-decoration: none; border-bottom: 1px solid rgba(125,176,255,0.35); }}
-    a:hover {{ border-bottom-color: rgba(125,176,255,0.85); }}
-    hr {{
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      margin: 22px 0;
-    }}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    {body}
-  </div>
-</body>
-</html>"""
-    return Response(doc, mimetype="text/html")
+    return render_template("docs.html", title=title, body=body)
 
 
 @app.route("/setup", methods=["GET"])
