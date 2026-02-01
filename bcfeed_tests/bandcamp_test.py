@@ -2570,20 +2570,20 @@ TRACK_HTML = """
         lang="en">
 
 <head>
-    <title>a scattering sanded pulse | madeline stepien</title>
+    <title>Beach Club | Casino Classix | Baby Ford</title>
     
     
 
 
 
     <meta name="description" content="
-a scattering sanded pulse by madeline stepien, released 31 January 2026
+Beach Club by Casino Classix, released 22 January 2026
 
 ">
     
      
-    <link rel="shortcut icon" href="https://f4.bcbits.com/img/a0869977637_3.jpg">
-    <link rel="apple-touch-icon" href="https://f4.bcbits.com/img/a0869977637_3.jpg">
+    <link rel="shortcut icon" href="https://f4.bcbits.com/img/a0700595149_3.jpg">
+    <link rel="apple-touch-icon" href="https://f4.bcbits.com/img/a0700595149_3.jpg">
 
 
 <meta name="msapplication-TileColor" content="#603cba">
@@ -2595,12 +2595,12 @@ a scattering sanded pulse by madeline stepien, released 31 January 2026
 
     
     
-        <meta name="title" content="a scattering sanded pulse, by madeline stepien">
-        <meta property="og:title" content="a scattering sanded pulse, by madeline stepien">
+        <meta name="title" content="Beach Club, by Casino Classix">
+        <meta property="og:title" content="Beach Club, by Casino Classix">
         <meta property="og:type" content="song">
-        <meta property="og:site_name" content="madeline stepien">
-        <meta property="og:description" content=" from the album four shame induced soliloquies ">
-        <meta name="bc-page-properties" content="{&quot;item_type&quot;:&quot;t&quot;,&quot;item_id&quot;:3972831481,&quot;tralbum_page_version&quot;:0}">
+        <meta property="og:site_name" content="Baby Ford">
+        <meta property="og:description" content=" track by Casino Classix ">
+        <meta name="bc-page-properties" content="{&quot;item_type&quot;:&quot;t&quot;,&quot;item_id&quot;:287192821,&quot;tralbum_page_version&quot;:0}">
         <meta name="robots" content="max-image-preview:large">
 
         
@@ -2617,11 +2617,11 @@ a scattering sanded pulse by madeline stepien, released 31 January 2026
         
 
         
-            <meta property="og:image" content="https://f4.bcbits.com/img/a0869977637_5.jpg">
-            <link rel="image_src" href="https://f4.bcbits.com/img/a0869977637_16.jpg">
+            <meta property="og:image" content="https://f4.bcbits.com/img/a0700595149_5.jpg">
+            <link rel="image_src" href="https://f4.bcbits.com/img/a0700595149_16.jpg">
         
 
-        <meta property="og:url"   content="https://madelinestepien.bandcamp.com/track/a-scattering-sanded-pulse">
+        <meta property="og:url"   content="https://babyford.bandcamp.com/track/beach-club-2">
 
         
 
@@ -2642,15 +2642,15 @@ a scattering sanded pulse by madeline stepien, released 31 January 2026
             <meta name="video_type"     content="application/x-shockwave-flash">
 
             <meta property="og:video"
-                content="https://bandcamp.com/EmbeddedPlayer/v=2/track=3972831481/size=large/tracklist=false/artwork=small/">
+                content="https://bandcamp.com/EmbeddedPlayer/v=2/track=287192821/size=large/tracklist=false/artwork=small/">
             <meta property="og:video:secure_url"
-                content="https://bandcamp.com/EmbeddedPlayer/v=2/track=3972831481/size=large/tracklist=false/artwork=small/">
+                content="https://bandcamp.com/EmbeddedPlayer/v=2/track=287192821/size=large/tracklist=false/artwork=small/">
             <meta property="og:video:type" content="text/html">
             <meta property="og:video:height" content="120">
             <meta property="og:video:width" content="400">
 
             
-                <meta property="twitter:player" content="https://bandcamp.com/EmbeddedPlayer/v=2/track=3972831481/size=large/linkcol=0084B4/notracklist=true/twittercard=true/">
+                <meta property="twitter:player" content="https://bandcamp.com/EmbeddedPlayer/v=2/track=287192821/size=large/linkcol=0084B4/notracklist=true/twittercard=true/">
                 <meta property="twitter:player:height" content="467">
                 <meta property="twitter:player:width" content="350">
             
@@ -2680,41 +2680,41 @@ a scattering sanded pulse by madeline stepien, released 31 January 2026
 <link type="text/css" rel="stylesheet" href="https://s4.bcbits.com/client-bundle/1/trackpipe/tralbum-828e855b799307ef427645b8fc241f90.css">
 <link type="text/css" rel="stylesheet" href="https://s4.bcbits.com/client-bundle/1/trackpipe/bandmember-f6c9212a36739a15a1b15a7d5158a211.css">
 
-    <meta id="js-crumbs-data" data-crumbs="{&quot;logout&quot;:&quot;|logout|1769967989|b8I4M9sGAvEAZ9l/mJgjhXkcRyI=&quot;,&quot;contact_cb&quot;:&quot;|contact_cb|1769967989|HTkl3aBlqDRHlFbAcFIyENGquJw=&quot;,&quot;api/login/1/logout&quot;:&quot;|api/login/1/logout|1769967989|ynvS3mq0FGvBVwUeosPBa0W5/Xk=&quot;,&quot;collect_item_cb&quot;:&quot;|collect_item_cb|1769967989|O12xO4NETJ7GZIvBVwt24WqLmJM=&quot;,&quot;api/push_notification_public_api/1/mark_menubar_activity_read&quot;:&quot;|api/push_notification_public_api/1/mark_menubar_activity_read|1769967989|qiMrvEH8u3/k5n4+sm4tMriDsLU=&quot;,&quot;api/community/1/hide_notifications_indicator&quot;:&quot;|api/community/1/hide_notifications_indicator|1769967989|UWLWQRMEuN9AKzDGvn3BSgKix2Q=&quot;,&quot;fan_follow_band_cb&quot;:&quot;|fan_follow_band_cb|1769967989|SKxHNvqsZ2he674kUZ4rBLpA73k=&quot;,&quot;uncollect_item_cb&quot;:&quot;|uncollect_item_cb|1769967989|DAJeSPN1m6bN5u1VQtX0XVpFwsw=&quot;,&quot;band_follow_email_opt_in_cb&quot;:&quot;|band_follow_email_opt_in_cb|1769967989|wF2wbM2OZXnVW8RmPNcJqbg4mbY=&quot;,&quot;api/banners_api/1/dismiss_banner_logged_in&quot;:&quot;|api/banners_api/1/dismiss_banner_logged_in|1769967989|BTIWITQ5hTTMkHx7G8d+aaZp3t4=&quot;}">
+    <meta id="js-crumbs-data" data-crumbs="{&quot;logout&quot;:&quot;|logout|1769968163|ohWRZmB0bJLk0ydtBqexc6kzbqM=&quot;,&quot;contact_cb&quot;:&quot;|contact_cb|1769968163|2GptpaILonHjSahB2bsVzdXqzP0=&quot;,&quot;api/login/1/logout&quot;:&quot;|api/login/1/logout|1769968163|JYn0Xo+X4OwSvlSacy+OLWvcdqw=&quot;,&quot;collect_item_cb&quot;:&quot;|collect_item_cb|1769968163|+cGBDyWf+N94Z2s6xe2HqJ5N1jw=&quot;,&quot;api/push_notification_public_api/1/mark_menubar_activity_read&quot;:&quot;|api/push_notification_public_api/1/mark_menubar_activity_read|1769968163|6Kp6cwGMVsWfkU5qnUevc/dCxSw=&quot;,&quot;api/community/1/hide_notifications_indicator&quot;:&quot;|api/community/1/hide_notifications_indicator|1769968163|XVFQmRCYG5GdaoLAlp51unf31eE=&quot;,&quot;fan_follow_band_cb&quot;:&quot;|fan_follow_band_cb|1769968163|5T8uGYl4X1QcAeqm346X4v7NkqA=&quot;,&quot;uncollect_item_cb&quot;:&quot;|uncollect_item_cb|1769968163|pM+Jou+ZOBy3jHogPadi++dAStM=&quot;,&quot;band_follow_email_opt_in_cb&quot;:&quot;|band_follow_email_opt_in_cb|1769968163|OBK6iC96Mb2R3+sFaQs0sLlL60A=&quot;,&quot;api/banners_api/1/dismiss_banner_logged_in&quot;:&quot;|api/banners_api/1/dismiss_banner_logged_in|1769968163|M4BTuu6XwOg6CdW9fcuTkeg+bsg=&quot;}">
     
 
     
     <script type="application/ld+json">
-        {"@type":"MusicRecording","@id":"https://madelinestepien.bandcamp.com/track/a-scattering-sanded-pulse","additionalProperty":[{"@type":"PropertyValue","name":"track_id","value":3972831481},{"@type":"PropertyValue","name":"art_id","value":869977637},{"@type":"PropertyValue","name":"license_name","value":"all_rights_reserved"},{"@type":"PropertyValue","name":"tracknum","value":2}],"name":"a scattering sanded pulse","duration":"P00H04M53S","dateModified":"31 Jan 2026 21:15:15 GMT","datePublished":"31 Jan 2026 00:00:00 GMT","inAlbum":{"@type":"MusicAlbum","name":"four shame induced soliloquies","albumRelease":[{"@type":"MusicRelease","@id":"https://madelinestepien.bandcamp.com/album/four-shame-induced-soliloquies","additionalProperty":[{"@type":"PropertyValue","name":"item_type","value":"a"}]},{"@type":["MusicRelease","Product"],"@id":"https://madelinestepien.bandcamp.com/track/a-scattering-sanded-pulse","name":"a scattering sanded pulse","additionalProperty":[{"@type":"PropertyValue","name":"item_id","value":3972831481},{"@type":"PropertyValue","name":"item_type","value":"t"},{"@type":"PropertyValue","name":"selling_band_id","value":2505888832},{"@type":"PropertyValue","name":"type_name","value":"Digital"},{"@type":"PropertyValue","name":"art_id","value":869977637}],"description":"Includes high-quality download in MP3, FLAC and more. Paying supporters also get unlimited streaming via the free Bandcamp app.","offers":{"@type":"Offer","url":"https://madelinestepien.bandcamp.com/track/a-scattering-sanded-pulse#t3972831481-buy","priceCurrency":"USD","price":2.0,"priceSpecification":{"minPrice":2.0},"availability":"OnlineOnly"},"musicReleaseFormat":"DigitalFormat","image":["https://f4.bcbits.com/img/a0869977637_10.jpg"]}],"albumReleaseType":"SingleRelease","@id":"https://madelinestepien.bandcamp.com/album/four-shame-induced-soliloquies","additionalProperty":[{"@type":"PropertyValue","name":"download_pref","value":2}]},"byArtist":{"@type":"MusicGroup","name":"madeline stepien","@id":"https://madelinestepien.bandcamp.com"},"publisher":{"@type":"MusicGroup","@id":"https://madelinestepien.bandcamp.com","name":"madeline stepien","additionalProperty":[{"@type":"PropertyValue","name":"band_id","value":2505888832},{"@type":"PropertyValue","name":"has_any_downloads","value":true},{"@type":"PropertyValue","name":"has_download_codes","value":true},{"@type":"PropertyValue","name":"image_height","value":1170},{"@type":"PropertyValue","name":"image_id","value":40727426},{"@type":"PropertyValue","name":"image_width","value":1775}],"image":"https://f4.bcbits.com/img/0040727426_10.jpg","genre":"https://bandcamp.com/discover/experimental","description":"⥀\n\nMadeline Stepien is a composer and artist based in New York City. Her work explores sound as a tool of perceptual and emotional manipulation. \n\nOperating under the alias “pent” from 2020-2024, she developed her practice through a plethora of live performances & recorded material that range from live interventions in club environments to fixed media installations.","subjectOf":[{"@type":"WebPage","url":"https://madelinestepien.bandcamp.com/music","name":"music","additionalProperty":[{"@type":"PropertyValue","name":"nav_type","value":"m"}]},{"@type":"WebPage","url":"https://madelinestepien.bandcamp.com/community","name":"community","additionalProperty":[{"@type":"PropertyValue","name":"nav_type","value":"c"}]}],"foundingLocation":{"@type":"Place","name":"New York, New York"}},"copyrightNotice":"All Rights Reserved","keywords":["Experimental","electroacoustic","experimental-electronic","noise","sound-art","New York"],"image":"https://f4.bcbits.com/img/a0869977637_10.jpg","sponsor":[{"@type":"Person","url":"https://bandcamp.com/arcuptune","image":"https://f4.bcbits.com/img/0040106617_50.jpg","additionalProperty":[{"@type":"PropertyValue","name":"image_id","value":40106617}],"name":"arcuptune"}],"mainEntityOfPage":"https://madelinestepien.bandcamp.com/track/a-scattering-sanded-pulse","@context":"https://schema.org"}
+        {"@type":"MusicRecording","@id":"https://babyford.bandcamp.com/track/beach-club-2","additionalProperty":[{"@type":"PropertyValue","name":"track_id","value":287192821},{"@type":"PropertyValue","name":"art_id","value":700595149},{"@type":"PropertyValue","name":"license_name","value":"all_rights_reserved"}],"name":"Beach Club","description":"w&p, mark broom & baby ford \nrecorded at lfach studio london 1995\nmastered by kevin metcalfe at the townhouse london\npreviously released on vinyl (ifach 011) \n℗+© ifach records 1995\n\n2024 vinyl reissue available,\nhttps://www.juno.co.uk/products/mark-broom-baby-ford-casino-classix-vinyl/979251-01/","duration":"P00H04M36S","dateModified":"22 Jan 2026 11:06:10 GMT","datePublished":"22 Jan 2026 11:06:11 GMT","inAlbum":{"@type":"MusicAlbum","name":"Beach Club","albumRelease":[{"@type":["MusicRelease","Product"],"@id":"https://babyford.bandcamp.com/track/beach-club-2","name":"Beach Club","additionalProperty":[{"@type":"PropertyValue","name":"item_id","value":287192821},{"@type":"PropertyValue","name":"item_type","value":"t"},{"@type":"PropertyValue","name":"selling_band_id","value":3275310411},{"@type":"PropertyValue","name":"type_name","value":"Digital"},{"@type":"PropertyValue","name":"art_id","value":700595149}],"description":"Includes high-quality download in MP3, FLAC and more. Paying supporters also get unlimited streaming via the free Bandcamp app.","offers":{"@type":"Offer","url":"https://babyford.bandcamp.com/track/beach-club-2#t287192821-buy","priceCurrency":"GBP","price":2.0,"priceSpecification":{"minPrice":2.0},"availability":"OnlineOnly"},"musicReleaseFormat":"DigitalFormat","image":["https://f4.bcbits.com/img/a0700595149_10.jpg"]},{"@type":["MusicRelease","Product"],"@id":"https://babyford.bandcamp.com/track/beach-club-2#b105396211","name":"full digital discography (97 releases)","additionalProperty":[{"@type":"PropertyValue","name":"item_id","value":105396211},{"@type":"PropertyValue","name":"item_type","value":"b"},{"@type":"PropertyValue","name":"selling_band_id","value":3275310411},{"@type":"PropertyValue","name":"type_name","value":"Digital"},{"@type":"PropertyValue","name":"art_id","value":700595149},{"@type":"PropertyValue","name":"is_bfd","value":true}],"offers":{"@type":"Offer","url":"https://babyford.bandcamp.com/track/beach-club-2#b105396211-buy","priceCurrency":"GBP","price":255.5,"priceSpecification":{"minPrice":255.5},"availability":"OnlineOnly","additionalProperty":[{"@type":"PropertyValue","name":"bundle_size","value":97},{"@type":"PropertyValue","name":"discount","value":0.3}]},"musicReleaseFormat":"DigitalFormat","image":["https://f4.bcbits.com/img/a0700595149_10.jpg"]}],"albumReleaseType":"SingleRelease","numTracks":1},"byArtist":{"@type":"MusicGroup","name":"Casino Classix"},"publisher":{"@type":"MusicGroup","@id":"https://babyford.bandcamp.com","name":"Baby Ford","additionalProperty":[{"@type":"PropertyValue","name":"band_id","value":3275310411},{"@type":"PropertyValue","name":"has_any_downloads","value":true},{"@type":"PropertyValue","name":"image_height","value":400},{"@type":"PropertyValue","name":"image_id","value":36541358},{"@type":"PropertyValue","name":"image_width","value":600}],"image":"https://f4.bcbits.com/img/0036541358_10.jpg","genre":"https://bandcamp.com/discover/electronic","description":"Electronic music producer, originally from Bolton, Greater Manchester who moved to London in 1985.\nFirst release, Oochy Koochy 12\" followed by FordTrax album in 1988.\nIfach/Trelik/Pal sl Record label runner","subjectOf":[{"@type":"WebPage","url":"https://babyford.bandcamp.com/music","name":"music","additionalProperty":[{"@type":"PropertyValue","name":"nav_type","value":"m"}]},{"@type":"WebPage","url":"https://babyford.bandcamp.com/community","name":"community","additionalProperty":[{"@type":"PropertyValue","name":"nav_type","value":"c"}]}],"foundingLocation":{"@type":"Place","name":"London, UK"}},"copyrightNotice":"All Rights Reserved","keywords":["Electronic","deep","experimental","minimal techno house","London"],"image":"https://f4.bcbits.com/img/a0700595149_10.jpg","sponsor":[{"@type":"Person","url":"https://bandcamp.com/soakedinmoonlight","image":"https://f4.bcbits.com/img/0033708842_50.jpg","additionalProperty":[{"@type":"PropertyValue","name":"image_id","value":33708842}],"name":"SwimmingInColour"},{"@type":"Person","url":"https://bandcamp.com/_123456789098765432","image":"https://f4.bcbits.com/img/0037913490_50.jpg","additionalProperty":[{"@type":"PropertyValue","name":"image_id","value":37913490}],"name":"mat"},{"@type":"Person","url":"https://bandcamp.com/feltwell","image":"https://f4.bcbits.com/img/0036143023_50.jpg","additionalProperty":[{"@type":"PropertyValue","name":"image_id","value":36143023}],"name":"Auth"},{"@type":"Person","url":"https://bandcamp.com/ollylawrence","image":"https://f4.bcbits.com/img/0042545852_50.jpg","additionalProperty":[{"@type":"PropertyValue","name":"image_id","value":42545852}],"name":"ODG"},{"@type":"Person","url":"https://bandcamp.com/cwebber","image":"https://f4.bcbits.com/img/0019129761_50.jpg","additionalProperty":[{"@type":"PropertyValue","name":"image_id","value":19129761}],"name":"cwebber"}],"mainEntityOfPage":"https://babyford.bandcamp.com/track/beach-club-2","@context":"https://schema.org"}
     </script>
 
 
     
         <script type="text/javascript"
-            nonce="gKrBtRG7Ljp44vqJgfNYJA=="
+            nonce="uXMvRCgs/qdZQTuv55InXw=="
             src="https://bandcamp.com/api/currency_data/1/javascript?when=1769965603"
-            data-band-currency="USD"
+            data-band-currency="GBP"
         ></script>
     
 
     
     
-        <script nonce="gKrBtRG7Ljp44vqJgfNYJA==" src="https://js.stripe.com/basil/stripe.js" async></script>
+        <script nonce="uXMvRCgs/qdZQTuv55InXw==" src="https://js.stripe.com/basil/stripe.js" async></script>
     
 
     
-<script type="text/javascript" nonce="gKrBtRG7Ljp44vqJgfNYJA==">
+<script type="text/javascript" nonce="uXMvRCgs/qdZQTuv55InXw==">
 window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.preloadQueue.push(Array.prototype.slice.call(arguments))},prePageViewCallbacks:[],afterPageView:function(e){this.prePageViewCallbacks.push(e)}},window.ScrollDepthTracker=function(){this.track=function(){}},window.ScrollDepthTracker.track=function(){}
 </script>
 
-    <script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/BCCookies_1/bccookies-fb37f2fdf1cf58b7b623df3dda68227d.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
-    <script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/global_head-574a8ace3b730e8b08ab6d298a4b10d3.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" data-vars="{&quot;debug&quot;:false,&quot;PRODUCTION&quot;:true,&quot;siteroot&quot;:&quot;https://bandcamp.com&quot;,&quot;static_siteroot&quot;:&quot;https://s4.bcbits.com&quot;,&quot;client_logging&quot;:{&quot;enabled&quot;:true,&quot;sampleRate&quot;:null},&quot;browser&quot;:{&quot;type&quot;:&quot;webkit&quot;,&quot;make&quot;:&quot;chrome&quot;,&quot;version&quot;:[144,0,0,0],&quot;platform&quot;:&quot;mac&quot;,&quot;grade&quot;:&quot;A&quot;,&quot;platform_name&quot;:&quot;&quot;,&quot;platform_closed&quot;:false,&quot;download_difficulty&quot;:&quot;easy&quot;,&quot;media_mode&quot;:&quot;desktop&quot;,&quot;mobile_app_compatible&quot;:false},&quot;client_template_globals&quot;:{&quot;siteroot&quot;:&quot;http://bandcamp.com&quot;,&quot;siteroot_https&quot;:&quot;https://bandcamp.com&quot;,&quot;siteroot_current&quot;:&quot;https://bandcamp.com&quot;,&quot;static_siteroot&quot;:&quot;https://s4.bcbits.com&quot;,&quot;is_https&quot;:true,&quot;image_siteroot&quot;:&quot;https://f4.bcbits.com&quot;,&quot;image_siteroot_https&quot;:&quot;https://f4.bcbits.com&quot;,&quot;image_formats&quot;:[{&quot;id&quot;:0,&quot;name&quot;:&quot;original&quot;,&quot;resize_algo&quot;:&quot;original&quot;,&quot;file_format&quot;:null},{&quot;id&quot;:1,&quot;name&quot;:&quot;fullsize&quot;,&quot;resize_algo&quot;:&quot;scrub&quot;,&quot;file_format&quot;:&quot;original&quot;},{&quot;id&quot;:2,&quot;name&quot;:&quot;art_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:350,&quot;height&quot;:350,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:3,&quot;name&quot;:&quot;art_thumbthumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:100,&quot;height&quot;:100,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:4,&quot;name&quot;:&quot;art_embedded_metadata&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:300,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:5,&quot;name&quot;:&quot;art_embedded_metadata_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:6,&quot;name&quot;:&quot;art_embedded_player&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:100,&quot;height&quot;:100,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:7,&quot;name&quot;:&quot;art_embedded_player_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:150,&quot;height&quot;:150,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:8,&quot;name&quot;:&quot;art_tags&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:124,&quot;height&quot;:124,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:9,&quot;name&quot;:&quot;art_tags_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:10,&quot;name&quot;:&quot;screen&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1200,&quot;height&quot;:1200,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:11,&quot;name&quot;:&quot;art_tag_search&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:172,&quot;height&quot;:172,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:12,&quot;name&quot;:&quot;art_artist_index&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:138,&quot;height&quot;:138,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:13,&quot;name&quot;:&quot;art_solo_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:380,&quot;height&quot;:380,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:14,&quot;name&quot;:&quot;art_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:368,&quot;height&quot;:368,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:15,&quot;name&quot;:&quot;art_feed_new_release&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:135,&quot;height&quot;:135,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:16,&quot;name&quot;:&quot;art_app_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:70,&quot;minsize&quot;:{&quot;size&quot;:30000,&quot;format&quot;:5}},{&quot;id&quot;:20,&quot;name&quot;:&quot;bio_screen&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1024,&quot;height&quot;:1024,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:21,&quot;name&quot;:&quot;bio_thumb&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:120,&quot;height&quot;:180,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:22,&quot;name&quot;:&quot;bio_navbar&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:25,&quot;height&quot;:25,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:23,&quot;name&quot;:&quot;bio_phone&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:300,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:24,&quot;name&quot;:&quot;bio_licensing&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:300,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:25,&quot;name&quot;:&quot;bio_app&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:70},{&quot;id&quot;:26,&quot;name&quot;:&quot;bio_subscribe&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:800,&quot;height&quot;:600,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:27,&quot;name&quot;:&quot;bio_subscribe2&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:715,&quot;height&quot;:402,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:28,&quot;name&quot;:&quot;bio_featured&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:768,&quot;height&quot;:432,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:29,&quot;name&quot;:&quot;bio_autocomplete&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:100,&quot;height&quot;:75,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:31,&quot;name&quot;:&quot;package_screen&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1024,&quot;height&quot;:1024,&quot;file_format&quot;:&quot;original&quot;},{&quot;id&quot;:32,&quot;name&quot;:&quot;package_solo_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:380,&quot;height&quot;:285,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:33,&quot;name&quot;:&quot;package_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:368,&quot;height&quot;:276,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:36,&quot;name&quot;:&quot;package_page&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:400,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:37,&quot;name&quot;:&quot;package_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:168,&quot;height&quot;:126,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:38,&quot;name&quot;:&quot;package_thumb_small&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:144,&quot;height&quot;:108,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:41,&quot;name&quot;:&quot;fan_bio_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:42,&quot;name&quot;:&quot;fan_bio_thumb_small&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;height&quot;:50,&quot;width&quot;:50,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:43,&quot;name&quot;:&quot;fan_banner&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;height&quot;:100,&quot;width&quot;:99999,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:44,&quot;name&quot;:&quot;fan_banner_2x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;height&quot;:200,&quot;width&quot;:99999,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:50,&quot;name&quot;:&quot;results_grid&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:140,&quot;height&quot;:140,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:65,&quot;name&quot;:&quot;tralbum_page_cover_art&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:70,&quot;minsize&quot;:{&quot;size&quot;:30000,&quot;format&quot;:69},&quot;anim_ok&quot;:true},{&quot;id&quot;:66,&quot;name&quot;:&quot;tralbum_page_cover_art_popup&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1200,&quot;height&quot;:1200,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:67,&quot;name&quot;:&quot;art_thumb_anim_ok&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:350,&quot;height&quot;:350,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:68,&quot;name&quot;:&quot;art_tags_large_anim_ok&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:69,&quot;name&quot;:&quot;art_embedded_metadata_large_anim_ok&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:70,&quot;name&quot;:&quot;tralbum_page_package_small&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:360,&quot;height&quot;:270,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;mozjpeg&quot;:true},{&quot;id&quot;:71,&quot;name&quot;:&quot;tralbum_page_package_large&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:720,&quot;height&quot;:540,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;mozjpeg&quot;:true},{&quot;id&quot;:100,&quot;name&quot;:&quot;custom_header_desktop&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:975,&quot;max_height&quot;:180,&quot;file_format&quot;:&quot;original&quot;,&quot;allow_transparency&quot;:true},{&quot;id&quot;:101,&quot;name&quot;:&quot;custom_header_paypal&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:750,&quot;height&quot;:90,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:120,&quot;name&quot;:&quot;custom_header_phone&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:640,&quot;max_height&quot;:124,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:130,&quot;name&quot;:&quot;design_background&quot;,&quot;resize_algo&quot;:&quot;scrub&quot;,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:140,&quot;name&quot;:&quot;subscribe_message&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:60,&quot;height&quot;:45,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:150,&quot;name&quot;:&quot;video_landscape&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:1280,&quot;height&quot;:720,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:151,&quot;name&quot;:&quot;video_portrait&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:720,&quot;height&quot;:1280,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:160,&quot;name&quot;:&quot;buy_full_email_thumb_montage&quot;,&quot;resize_algo&quot;:&quot;thumb_crop&quot;,&quot;width&quot;:60,&quot;height&quot;:100,&quot;left&quot;:40,&quot;top&quot;:0,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:161,&quot;name&quot;:&quot;buy_full_email_thumb_montage_release&quot;,&quot;resize_algo&quot;:&quot;thumb_crop&quot;,&quot;width&quot;:40,&quot;height&quot;:80,&quot;left&quot;:40,&quot;top&quot;:0,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:100},{&quot;id&quot;:165,&quot;name&quot;:&quot;ppp_email_gift_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb_composite&quot;,&quot;overlay_image&quot;:&quot;public/img/banner_email.png&quot;,&quot;x_offset&quot;:92,&quot;y_offset&quot;:0,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:100},{&quot;id&quot;:170,&quot;name&quot;:&quot;weekly_mobile_web&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:750,&quot;height&quot;:422,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:171,&quot;name&quot;:&quot;weekly_desktop&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1244,&quot;height&quot;:646,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:180,&quot;name&quot;:&quot;bcdaily_homepage_big&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1244,&quot;height&quot;:646,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:200,&quot;name&quot;:&quot;mobile_fan_banner_ios_3x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1125,&quot;height&quot;:420,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:201,&quot;name&quot;:&quot;mobile_fan_banner_ios_2x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:750,&quot;height&quot;:280,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:202,&quot;name&quot;:&quot;mobile_fan_banner_ios_1x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:375,&quot;height&quot;:140,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:203,&quot;name&quot;:&quot;mobile_fan_banner_android_xxxhdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1125,&quot;height&quot;:420,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:204,&quot;name&quot;:&quot;mobile_fan_banner_android_xxhdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:960,&quot;height&quot;:360,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:205,&quot;name&quot;:&quot;mobile_fan_banner_android_xhdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:640,&quot;height&quot;:240,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:206,&quot;name&quot;:&quot;mobile_fan_banner_android_hdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:480,&quot;height&quot;:180,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:207,&quot;name&quot;:&quot;mobile_fan_banner_android_mdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:320,&quot;height&quot;:120,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:220,&quot;name&quot;:&quot;newsletter_artist_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:900,&quot;height&quot;:468,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:300,&quot;name&quot;:&quot;grayscale_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:350,&quot;height&quot;:350,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;filter&quot;:&quot;grayscale&quot;},{&quot;id&quot;:499,&quot;name&quot;:&quot;art_app_large_webp&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;WEBP&quot;,&quot;quality&quot;:70}],&quot;custom_domains_active&quot;:true,&quot;base_port_str&quot;:null,&quot;sitedomain&quot;:&quot;bandcamp.com&quot;},&quot;matches_base_domain&quot;:true,&quot;crumb&quot;:&quot;01ca1ed184ee0fad0f9934301bc85c15&quot;,&quot;upload_info&quot;:{&quot;type&quot;:&quot;gcs&quot;},&quot;endpoint_mobilized&quot;:true}" data-validators="{&quot;contact&quot;:{&quot;name&quot;:{&quot;req&quot;:true},&quot;email&quot;:{&quot;req&quot;:true,&quot;match&quot;:&quot;(^)([^\\s\\(\\)\&quot;&#39;/&gt;&lt;,@]+@\\w([^\\s\\(\\)\&quot;&#39;/&gt;&lt;&amp;,@]*\\w)?\\.\\w[^\\s\\(\\)\&quot;&#39;/&gt;&lt;&amp;,@]*\\w)($)&quot;,&quot;message&quot;:&quot;Invalid email address.&quot;},&quot;subject&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:300},&quot;message&quot;:{&quot;req&quot;:true,&quot;type&quot;:&quot;text&quot;,&quot;min&quot;:1,&quot;max&quot;:1999},&quot;attachment_0_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_0_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_1_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_1_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_2_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_2_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_3_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_3_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_4_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_4_data&quot;:{&quot;type&quot;:&quot;text&quot;}}}" data-hide-params="[&quot;action&quot;,&quot;buy_id&quot;,&quot;no&quot;,&quot;permalink&quot;,&quot;from&quot;,&quot;pk&quot;,&quot;recipient&quot;,&quot;fan_id&quot;,&quot;label&quot;,&quot;tab&quot;,&quot;filter_band&quot;,&quot;campaign&quot;,&quot;external_follow&quot;,&quot;search_page_id&quot;,&quot;search_page_no&quot;,&quot;search_rank&quot;,&quot;search_match_part&quot;,&quot;search_item_type&quot;,&quot;search_item_id&quot;,&quot;search_sig&quot;,&quot;logged_out_menubar&quot;,&quot;logged_in_menubar&quot;,&quot;logged_in_mobile_menubar&quot;,&quot;logged_out_mobile_menubar&quot;,&quot;corp_header&quot;]"></script>
+    <script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/BCCookies_1/bccookies-fb37f2fdf1cf58b7b623df3dda68227d.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
+    <script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/global_head-574a8ace3b730e8b08ab6d298a4b10d3.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" data-vars="{&quot;debug&quot;:false,&quot;PRODUCTION&quot;:true,&quot;siteroot&quot;:&quot;https://bandcamp.com&quot;,&quot;static_siteroot&quot;:&quot;https://s4.bcbits.com&quot;,&quot;client_logging&quot;:{&quot;enabled&quot;:true,&quot;sampleRate&quot;:null},&quot;browser&quot;:{&quot;type&quot;:&quot;webkit&quot;,&quot;make&quot;:&quot;chrome&quot;,&quot;version&quot;:[144,0,0,0],&quot;platform&quot;:&quot;mac&quot;,&quot;grade&quot;:&quot;A&quot;,&quot;platform_name&quot;:&quot;&quot;,&quot;platform_closed&quot;:false,&quot;download_difficulty&quot;:&quot;easy&quot;,&quot;media_mode&quot;:&quot;desktop&quot;,&quot;mobile_app_compatible&quot;:false},&quot;client_template_globals&quot;:{&quot;siteroot&quot;:&quot;http://bandcamp.com&quot;,&quot;siteroot_https&quot;:&quot;https://bandcamp.com&quot;,&quot;siteroot_current&quot;:&quot;https://bandcamp.com&quot;,&quot;static_siteroot&quot;:&quot;https://s4.bcbits.com&quot;,&quot;is_https&quot;:true,&quot;image_siteroot&quot;:&quot;https://f4.bcbits.com&quot;,&quot;image_siteroot_https&quot;:&quot;https://f4.bcbits.com&quot;,&quot;image_formats&quot;:[{&quot;id&quot;:0,&quot;name&quot;:&quot;original&quot;,&quot;resize_algo&quot;:&quot;original&quot;,&quot;file_format&quot;:null},{&quot;id&quot;:1,&quot;name&quot;:&quot;fullsize&quot;,&quot;resize_algo&quot;:&quot;scrub&quot;,&quot;file_format&quot;:&quot;original&quot;},{&quot;id&quot;:2,&quot;name&quot;:&quot;art_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:350,&quot;height&quot;:350,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:3,&quot;name&quot;:&quot;art_thumbthumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:100,&quot;height&quot;:100,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:4,&quot;name&quot;:&quot;art_embedded_metadata&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:300,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:5,&quot;name&quot;:&quot;art_embedded_metadata_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:6,&quot;name&quot;:&quot;art_embedded_player&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:100,&quot;height&quot;:100,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:7,&quot;name&quot;:&quot;art_embedded_player_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:150,&quot;height&quot;:150,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:8,&quot;name&quot;:&quot;art_tags&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:124,&quot;height&quot;:124,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:9,&quot;name&quot;:&quot;art_tags_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:10,&quot;name&quot;:&quot;screen&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1200,&quot;height&quot;:1200,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:11,&quot;name&quot;:&quot;art_tag_search&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:172,&quot;height&quot;:172,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:12,&quot;name&quot;:&quot;art_artist_index&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:138,&quot;height&quot;:138,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:13,&quot;name&quot;:&quot;art_solo_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:380,&quot;height&quot;:380,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:14,&quot;name&quot;:&quot;art_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:368,&quot;height&quot;:368,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:15,&quot;name&quot;:&quot;art_feed_new_release&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:135,&quot;height&quot;:135,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:16,&quot;name&quot;:&quot;art_app_large&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:70,&quot;minsize&quot;:{&quot;size&quot;:30000,&quot;format&quot;:5}},{&quot;id&quot;:20,&quot;name&quot;:&quot;bio_screen&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1024,&quot;height&quot;:1024,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:21,&quot;name&quot;:&quot;bio_thumb&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:120,&quot;height&quot;:180,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:22,&quot;name&quot;:&quot;bio_navbar&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:25,&quot;height&quot;:25,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:23,&quot;name&quot;:&quot;bio_phone&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:300,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:24,&quot;name&quot;:&quot;bio_licensing&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:300,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:25,&quot;name&quot;:&quot;bio_app&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:70},{&quot;id&quot;:26,&quot;name&quot;:&quot;bio_subscribe&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:800,&quot;height&quot;:600,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:27,&quot;name&quot;:&quot;bio_subscribe2&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:715,&quot;height&quot;:402,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:28,&quot;name&quot;:&quot;bio_featured&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:768,&quot;height&quot;:432,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:29,&quot;name&quot;:&quot;bio_autocomplete&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:100,&quot;height&quot;:75,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:31,&quot;name&quot;:&quot;package_screen&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1024,&quot;height&quot;:1024,&quot;file_format&quot;:&quot;original&quot;},{&quot;id&quot;:32,&quot;name&quot;:&quot;package_solo_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:380,&quot;height&quot;:285,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:33,&quot;name&quot;:&quot;package_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:368,&quot;height&quot;:276,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:36,&quot;name&quot;:&quot;package_page&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:400,&quot;height&quot;:300,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:37,&quot;name&quot;:&quot;package_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:168,&quot;height&quot;:126,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:38,&quot;name&quot;:&quot;package_thumb_small&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:144,&quot;height&quot;:108,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:41,&quot;name&quot;:&quot;fan_bio_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:42,&quot;name&quot;:&quot;fan_bio_thumb_small&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;height&quot;:50,&quot;width&quot;:50,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:43,&quot;name&quot;:&quot;fan_banner&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;height&quot;:100,&quot;width&quot;:99999,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:44,&quot;name&quot;:&quot;fan_banner_2x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;height&quot;:200,&quot;width&quot;:99999,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:50,&quot;name&quot;:&quot;results_grid&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:140,&quot;height&quot;:140,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:65,&quot;name&quot;:&quot;tralbum_page_cover_art&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:70,&quot;minsize&quot;:{&quot;size&quot;:30000,&quot;format&quot;:69},&quot;anim_ok&quot;:true},{&quot;id&quot;:66,&quot;name&quot;:&quot;tralbum_page_cover_art_popup&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1200,&quot;height&quot;:1200,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:67,&quot;name&quot;:&quot;art_thumb_anim_ok&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:350,&quot;height&quot;:350,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:68,&quot;name&quot;:&quot;art_tags_large_anim_ok&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:69,&quot;name&quot;:&quot;art_embedded_metadata_large_anim_ok&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:70,&quot;name&quot;:&quot;tralbum_page_package_small&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:360,&quot;height&quot;:270,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;mozjpeg&quot;:true},{&quot;id&quot;:71,&quot;name&quot;:&quot;tralbum_page_package_large&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:720,&quot;height&quot;:540,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;mozjpeg&quot;:true},{&quot;id&quot;:100,&quot;name&quot;:&quot;custom_header_desktop&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:975,&quot;max_height&quot;:180,&quot;file_format&quot;:&quot;original&quot;,&quot;allow_transparency&quot;:true},{&quot;id&quot;:101,&quot;name&quot;:&quot;custom_header_paypal&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:750,&quot;height&quot;:90,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:120,&quot;name&quot;:&quot;custom_header_phone&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:640,&quot;max_height&quot;:124,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:130,&quot;name&quot;:&quot;design_background&quot;,&quot;resize_algo&quot;:&quot;scrub&quot;,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:140,&quot;name&quot;:&quot;subscribe_message&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:60,&quot;height&quot;:45,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:150,&quot;name&quot;:&quot;video_landscape&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:1280,&quot;height&quot;:720,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:151,&quot;name&quot;:&quot;video_portrait&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:720,&quot;height&quot;:1280,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:160,&quot;name&quot;:&quot;buy_full_email_thumb_montage&quot;,&quot;resize_algo&quot;:&quot;thumb_crop&quot;,&quot;width&quot;:60,&quot;height&quot;:100,&quot;left&quot;:40,&quot;top&quot;:0,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:161,&quot;name&quot;:&quot;buy_full_email_thumb_montage_release&quot;,&quot;resize_algo&quot;:&quot;thumb_crop&quot;,&quot;width&quot;:40,&quot;height&quot;:80,&quot;left&quot;:40,&quot;top&quot;:0,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:100},{&quot;id&quot;:165,&quot;name&quot;:&quot;ppp_email_gift_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb_composite&quot;,&quot;overlay_image&quot;:&quot;public/img/banner_email.png&quot;,&quot;x_offset&quot;:92,&quot;y_offset&quot;:0,&quot;width&quot;:210,&quot;height&quot;:210,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;quality&quot;:100},{&quot;id&quot;:170,&quot;name&quot;:&quot;weekly_mobile_web&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:750,&quot;height&quot;:422,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:171,&quot;name&quot;:&quot;weekly_desktop&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1244,&quot;height&quot;:646,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:180,&quot;name&quot;:&quot;bcdaily_homepage_big&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1244,&quot;height&quot;:646,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;anim_ok&quot;:true},{&quot;id&quot;:200,&quot;name&quot;:&quot;mobile_fan_banner_ios_3x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1125,&quot;height&quot;:420,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:201,&quot;name&quot;:&quot;mobile_fan_banner_ios_2x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:750,&quot;height&quot;:280,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:202,&quot;name&quot;:&quot;mobile_fan_banner_ios_1x&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:375,&quot;height&quot;:140,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:203,&quot;name&quot;:&quot;mobile_fan_banner_android_xxxhdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:1125,&quot;height&quot;:420,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:204,&quot;name&quot;:&quot;mobile_fan_banner_android_xxhdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:960,&quot;height&quot;:360,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:205,&quot;name&quot;:&quot;mobile_fan_banner_android_xhdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:640,&quot;height&quot;:240,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:206,&quot;name&quot;:&quot;mobile_fan_banner_android_hdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:480,&quot;height&quot;:180,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:207,&quot;name&quot;:&quot;mobile_fan_banner_android_mdpi&quot;,&quot;resize_algo&quot;:&quot;fit&quot;,&quot;width&quot;:320,&quot;height&quot;:120,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:220,&quot;name&quot;:&quot;newsletter_artist_feature&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:900,&quot;height&quot;:468,&quot;file_format&quot;:&quot;JPEG&quot;},{&quot;id&quot;:300,&quot;name&quot;:&quot;grayscale_thumb&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:350,&quot;height&quot;:350,&quot;file_format&quot;:&quot;JPEG&quot;,&quot;filter&quot;:&quot;grayscale&quot;},{&quot;id&quot;:499,&quot;name&quot;:&quot;art_app_large_webp&quot;,&quot;resize_algo&quot;:&quot;thumb&quot;,&quot;width&quot;:700,&quot;height&quot;:700,&quot;file_format&quot;:&quot;WEBP&quot;,&quot;quality&quot;:70}],&quot;custom_domains_active&quot;:true,&quot;base_port_str&quot;:null,&quot;sitedomain&quot;:&quot;bandcamp.com&quot;},&quot;matches_base_domain&quot;:true,&quot;crumb&quot;:&quot;01ca1ed184ee0fad0f9934301bc85c15&quot;,&quot;upload_info&quot;:{&quot;type&quot;:&quot;gcs&quot;},&quot;endpoint_mobilized&quot;:true}" data-validators="{&quot;contact&quot;:{&quot;name&quot;:{&quot;req&quot;:true},&quot;email&quot;:{&quot;req&quot;:true,&quot;match&quot;:&quot;(^)([^\\s\\(\\)\&quot;&#39;/&gt;&lt;,@]+@\\w([^\\s\\(\\)\&quot;&#39;/&gt;&lt;&amp;,@]*\\w)?\\.\\w[^\\s\\(\\)\&quot;&#39;/&gt;&lt;&amp;,@]*\\w)($)&quot;,&quot;message&quot;:&quot;Invalid email address.&quot;},&quot;subject&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:300},&quot;message&quot;:{&quot;req&quot;:true,&quot;type&quot;:&quot;text&quot;,&quot;min&quot;:1,&quot;max&quot;:1999},&quot;attachment_0_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_0_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_1_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_1_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_2_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_2_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_3_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_3_data&quot;:{&quot;type&quot;:&quot;text&quot;},&quot;attachment_4_filename&quot;:{&quot;type&quot;:&quot;text&quot;,&quot;max&quot;:255},&quot;attachment_4_data&quot;:{&quot;type&quot;:&quot;text&quot;}}}" data-hide-params="[&quot;action&quot;,&quot;buy_id&quot;,&quot;no&quot;,&quot;permalink&quot;,&quot;from&quot;,&quot;pk&quot;,&quot;recipient&quot;,&quot;fan_id&quot;,&quot;label&quot;,&quot;tab&quot;,&quot;filter_band&quot;,&quot;campaign&quot;,&quot;external_follow&quot;,&quot;search_page_id&quot;,&quot;search_page_no&quot;,&quot;search_rank&quot;,&quot;search_match_part&quot;,&quot;search_item_type&quot;,&quot;search_item_id&quot;,&quot;search_sig&quot;,&quot;logged_out_menubar&quot;,&quot;logged_in_menubar&quot;,&quot;logged_in_mobile_menubar&quot;,&quot;logged_out_mobile_menubar&quot;,&quot;corp_header&quot;]"></script>
 
     
   <script
     src="https://js.sentry-cdn.com/7c33659f530ef43fb4532fc6e83354dd.min.js"
     crossorigin="anonymous"
-    nonce="gKrBtRG7Ljp44vqJgfNYJA=="
+    nonce="uXMvRCgs/qdZQTuv55InXw=="
     id="sentry"
     data-config="{&quot;sentry&quot;:{&quot;dsn&quot;:&quot;https://7c33659f530ef43fb4532fc6e83354dd@o363271.ingest.us.sentry.io/4508223638732800&quot;,&quot;environment&quot;:&quot;production&quot;,&quot;release&quot;:&quot;trackpipe@c37293d825a2711e25588513f4e469c0774c82f2&quot;},&quot;userId&quot;:3736322262}"
   ></script>
@@ -2725,7 +2725,7 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
     
 
 
-    <script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/tralbum_head-30b31d9238f78073c67fc7597561a35c.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" data-cart="{&quot;currency&quot;:&quot;USD&quot;,&quot;country&quot;:&quot;US&quot;,&quot;us_state&quot;:null,&quot;us_zip&quot;:null,&quot;email&quot;:&quot;tammohesselink@gmail.com&quot;,&quot;payment_type&quot;:null,&quot;locale&quot;:null,&quot;is_default&quot;:true,&quot;country_name&quot;:&quot;United States&quot;,&quot;gift_balance&quot;:{&quot;amount&quot;:3525,&quot;currency&quot;:&quot;EUR&quot;,&quot;is_money&quot;:true}}" data-site="{&quot;supportEmail&quot;:&quot;support@madelinestepien.bandcamp.com&quot;,&quot;is_custom_domain&quot;:null,&quot;env&quot;:&quot;prod&quot;}" data-band="{&quot;id&quot;:2505888832,&quot;name&quot;:&quot;madeline stepien&quot;,&quot;fan_email&quot;:null,&quot;account_id&quot;:2967565139,&quot;facebook_like_enabled&quot;:1,&quot;has_discounts&quot;:true,&quot;image_id&quot;:40727426}" data-embed="{&quot;tralbum_param&quot;:{&quot;name&quot;:&quot;track&quot;,&quot;value&quot;:3972831481},&quot;art_id&quot;:869977637,&quot;artist&quot;:&quot;madeline stepien&quot;,&quot;swf_base_url&quot;:&quot;https://bandcamp.com&quot;,&quot;show_campaign&quot;:null,&quot;embed_info&quot;:{&quot;public_embeddable&quot;:true,&quot;exclusive_embeddable&quot;:false,&quot;item_public&quot;:true,&quot;no_track_preorder&quot;:false},&quot;linkback&quot;:&quot;https://madelinestepien.bandcamp.com/track/a-scattering-sanded-pulse&quot;,&quot;album_embed_data&quot;:{&quot;tralbum_param&quot;:{&quot;name&quot;:&quot;album&quot;,&quot;value&quot;:445172539},&quot;album_title&quot;:&quot;four shame induced soliloquies&quot;,&quot;linkback&quot;:&quot;https://madelinestepien.bandcamp.com/album/four-shame-induced-soliloquies&quot;,&quot;track_id&quot;:3972831481,&quot;art_id&quot;:869977637,&quot;artist&quot;:&quot;madeline stepien&quot;,&quot;swf_base_url&quot;:&quot;https://bandcamp.com&quot;,&quot;show_campaign&quot;:null,&quot;embed_info&quot;:{&quot;public_embeddable&quot;:true,&quot;exclusive_embeddable&quot;:false,&quot;item_public&quot;:true,&quot;no_track_preorder&quot;:false}},&quot;album_title&quot;:&quot;four shame induced soliloquies&quot;}" data-fan="{&quot;logged_in&quot;:true,&quot;name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;image_id&quot;:null}" data-band-follow-info="{&quot;fan_id&quot;:2105866,&quot;is_following&quot;:true,&quot;is_subscribed&quot;:null,&quot;show_follow_tooltip&quot;:null,&quot;fan_email&quot;:&quot;tammohesselink@gmail.com&quot;,&quot;fan_image_id&quot;:null,&quot;band_id&quot;:2505888832,&quot;band_image_id&quot;:40727426,&quot;tralbum_id&quot;:3972831481,&quot;tralbum_type&quot;:&quot;t&quot;}" data-tralbum-collect-info="{&quot;show_collect&quot;:true,&quot;is_collected&quot;:false,&quot;is_purchased&quot;:false,&quot;part_of_purchased_album&quot;:false,&quot;collect_item_id&quot;:3972831481,&quot;collect_band_id&quot;:2505888832,&quot;collect_item_type&quot;:&quot;track&quot;,&quot;fan_id&quot;:2105866,&quot;fan_trackpipe_url&quot;:&quot;https://bandcamp.com/asjldflkasdnfzivxniowen&quot;,&quot;show_wishlist_tooltip&quot;:null}" data-tralbum="{&quot;for the curious&quot;:&quot;https://bandcamp.com/help/audio_basics#steal https://bandcamp.com/terms_of_use&quot;,&quot;current&quot;:{&quot;audit&quot;:3,&quot;title&quot;:&quot;a scattering sanded pulse&quot;,&quot;new_date&quot;:&quot;31 Jan 2026 21:09:34 GMT&quot;,&quot;mod_date&quot;:&quot;31 Jan 2026 21:15:15 GMT&quot;,&quot;publish_date&quot;:&quot;31 Jan 2026 21:15:15 GMT&quot;,&quot;private&quot;:null,&quot;killed&quot;:null,&quot;download_pref&quot;:2,&quot;require_email&quot;:null,&quot;is_set_price&quot;:null,&quot;set_price&quot;:1.5,&quot;minimum_price&quot;:2.0,&quot;minimum_price_nonzero&quot;:2.0,&quot;require_email_0&quot;:null,&quot;artist&quot;:null,&quot;about&quot;:null,&quot;credits&quot;:null,&quot;auto_repriced&quot;:null,&quot;new_desc_format&quot;:1,&quot;band_id&quot;:2505888832,&quot;selling_band_id&quot;:2505888832,&quot;art_id&quot;:null,&quot;download_desc_id&quot;:null,&quot;track_number&quot;:2,&quot;release_date&quot;:null,&quot;file_name&quot;:null,&quot;lyrics&quot;:null,&quot;album_id&quot;:445172539,&quot;encodings_id&quot;:3598705388,&quot;pending_encodings_id&quot;:null,&quot;license_type&quot;:1,&quot;isrc&quot;:null,&quot;preorder_download&quot;:null,&quot;streaming&quot;:1,&quot;id&quot;:3972831481,&quot;type&quot;:&quot;track&quot;},&quot;preorder_count&quot;:null,&quot;hasAudio&quot;:true,&quot;art_id&quot;:869977637,&quot;packages&quot;:null,&quot;defaultPrice&quot;:1.5,&quot;freeDownloadPage&quot;:null,&quot;FREE&quot;:1,&quot;PAID&quot;:2,&quot;artist&quot;:&quot;madeline stepien&quot;,&quot;item_type&quot;:&quot;track&quot;,&quot;id&quot;:3972831481,&quot;last_subscription_item&quot;:null,&quot;has_discounts&quot;:false,&quot;is_bonus&quot;:null,&quot;play_cap_data&quot;:{&quot;streaming_limits_enabled&quot;:true,&quot;streaming_limit&quot;:3},&quot;is_purchased&quot;:false,&quot;items_purchased&quot;:{&quot;packages&quot;:{},&quot;bundles&quot;:{},&quot;crowdfunding_campaign&quot;:{}},&quot;is_private_stream&quot;:null,&quot;is_band_member&quot;:null,&quot;licensed_version_ids&quot;:null,&quot;package_associated_license_id&quot;:null,&quot;has_video&quot;:null,&quot;tralbum_subscriber_only&quot;:false,&quot;album_is_preorder&quot;:false,&quot;album_release_date&quot;:&quot;31 Jan 2026 00:00:00 GMT&quot;,&quot;trackinfo&quot;:[{&quot;id&quot;:3972831481,&quot;track_id&quot;:3972831481,&quot;file&quot;:{&quot;mp3-128&quot;:&quot;https://t4.bcbits.com/stream/19dac9e2d62089d9669948969a568b2e/mp3-128/3972831481?p=0&amp;ts=1770052589&amp;t=9f9e97f7db92e84b803c66277716e679f100e812&amp;token=1770052589_7481e06e60805581149cb06d7ba306bedf2b977b&quot;},&quot;artist&quot;:null,&quot;title&quot;:&quot;a scattering sanded pulse&quot;,&quot;encodings_id&quot;:3598705388,&quot;license_type&quot;:1,&quot;private&quot;:null,&quot;track_num&quot;:2,&quot;album_preorder&quot;:false,&quot;unreleased_track&quot;:false,&quot;title_link&quot;:&quot;/track/a-scattering-sanded-pulse&quot;,&quot;has_lyrics&quot;:false,&quot;has_info&quot;:false,&quot;streaming&quot;:1,&quot;is_downloadable&quot;:true,&quot;has_free_download&quot;:null,&quot;free_album_download&quot;:false,&quot;duration&quot;:293.301,&quot;lyrics&quot;:null,&quot;sizeof_lyrics&quot;:0,&quot;is_draft&quot;:false,&quot;video_source_type&quot;:null,&quot;video_source_id&quot;:null,&quot;video_mobile_url&quot;:null,&quot;video_poster_url&quot;:null,&quot;video_id&quot;:null,&quot;video_caption&quot;:null,&quot;video_featured&quot;:null,&quot;alt_link&quot;:null,&quot;encoding_error&quot;:null,&quot;encoding_pending&quot;:null,&quot;play_count&quot;:0,&quot;is_capped&quot;:false,&quot;track_license_id&quot;:null}],&quot;playing_from&quot;:&quot;track page&quot;,&quot;album_url&quot;:&quot;/album/four-shame-induced-soliloquies&quot;,&quot;album_upsell_url&quot;:&quot;/album/four-shame-induced-soliloquies&quot;,&quot;url&quot;:&quot;https://madelinestepien.bandcamp.com/track/a-scattering-sanded-pulse&quot;}" data-payment="{&quot;paymentType&quot;:null,&quot;paymentDownloadPage&quot;:null}" data-referrer-token="null"></script>
+    <script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/tralbum_head-30b31d9238f78073c67fc7597561a35c.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" data-cart="{&quot;currency&quot;:&quot;USD&quot;,&quot;country&quot;:&quot;US&quot;,&quot;us_state&quot;:null,&quot;us_zip&quot;:null,&quot;email&quot;:&quot;tammohesselink@gmail.com&quot;,&quot;payment_type&quot;:null,&quot;locale&quot;:null,&quot;is_default&quot;:true,&quot;country_name&quot;:&quot;United States&quot;,&quot;gift_balance&quot;:{&quot;amount&quot;:3525,&quot;currency&quot;:&quot;EUR&quot;,&quot;is_money&quot;:true}}" data-site="{&quot;supportEmail&quot;:&quot;support@babyford.bandcamp.com&quot;,&quot;is_custom_domain&quot;:null,&quot;env&quot;:&quot;prod&quot;}" data-band="{&quot;id&quot;:3275310411,&quot;name&quot;:&quot;Baby Ford&quot;,&quot;fan_email&quot;:null,&quot;account_id&quot;:2753764753,&quot;facebook_like_enabled&quot;:1,&quot;has_discounts&quot;:false,&quot;image_id&quot;:36541358}" data-embed="{&quot;tralbum_param&quot;:{&quot;name&quot;:&quot;track&quot;,&quot;value&quot;:287192821},&quot;art_id&quot;:700595149,&quot;artist&quot;:&quot;Casino Classix&quot;,&quot;swf_base_url&quot;:&quot;https://bandcamp.com&quot;,&quot;show_campaign&quot;:null,&quot;embed_info&quot;:{&quot;public_embeddable&quot;:true,&quot;exclusive_embeddable&quot;:false,&quot;item_public&quot;:&quot;22 Jan 2026 11:06:11 GMT&quot;,&quot;no_track_preorder&quot;:false},&quot;linkback&quot;:&quot;https://babyford.bandcamp.com/track/beach-club-2&quot;,&quot;title&quot;:&quot;Beach Club&quot;,&quot;numtracks&quot;:1}" data-fan="{&quot;logged_in&quot;:true,&quot;name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;image_id&quot;:null}" data-band-follow-info="{&quot;fan_id&quot;:2105866,&quot;is_following&quot;:true,&quot;is_subscribed&quot;:null,&quot;show_follow_tooltip&quot;:null,&quot;fan_email&quot;:&quot;tammohesselink@gmail.com&quot;,&quot;fan_image_id&quot;:null,&quot;band_id&quot;:3275310411,&quot;band_image_id&quot;:36541358,&quot;tralbum_id&quot;:287192821,&quot;tralbum_type&quot;:&quot;t&quot;}" data-tralbum-collect-info="{&quot;show_collect&quot;:true,&quot;is_collected&quot;:false,&quot;is_purchased&quot;:false,&quot;part_of_purchased_album&quot;:false,&quot;collect_item_id&quot;:287192821,&quot;collect_band_id&quot;:3275310411,&quot;collect_item_type&quot;:&quot;track&quot;,&quot;fan_id&quot;:2105866,&quot;fan_trackpipe_url&quot;:&quot;https://bandcamp.com/asjldflkasdnfzivxniowen&quot;,&quot;show_wishlist_tooltip&quot;:null}" data-tralbum="{&quot;for the curious&quot;:&quot;https://bandcamp.com/help/audio_basics#steal https://bandcamp.com/terms_of_use&quot;,&quot;current&quot;:{&quot;audit&quot;:26,&quot;title&quot;:&quot;Beach Club&quot;,&quot;new_date&quot;:&quot;10 Oct 2025 19:16:27 GMT&quot;,&quot;mod_date&quot;:&quot;22 Jan 2026 11:06:10 GMT&quot;,&quot;publish_date&quot;:&quot;22 Jan 2026 11:06:11 GMT&quot;,&quot;private&quot;:null,&quot;killed&quot;:null,&quot;download_pref&quot;:2,&quot;require_email&quot;:null,&quot;is_set_price&quot;:null,&quot;set_price&quot;:1.5,&quot;minimum_price&quot;:2.0,&quot;minimum_price_nonzero&quot;:2.0,&quot;require_email_0&quot;:null,&quot;artist&quot;:&quot;Casino Classix&quot;,&quot;about&quot;:&quot;w&amp;p, mark broom &amp; baby ford \nrecorded at lfach studio london 1995\nmastered by kevin metcalfe at the townhouse london\npreviously released on vinyl (ifach 011) \n℗+© ifach records 1995\n\n2024 vinyl reissue available,\nhttps://www.juno.co.uk/products/mark-broom-baby-ford-casino-classix-vinyl/979251-01/&quot;,&quot;credits&quot;:null,&quot;auto_repriced&quot;:null,&quot;new_desc_format&quot;:1,&quot;band_id&quot;:3275310411,&quot;selling_band_id&quot;:3275310411,&quot;art_id&quot;:700595149,&quot;download_desc_id&quot;:null,&quot;track_number&quot;:null,&quot;release_date&quot;:&quot;22 Jan 2026 11:06:11 GMT&quot;,&quot;file_name&quot;:null,&quot;lyrics&quot;:null,&quot;album_id&quot;:null,&quot;encodings_id&quot;:507771689,&quot;pending_encodings_id&quot;:null,&quot;license_type&quot;:1,&quot;isrc&quot;:null,&quot;preorder_download&quot;:null,&quot;streaming&quot;:1,&quot;id&quot;:287192821,&quot;type&quot;:&quot;track&quot;},&quot;preorder_count&quot;:null,&quot;hasAudio&quot;:true,&quot;art_id&quot;:700595149,&quot;packages&quot;:null,&quot;defaultPrice&quot;:1.5,&quot;freeDownloadPage&quot;:null,&quot;FREE&quot;:1,&quot;PAID&quot;:2,&quot;artist&quot;:&quot;Casino Classix&quot;,&quot;item_type&quot;:&quot;track&quot;,&quot;id&quot;:287192821,&quot;last_subscription_item&quot;:null,&quot;has_discounts&quot;:false,&quot;is_bonus&quot;:null,&quot;play_cap_data&quot;:{&quot;streaming_limits_enabled&quot;:true,&quot;streaming_limit&quot;:4},&quot;is_purchased&quot;:false,&quot;items_purchased&quot;:{&quot;packages&quot;:{},&quot;bundles&quot;:{},&quot;crowdfunding_campaign&quot;:{}},&quot;is_private_stream&quot;:null,&quot;is_band_member&quot;:null,&quot;licensed_version_ids&quot;:null,&quot;package_associated_license_id&quot;:null,&quot;has_video&quot;:null,&quot;tralbum_subscriber_only&quot;:null,&quot;album_is_preorder&quot;:null,&quot;album_release_date&quot;:null,&quot;trackinfo&quot;:[{&quot;id&quot;:287192821,&quot;track_id&quot;:287192821,&quot;file&quot;:{&quot;mp3-128&quot;:&quot;https://t4.bcbits.com/stream/d1857d4a444ae5d5150fe3a60ac9b25c/mp3-128/287192821?p=0&amp;ts=1770052763&amp;t=21f2cacf38bd66006c2c51d8a6a0b57048b0c87a&amp;token=1770052763_14ddeb926a9dde50e79626a76cdfcaf33ba853e3&quot;},&quot;artist&quot;:&quot;Casino Classix&quot;,&quot;title&quot;:&quot;Casino Classix - Beach Club&quot;,&quot;encodings_id&quot;:507771689,&quot;license_type&quot;:1,&quot;private&quot;:null,&quot;track_num&quot;:null,&quot;album_preorder&quot;:false,&quot;unreleased_track&quot;:false,&quot;title_link&quot;:&quot;/track/beach-club-2&quot;,&quot;has_lyrics&quot;:false,&quot;has_info&quot;:true,&quot;streaming&quot;:1,&quot;is_downloadable&quot;:true,&quot;has_free_download&quot;:null,&quot;free_album_download&quot;:false,&quot;duration&quot;:276.45,&quot;lyrics&quot;:null,&quot;sizeof_lyrics&quot;:0,&quot;is_draft&quot;:false,&quot;video_source_type&quot;:null,&quot;video_source_id&quot;:null,&quot;video_mobile_url&quot;:null,&quot;video_poster_url&quot;:null,&quot;video_id&quot;:null,&quot;video_caption&quot;:null,&quot;video_featured&quot;:null,&quot;alt_link&quot;:null,&quot;encoding_error&quot;:null,&quot;encoding_pending&quot;:null,&quot;play_count&quot;:0,&quot;is_capped&quot;:false,&quot;track_license_id&quot;:null}],&quot;playing_from&quot;:&quot;track page&quot;,&quot;album_url&quot;:null,&quot;album_upsell_url&quot;:null,&quot;url&quot;:&quot;https://babyford.bandcamp.com/track/beach-club-2&quot;}" data-payment="{&quot;paymentType&quot;:null,&quot;paymentDownloadPage&quot;:null}" data-referrer-token="null"></script>
 
     
     
@@ -2747,7 +2747,7 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
 
-<body class="webkit mac enable-cookie-control has-menubar tralbum-page has-rec-footer has-corpbanner2 " lang="en">
+<body class="webkit mac enable-cookie-control has-menubar tralbum-page invertIconography has-rec-footer has-corpbanner2 " lang="en">
 
 
 
@@ -3108,13 +3108,13 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
 
-<div id="pagedata" data-blob="{&quot;recaptcha_public_key&quot;:&quot;6LfhSPgSAAAAAPwto_qzHuwSmjgfrkg35xXXu_8K&quot;,&quot;invisible_recaptcha_public_key&quot;:&quot;6Ld7hz4UAAAAANlndw60vAheGUwN0Mb-qeWD_LHr&quot;,&quot;cfg&quot;:{&quot;menubar_autocomplete_enabled&quot;:true,&quot;use_elasticsearch_backed_search&quot;:true,&quot;new_search_api_service&quot;:true,&quot;search_tracking&quot;:true,&quot;single_sign_up&quot;:true,&quot;fan_signup_use_captcha&quot;:true,&quot;gift_cards&quot;:true,&quot;order_history&quot;:true,&quot;header_rework_2018&quot;:true,&quot;search_discovery_one_filter_desktop_only&quot;:true,&quot;search_discovery_one_filter_rollout&quot;:true,&quot;community&quot;:true,&quot;login_use_captcha&quot;:true,&quot;mobile_app&quot;:true,&quot;gifting&quot;:true,&quot;physical_gifting&quot;:true,&quot;physical_gifting_zip_regex&quot;:true,&quot;tralbum_login&quot;:true,&quot;no_flash_uploads&quot;:true,&quot;artist_subscriptions&quot;:true,&quot;video_sharing&quot;:true,&quot;open_signup&quot;:true,&quot;stream_buffer_duration_stats&quot;:true,&quot;fan_page_2017&quot;:true,&quot;band_navbar_update_2023&quot;:true,&quot;dsa_buy_dialog&quot;:true},&quot;identities&quot;:{&quot;user&quot;:{&quot;id&quot;:3736322262},&quot;ip_country_code&quot;:&quot;NL&quot;,&quot;fan&quot;:{&quot;id&quot;:2105866,&quot;username&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;photo&quot;:null,&quot;private&quot;:false,&quot;verified&quot;:true,&quot;url&quot;:&quot;https://bandcamp.com/asjldflkasdnfzivxniowen&quot;},&quot;is_page_band_member&quot;:null,&quot;subscribed_to_page_band&quot;:null,&quot;bands&quot;:[{&quot;id&quot;:4090423024,&quot;name&quot;:&quot;Tammo Hesselink&quot;,&quot;photo&quot;:35219164,&quot;trackpipe_url&quot;:&quot;https://tammohesselink.bandcamp.com&quot;,&quot;trackpipe_local_url&quot;:&quot;https://tammohesselink.bandcamp.com&quot;,&quot;trackpipe_url_https&quot;:&quot;https://tammohesselink.bandcamp.com&quot;,&quot;is_pro&quot;:1,&quot;has_service&quot;:false,&quot;service_name&quot;:null,&quot;service_url_fragment&quot;:null,&quot;is_label&quot;:false,&quot;lapsed_label&quot;:false,&quot;band_has_items&quot;:true}],&quot;partner&quot;:false,&quot;is_admin&quot;:false,&quot;labels&quot;:[],&quot;page_band&quot;:null,&quot;active_licenses&quot;:[]},&quot;signup_params&quot;:{},&quot;fan_onboarding&quot;:{&quot;tooltips&quot;:null,&quot;num_tooltips&quot;:0,&quot;tooltip_number&quot;:null,&quot;current_index&quot;:null,&quot;complete&quot;:true,&quot;show_collection_banner&quot;:false,&quot;show_feed_banner&quot;:false,&quot;show_verify_banner&quot;:false,&quot;first_wishlisted_item_title&quot;:null,&quot;first_wishlisted_item_type&quot;:null,&quot;first_purchased_item_title&quot;:null,&quot;first_purchased_item_type&quot;:null,&quot;template&quot;:null,&quot;email&quot;:&quot;tammohesselink@gmail.com&quot;,&quot;has_collection&quot;:false,&quot;has_seen_tooltips&quot;:false,&quot;show_first_wishlist_tooltip&quot;:false,&quot;deferred&quot;:null},&quot;templglobals&quot;:{&quot;endpoint_mobilized&quot;:true,&quot;is_phone&quot;:false},&quot;env&quot;:&quot;prod&quot;,&quot;localize_page&quot;:true,&quot;locale&quot;:&quot;en&quot;,&quot;languages&quot;:{&quot;en&quot;:&quot;English&quot;,&quot;de&quot;:&quot;Deutsch&quot;,&quot;es&quot;:&quot;Español&quot;,&quot;fr&quot;:&quot;Français&quot;,&quot;pt&quot;:&quot;Português&quot;,&quot;ja&quot;:&quot;日本語&quot;},&quot;help_center_url&quot;:&quot;https://get.bandcamp.help/hc/en-us&quot;,&quot;user_territory&quot;:null,&quot;sidebar_disco&quot;:{&quot;music_grid&quot;:true,&quot;discography_real_size&quot;:7,&quot;sidebar_max_size&quot;:12,&quot;sidebar_collapse_size&quot;:3},&quot;embed_info&quot;:{&quot;public_embeddable&quot;:true,&quot;exclusive_embeddable&quot;:false,&quot;item_public&quot;:true,&quot;no_track_preorder&quot;:false},&quot;fan_name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;fan_follows_label&quot;:false,&quot;login_bounce_url&quot;:false,&quot;lo_querystr&quot;:&quot;?action_sig=eabce75a22b4c0e28914df43297cb3b0&amp;action_url=https%3A%2F%2Fmadelinestepien.bandcamp.com%2Ftrack%2Fa-scattering-sanded-pulse&amp;band_id=2505888832&amp;item_id=3972831481&amp;item_type=track&quot;,&quot;fan_location_country&quot;:null,&quot;ip_location_country_code&quot;:&quot;NL&quot;,&quot;fan_tralbum_data&quot;:{&quot;band_id&quot;:2505888832,&quot;tralbum_type&quot;:&quot;t&quot;,&quot;tralbum_id&quot;:3972831481,&quot;fan_id&quot;:2105866,&quot;fan_username&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;fan_name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;fan_photo&quot;:null,&quot;is_purchased&quot;:false,&quot;is_wishlisted&quot;:false,&quot;part_of_purchased_album&quot;:false,&quot;follows_band&quot;:true,&quot;follows_label&quot;:false,&quot;subscribed_to_band&quot;:null,&quot;subscribed_to_selling_band&quot;:null,&quot;subscribed_to_licensor&quot;:null,&quot;member_of_band&quot;:false,&quot;fan_location&quot;:null,&quot;subscriptions_by_band_id&quot;:{},&quot;mod_date&quot;:null},&quot;track_id&quot;:3972831481,&quot;album_id&quot;:445172539,&quot;pgload_sample_rate&quot;:5,&quot;item_sellers&quot;:{&quot;2505888832&quot;:{&quot;id&quot;:2505888832,&quot;name&quot;:&quot;madeline stepien&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;max_price&quot;:1000.0,&quot;digital_vat_enabled&quot;:true,&quot;is_dsa_trader&quot;:false}},&quot;gift_card_balance&quot;:{&quot;amount&quot;:3525,&quot;currency&quot;:&quot;EUR&quot;,&quot;is_money&quot;:true},&quot;limited_checkout&quot;:false,&quot;show_buy_full_disco&quot;:null,&quot;payment_type&quot;:&quot;p&quot;,&quot;saved_card&quot;:{&quot;last4&quot;:&quot;7067&quot;,&quot;brand&quot;:&quot;MasterCard&quot;,&quot;brand_slug&quot;:&quot;mastercard&quot;},&quot;buyer_location&quot;:{&quot;country_code&quot;:&quot;NL&quot;,&quot;is_eu&quot;:true},&quot;launch_edit_design&quot;:false,&quot;rec_footer&quot;:{},&quot;show_tos_banner_layout&quot;:true}"></div>
+<div id="pagedata" data-blob="{&quot;recaptcha_public_key&quot;:&quot;6LfhSPgSAAAAAPwto_qzHuwSmjgfrkg35xXXu_8K&quot;,&quot;invisible_recaptcha_public_key&quot;:&quot;6Ld7hz4UAAAAANlndw60vAheGUwN0Mb-qeWD_LHr&quot;,&quot;cfg&quot;:{&quot;menubar_autocomplete_enabled&quot;:true,&quot;use_elasticsearch_backed_search&quot;:true,&quot;new_search_api_service&quot;:true,&quot;search_tracking&quot;:true,&quot;single_sign_up&quot;:true,&quot;fan_signup_use_captcha&quot;:true,&quot;gift_cards&quot;:true,&quot;order_history&quot;:true,&quot;header_rework_2018&quot;:true,&quot;search_discovery_one_filter_desktop_only&quot;:true,&quot;search_discovery_one_filter_rollout&quot;:true,&quot;community&quot;:true,&quot;login_use_captcha&quot;:true,&quot;mobile_app&quot;:true,&quot;gifting&quot;:true,&quot;physical_gifting&quot;:true,&quot;physical_gifting_zip_regex&quot;:true,&quot;tralbum_login&quot;:true,&quot;no_flash_uploads&quot;:true,&quot;artist_subscriptions&quot;:true,&quot;video_sharing&quot;:true,&quot;open_signup&quot;:true,&quot;stream_buffer_duration_stats&quot;:true,&quot;fan_page_2017&quot;:true,&quot;band_navbar_update_2023&quot;:true,&quot;dsa_buy_dialog&quot;:true},&quot;identities&quot;:{&quot;user&quot;:{&quot;id&quot;:3736322262},&quot;ip_country_code&quot;:&quot;NL&quot;,&quot;fan&quot;:{&quot;id&quot;:2105866,&quot;username&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;photo&quot;:null,&quot;private&quot;:false,&quot;verified&quot;:true,&quot;url&quot;:&quot;https://bandcamp.com/asjldflkasdnfzivxniowen&quot;},&quot;is_page_band_member&quot;:null,&quot;subscribed_to_page_band&quot;:null,&quot;bands&quot;:[{&quot;id&quot;:4090423024,&quot;name&quot;:&quot;Tammo Hesselink&quot;,&quot;photo&quot;:35219164,&quot;trackpipe_url&quot;:&quot;https://tammohesselink.bandcamp.com&quot;,&quot;trackpipe_local_url&quot;:&quot;https://tammohesselink.bandcamp.com&quot;,&quot;trackpipe_url_https&quot;:&quot;https://tammohesselink.bandcamp.com&quot;,&quot;is_pro&quot;:1,&quot;has_service&quot;:false,&quot;service_name&quot;:null,&quot;service_url_fragment&quot;:null,&quot;is_label&quot;:false,&quot;lapsed_label&quot;:false,&quot;band_has_items&quot;:true}],&quot;partner&quot;:false,&quot;is_admin&quot;:false,&quot;labels&quot;:[],&quot;page_band&quot;:null,&quot;active_licenses&quot;:[]},&quot;signup_params&quot;:{},&quot;fan_onboarding&quot;:{&quot;tooltips&quot;:null,&quot;num_tooltips&quot;:0,&quot;tooltip_number&quot;:null,&quot;current_index&quot;:null,&quot;complete&quot;:true,&quot;show_collection_banner&quot;:false,&quot;show_feed_banner&quot;:false,&quot;show_verify_banner&quot;:false,&quot;first_wishlisted_item_title&quot;:null,&quot;first_wishlisted_item_type&quot;:null,&quot;first_purchased_item_title&quot;:null,&quot;first_purchased_item_type&quot;:null,&quot;template&quot;:null,&quot;email&quot;:&quot;tammohesselink@gmail.com&quot;,&quot;has_collection&quot;:false,&quot;has_seen_tooltips&quot;:false,&quot;show_first_wishlist_tooltip&quot;:false,&quot;deferred&quot;:null},&quot;templglobals&quot;:{&quot;endpoint_mobilized&quot;:true,&quot;is_phone&quot;:false},&quot;env&quot;:&quot;prod&quot;,&quot;localize_page&quot;:true,&quot;locale&quot;:&quot;en&quot;,&quot;languages&quot;:{&quot;en&quot;:&quot;English&quot;,&quot;de&quot;:&quot;Deutsch&quot;,&quot;es&quot;:&quot;Español&quot;,&quot;fr&quot;:&quot;Français&quot;,&quot;pt&quot;:&quot;Português&quot;,&quot;ja&quot;:&quot;日本語&quot;},&quot;help_center_url&quot;:&quot;https://get.bandcamp.help/hc/en-us&quot;,&quot;user_territory&quot;:null,&quot;sidebar_disco&quot;:{&quot;music_grid&quot;:true,&quot;discography_real_size&quot;:97,&quot;sidebar_max_size&quot;:12,&quot;sidebar_collapse_size&quot;:3},&quot;embed_info&quot;:{&quot;public_embeddable&quot;:true,&quot;exclusive_embeddable&quot;:false,&quot;item_public&quot;:&quot;22 Jan 2026 11:06:11 GMT&quot;,&quot;no_track_preorder&quot;:false},&quot;fan_name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;fan_follows_label&quot;:false,&quot;login_bounce_url&quot;:false,&quot;lo_querystr&quot;:&quot;?action_sig=1c3fa7792c86d61e4417ccff3c749d82&amp;action_url=https%3A%2F%2Fbabyford.bandcamp.com%2Ftrack%2Fbeach-club-2%3Futm_source%3Dtrack_release%26utm_medium%3Demail%26utm_content%3Dfanpub_fnb_trk%26utm_campaign%3Dbabyford%252Btrack%252Bbeach-club-2&amp;band_id=3275310411&amp;item_id=287192821&amp;item_type=track&quot;,&quot;fan_location_country&quot;:null,&quot;ip_location_country_code&quot;:&quot;NL&quot;,&quot;fan_tralbum_data&quot;:{&quot;band_id&quot;:3275310411,&quot;tralbum_type&quot;:&quot;t&quot;,&quot;tralbum_id&quot;:287192821,&quot;fan_id&quot;:2105866,&quot;fan_username&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;fan_name&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;fan_photo&quot;:null,&quot;is_purchased&quot;:false,&quot;is_wishlisted&quot;:false,&quot;part_of_purchased_album&quot;:false,&quot;follows_band&quot;:true,&quot;follows_label&quot;:false,&quot;subscribed_to_band&quot;:null,&quot;subscribed_to_selling_band&quot;:null,&quot;subscribed_to_licensor&quot;:null,&quot;member_of_band&quot;:false,&quot;fan_location&quot;:null,&quot;subscriptions_by_band_id&quot;:{},&quot;mod_date&quot;:null},&quot;track_id&quot;:287192821,&quot;album_id&quot;:null,&quot;pgload_sample_rate&quot;:5,&quot;item_sellers&quot;:{&quot;3275310411&quot;:{&quot;id&quot;:3275310411,&quot;name&quot;:&quot;Baby Ford&quot;,&quot;currency&quot;:&quot;GBP&quot;,&quot;max_price&quot;:1000.0,&quot;digital_vat_enabled&quot;:true,&quot;is_dsa_trader&quot;:false}},&quot;gift_card_balance&quot;:{&quot;amount&quot;:3525,&quot;currency&quot;:&quot;EUR&quot;,&quot;is_money&quot;:true},&quot;limited_checkout&quot;:false,&quot;show_buy_full_disco&quot;:true,&quot;buyfulldisco&quot;:{&quot;bundle_id&quot;:105396211,&quot;enabled&quot;:1,&quot;is_set_price&quot;:null,&quot;full_price&quot;:365.0,&quot;price&quot;:255.5,&quot;discount&quot;:0.3,&quot;has_sub_only_items&quot;:null,&quot;has_free_tralbums&quot;:null,&quot;n_discount_codes&quot;:0,&quot;tralbum_count&quot;:97,&quot;tralbums&quot;:[{&quot;title&quot;:&quot;Beach Club&quot;,&quot;page_url&quot;:&quot;/track/beach-club-2&quot;,&quot;art_id&quot;:700595149,&quot;item_id&quot;:287192821,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Trelik Volume 1&quot;,&quot;page_url&quot;:&quot;/album/trelik-volume-1&quot;,&quot;art_id&quot;:1569503928,&quot;item_id&quot;:3295550061,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:9.5},{&quot;title&quot;:&quot;Third Kind&quot;,&quot;page_url&quot;:&quot;/track/third-kind&quot;,&quot;art_id&quot;:2804829401,&quot;item_id&quot;:3253711785,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;RTDC (Mark Broom Mix / Soul Capsule Unreleased Remixes)&quot;,&quot;page_url&quot;:&quot;/album/rtdc-mark-broom-mix-soul-capsule-unreleased-remixes&quot;,&quot;art_id&quot;:1253277920,&quot;item_id&quot;:3629637672,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.0},{&quot;title&quot;:&quot;Milky Très / Chikki Chikki Ahh Ahh (AC&#39;s 2025 Remaster)&quot;,&quot;page_url&quot;:&quot;/track/milky-tr-s-chikki-chikki-ahh-ahh-acs-2025-remaster&quot;,&quot;art_id&quot;:2637009078,&quot;item_id&quot;:2127629172,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Callers Theme&quot;,&quot;page_url&quot;:&quot;/track/callers-theme&quot;,&quot;art_id&quot;:3682551372,&quot;item_id&quot;:4239506551,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Them Yeah&quot;,&quot;page_url&quot;:&quot;/track/them-yeah&quot;,&quot;art_id&quot;:2506839177,&quot;item_id&quot;:3344510402,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;After Shock&quot;,&quot;page_url&quot;:&quot;/track/after-shock&quot;,&quot;art_id&quot;:774780463,&quot;item_id&quot;:502578244,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;FordTrax Vol.2 ( Alex Celler&#39;s Extended Edits ) Previously Unreleased LP&quot;,&quot;page_url&quot;:&quot;/album/fordtrax-vol-2-alex-cellers-extended-edits-previously-unreleased-lp&quot;,&quot;art_id&quot;:185079611,&quot;item_id&quot;:1295825502,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:10.0},{&quot;title&quot;:&quot;FordTrax (Mark Broom Edit)  Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/fordtrax-mark-broom-edit-previously-unreleased&quot;,&quot;art_id&quot;:2700319287,&quot;item_id&quot;:1831748092,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.5},{&quot;title&quot;:&quot;Chevy / Rain Tower&quot;,&quot;page_url&quot;:&quot;/album/chevy-rain-tower&quot;,&quot;art_id&quot;:3368359861,&quot;item_id&quot;:2039872932,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Reprise (Alex Celler&#39;s 8:08 Club Edit) - Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/reprise-alex-cellers-8-08-club-edit-previously-unreleased&quot;,&quot;art_id&quot;:1685050132,&quot;item_id&quot;:1034805752,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.5},{&quot;title&quot;:&quot;Spooked&quot;,&quot;page_url&quot;:&quot;/track/spooked-2&quot;,&quot;art_id&quot;:855016985,&quot;item_id&quot;:3305243936,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Lost Secret&quot;,&quot;page_url&quot;:&quot;/track/lost-secret&quot;,&quot;art_id&quot;:3356147997,&quot;item_id&quot;:1173772008,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Gently (Baby Ford &amp; Dazmos&#39;s &#39;Falling To Pieces&#39; Mix) Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/gently-baby-ford-dazmoss-falling-to-pieces-mix-previously-unreleased&quot;,&quot;art_id&quot;:3074636097,&quot;item_id&quot;:1916360373,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Check Your Buddha (Groovin&#39; Mix)&quot;,&quot;page_url&quot;:&quot;/track/check-your-buddha-groovin-mix&quot;,&quot;art_id&quot;:3884105672,&quot;item_id&quot;:801733763,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Crashing (AC&#39;s 9:09 Edit) Previously Unreleased &amp; (Original Version)&quot;,&quot;page_url&quot;:&quot;/album/crashing-acs-9-09-edit-previously-unreleased-original-version&quot;,&quot;art_id&quot;:2555704977,&quot;item_id&quot;:249940806,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.5},{&quot;title&quot;:&quot;Vision&quot;,&quot;page_url&quot;:&quot;/track/vision&quot;,&quot;art_id&quot;:1683651870,&quot;item_id&quot;:1558986373,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Time Tourism (Baby Ford&#39;s Rain Charmaine / Belmont Club Mix / Diorama Dub) - Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/album/time-tourism-baby-fords-rain-charmaine-belmont-club-mix-diorama-dub-previously-unreleased&quot;,&quot;art_id&quot;:1386049080,&quot;item_id&quot;:1443011809,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.0},{&quot;title&quot;:&quot;Coburn&quot;,&quot;page_url&quot;:&quot;/track/coburn&quot;,&quot;art_id&quot;:2716915786,&quot;item_id&quot;:1657676364,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Slippery Elm EP  (Previously Unreleased)&quot;,&quot;page_url&quot;:&quot;/album/slippery-elm-ep-previously-unreleased&quot;,&quot;art_id&quot;:264233076,&quot;item_id&quot;:1072974327,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:5.0},{&quot;title&quot;:&quot;Le Mur (Baby Ford&#39;s &#39;House Of Cards &amp; Dogtown Unreleased Remixes&#39;)&quot;,&quot;page_url&quot;:&quot;/album/le-mur-baby-fords-house-of-cards-dogtown-unreleased-remixes&quot;,&quot;art_id&quot;:1907750901,&quot;item_id&quot;:2233073111,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:5.0},{&quot;title&quot;:&quot;YHIAR&quot;,&quot;page_url&quot;:&quot;/track/yhiar&quot;,&quot;art_id&quot;:2738264591,&quot;item_id&quot;:847606920,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Uff  (Melchior Productions Ltd Unedited Version) Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/uff-melchior-productions-ltd-unedited-version-previously-unreleased&quot;,&quot;art_id&quot;:1822530783,&quot;item_id&quot;:1312419092,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;In Your Blood (Original Demo Version)&quot;,&quot;page_url&quot;:&quot;/track/in-your-blood-original-demo-version-2&quot;,&quot;art_id&quot;:2009339222,&quot;item_id&quot;:2282740591,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Ford Trax LP (Colin Faver&#39;s 1988 &#39;Special Mix&#39;)&quot;,&quot;page_url&quot;:&quot;/album/ford-trax-lp-colin-favers-1988-special-mix&quot;,&quot;art_id&quot;:1094136435,&quot;item_id&quot;:1399857086,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.5},{&quot;title&quot;:&quot;Getting There (Yookay 2 Day Mix) Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/getting-there-yookay-2-day-mix-previously-unreleased&quot;,&quot;art_id&quot;:1681757630,&quot;item_id&quot;:2036564201,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;UGold 2 EP&quot;,&quot;page_url&quot;:&quot;/album/ugold-2-ep&quot;,&quot;art_id&quot;:1002486433,&quot;item_id&quot;:2235911658,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.0},{&quot;title&quot;:&quot;Hot Pot&quot;,&quot;page_url&quot;:&quot;/track/hot-pot&quot;,&quot;art_id&quot;:3729404810,&quot;item_id&quot;:3597947110,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;birds LP&quot;,&quot;page_url&quot;:&quot;/album/birds-lp&quot;,&quot;art_id&quot;:808550315,&quot;item_id&quot;:143596062,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:6.0},{&quot;title&quot;:&quot;Walk-ins / Airbug&quot;,&quot;page_url&quot;:&quot;/album/walk-ins-airbug&quot;,&quot;art_id&quot;:3684834215,&quot;item_id&quot;:3727877879,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Seekers EP (Villalobos Remix / Original Version)&quot;,&quot;page_url&quot;:&quot;/album/seekers-ep-villalobos-remix-original-version&quot;,&quot;art_id&quot;:1509444424,&quot;item_id&quot;:2215557359,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.5},{&quot;title&quot;:&quot;Texas Sun EP&quot;,&quot;page_url&quot;:&quot;/album/texas-sun-ep&quot;,&quot;art_id&quot;:1790042340,&quot;item_id&quot;:2954332825,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Gurner / Coupe Savage&quot;,&quot;page_url&quot;:&quot;/album/gurner-coupe-savage&quot;,&quot;art_id&quot;:588508483,&quot;item_id&quot;:523398333,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Lady Science / Overcome (D&amp;M 2012 Remasters) Lady Science (MB&#39;s Respect The Sunrise Mix)&quot;,&quot;page_url&quot;:&quot;/album/lady-science-overcome-d-m-2012-remasters-lady-science-mbs-respect-the-sunrise-mix&quot;,&quot;art_id&quot;:3270301157,&quot;item_id&quot;:2314866199,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:6.0},{&quot;title&quot;:&quot;Rock Tek Da City&quot;,&quot;page_url&quot;:&quot;/track/rock-tek-da-city-2&quot;,&quot;art_id&quot;:1579434465,&quot;item_id&quot;:1248755415,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Variety Club / Until The End Pt.1 &amp; Pt.2&quot;,&quot;page_url&quot;:&quot;/album/variety-club-until-the-end-pt-1-pt-2&quot;,&quot;art_id&quot;:2704582913,&quot;item_id&quot;:495857171,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.0},{&quot;title&quot;:&quot;Be Gene&quot;,&quot;page_url&quot;:&quot;/album/be-gene&quot;,&quot;art_id&quot;:3367614627,&quot;item_id&quot;:988445044,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Treatment Feel (Soul Capsule&#39;s &#39;Joy Mix&#39;) Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/treatment-feel-soul-capsules-joy-mix-previously-unreleased&quot;,&quot;art_id&quot;:2878905116,&quot;item_id&quot;:922768818,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.5},{&quot;title&quot;:&quot;GT Organ (Alex Celler Remaster) Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/gt-organ-alex-celler-remaster-previously-unreleased&quot;,&quot;art_id&quot;:4125716079,&quot;item_id&quot;:1191984214,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.5},{&quot;title&quot;:&quot;Deep Dawn EP&quot;,&quot;page_url&quot;:&quot;/album/deep-dawn-ep&quot;,&quot;art_id&quot;:1792014830,&quot;item_id&quot;:2805523668,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Off The Man&quot;,&quot;page_url&quot;:&quot;/track/off-the-man&quot;,&quot;art_id&quot;:3577123059,&quot;item_id&quot;:411949506,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Oochy Koochy (1988 Demo Version) Previously Unreleased&quot;,&quot;page_url&quot;:&quot;/track/oochy-koochy-1988-demo-version-previously-unreleased&quot;,&quot;art_id&quot;:2481194426,&quot;item_id&quot;:3259183956,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Chicken Store (TR/12 Version)&quot;,&quot;page_url&quot;:&quot;/track/chicken-store-tr-12-version&quot;,&quot;art_id&quot;:102128053,&quot;item_id&quot;:1224942759,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Law Of Grace / Meltdown / Lady Science (Tek Mix)&quot;,&quot;page_url&quot;:&quot;/album/law-of-grace-meltdown-lady-science-tek-mix&quot;,&quot;art_id&quot;:457151123,&quot;item_id&quot;:1030796902,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.5},{&quot;title&quot;:&quot;Pukka Your Lips&quot;,&quot;page_url&quot;:&quot;/track/pukka-your-lips&quot;,&quot;art_id&quot;:1062171565,&quot;item_id&quot;:3120252609,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Satellite Stroll (Edge Of The Night Mix)&quot;,&quot;page_url&quot;:&quot;/track/satellite-stroll-edge-of-the-night-mix&quot;,&quot;art_id&quot;:4212446709,&quot;item_id&quot;:4214667523,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Come On With Me&quot;,&quot;page_url&quot;:&quot;/album/come-on-with-me&quot;,&quot;art_id&quot;:3844601368,&quot;item_id&quot;:1474543572,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Dead Eye V.1&quot;,&quot;page_url&quot;:&quot;/track/dead-eye-v-1&quot;,&quot;art_id&quot;:3627883205,&quot;item_id&quot;:2326232450,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.0},{&quot;title&quot;:&quot;Chaser / Long John&quot;,&quot;page_url&quot;:&quot;/album/chaser-long-john&quot;,&quot;art_id&quot;:2936012201,&quot;item_id&quot;:311406317,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Westway / Tin Of Worms&quot;,&quot;page_url&quot;:&quot;/album/westway-tin-of-worms&quot;,&quot;art_id&quot;:3917323474,&quot;item_id&quot;:29850823,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Coyote Flux EP&quot;,&quot;page_url&quot;:&quot;/album/coyote-flux-ep&quot;,&quot;art_id&quot;:4208032727,&quot;item_id&quot;:1900993620,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:5.0},{&quot;title&quot;:&quot;Clean Hands / For How Long&quot;,&quot;page_url&quot;:&quot;/album/clean-hands-for-how-long&quot;,&quot;art_id&quot;:832613868,&quot;item_id&quot;:3813116423,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Ambo / Claypool / Eggs Is Eggs&quot;,&quot;page_url&quot;:&quot;/album/ambo-claypool-eggs-is-eggs&quot;,&quot;art_id&quot;:667234756,&quot;item_id&quot;:442260747,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.0},{&quot;title&quot;:&quot;Swings &amp; Ladders (Previously Unreleased)&quot;,&quot;page_url&quot;:&quot;/track/swings-ladders-previously-unreleased&quot;,&quot;art_id&quot;:1378262477,&quot;item_id&quot;:61907133,&quot;item_type&quot;:&quot;t&quot;,&quot;preorder&quot;:null,&quot;price&quot;:2.5},{&quot;title&quot;:&quot;Las Ramblas EP&quot;,&quot;page_url&quot;:&quot;/album/las-ramblas-ep&quot;,&quot;art_id&quot;:2850261166,&quot;item_id&quot;:1397680041,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:4.5},{&quot;title&quot;:&quot;Overcome / Lady Science (NYC Sunrise) / Lady Science (Tek Mix) &#39;Original Jon Davis 1999  Masters&#39;&quot;,&quot;page_url&quot;:&quot;/album/overcome-lady-science-nyc-sunrise-lady-science-tek-mix-original-jon-davis-1999-masters&quot;,&quot;art_id&quot;:136407509,&quot;item_id&quot;:2592108109,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:5.0},{&quot;title&quot;:&quot;Tantric Pt.1 / Tantric Pt.2 / Six Of One Pt.1 / Six Of One Pt.2&quot;,&quot;page_url&quot;:&quot;/album/tantric-pt-1-tantric-pt-2-six-of-one-pt-1-six-of-one-pt-2&quot;,&quot;art_id&quot;:4181913276,&quot;item_id&quot;:27017566,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:5.0},{&quot;title&quot;:&quot;Yohm / Emojerk&quot;,&quot;page_url&quot;:&quot;/album/yohm-emojerk&quot;,&quot;art_id&quot;:3724959634,&quot;item_id&quot;:821247151,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0},{&quot;title&quot;:&quot;Bad Schandau / Laguna Loon&quot;,&quot;page_url&quot;:&quot;/album/bad-schandau-laguna-loon&quot;,&quot;art_id&quot;:939753604,&quot;item_id&quot;:4007094616,&quot;item_type&quot;:&quot;a&quot;,&quot;preorder&quot;:null,&quot;price&quot;:3.0}],&quot;selling_band_id&quot;:3275310411,&quot;band_name&quot;:&quot;Baby Ford&quot;,&quot;title&quot;:&quot;full digital discography (97 releases)&quot;,&quot;art_id&quot;:700595149},&quot;max_price&quot;:1000.0,&quot;price&quot;:255.5,&quot;payment_type&quot;:&quot;p&quot;,&quot;saved_card&quot;:{&quot;last4&quot;:&quot;7067&quot;,&quot;brand&quot;:&quot;MasterCard&quot;,&quot;brand_slug&quot;:&quot;mastercard&quot;},&quot;buyer_location&quot;:{&quot;country_code&quot;:&quot;NL&quot;,&quot;is_eu&quot;:true},&quot;launch_edit_design&quot;:false,&quot;rec_footer&quot;:{},&quot;show_tos_banner_layout&quot;:true}"></div>
 
 
     <div class='menu-bar-wrapper'>
         <menu-bar
-            page-context="{&quot;env&quot;:&quot;production&quot;,&quot;colorScheme&quot;:&quot;light&quot;,&quot;identity&quot;:{&quot;userId&quot;:3736322262,&quot;adminLevel&quot;:0,&quot;fanId&quot;:2105866,&quot;fanUsername&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;isFanPrivate&quot;:false,&quot;isFanVerified&quot;:true,&quot;isImpersonating&quot;:false,&quot;isLoggedIn&quot;:true,&quot;isAdmin&quot;:false},&quot;isMobile&quot;:false,&quot;pageBand&quot;:{&quot;bandId&quot;:2505888832,&quot;currentUserRole&quot;:null,&quot;googleAnalyticsId&quot;:null},&quot;recaptchaPublicKey&quot;:&quot;6Ld7hz4UAAAAANlndw60vAheGUwN0Mb-qeWD_LHr&quot;,&quot;sentryConfig&quot;:&quot;{\&quot;sentry\&quot;:{\&quot;dsn\&quot;:\&quot;https://7c33659f530ef43fb4532fc6e83354dd@o363271.ingest.us.sentry.io/4508223638732800\&quot;,\&quot;environment\&quot;:\&quot;production\&quot;,\&quot;release\&quot;:\&quot;trackpipe@c37293d825a2711e25588513f4e469c0774c82f2\&quot;},\&quot;userId\&quot;:3736322262}&quot;,&quot;fanId&quot;:2105866,&quot;isAdmin&quot;:false,&quot;userId&quot;:3736322262,&quot;isLoggedIn&quot;:true,&quot;languages&quot;:{&quot;en&quot;:&quot;English&quot;,&quot;de&quot;:&quot;Deutsch&quot;,&quot;es&quot;:&quot;Español&quot;,&quot;fr&quot;:&quot;Français&quot;,&quot;pt&quot;:&quot;Português&quot;,&quot;ja&quot;:&quot;日本語&quot;},&quot;bcStrings&quot;:null,&quot;isPageMobilized&quot;:true}"
-            color-scheme=""
+            page-context="{&quot;env&quot;:&quot;production&quot;,&quot;colorScheme&quot;:&quot;light&quot;,&quot;identity&quot;:{&quot;userId&quot;:3736322262,&quot;adminLevel&quot;:0,&quot;fanId&quot;:2105866,&quot;fanUsername&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;isFanPrivate&quot;:false,&quot;isFanVerified&quot;:true,&quot;isImpersonating&quot;:false,&quot;isLoggedIn&quot;:true,&quot;isAdmin&quot;:false},&quot;isMobile&quot;:false,&quot;pageBand&quot;:{&quot;bandId&quot;:3275310411,&quot;currentUserRole&quot;:null,&quot;googleAnalyticsId&quot;:null},&quot;recaptchaPublicKey&quot;:&quot;6Ld7hz4UAAAAANlndw60vAheGUwN0Mb-qeWD_LHr&quot;,&quot;sentryConfig&quot;:&quot;{\&quot;sentry\&quot;:{\&quot;dsn\&quot;:\&quot;https://7c33659f530ef43fb4532fc6e83354dd@o363271.ingest.us.sentry.io/4508223638732800\&quot;,\&quot;environment\&quot;:\&quot;production\&quot;,\&quot;release\&quot;:\&quot;trackpipe@c37293d825a2711e25588513f4e469c0774c82f2\&quot;},\&quot;userId\&quot;:3736322262}&quot;,&quot;fanId&quot;:2105866,&quot;isAdmin&quot;:false,&quot;userId&quot;:3736322262,&quot;isLoggedIn&quot;:true,&quot;languages&quot;:{&quot;en&quot;:&quot;English&quot;,&quot;de&quot;:&quot;Deutsch&quot;,&quot;es&quot;:&quot;Español&quot;,&quot;fr&quot;:&quot;Français&quot;,&quot;pt&quot;:&quot;Português&quot;,&quot;ja&quot;:&quot;日本語&quot;},&quot;bcStrings&quot;:null,&quot;isPageMobilized&quot;:true}"
+            color-scheme="dark"
             banners=''
             
         ></menu-bar>
@@ -3377,15 +3377,15 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
 
-<style type="text/css" id="custom-design-rules-style" data-design="{&quot;bg_color&quot;:&quot;FFFFFF&quot;,&quot;text_color&quot;:&quot;969696&quot;,&quot;secondary_text_color&quot;:&quot;969696&quot;,&quot;link_color&quot;:&quot;969696&quot;,&quot;body_color&quot;:&quot;FFFFFF&quot;,&quot;hd_ft_color&quot;:&quot;848484&quot;,&quot;navbar_bg_color&quot;:&quot;FFFFFF&quot;,&quot;invert_iconography&quot;:null,&quot;tile_bg&quot;:null,&quot;bg_halign&quot;:&quot;l&quot;,&quot;bg_image_id&quot;:null,&quot;bg_file_name&quot;:null,&quot;defaultbg&quot;:false,&quot;bg_fixed&quot;:null,&quot;bg_behavior&quot;:&quot;r&quot;}">
+<style type="text/css" id="custom-design-rules-style" data-design="{&quot;bg_color&quot;:&quot;000000&quot;,&quot;text_color&quot;:&quot;73A4ED&quot;,&quot;secondary_text_color&quot;:&quot;FCFCFC&quot;,&quot;link_color&quot;:&quot;D7D5D7&quot;,&quot;body_color&quot;:&quot;000000&quot;,&quot;hd_ft_color&quot;:&quot;1A1A1A&quot;,&quot;navbar_bg_color&quot;:&quot;000000&quot;,&quot;invert_iconography&quot;:1,&quot;tile_bg&quot;:null,&quot;bg_halign&quot;:&quot;l&quot;,&quot;bg_image_id&quot;:null,&quot;bg_file_name&quot;:null,&quot;defaultbg&quot;:false,&quot;bg_fixed&quot;:null,&quot;bg_behavior&quot;:&quot;r&quot;}">
 
     #propOpenWrapper {
         background: none transparent;
     }
 
     #pgBd {
-        background: #FFFFFF;
-        color: #969696;
+        background: #000000;
+        color: #73A4ED;
     }
 
     a.custom-color, .custom-link-color, #trackInfo a:not(.notSkinnable), #trackInfo .buy-link,
@@ -3396,51 +3396,51 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
     .subscribe a, .sub a, .video-list a, .sub .main a, .subwelcome a, .artists-grid-name a, .featured-grid-name,
     .label-welcome .buttons a.new, .themed .label-band-selector a.themeable, .tralbum-tags a,
     button.join-live-event.live-event.live-event-stream-button  {
-        color: #969696;
+        color: #D7D5D7;
     }
 
 
     #trackInfo .g-button:not(.send-as-gift):not([disabled]), 
     #merch-item .g-button:not(.send-as-gift):not([disabled]) {
-        background-color: #969696;
-        border-color: #969696;
-        color: #FFFFFF;
+        background-color: #D7D5D7;
+        border-color: #D7D5D7;
+        color: #000000;
     }
 
     #trackInfo .g-button.send-as-gift:not([disabled]),
     #merch-item .g-button.send-as-gift:not([disabled]) {
-        color: #969696;
-        border-color: rgba(34, 34, 34, 0.32);
+        color: #D7D5D7;
+        border-color: rgba(255, 255, 255, 0.32);
     }
 
     .themed .label-band-selector .bands-menu {
-        border: 1px solid #FFFFFF;
+        border: 1px solid #000000;
     }
 
     .themed .label-band-selector .bands-menu,
     .themed .label-band-selector .bands-menu .menu-artistpic {
-         background: #FFFFFF;
+         background: #000000;
     }
 
     .label-welcome h2, .label-welcome p {
-        color: #969696;
+        color: #73A4ED;
     }
 
     .label-welcome .buttons a.new {
-        box-shadow: 2px 2px #969696;
+        box-shadow: 2px 2px #D7D5D7;
     }
 
     .label-welcome .buttons a.existing {
-        box-shadow: 2px 2px #969696;
+        box-shadow: 2px 2px #73A4ED;
     }
 
 
     #live-ticket-item .buy,
     #live-ticket-item .included-tralbum-info a {
-        color: #969696;
+        color: #D7D5D7;
     }
     #live-calendar-icon-stroke, #live-clock-icon-stroke {
-        stroke: #969696;
+        stroke: #73A4ED;
     }
 
     .campaign-custom-header #customHeader {
@@ -3451,40 +3451,40 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
     #discography a.primaryText,
     #trackInfo a.title_link,
     .label-welcome .buttons a.existing {
-        color: #969696;
+        color: #73A4ED;
     }
 
     .secondaryText {
-        color: #969696;
+        color: #FCFCFC;
     }
 
     #band-navbar a:hover {
-        border-color: #969696;
+        border-color: #D7D5D7;
     }
 
     #band-navbar a.active {
-        color: #969696;
-        border-color: #969696;
+        color: #73A4ED;
+        border-color: #73A4ED;
     }
 
     .themed .label-band-selector .label {
-        color: #969696;
+        color: #FCFCFC;
     }
 
     .themed .label-band-selector .tabs > li {
-        border-color: #969696;
+        border-color: #FCFCFC;
     }
 
     .themed .label-band-selector a.selected {
-        color: #969696;
+        color: #73A4ED;
     }
 
     .themed .label-band-selector .caret {
-        fill: #969696;
+        fill: #D7D5D7;
     }
 
     .themed .label-band-selector .selected .caret {
-        fill: #969696;
+        fill: #73A4ED;
     }
 
     #trackInfo a.notable {
@@ -3493,12 +3493,12 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
     
     #band-navbar {
-        background-color: #FFFFFF;
+        background-color: #000000;
     }
     
 
     body {
-        background: #FFFFFF;
+        background: #000000;
         
             background-position: left top;
             background-repeat: repeat;
@@ -3533,87 +3533,87 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
     
 
     #pgHd, .lang-picker-content {
-        background-color: #848484;
+        background-color: #1A1A1A;
     }
 
     .just-icon {
-        color: #FFFFFF;
+        color: #000000;
     }
 
     .just-icon-bg {
-        border-right-color: #969696;
+        border-right-color: #73A4ED;
     }
 
     .collected-by .ellipsis-text {
-        color: #969696;
+        color: #D7D5D7;
     }
     .collected-by .ellipsis-bg {
-        background-color: #969696;
+        background-color: #D7D5D7;
     }
 
     button.subtop,
     button.subbot,
     button.custom-color {
-        background: #969696;
-        color: #FFFFFF;
+        background: #D7D5D7;
+        color: #000000;
     }
 
     .sub .includeditems .item a {
-        color: #969696;
+        color: #73A4ED;
     }
 
     .sub .post-message-link {
-        background-color: rgba(150, 150, 150, 0.2);
-        color: #969696;
+        background-color: rgba(215, 213, 215, 0.2);
+        color: #D7D5D7;
     }
 
     .sub ul.tierslist li.tier {
-        border-color: rgba(150, 150, 150, 0.2);
+        border-color: rgba(215, 213, 215, 0.2);
     }
 
     .sub button.tierbutton .spacer {
-        background-color: #FFFFFF;
+        background-color: #000000;
     }
 
     ol.sub-navbar li.active,
     .invertIconography ol.sub-navbar li.active {
-        background-color: #FFFFFF;
+        background-color: #000000;
     }
 
     ol.sub-navbar a {
-        color: #969696;
+        color: #D7D5D7;
     }
 
     .post-subscribe .button-background {
-        background-color: rgba(150, 150, 150, 0.2);
-        color: #969696;
+        background-color: rgba(215, 213, 215, 0.2);
+        color: #D7D5D7;
     }
 
     .post-subscribe .band-link-color,
     .post-subscribe .message-text button,
     .post-subscribe .new-feed-stories button,
     .post-subscribe .new-feed-stories-floater button {
-        color: #969696;
+        color: #D7D5D7;
     }
 
     .post-subscribe .new-feed-stories-floater button {
-        background-color: #FFFFFF;
+        background-color: #000000;
     }
 
     .buyFullDiscography .art .art-thumb {
-        background-color: #FFFFFF;
+        background-color: #000000;
     }
 
     .collected-by .loading {
-        color: #969696;
+        color: #73A4ED;
     }
 
     /* Styles for 05-2019 tralbum page tests -- temporary only */
     .artist-support {
-        border: 2px solid #969696;
+        border: 2px solid #D7D5D7;
     }
     .artist-support__bg {
-        background-color: #969696;
+        background-color: #D7D5D7;
     }
 
     /* community page styles */
@@ -3649,7 +3649,7 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
     <div id="customHeader">
     
         <div class="desktop-header">
-            <a href="/" referrerpolicy="strict-origin-when-cross-origin"><img src="https://f4.bcbits.com/img/0039259603_100.png" width="975" height="180"></a>
+            <a href="/" referrerpolicy="strict-origin-when-cross-origin"><img src="https://f4.bcbits.com/img/0036647592_100.png" width="975" height="180"></a>
             
         </div>
     
@@ -3815,10 +3815,6 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         
     
     
-    
-        
-    
-
 
 
 <div class="trackView leftMiddleColumns has-art"
@@ -3826,19 +3822,16 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
     <div id="name-section">
         <h2 class="trackTitle">
-            a scattering sanded pulse
+            Beach Club
             
         </h2>
         <h3 class="albumTitle">
         
-            from <span>
-                <a href="/album/four-shame-induced-soliloquies"><span class="fromAlbum">four shame induced soliloquies</span></a></span> by
+            by
             
             <span>
-            <a href="https://madelinestepien.bandcamp.com">madeline stepien</a>
+            <a href="https://babyford.bandcamp.com">Casino Classix</a>
             </span>
-            
-            
          
         </h3>
 
@@ -3854,8 +3847,8 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
         <div id="tralbumArt">
         
-            <a class="popupImage" href="https://f4.bcbits.com/img/a0869977637_10.jpg">
-                <img src="https://f4.bcbits.com/img/a0869977637_16.jpg">
+            <a class="popupImage" href="https://f4.bcbits.com/img/a0700595149_10.jpg">
+                <img src="https://f4.bcbits.com/img/a0700595149_16.jpg">
             </a>
 		
         </div>
@@ -3891,19 +3884,91 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 <div class="no-writing">
 
 	
-    <a class="fan pic" href="https://bandcamp.com/arcuptune?from=fanthanks">
+    <a class="fan pic" href="https://bandcamp.com/soakedinmoonlight?from=fanthanks">
     
     <div class="tooltip">
         <div class="round3">
-        	<img class="grid lazy" src="/img/0.gif" data-original="https://f4.bcbits.com/img/0040106617_50.jpg" style="display: inline-block;"/>
-            <div class="name">arcuptune</div>
+        	<img class="grid lazy" src="/img/0.gif" data-original="https://f4.bcbits.com/img/0033708842_50.jpg" style="display: inline-block;"/>
+            <div class="name">SwimmingInColour</div>
             
         </div>
     </div>
     
     
     
-    <img class="thumb" src="https://f4.bcbits.com/img/0040106617_42.jpg" alt="arcuptune thumbnail"/>
+    <img class="thumb" src="https://f4.bcbits.com/img/0033708842_42.jpg" alt="SwimmingInColour thumbnail"/>
+    
+</a>
+
+
+	
+    <a class="fan pic" href="https://bandcamp.com/_123456789098765432?from=fanthanks">
+    
+    <div class="tooltip">
+        <div class="round3">
+        	<img class="grid lazy" src="/img/0.gif" data-original="https://f4.bcbits.com/img/0037913490_50.jpg" style="display: inline-block;"/>
+            <div class="name">mat</div>
+            
+        </div>
+    </div>
+    
+    
+    
+    <img class="thumb" src="https://f4.bcbits.com/img/0037913490_42.jpg" alt="mat thumbnail"/>
+    
+</a>
+
+
+	
+    <a class="fan pic" href="https://bandcamp.com/feltwell?from=fanthanks">
+    
+    <div class="tooltip">
+        <div class="round3">
+        	<img class="grid lazy" src="/img/0.gif" data-original="https://f4.bcbits.com/img/0036143023_50.jpg" style="display: inline-block;"/>
+            <div class="name">Auth</div>
+            
+        </div>
+    </div>
+    
+    
+    
+    <img class="thumb" src="https://f4.bcbits.com/img/0036143023_42.jpg" alt="Auth thumbnail"/>
+    
+</a>
+
+
+	
+    <a class="fan pic" href="https://bandcamp.com/ollylawrence?from=fanthanks">
+    
+    <div class="tooltip">
+        <div class="round3">
+        	<img class="grid lazy" src="/img/0.gif" data-original="https://f4.bcbits.com/img/0042545852_50.jpg" style="display: inline-block;"/>
+            <div class="name">ODG</div>
+            
+        </div>
+    </div>
+    
+    
+    
+    <img class="thumb" src="https://f4.bcbits.com/img/0042545852_42.jpg" alt="ODG thumbnail"/>
+    
+</a>
+
+
+	
+    <a class="fan pic" href="https://bandcamp.com/cwebber?from=fanthanks">
+    
+    <div class="tooltip">
+        <div class="round3">
+        	<img class="grid lazy" src="/img/0.gif" data-original="https://f4.bcbits.com/img/0019129761_50.jpg" style="display: inline-block;"/>
+            <div class="name">cwebber</div>
+            
+        </div>
+    </div>
+    
+    
+    
+    <img class="thumb" src="https://f4.bcbits.com/img/0019129761_42.jpg" alt="cwebber thumbnail"/>
     
 </a>
 
@@ -4001,7 +4066,7 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
         
-            <script type="text/javascript" nonce="gKrBtRG7Ljp44vqJgfNYJA==">
+            <script type="text/javascript" nonce="uXMvRCgs/qdZQTuv55InXw==">
                 $(".buyItem .bd").last().bcTruncate(TruncateProfile.get("buyItem"), "more", "less");
             </script>
         
@@ -4038,8 +4103,8 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
             
             
                 <span class="nobreak">
-                    <span class="base-text-color">$2</span>
-                    <span class="buyItemExtra secondaryText">USD</span>
+                    <span class="base-text-color">£2</span>
+                    <span class="buyItemExtra secondaryText">GBP</span>
                 <span class="buyItemExtra buyItemNyp secondaryText">&nbsp;or more</span>
                 </span>
             
@@ -4064,20 +4129,6 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
 
-<li class="buyAlbumLink">
-    <h4 class="compound-button">
-    <a id="buyAlbumLink" href="/album/four-shame-induced-soliloquies">
-        
-            <span class="unowned-album">
-            
-                Buy the Full Digital Album
-            
-            </span>
-        
-        </a>
-    </h4>
-</li>
-
 
                 
 
@@ -4088,6 +4139,1172 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
                         
                     
                 
+
+                
+                    
+
+
+
+<li id="buyFullDiscography" class="buyItem buyFullDiscography">
+
+    <h3 class="hd">
+        
+            <a class="band-link" data-bind="click: fullDiscographyBuyDialog">
+              <span class="buyItemPackageTitle primaryText">Full Digital Discography</span>
+            </a>
+        
+        
+        
+    </h3>
+
+    <div class="art compact ">
+    
+        
+        
+    
+
+    
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/beach-club-2" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 8; background-image:url(https://f4.bcbits.com/img/a0700595149_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/trelik-volume-1" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 7; background-image:url(https://f4.bcbits.com/img/a1569503928_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/third-kind" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 6; background-image:url(https://f4.bcbits.com/img/a2804829401_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/rtdc-mark-broom-mix-soul-capsule-unreleased-remixes" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 5; background-image:url(https://f4.bcbits.com/img/a1253277920_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/milky-tr-s-chikki-chikki-ahh-ahh-acs-2025-remaster" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 4; background-image:url(https://f4.bcbits.com/img/a2637009078_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/callers-theme" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 3; background-image:url(https://f4.bcbits.com/img/a3682551372_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/them-yeah" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 2; background-image:url(https://f4.bcbits.com/img/a2506839177_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/after-shock" class="art-thumb thumb-glow last-visible" data-bind="click: expandCoverArt" style="z-index: 1; background-image:url(https://f4.bcbits.com/img/a0774780463_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/fordtrax-vol-2-alex-cellers-extended-edits-previously-unreleased-lp" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0185079611_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/fordtrax-mark-broom-edit-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2700319287_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/chevy-rain-tower" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3368359861_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/reprise-alex-cellers-8-08-club-edit-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1685050132_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/spooked-2" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0855016985_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/lost-secret" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3356147997_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/gently-baby-ford-dazmoss-falling-to-pieces-mix-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3074636097_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/check-your-buddha-groovin-mix" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3884105672_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/crashing-acs-9-09-edit-previously-unreleased-original-version" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2555704977_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/vision" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1683651870_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/time-tourism-baby-fords-rain-charmaine-belmont-club-mix-diorama-dub-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1386049080_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/coburn" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2716915786_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/slippery-elm-ep-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0264233076_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/le-mur-baby-fords-house-of-cards-dogtown-unreleased-remixes" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1907750901_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/yhiar" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2738264591_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/uff-melchior-productions-ltd-unedited-version-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1822530783_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/in-your-blood-original-demo-version-2" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2009339222_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/ford-trax-lp-colin-favers-1988-special-mix" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1094136435_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/getting-there-yookay-2-day-mix-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1681757630_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/ugold-2-ep" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1002486433_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/hot-pot" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3729404810_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/birds-lp" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0808550315_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/walk-ins-airbug" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3684834215_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/seekers-ep-villalobos-remix-original-version" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1509444424_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/texas-sun-ep" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1790042340_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/gurner-coupe-savage" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0588508483_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/lady-science-overcome-d-m-2012-remasters-lady-science-mbs-respect-the-sunrise-mix" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3270301157_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/rock-tek-da-city-2" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1579434465_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/variety-club-until-the-end-pt-1-pt-2" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2704582913_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/be-gene" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3367614627_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/treatment-feel-soul-capsules-joy-mix-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2878905116_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/gt-organ-alex-celler-remaster-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a4125716079_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/deep-dawn-ep" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1792014830_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/off-the-man" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3577123059_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/oochy-koochy-1988-demo-version-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2481194426_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/chicken-store-tr-12-version" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0102128053_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/law-of-grace-meltdown-lady-science-tek-mix" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0457151123_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/pukka-your-lips" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1062171565_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/satellite-stroll-edge-of-the-night-mix" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a4212446709_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/come-on-with-me" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3844601368_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/dead-eye-v-1" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3627883205_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/chaser-long-john" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2936012201_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/westway-tin-of-worms" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3917323474_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/coyote-flux-ep" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a4208032727_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/clean-hands-for-how-long" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0832613868_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/ambo-claypool-eggs-is-eggs" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0667234756_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/track/swings-ladders-previously-unreleased" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a1378262477_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/las-ramblas-ep" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a2850261166_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/overcome-lady-science-nyc-sunrise-lady-science-tek-mix-original-jon-davis-1999-masters" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0136407509_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/tantric-pt-1-tantric-pt-2-six-of-one-pt-1-six-of-one-pt-2" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a4181913276_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/yohm-emojerk" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a3724959634_3.jpg);"></a>
+        
+    
+        
+        
+        
+        
+            
+        
+
+        
+            
+        
+        
+        
+
+        
+            <a href="/album/bad-schandau-laguna-loon" class="art-thumb thumb-glow" data-bind="click: expandCoverArt" style="z-index: 1; display: none; background-image:url(https://f4.bcbits.com/img/a0939753604_3.jpg);"></a>
+        
+    
+    
+        
+            <a class="more-button" data-bind="click: expandCoverArt">
+                <div class="count">97</div>
+                                <div class="releases">releases</div>
+            </a>
+        
+    
+    </div>
+
+    <div class="bd">
+        <p>Get <strong>all 97 Baby Ford releases</strong> available on Bandcamp and save <strong>30%</strong>.</p>
+        <p>Includes unlimited streaming via the free Bandcamp app, plus high-quality downloads of
+
+        
+            
+        
+
+        
+        
+            
+                <a href="/track/beach-club-2">Beach Club</a>,
+            
+            
+        
+            
+                <a href="/album/trelik-volume-1">Trelik Volume 1</a>,
+            
+            
+        
+            
+                <a href="/track/third-kind">Third Kind</a>,
+            
+            
+        
+            
+                <a href="/album/rtdc-mark-broom-mix-soul-capsule-unreleased-remixes">RTDC (Mark Broom Mix / Soul Capsule Unreleased Remixes)</a>,
+            
+            
+        
+            
+                <a href="/track/milky-tr-s-chikki-chikki-ahh-ahh-acs-2025-remaster">Milky Très / Chikki Chikki Ahh Ahh (AC&#39;s 2025 Remaster)</a>,
+            
+            
+        
+            
+                <a href="/track/callers-theme">Callers Theme</a>,
+            
+            
+        
+            
+                <a href="/track/them-yeah">Them Yeah</a>,
+            
+            
+        
+            
+            
+                
+                    <a href="/track/after-shock">After Shock</a>,
+                    <span class="buy-full-more-text">
+                    
+                        <a href="/music">and 89 more.</a>
+                    
+                    </span>
+                
+            
+        
+        <!-- ko foreach: moreTralbums -->
+            <span style="display: none;" data-bind="visible: $data">
+                <a data-bind="attr: {href: page_url}, text: title"></a><!-- ko if: ($index() === ($parent.moreTralbums().length - 2)) -->, and <!-- /ko --><!-- ko if: ($index() < $parent.moreTralbums().length - 2) -->, <!-- /ko --><!-- ko if: ($index() === ($parent.moreTralbums().length - 1)) -->.<!-- /ko -->
+            </span>
+        <!-- /ko -->
+
+        
+    </div>
+
+    
+        <div class="listing-purchasable-with-gift-card  user-has-balance ">
+            <svg class="icon gift-card-icon-bordered small" width="9px" height="10px" viewBox="0 0 9 10"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#gift-card-icon"></use></svg>
+            Purchasable with gift card
+        </div>
+    
+
+    
+        <h4 class="ft compound-button main-button">
+            <button
+                class="buy-link"
+                type="button"
+                data-bind="click: fullDiscographyBuyDialog"
+                data-test="buy-full-digital-discography"
+            >
+                Buy Digital Discography
+            </button>&nbsp;
+            <span class="nobreak">
+            
+            <span class="base-text-color" >£255.50 </span>
+                    <span class="buyItemExtra secondaryText">GBP</span>
+                    <span class="buyItemExtra buyItemNyp secondaryText">or more</span>
+            
+            </span>
+            
+            <span class="base-text-color discount-percentage">(<strong>30% OFF</strong>)</span>
+            
+        </h4>
+    
+    
+
+    
+        <h4 class="ft compound-button send-as-gift">
+            <button
+                class="buy-link"
+                type="button"
+                data-bind="click: fullDiscographyGiftDialog"
+                data-test="send-full-digital-discography-as-gift"
+            >
+                Send as Gift
+            </button>&nbsp;
+        </h4>
+    
+</li>
 
                 
 
@@ -4112,6 +5329,22 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
             
+            <h3 class="about-label">about</h3>
+            <div class="tralbumData tralbum-about">w&amp;p, mark broom &amp; baby ford <br>
+recorded at lfach studio london 1995<br>
+mastered by kevin metcalfe at the townhouse london<br>
+previously released on vinyl (ifach 011) <br>
+℗+© ifach records 1995<br>
+<br>
+2024 vinyl reissue available, <br>
+<a href="https://www.juno.co.uk/products/mark-broom-baby-ford-casino-classix-vinyl/979251-01/" rel="nofollow ugc" referrerpolicy="strict-origin-when-cross-origin">www.juno.co.uk/products/mark-broom-baby-ford-casino-classix-vinyl/979251-01/</a> </div>
+            
+            
+                <script type="text/javascript" nonce="uXMvRCgs/qdZQTuv55InXw==">
+                    $(".tralbum-about").last().bcTruncate(TruncateProfile.get("tralbum_about"), "more", "less");
+                </script>
+            
+            
             
             
             
@@ -4119,28 +5352,20 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
             <div class="tralbumData tralbum-credits">
                 
                 
+                
+                
                     
-                
-                
                 
                 
                 
                 
 
                 
-                    
-                    
-                        
-                            
-                        
-                    
-                    from <a href="/album/four-shame-induced-soliloquies">four shame induced soliloquies</a>,
-                
 
                 
                     
                         
-                            released January 31, 2026
+                            released January 22, 2026
                         
                     
                 
@@ -4173,23 +5398,20 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         <div class="tralbumData tralbum-tags tralbum-tags-nu hidden">
             <h3><span class="tags-inline-label">Tags</span></h3>
             
-            <a class="tag" href="https://bandcamp.com/discover/experimental?from=tralbum&artist=2505888832"
+            <a class="tag" href="https://bandcamp.com/discover/electronic?from=tralbum&artist=3275310411"
+                >electronic</a>
+        
+            <a class="tag" href="https://bandcamp.com/discover/deep?from=tralbum&artist=3275310411"
+                >deep</a>
+        
+            <a class="tag" href="https://bandcamp.com/discover/experimental?from=tralbum&artist=3275310411"
                 >experimental</a>
         
-            <a class="tag" href="https://bandcamp.com/discover/electroacoustic?from=tralbum&artist=2505888832"
-                >electroacoustic</a>
+            <a class="tag" href="https://bandcamp.com/discover/minimal-techno-house?from=tralbum&artist=3275310411"
+                >minimal techno house</a>
         
-            <a class="tag" href="https://bandcamp.com/discover/experimental-electronic?from=tralbum&artist=2505888832"
-                >experimental-electronic</a>
-        
-            <a class="tag" href="https://bandcamp.com/discover/noise?from=tralbum&artist=2505888832"
-                >noise</a>
-        
-            <a class="tag" href="https://bandcamp.com/discover/sound-art?from=tralbum&artist=2505888832"
-                >sound-art</a>
-        
-            <a class="tag" href="https://bandcamp.com/discover/new-york?from=tralbum&artist=2505888832"
-                >New York</a>
+            <a class="tag" href="https://bandcamp.com/discover/london?from=tralbum&artist=3275310411"
+                >London</a>
         </div>
     
 
@@ -4325,9 +5547,9 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
             
             <div class="artists-bio-pic artists-bio-pic-uploaded  landscape">
                 <div class="signed-out bio-pic">
-                    <a class="popupImage" href="https://f4.bcbits.com/img/0040727426_10.jpg" data-image-size="1200,791" data-image-preload="true">
+                    <a class="popupImage" href="https://f4.bcbits.com/img/0036541358_10.jpg" data-image-size="600,400" data-image-preload="true">
                         
-                        <img src="https://f4.bcbits.com/img/0040727426_21.jpg" class="band-photo" alt="madeline stepien image">
+                        <img src="https://f4.bcbits.com/img/0036541358_21.jpg" class="band-photo" alt="Baby Ford image">
                     </a>
                 </div>
             </div>
@@ -4335,8 +5557,8 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
     
 
     <p id="band-name-location">
-        <span class="title">madeline stepien</span>
-        <span class="location secondaryText">New York, New York</span>
+        <span class="title">Baby Ford</span>
+        <span class="location secondaryText">London, UK</span>
     </p>
 
     
@@ -4357,24 +5579,9 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         <div class="signed-out-artists-bio-text">
             
                 
-                    <p id="bio-text">
-                        ⥀<br><span class="lightweightBreak"></span><br>Madeline Stepien is a composer and artist based in New York City. Her work 
-                        <span class="peekaboo-text">explores sound as a tool of perceptual and emotional manipulation. <br><span class="lightweightBreak"></span><br>Operating under the alias “pent” from 2020-2024, she developed her practice through a plethora of live performances &amp; recorded material that range from live interventions in club environments to fixed media installations.</span>
-                        <span class="peekaboo-link"><span class="peekaboo-ellipsis">...</span>&nbsp;<a>more</a></span> 
-                    </p>
-                    
-                    
-
-
-  
-  
-
-
-                    
-                        <script type="text/javascript" nonce="gKrBtRG7Ljp44vqJgfNYJA==">
-                            $("#bio-text").bcTruncate(TruncateProfile.get("bio"), "more", "less");
-                        </script>
-                    
+                    <p id="bio-text">Electronic music producer, originally from Bolton, Greater Manchester who moved to London in 1985.<br>
+First release, Oochy Koochy 12&quot; followed by FordTrax album in 1988.<br>
+Ifach/Trelik/Pal sl Record label runner</p>
                 
             
         </div>
@@ -4428,6 +5635,9 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
      
     
     
+     
+        
+        
     
 
     
@@ -4442,12 +5652,12 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         <li>
         
             <div>
-                <a class="thumbthumb " href="/album/four-shame-induced-soliloquies">
-                <img src="https://f4.bcbits.com/img/a0869977637_7.jpg">
+                <a class="thumbthumb " href="/track/beach-club-2">
+                <img src="https://f4.bcbits.com/img/a0700595149_7.jpg">
             
                 </a>
             </div>
-            <div class="trackTitle"><a href="/album/four-shame-induced-soliloquies">four shame induced soliloquies</a></div>
+            <div class="trackTitle"><a href="/track/beach-club-2">Beach Club</a></div>
             <div class="trackYear secondaryText">Jan 2026</div>
             
         </li>
@@ -4456,13 +5666,13 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         <li>
         
             <div>
-                <a class="thumbthumb " href="/album/untitled-live">
-                <img src="https://f4.bcbits.com/img/a3012860967_7.jpg">
+                <a class="thumbthumb " href="/album/trelik-volume-1">
+                <img src="https://f4.bcbits.com/img/a1569503928_7.jpg">
             
                 </a>
             </div>
-            <div class="trackTitle"><a href="/album/untitled-live">untitled (live)</a></div>
-            <div class="trackYear secondaryText">Dec 2025</div>
+            <div class="trackTitle"><a href="/album/trelik-volume-1">Trelik Volume 1</a></div>
+            <div class="trackYear secondaryText">Jan 2026</div>
             
         </li>
     
@@ -4470,73 +5680,33 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         <li>
         
             <div>
-                <a class="thumbthumb " href="/album/digitals">
-                <img src="https://f4.bcbits.com/img/a1576005739_7.jpg">
+                <a class="thumbthumb " href="/album/fordtrax-vol-2-alex-cellers-extended-edits-previously-unreleased-lp">
+                <img src="https://f4.bcbits.com/img/a0185079611_7.jpg">
             
                 </a>
             </div>
-            <div class="trackTitle"><a href="/album/digitals">&#39;digitals&#39;</a></div>
-            <div class="trackYear secondaryText">Oct 2024</div>
+            <div class="trackTitle"><a href="/album/fordtrax-vol-2-alex-cellers-extended-edits-previously-unreleased-lp">FordTrax Vol.2 ( Alex Celler&#39;s Extended Edits ) Previously Unreleased LP</a></div>
+            <div class="trackYear secondaryText">Oct 2025</div>
             
         </li>
     
         
-        <li>
+        <li class="gt3">
         
             <div>
-                <a class="thumbthumb " href="/album/trepidation-cycles">
-                <img src="https://f4.bcbits.com/img/a3277473594_7.jpg">
+                <a class="thumbthumb " href="/track/after-shock">
+                <img src="https://f4.bcbits.com/img/a0774780463_7.jpg">
             
                 </a>
             </div>
-            <div class="trackTitle"><a href="/album/trepidation-cycles">trepidation cycles</a></div>
-            <div class="trackYear secondaryText">Mar 2024</div>
-            
-        </li>
-    
-        
-        <li>
-        
-            <div>
-                <a class="thumbthumb " href="/album/untitled">
-                <img src="https://f4.bcbits.com/img/a1581823379_7.jpg">
-            
-                </a>
-            </div>
-            <div class="trackTitle"><a href="/album/untitled">untitled</a></div>
-            <div class="trackYear secondaryText">Feb 2024</div>
-            
-        </li>
-    
-        
-        <li>
-        
-            <div>
-                <a class="thumbthumb " href="/album/upg-2777-87-annular-proto-sep">
-                <img src="https://f4.bcbits.com/img/a4206579588_7.jpg">
-            
-                </a>
-            </div>
-            <div class="trackTitle"><a href="/album/upg-2777-87-annular-proto-sep">uPg_(27.77._87) / annular proto sep</a></div>
-            <div class="trackYear secondaryText">Feb 2022</div>
-            
-        </li>
-    
-        
-        <li>
-        
-            <div>
-                <a class="thumbthumb " href="/album/rone-3-x7xu">
-                <img src="https://f4.bcbits.com/img/a2247407555_7.jpg">
-            
-                </a>
-            </div>
-            <div class="trackTitle"><a href="/album/rone-3-x7xu">rone 3 / x7xu</a></div>
-            <div class="trackYear secondaryText">Dec 2020</div>
+            <div class="trackTitle"><a href="/track/after-shock">After Shock</a></div>
+            <div class="trackYear secondaryText">Oct 2025</div>
             
         </li>
     
 </ul>
+
+<div class="showMore" ><a  href="/music">more releases...</a></div>
 
 </div>
 
@@ -4558,9 +5728,9 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
 
-<p id="contact-tracker-data" data-band-id="2505888832">
+<p id="contact-tracker-data" data-band-id="3275310411">
 
-    <a href="/contact?b=2505888832&amp;n=madeline%20stepien&amp;email=tammohesselink%40gmail.com" title="Send an email to madeline stepien">Contact madeline stepien</a>
+    <a href="/contact?b=3275310411&amp;n=Baby%20Ford&amp;email=tammohesselink%40gmail.com" title="Send an email to Baby Ford">Contact Baby Ford</a>
 
 </p>
 
@@ -4571,13 +5741,11 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
 
-<p><a href="https://madelinestepien.bandcamp.com/yum">Redeem code</a></p>
 
 
 
 
-
-    <p id="report-account-vm" data-tou-report-params="{&quot;i_type&quot;:&quot;t&quot;,&quot;i_id&quot;:3972831481,&quot;a_id&quot;:2505888832}">
+    <p id="report-account-vm" data-tou-report-params="{&quot;i_type&quot;:&quot;t&quot;,&quot;i_id&quot;:287192821,&quot;a_id&quot;:3275310411}">
         <a data-bind="click: showDialog">
             
                 Report this track or account
@@ -4589,7 +5757,7 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 </div>
 
-<div id="collectors-data" data-blob="{&quot;thumbs&quot;:[{&quot;fan_id&quot;:7701436,&quot;username&quot;:&quot;arcuptune&quot;,&quot;name&quot;:&quot;arcuptune&quot;,&quot;image_id&quot;:40106617,&quot;token&quot;:&quot;1:1769943917:7701436:0:1:0&quot;}],&quot;more_thumbs_available&quot;:false,&quot;reviews&quot;:[],&quot;more_reviews_available&quot;:false,&quot;band_thanks_text&quot;:&quot;supported by&quot;,&quot;shown_reviews&quot;:[],&quot;shown_thumbs&quot;:[{&quot;fan_id&quot;:7701436,&quot;username&quot;:&quot;arcuptune&quot;,&quot;name&quot;:&quot;arcuptune&quot;,&quot;image_id&quot;:40106617,&quot;token&quot;:&quot;1:1769943917:7701436:0:1:0&quot;}]}"></div>
+<div id="collectors-data" data-blob="{&quot;thumbs&quot;:[{&quot;fan_id&quot;:2670087,&quot;username&quot;:&quot;soakedinmoonlight&quot;,&quot;name&quot;:&quot;SwimmingInColour&quot;,&quot;image_id&quot;:33708842,&quot;token&quot;:&quot;1:1769776120:2670087:0:1:0&quot;},{&quot;fan_id&quot;:2450634,&quot;username&quot;:&quot;_123456789098765432&quot;,&quot;name&quot;:&quot;mat&quot;,&quot;image_id&quot;:37913490,&quot;token&quot;:&quot;1:1769652644:2450634:0:1:0&quot;},{&quot;fan_id&quot;:3516834,&quot;username&quot;:&quot;feltwell&quot;,&quot;name&quot;:&quot;Auth&quot;,&quot;image_id&quot;:36143023,&quot;token&quot;:&quot;1:1769216762:3516834:0:1:0&quot;},{&quot;fan_id&quot;:11390450,&quot;username&quot;:&quot;ollylawrence&quot;,&quot;name&quot;:&quot;ODG&quot;,&quot;image_id&quot;:42545852,&quot;token&quot;:&quot;1:1769189672:11390450:0:1:0&quot;},{&quot;fan_id&quot;:4940366,&quot;username&quot;:&quot;cwebber&quot;,&quot;name&quot;:&quot;cwebber&quot;,&quot;image_id&quot;:19129761,&quot;token&quot;:&quot;1:1769116197:4940366:0:0:0&quot;}],&quot;more_thumbs_available&quot;:false,&quot;reviews&quot;:[],&quot;more_reviews_available&quot;:false,&quot;band_thanks_text&quot;:&quot;supported by&quot;,&quot;shown_reviews&quot;:[],&quot;shown_thumbs&quot;:[{&quot;fan_id&quot;:2670087,&quot;username&quot;:&quot;soakedinmoonlight&quot;,&quot;name&quot;:&quot;SwimmingInColour&quot;,&quot;image_id&quot;:33708842,&quot;token&quot;:&quot;1:1769776120:2670087:0:1:0&quot;},{&quot;fan_id&quot;:2450634,&quot;username&quot;:&quot;_123456789098765432&quot;,&quot;name&quot;:&quot;mat&quot;,&quot;image_id&quot;:37913490,&quot;token&quot;:&quot;1:1769652644:2450634:0:1:0&quot;},{&quot;fan_id&quot;:3516834,&quot;username&quot;:&quot;feltwell&quot;,&quot;name&quot;:&quot;Auth&quot;,&quot;image_id&quot;:36143023,&quot;token&quot;:&quot;1:1769216762:3516834:0:1:0&quot;},{&quot;fan_id&quot;:11390450,&quot;username&quot;:&quot;ollylawrence&quot;,&quot;name&quot;:&quot;ODG&quot;,&quot;image_id&quot;:42545852,&quot;token&quot;:&quot;1:1769189672:11390450:0:1:0&quot;},{&quot;fan_id&quot;:4940366,&quot;username&quot;:&quot;cwebber&quot;,&quot;name&quot;:&quot;cwebber&quot;,&quot;image_id&quot;:19129761,&quot;token&quot;:&quot;1:1769116197:4940366:0:0:0&quot;}]}"></div>
 
             <div style="clear:both"></div>
         </div>
@@ -4605,90 +5773,121 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
             <div class="recs-section bc-recs">
                 <p class="section-title">
                     
-                        If you like madeline stepien, you may also like:
+                        If you like Beach Club, you may also like:
                     
                 </p>            
                 <ul class="horizontal">
                     
                         <li class="recommended-album footer-nn"
-    id="id-1152706460"
-    data-trackid="3428414104"
-    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=3428414104&amp;ts=1769966189&amp;t=06dd0b6c737a34024bc83aa02a5cdc0736978724&quot;}"
-    data-albumtitle="Cataclysmic System Binding Loss"
-    data-albumid="1152706460"
-    data-artist="Carbon In Prose"
-    data-artistid="1529444814"
-    data-from="footer-nn-a445172539">
+    id="id-1004404970"
+    data-trackid="82078170"
+    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=82078170&amp;ts=1769966363&amp;t=c1e5272d4d27d4ba2b1a088583a027b101217482&quot;}"
+    data-albumtitle="Drums"
+    data-albumid="1004404970"
+    data-artist="Red On"
+    data-artistid="1320963103"
+    data-from="footer-nn-t287192821">
     <div class="album-art-container">
-        <img class="album-art" src="https://f4.bcbits.com/img/a1342393571_9.jpg">
+        <img class="album-art" src="https://f4.bcbits.com/img/a3032196637_9.jpg">
         <div class="play-button">
             <div class="play-icon"></div>
         </div>
     </div>
     <p class="title-and-artist">
-        <a class="album-link" href="https://cameronmacnair.bandcamp.com/album/cataclysmic-system-binding-loss?from=footer-nn-a445172539"><span class="release-title">Cataclysmic System Binding Loss</span><br><span class="spacer"></span><span class="by-artist">by Carbon In Prose</span></a>
+        <a class="album-link" href="https://verydeeprec.bandcamp.com/album/drums?from=footer-nn-t287192821"><span class="release-title">Drums</span><br><span class="spacer"></span><span class="by-artist">by Red On</span></a>
     </p>
     <div class="album-details">
         
         
         
-            <p class="comment"><span class="comment-contents">Shards of static &amp; distortion crash against disarmingly beautiful piano &amp; synth melodies on this riveting new record from Carbon and Prose. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">Oct 30, 2022</span></span></p>
+            <p class="comment"><span class="comment-contents">Layering acoustic drums and bass with synth and dreamy vocals to form undulating pieces, “Drums” is Red On&#39;s take on contemporary krautrock. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">Oct 12, 2021</span></span></p>
         
         
         
-        <a class="go-to-album album-link" href="https://cameronmacnair.bandcamp.com/album/cataclysmic-system-binding-loss?from=footer-nn-a445172539">go to album</a>
+        <a class="go-to-album album-link" href="https://verydeeprec.bandcamp.com/album/drums?from=footer-nn-t287192821">go to album</a>
     </div>
 </li>
 
                     
                         <li class="recommended-album footer-nn"
-    id="id-2907576263"
-    data-trackid="1718202750"
-    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=1718202750&amp;ts=1769966189&amp;t=9ef413caa404a374fb4d86359c59b504124f7bc0&quot;}"
-    data-albumtitle="SAD GODS presents &quot;Singing for Survival - a Compilation for Project Onward&quot;"
-    data-albumid="2907576263"
-    data-artist="Various Artists"
-    data-artistid="1692630393"
-    data-from="footer-nn-a445172539">
+    id="id-3160934953"
+    data-trackid="3477441700"
+    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=3477441700&amp;ts=1769966363&amp;t=6e0afe23dd2b858f9c2b04ba6c7a952a51d8273d&quot;}"
+    data-albumtitle="XLR8R+019 (Visionquest: Shaun Reeves, Ryan Crosson, Lee Curtiss, and Seth Troxler)"
+    data-albumid="3160934953"
+    data-artist="XLR8R+"
+    data-artistid="3719420246"
+    data-from="footer-nn-t287192821">
     <div class="album-art-container">
-        <img class="album-art" src="https://f4.bcbits.com/img/a0212692398_9.jpg">
+        <img class="album-art" src="https://f4.bcbits.com/img/a2937028040_9.jpg">
         <div class="play-button">
             <div class="play-icon"></div>
         </div>
     </div>
     <p class="title-and-artist">
-        <a class="album-link" href="https://sad-gods.bandcamp.com/album/sad-gods-presents-singing-for-survival-a-compilation-for-project-onward?from=footer-nn-a445172539"><span class="release-title">SAD GODS presents &quot;Singing for Survival - a Compilation for Project Onward&quot;</span><br><span class="spacer"></span><span class="by-artist">by Various Artists</span></a>
+        <a class="album-link" href="https://xlr8rplus.bandcamp.com/album/xlr8r-019-visionquest-shaun-reeves-ryan-crosson-lee-curtiss-and-seth-troxler?from=footer-nn-t287192821"><span class="release-title">XLR8R+019 (Visionquest: Shaun Reeves, Ryan Crosson, Lee Curtiss, and Seth Troxler)</span><br><span class="spacer"></span><span class="by-artist">by XLR8R+</span></a>
     </p>
     <div class="album-details">
         
         
         
-            <p class="comment"><span class="comment-contents">A stellar compilation featuring shoegaze and indie favorites like Drowse, Midwife, and Mount Eerie benefitting Project Onward in Chicago. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">May 11, 2023</span></span></p>
+            <p class="comment"><span class="comment-contents">XLR8R+’s subscription service gives you exclusive tracks and mixes, as well as a digital ’zine with artist profiles &amp; more. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">Aug 10, 2020</span></span></p>
         
         
         
-        <a class="go-to-album album-link" href="https://sad-gods.bandcamp.com/album/sad-gods-presents-singing-for-survival-a-compilation-for-project-onward?from=footer-nn-a445172539">go to album</a>
+        <a class="go-to-album album-link" href="https://xlr8rplus.bandcamp.com/album/xlr8r-019-visionquest-shaun-reeves-ryan-crosson-lee-curtiss-and-seth-troxler?from=footer-nn-t287192821">go to album</a>
+    </div>
+</li>
+
+                    
+                        <li class="recommended-album footer-nn"
+    id="id-479122662"
+    data-trackid="2096180023"
+    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=2096180023&amp;ts=1769966363&amp;t=19828c143f5ba0c3f3a648c224634714ed68ca18&quot;}"
+    data-albumtitle="Anther"
+    data-albumid="479122662"
+    data-artist="OK EG"
+    data-artistid="776925458"
+    data-from="footer-nn-t287192821">
+    <div class="album-art-container">
+        <img class="album-art" src="https://f4.bcbits.com/img/a3387523114_9.jpg">
+        <div class="play-button">
+            <div class="play-icon"></div>
+        </div>
+    </div>
+    <p class="title-and-artist">
+        <a class="album-link" href="https://okegmusic.bandcamp.com/album/anther?from=footer-nn-t287192821"><span class="release-title">Anther</span><br><span class="spacer"></span><span class="by-artist">by OK EG</span></a>
+    </p>
+    <div class="album-details">
+        
+        
+        
+            <p class="comment"><span class="comment-contents">Australian duo OK EG imbue rigid power electronics with organic warmth, approaching club music from a naturalistic mindset. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">May 27, 2020</span></span></p>
+        
+        
+        
+        <a class="go-to-album album-link" href="https://okegmusic.bandcamp.com/album/anther?from=footer-nn-t287192821">go to album</a>
     </div>
 </li>
 
                     
                         <li class="recommended-album footer-bcw"
-    id="id-431916024"
-    data-trackid="3809676860"
-    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=3809676860&amp;ts=1769966189&amp;t=982d66f1835ff53661e3a355d2717e9a57fc1075&quot;}"
-    data-albumtitle="a river holds a perfect memory"
-    data-albumid="431916024"
-    data-artist="felix taylor"
-    data-artistid="1911982235"
-    data-from="footer-bcw-a445172539">
+    id="id-1705814386"
+    data-trackid="1524825748"
+    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=1524825748&amp;ts=1769966363&amp;t=ec9a79f7f950b4359ae951077d043ae12f57190c&quot;}"
+    data-albumtitle="Forgotten Wasteland EP"
+    data-albumid="1705814386"
+    data-artist="Claro Intelecto"
+    data-artistid="2479898626"
+    data-from="footer-bcw-t287192821">
     <div class="album-art-container">
-        <img class="album-art" src="https://f4.bcbits.com/img/a1847262660_9.jpg">
+        <img class="album-art" src="https://f4.bcbits.com/img/a2387742971_9.jpg">
         <div class="play-button">
             <div class="play-icon"></div>
         </div>
     </div>
     <p class="title-and-artist">
-        <a class="album-link" href="https://byfelix.bandcamp.com/album/a-river-holds-a-perfect-memory?from=footer-bcw-a445172539"><span class="release-title">a river holds a perfect memory</span><br><span class="spacer"></span><span class="by-artist">by felix taylor</span></a>
+        <a class="album-link" href="https://clarointelecto.bandcamp.com/album/forgotten-wasteland-ep?from=footer-bcw-t287192821"><span class="release-title">Forgotten Wasteland EP</span><br><span class="spacer"></span><span class="by-artist">by Claro Intelecto</span></a>
     </p>
     <div class="album-details">
         
@@ -4696,133 +5895,102 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         
         
         
-            <p class="bcw-featured-text">featured on <span class="bcweekly-title">Bandcamp Radio</span> <span class="date">May 20, 2025</span></p>
+            <p class="bcw-featured-text">featured on <span class="bcweekly-title">Bandcamp Radio</span> <span class="date">Jul 16, 2019</span></p>
         
-        <a class="go-to-album album-link" href="https://byfelix.bandcamp.com/album/a-river-holds-a-perfect-memory?from=footer-bcw-a445172539">go to album</a>
+        <a class="go-to-album album-link" href="https://clarointelecto.bandcamp.com/album/forgotten-wasteland-ep?from=footer-bcw-t287192821">go to album</a>
     </div>
 </li>
 
                     
-                        <li class="recommended-album footer-nn"
-    id="id-786510127"
-    data-trackid="2582008798"
-    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=2582008798&amp;ts=1769966189&amp;t=ae77fd7566b6dbf1ebef2ad7f92e4b509744deaf&quot;}"
-    data-albumtitle="Images"
-    data-albumid="786510127"
-    data-artist="Colin Andrew Sheffield"
-    data-artistid="925891634"
-    data-from="footer-nn-a445172539">
+                        <li class="recommended-album footer-bcw"
+    id="id-518541987"
+    data-trackid="666394774"
+    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=666394774&amp;ts=1769966363&amp;t=27c289bb79c11b41a37f1c431270a328abea56e4&quot;}"
+    data-albumtitle="A Period of Review (Original Recordings: 1975 - 1983)"
+    data-albumid="518541987"
+    data-artist="K. Leimer"
+    data-artistid="2791952698"
+    data-from="footer-bcw-t287192821">
     <div class="album-art-container">
-        <img class="album-art" src="https://f4.bcbits.com/img/a0342274952_9.jpg">
+        <img class="album-art" src="https://f4.bcbits.com/img/a1828880112_9.jpg">
         <div class="play-button">
             <div class="play-icon"></div>
         </div>
     </div>
     <p class="title-and-artist">
-        <a class="album-link" href="https://colinandrewsheffield.bandcamp.com/album/images?from=footer-nn-a445172539"><span class="release-title">Images</span><br><span class="spacer"></span><span class="by-artist">by Colin Andrew Sheffield</span></a>
+        <a class="album-link" href="https://kleimer.bandcamp.com/album/a-period-of-review-original-recordings-1975-1983?from=footer-bcw-t287192821"><span class="release-title">A Period of Review (Original Recordings: 1975 - 1983)</span><br><span class="spacer"></span><span class="by-artist">by K. Leimer</span></a>
     </p>
     <div class="album-details">
         
         
         
-            <p class="comment"><span class="comment-contents">Colin Andrew Sheffield (Elevator Bath) repurposes heavily manipulated jazz samples into gorgeously eerie soundscapes. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">Jun 20, 2023</span></span></p>
         
         
+            <p class="bcw-featured-text">featured on <span class="bcweekly-title">Bandcamp Radio</span> <span class="date">Aug 28, 2018</span></p>
         
-        <a class="go-to-album album-link" href="https://colinandrewsheffield.bandcamp.com/album/images?from=footer-nn-a445172539">go to album</a>
+        <a class="go-to-album album-link" href="https://kleimer.bandcamp.com/album/a-period-of-review-original-recordings-1975-1983?from=footer-bcw-t287192821">go to album</a>
     </div>
 </li>
 
                     
-                        <li class="recommended-album footer-nn"
-    id="id-3426784643"
-    data-trackid="3436353562"
-    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=3436353562&amp;ts=1769966189&amp;t=dbdd920dc30eaeb1808daad70052583ab7b6ff1f&quot;}"
-    data-albumtitle="42 Days 四十二天"
-    data-albumid="3426784643"
-    data-artist="Southeast of Rain 东南有雨"
-    data-artistid="2779299460"
-    data-from="footer-nn-a445172539">
+                        <li class="recommended-album footer-bcw"
+    id="id-2512985273"
+    data-trackid="3483864136"
+    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=3483864136&amp;ts=1769966363&amp;t=dd6185bab16e282939258521fe9a11dc6d92f249&quot;}"
+    data-albumtitle="Oneirology"
+    data-albumid="2512985273"
+    data-artist="Hmot"
+    data-artistid="1711360370"
+    data-from="footer-bcw-t287192821">
     <div class="album-art-container">
-        <img class="album-art" src="https://f4.bcbits.com/img/a0597635686_9.jpg">
+        <img class="album-art" src="https://f4.bcbits.com/img/a4276490388_9.jpg">
         <div class="play-button">
             <div class="play-icon"></div>
         </div>
     </div>
     <p class="title-and-artist">
-        <a class="album-link" href="https://southeastofrain.bandcamp.com/album/42-days?from=footer-nn-a445172539"><span class="release-title">42 Days 四十二天</span><br><span class="spacer"></span><span class="by-artist">by Southeast of Rain 东南有雨</span></a>
+        <a class="album-link" href="https://fuselab.bandcamp.com/album/oneirology?from=footer-bcw-t287192821"><span class="release-title">Oneirology</span><br><span class="spacer"></span><span class="by-artist">by Hmot</span></a>
     </p>
     <div class="album-details">
         
         
         
-            <p class="comment"><span class="comment-contents">This stunning, beautiful project from Fujian duo Southeast of Rain 东南有雨 blends field recordings with rippling notes from the pipa.  </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">Feb 8, 2021</span></span></p>
         
         
+            <p class="bcw-featured-text">featured on <span class="bcweekly-title">Bandcamp Radio</span> <span class="date">Dec 3, 2013</span></p>
         
-        <a class="go-to-album album-link" href="https://southeastofrain.bandcamp.com/album/42-days?from=footer-nn-a445172539">go to album</a>
+        <a class="go-to-album album-link" href="https://fuselab.bandcamp.com/album/oneirology?from=footer-bcw-t287192821">go to album</a>
     </div>
 </li>
 
                     
-                        <li class="recommended-album footer-nn"
-    id="id-1294950661"
-    data-trackid="3127346075"
-    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=3127346075&amp;ts=1769966189&amp;t=37f7a16085583e1974e0a98b80b35f2316584dc2&quot;}"
-    data-albumtitle="Wave Debris"
-    data-albumid="1294950661"
-    data-artist="Diana Duta &amp; Julia E. Dyck"
-    data-artistid="3099622090"
-    data-from="footer-nn-a445172539">
+                        <li class="recommended-album footer-bcw"
+    id="id-3997525721"
+    data-trackid="2128285492"
+    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=2128285492&amp;ts=1769966363&amp;t=eb6b6fa0bc6d4620be94a2261ae0e67b17724e69&quot;}"
+    data-albumtitle="Domino"
+    data-albumid="3997525721"
+    data-artist="Dukes of Chutney"
+    data-artistid="3697462043"
+    data-from="footer-bcw-t287192821">
     <div class="album-art-container">
-        <img class="album-art" src="https://f4.bcbits.com/img/a3091030411_9.jpg">
+        <img class="album-art" src="https://f4.bcbits.com/img/a0767391357_9.jpg">
         <div class="play-button">
             <div class="play-icon"></div>
         </div>
     </div>
     <p class="title-and-artist">
-        <a class="album-link" href="https://crashsymbols.bandcamp.com/album/wave-debris?from=footer-nn-a445172539"><span class="release-title">Wave Debris</span><br><span class="spacer"></span><span class="by-artist">by Diana Duta &amp; Julia E. Dyck</span></a>
+        <a class="album-link" href="https://dukesofchutney.bandcamp.com/album/domino?from=footer-bcw-t287192821"><span class="release-title">Domino</span><br><span class="spacer"></span><span class="by-artist">by Dukes of Chutney</span></a>
     </p>
     <div class="album-details">
         
         
         
-            <p class="comment"><span class="comment-contents">An otherworldly release uses modulated frequencies, feedback, &amp; field recordings to explore the sensation of unperceived natural phenomena. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">Oct 29, 2020</span></span></p>
         
         
+            <p class="bcw-featured-text">featured on <span class="bcweekly-title">Bandcamp Radio</span> <span class="date">Nov 19, 2013</span></p>
         
-        <a class="go-to-album album-link" href="https://crashsymbols.bandcamp.com/album/wave-debris?from=footer-nn-a445172539">go to album</a>
-    </div>
-</li>
-
-                    
-                        <li class="recommended-album footer-nn"
-    id="id-2759193862"
-    data-trackid="2135913067"
-    data-audiourl="{&quot;mp3-128&quot;:&quot;https://bandcamp.com/stream_redirect?enc=mp3-128&amp;track_id=2135913067&amp;ts=1769966189&amp;t=b936c51d8db9592e66fc4504b386f5922e81b73e&quot;}"
-    data-albumtitle="Loss Less"
-    data-albumid="2759193862"
-    data-artist="KAMRAN SADEGHI"
-    data-artistid="825427575"
-    data-from="footer-nn-a445172539">
-    <div class="album-art-container">
-        <img class="album-art" src="https://f4.bcbits.com/img/a3849810212_9.jpg">
-        <div class="play-button">
-            <div class="play-icon"></div>
-        </div>
-    </div>
-    <p class="title-and-artist">
-        <a class="album-link" href="https://lineimprint.bandcamp.com/album/loss-less?from=footer-nn-a445172539"><span class="release-title">Loss Less</span><br><span class="spacer"></span><span class="by-artist">by KAMRAN SADEGHI</span></a>
-    </p>
-    <div class="album-details">
-        
-        
-        
-            <p class="comment"><span class="comment-contents">Recorded inside a nuclear cooling tower, this 25-minute album is distinguished by innovative sound design and musical ingenuity. </span><span class="comment-author">Bandcamp New &amp; Notable <span class="date">Mar 18, 2020</span></span></p>
-        
-        
-        
-        <a class="go-to-album album-link" href="https://lineimprint.bandcamp.com/album/loss-less?from=footer-nn-a445172539">go to album</a>
+        <a class="go-to-album album-link" href="https://dukesofchutney.bandcamp.com/album/domino?from=footer-bcw-t287192821">go to album</a>
     </div>
 </li>
 
@@ -4838,12 +6006,12 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
         
 
         
-            <span id="webapp-selector-ui" class="webapp-selector-ui" style="display:none" data-webapps="[&quot;flexotest01-1&quot;,&quot;flexotest01-2&quot;,&quot;flexotest01-3&quot;,&quot;flexotest01-4&quot;,&quot;flexotest01-5&quot;,&quot;flexotest01-6&quot;,&quot;flexotest01-7&quot;,&quot;flexotest01-8&quot;,&quot;flexotest01-9&quot;,&quot;flexotest01-10&quot;,&quot;flexotest01-11&quot;,&quot;flexotest01-12&quot;,&quot;flexotest01-13&quot;,&quot;flexotest01-14&quot;,&quot;flexotest01-15&quot;,&quot;flexotest01-16&quot;]" data-backendid="flexocentral-v9kv-3" data-bccookie="" data-cookiename="bc_webapp3"></span>
+            <span id="webapp-selector-ui" class="webapp-selector-ui" style="display:none" data-webapps="[&quot;flexotest01-1&quot;,&quot;flexotest01-2&quot;,&quot;flexotest01-3&quot;,&quot;flexotest01-4&quot;,&quot;flexotest01-5&quot;,&quot;flexotest01-6&quot;,&quot;flexotest01-7&quot;,&quot;flexotest01-8&quot;,&quot;flexotest01-9&quot;,&quot;flexotest01-10&quot;,&quot;flexotest01-11&quot;,&quot;flexotest01-12&quot;,&quot;flexotest01-13&quot;,&quot;flexotest01-14&quot;,&quot;flexotest01-15&quot;,&quot;flexotest01-16&quot;]" data-backendid="c2flexocentral-6lkg-2" data-bccookie="" data-cookiename="bc_webapp3"></span>
 
             <page-footer 
-                page-context="{&quot;env&quot;:&quot;production&quot;,&quot;colorScheme&quot;:&quot;light&quot;,&quot;identity&quot;:{&quot;userId&quot;:3736322262,&quot;adminLevel&quot;:0,&quot;fanId&quot;:2105866,&quot;fanUsername&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;isFanPrivate&quot;:false,&quot;isFanVerified&quot;:true,&quot;isImpersonating&quot;:false,&quot;isLoggedIn&quot;:true,&quot;isAdmin&quot;:false},&quot;isMobile&quot;:false,&quot;pageBand&quot;:{&quot;bandId&quot;:2505888832,&quot;currentUserRole&quot;:null,&quot;googleAnalyticsId&quot;:null},&quot;recaptchaPublicKey&quot;:&quot;6Ld7hz4UAAAAANlndw60vAheGUwN0Mb-qeWD_LHr&quot;,&quot;sentryConfig&quot;:&quot;{\&quot;sentry\&quot;:{\&quot;dsn\&quot;:\&quot;https://7c33659f530ef43fb4532fc6e83354dd@o363271.ingest.us.sentry.io/4508223638732800\&quot;,\&quot;environment\&quot;:\&quot;production\&quot;,\&quot;release\&quot;:\&quot;trackpipe@c37293d825a2711e25588513f4e469c0774c82f2\&quot;},\&quot;userId\&quot;:3736322262}&quot;,&quot;fanId&quot;:2105866,&quot;isAdmin&quot;:false,&quot;userId&quot;:3736322262,&quot;isLoggedIn&quot;:true,&quot;languages&quot;:{&quot;en&quot;:&quot;English&quot;,&quot;de&quot;:&quot;Deutsch&quot;,&quot;es&quot;:&quot;Español&quot;,&quot;fr&quot;:&quot;Français&quot;,&quot;pt&quot;:&quot;Português&quot;,&quot;ja&quot;:&quot;日本語&quot;},&quot;bcStrings&quot;:null,&quot;isPageMobilized&quot;:true}" 
+                page-context="{&quot;env&quot;:&quot;production&quot;,&quot;colorScheme&quot;:&quot;light&quot;,&quot;identity&quot;:{&quot;userId&quot;:3736322262,&quot;adminLevel&quot;:0,&quot;fanId&quot;:2105866,&quot;fanUsername&quot;:&quot;asjldflkasdnfzivxniowen&quot;,&quot;isFanPrivate&quot;:false,&quot;isFanVerified&quot;:true,&quot;isImpersonating&quot;:false,&quot;isLoggedIn&quot;:true,&quot;isAdmin&quot;:false},&quot;isMobile&quot;:false,&quot;pageBand&quot;:{&quot;bandId&quot;:3275310411,&quot;currentUserRole&quot;:null,&quot;googleAnalyticsId&quot;:null},&quot;recaptchaPublicKey&quot;:&quot;6Ld7hz4UAAAAANlndw60vAheGUwN0Mb-qeWD_LHr&quot;,&quot;sentryConfig&quot;:&quot;{\&quot;sentry\&quot;:{\&quot;dsn\&quot;:\&quot;https://7c33659f530ef43fb4532fc6e83354dd@o363271.ingest.us.sentry.io/4508223638732800\&quot;,\&quot;environment\&quot;:\&quot;production\&quot;,\&quot;release\&quot;:\&quot;trackpipe@c37293d825a2711e25588513f4e469c0774c82f2\&quot;},\&quot;userId\&quot;:3736322262}&quot;,&quot;fanId&quot;:2105866,&quot;isAdmin&quot;:false,&quot;userId&quot;:3736322262,&quot;isLoggedIn&quot;:true,&quot;languages&quot;:{&quot;en&quot;:&quot;English&quot;,&quot;de&quot;:&quot;Deutsch&quot;,&quot;es&quot;:&quot;Español&quot;,&quot;fr&quot;:&quot;Français&quot;,&quot;pt&quot;:&quot;Português&quot;,&quot;ja&quot;:&quot;日本語&quot;},&quot;bcStrings&quot;:null,&quot;isPageMobilized&quot;:true}" 
                 is-recs-banner-visible="true" 
-                color-scheme=""
+                color-scheme="dark"
                 
             ></page-footer>
             
@@ -4857,28 +6025,28 @@ window.BCTracker=window.BCTracker||{preloadQueue:[],record:function(){this.prelo
 
 
 
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/GlobalJS_1/tko_trackpipe-525ac32695cf93110d7d35f736fd51e7.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/global_foot1-427109551f7206160fa1cc083773672b.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/global_foot2-2402c1c464c97f49f690a4abf5775aae.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/GlobalJS_1/time-c6f294f92b5c3a7bd018b03b3c71f372.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/Fraud_1/fraud_js-2dae71c049a60b82b63f4cd24b1b062f.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" data-enterprise-recaptcha="{&quot;render_url&quot;:&quot;https://www.recaptcha.net/recaptcha/enterprise.js?render=6LeBNSocAAAAADrhkgX9-hQq4E4K1P_HVzB7IDFD&quot;,&quot;public_site_key&quot;:&quot;6LeBNSocAAAAADrhkgX9-hQq4E4K1P_HVzB7IDFD&quot;}"></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/GlobalJS_1/tko_trackpipe-525ac32695cf93110d7d35f736fd51e7.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/global_foot1-427109551f7206160fa1cc083773672b.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/global_foot2-2402c1c464c97f49f690a4abf5775aae.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/GlobalJS_1/time-c6f294f92b5c3a7bd018b03b3c71f372.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/Fraud_1/fraud_js-2dae71c049a60b82b63f4cd24b1b062f.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" data-enterprise-recaptcha="{&quot;render_url&quot;:&quot;https://www.recaptcha.net/recaptcha/enterprise.js?render=6LeBNSocAAAAADrhkgX9-hQq4E4K1P_HVzB7IDFD&quot;,&quot;public_site_key&quot;:&quot;6LeBNSocAAAAADrhkgX9-hQq4E4K1P_HVzB7IDFD&quot;}"></script>
 
 
 
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/tralbum-7bf5753f7d175134c3a38dc4c6dd6a5b.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" data-page="&quot;tralbum_page0&quot;"></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/tralbum_templates-b78e779dc03139ee48f7ed2985a0dd2d.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/jquery_lazyload-5cf7fa0f947f3ee0586643c533c423d9.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/GlobalJS_2/web_components-1cbbc2c46284a277e52680eff7d5847e.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" ></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/tralbum-7bf5753f7d175134c3a38dc4c6dd6a5b.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" data-page="&quot;tralbum_page0&quot;"></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/tralbum_templates-b78e779dc03139ee48f7ed2985a0dd2d.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/trackpipe/jquery_lazyload-5cf7fa0f947f3ee0586643c533c423d9.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/GlobalJS_2/web_components-1cbbc2c46284a277e52680eff7d5847e.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" ></script>
 
 
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/Tracker_1/analytics-f6d7fd2522940544d7e5f73a03ca3c4f.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" data-data="{&quot;env&quot;:2,&quot;domain_match&quot;:true,&quot;bandGoogleAnalyticsId&quot;:null}"></script>
-<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/Tracker_1/impl-2fd8d3e0ca4ebe03fd7a3b7d60fa3671.js" crossorigin="anonymous" nonce="gKrBtRG7Ljp44vqJgfNYJA==" data-enabled="true" data-transport="&quot;beacon&quot;" data-record-url="&quot;https://bandcamp.com/api/tracker/1/record&quot;" data-send-delay="5" data-auto-track-clicks="true" data-auto-track-filters="null"></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/Tracker_1/analytics-f6d7fd2522940544d7e5f73a03ca3c4f.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" data-data="{&quot;env&quot;:2,&quot;domain_match&quot;:true,&quot;bandGoogleAnalyticsId&quot;:null}"></script>
+<script type="text/javascript" src="https://s4.bcbits.com/client-bundle/1/Tracker_1/impl-2fd8d3e0ca4ebe03fd7a3b7d60fa3671.js" crossorigin="anonymous" nonce="uXMvRCgs/qdZQTuv55InXw==" data-enabled="true" data-transport="&quot;beacon&quot;" data-record-url="&quot;https://bandcamp.com/api/tracker/1/record&quot;" data-send-delay="5" data-auto-track-clicks="true" data-auto-track-filters="null"></script>
  
 
 </body>
 </html>
-<!-- flexocentral-v9kv-3 2026-02-01 17:16:29 UTC -->
-<!-- track id 3972831481 -->
+<!-- c2flexocentral-6lkg-2 2026-02-01 17:19:23 UTC -->
+<!-- track id 287192821 -->
 """
 
 def test_extract_bc_meta_for_album():
@@ -4898,6 +6066,6 @@ def test_embed_url_for_album_():
 
 
 def test_embed_url_for_track():
-    res = build_embed_url(3972831481, True)
+    res = build_embed_url(287192821, True)
     assert res is not None
     assert res == "https://bandcamp.com/EmbeddedPlayer/track=1234567890/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=true/artwork=small/transparent=true/"
