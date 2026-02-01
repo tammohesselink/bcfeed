@@ -459,7 +459,7 @@ def embed_meta():
         ), 404
 
     item_id = data.get("item_id")
-    is_track = data.get("item_type") == "track"
+    is_track = (data.get("item_type") == "t") or (data.get("item_type") == "track")
     embed_url = build_embed_url(item_id, is_track)
 
     # Persist embed metadata for future sessions.
