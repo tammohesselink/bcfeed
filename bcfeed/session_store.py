@@ -14,8 +14,8 @@ import json
 from pathlib import Path
 from typing import Dict, Iterable, List, Set, Tuple
 
-from paths import EMPTY_DATES_PATH, RELEASE_CACHE_PATH, SCRAPE_STATUS_PATH
-from util import dedupe_by_url
+from bcfeed.paths import EMPTY_DATES_PATH, RELEASE_CACHE_PATH, SCRAPE_STATUS_PATH
+from bcfeed.util import dedupe_by_url
 
 CacheType = Dict[str, List[dict]]
 
@@ -67,7 +67,9 @@ def _load_date_set(path: Path) -> Set[datetime.date]:
         return set()
 
 
-def _save_date_set(path: Path, dates: Set[datetime.date], *, drop_today: bool = False) -> None:
+def _save_date_set(
+    path: Path, dates: Set[datetime.date], *, drop_today: bool = False
+) -> None:
     _ensure_cache_dir()
     tmp_path = path.with_suffix(".tmp")
     if drop_today:
@@ -126,7 +128,9 @@ def get_full_release_cache() -> List[dict]:
     return dedupe_by_url(all_items)
 
 
-def mark_dates_scraped(dates: Iterable[datetime.date], *, exclude_today: bool = True) -> None:
+def mark_dates_scraped(
+    dates: Iterable[datetime.date], *, exclude_today: bool = True
+) -> None:
     """
     Mark specific dates as having been scraped from Gmail.
     """
@@ -141,7 +145,9 @@ def mark_dates_scraped(dates: Iterable[datetime.date], *, exclude_today: bool = 
     _save_scrape_status(scraped)
 
 
-def mark_date_range_scraped(start: datetime.date, end: datetime.date, *, exclude_today: bool = True) -> None:
+def mark_date_range_scraped(
+    start: datetime.date, end: datetime.date, *, exclude_today: bool = True
+) -> None:
     """Mark a contiguous date range as scraped."""
     if start > end:
         return
@@ -165,7 +171,9 @@ def mark_dates_not_scraped(dates: Iterable[datetime.date]) -> None:
     _save_scrape_status(scraped)
 
 
-def scrape_status_for_range(start: datetime.date, end: datetime.date) -> Dict[str, bool]:
+def scrape_status_for_range(
+    start: datetime.date, end: datetime.date
+) -> Dict[str, bool]:
     """
     Return a mapping of ISO date -> scraped flag for the inclusive range.
     Today's date is always False (not scraped).
@@ -182,7 +190,9 @@ def scrape_status_for_range(start: datetime.date, end: datetime.date) -> Dict[st
     return status
 
 
-def persist_release_metadata(releases: Iterable[dict], *, exclude_today: bool = True) -> None:
+def persist_release_metadata(
+    releases: Iterable[dict], *, exclude_today: bool = True
+) -> None:
     """
     Save release metadata into the cache, keyed by release date.
     Skips today's date when exclude_today is True.
@@ -212,7 +222,9 @@ def persist_release_metadata(releases: Iterable[dict], *, exclude_today: bool = 
         mark_dates_scraped(scraped_days, exclude_today=exclude_today)
 
 
-def cached_releases_for_range(start: datetime.date, end: datetime.date) -> Tuple[List[dict], List[datetime.date]]:
+def cached_releases_for_range(
+    start: datetime.date, end: datetime.date
+) -> Tuple[List[dict], List[datetime.date]]:
     """
     Return (cached_releases, missing_dates) for the inclusive date range.
     missing_dates are days that have not been scraped yet.
@@ -237,7 +249,9 @@ def cached_releases_for_range(start: datetime.date, end: datetime.date) -> Tuple
     return dedupe_by_url(cached), missing
 
 
-def collapse_date_ranges(dates: List[datetime.date]) -> List[Tuple[datetime.date, datetime.date]]:
+def collapse_date_ranges(
+    dates: List[datetime.date],
+) -> List[Tuple[datetime.date, datetime.date]]:
     """Collapse a list of dates into contiguous inclusive ranges."""
     if not dates:
         return []
@@ -254,7 +268,9 @@ def collapse_date_ranges(dates: List[datetime.date]) -> List[Tuple[datetime.date
     return ranges
 
 
-def persist_empty_date_range(start: datetime.date, end: datetime.date, *, exclude_today: bool = True) -> None:
+def persist_empty_date_range(
+    start: datetime.date, end: datetime.date, *, exclude_today: bool = True
+) -> None:
     """
     Record a contiguous date range that returned no Gmail results so we avoid
     querying it again. Optionally excludes today's date.

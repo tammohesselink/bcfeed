@@ -35,7 +35,9 @@ def extract_bandcamp_description(html_text: str) -> str | None:
             text = "\n".join(lines)
             return re.sub(r"\n{3,}", "\n\n", text).strip("\n")
 
-        about = soup.find(id="tralbum-about") or soup.find("div", class_="tralbum-about")
+        about = soup.find(id="tralbum-about") or soup.find(
+            "div", class_="tralbum-about"
+        )
         credits = soup.find(class_="tralbum-credits") or soup.find(id="tralbum-credits")
 
         parts = []
