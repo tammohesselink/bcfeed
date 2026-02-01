@@ -35,18 +35,26 @@ You must keep the Terminal window open in the background in order to use **bcfee
 
 ### Running from Python source (developers and advanced users)
 
-If you're familiar with Python and CLI tools, you can create a virtual environment, install the dependencies and run the script from the CLI:
+If you're familiar with Python and CLI tools, you can install and run from source using UV:
 
 - Download **bcfeed** source code
-- Ensure Python 3.10 or newer is installed and selected as the local python version
-- In the project directory, run `virtualenv .venv`
-- Run `source .venv/bin/activate`
-- Download dependencies: `pip install -r requirements.txt`
-- Run `python3 bcfeed.py`
+- Ensure Python 3.10 or newer is installed
+- Install UV: `curl -LsSf https://astral.sh/uv/install.sh | sh` (or see https://docs.astral.sh/uv/getting-started/installation/)
+- In the project directory, run `uv sync` to create a virtual environment and install dependencies
+  - **Note:** If you have a custom PyPI index configured globally, you may need to run `UV_NO_CONFIG=1 uv sync` instead
+- Run `uv run bcfeed`
 
 This will launch the server from the CLI and open the dashboard in your web browser.
 
 You must keep the CLI process running in order to use **bcfeed**.
+
+**Alternative: Using pip**
+
+You can also use traditional pip/venv if preferred:
+- In the project directory, run `python -m venv .venv`
+- Run `source .venv/bin/activate`
+- Run `pip install -e .`
+- Run `bcfeed`
 
 
 ## 📘 Gmail Setup Guide
