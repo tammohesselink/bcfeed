@@ -13,13 +13,25 @@ import threading
 from pathlib import Path
 
 import requests
-from flask import Flask, jsonify, request, Response, stream_with_context, send_file, render_template
+from flask import (
+    Flask,
+    jsonify,
+    request,
+    Response,
+    stream_with_context,
+    send_file,
+    render_template,
+)
 from queue import SimpleQueue
 from werkzeug.serving import make_server, WSGIRequestHandler
 
-from bandcamp import extract_bc_meta, extract_bandcamp_description, build_embed_url
-from util import parse_date
-from paths import (
+from bcfeed.bandcamp import (
+    extract_bc_meta,
+    extract_bandcamp_description,
+    build_embed_url,
+)
+from bcfeed.util import parse_date
+from bcfeed.paths import (
     DATA_DIR,
     VIEWED_PATH,
     STARRED_PATH,
@@ -36,9 +48,9 @@ from paths import (
     SETUP_PATH,
     GMAIL_SETUP_PATH,
 )
-from session_store import scrape_status_for_range, get_full_release_cache
-from pipeline import populate_release_cache, MaxResultsExceeded
-from gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
+from bcfeed.session_store import scrape_status_for_range, get_full_release_cache
+from bcfeed.pipeline import populate_release_cache, MaxResultsExceeded
+from bcfeed.gmail import _find_credentials_file, GmailAuthError, gmail_authenticate
 
 app = Flask(__name__)
 
@@ -205,7 +217,9 @@ def _save_embed_cache(cache: dict) -> None:
     tmp.replace(EMBED_CACHE_PATH)
 
 
-def _save_embed_metadata(url: str, *, release_id=None, is_track=None, embed_url=None, description=None) -> None:
+def _save_embed_metadata(
+    url: str, *, release_id=None, is_track=None, embed_url=None, description=None
+) -> None:
     if not url:
         return
     cache = _load_embed_cache()
@@ -234,6 +248,7 @@ def health():
         return _corsify(app.response_class(status=204))
     return _corsify(jsonify({"ok": True}))
 
+
 # Suppress noisy logging for health checks
 class QuietHealthHandler(WSGIRequestHandler):
     def log_request(self, code="-", size="-"):
@@ -244,7 +259,9 @@ class QuietHealthHandler(WSGIRequestHandler):
 
 def start_server(port: int = 5050):
     """Start the server in a background thread and return (server, thread)."""
-    server = make_server("0.0.0.0", port, app, threaded=True, request_handler=QuietHealthHandler)
+    server = make_server(
+        "0.0.0.0", port, app, threaded=True, request_handler=QuietHealthHandler
+    )
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     return server, thread
@@ -353,21 +370,27 @@ def config_json():
 @app.route("/dashboard", methods=["GET"])
 def dashboard_page():
     if not DASHBOARD_PATH.exists():
-        return _corsify(jsonify({"error": f"dashboard not found at {DASHBOARD_PATH}"})), 500
+        return _corsify(
+            jsonify({"error": f"dashboard not found at {DASHBOARD_PATH}"})
+        ), 500
     return send_file(DASHBOARD_PATH, mimetype="text/html")
 
 
 @app.route("/dashboard.css", methods=["GET"])
 def dashboard_css():
     if not DASHBOARD_CSS_PATH.exists():
-        return _corsify(jsonify({"error": f"dashboard css not found at {DASHBOARD_CSS_PATH}"})), 500
+        return _corsify(
+            jsonify({"error": f"dashboard css not found at {DASHBOARD_CSS_PATH}"})
+        ), 500
     return send_file(DASHBOARD_CSS_PATH, mimetype="text/css")
 
 
 @app.route("/dashboard.js", methods=["GET"])
 def dashboard_js():
     if not DASHBOARD_JS_PATH.exists():
-        return _corsify(jsonify({"error": f"dashboard js not found at {DASHBOARD_JS_PATH}"})), 500
+        return _corsify(
+            jsonify({"error": f"dashboard js not found at {DASHBOARD_JS_PATH}"})
+        ), 500
     return send_file(DASHBOARD_JS_PATH, mimetype="application/javascript")
 
 
@@ -423,23 +446,38 @@ def embed_meta():
         )
         resp.raise_for_status()
     except Exception as exc:
-        return _corsify(jsonify({"error": f"Failed to fetch Bandcamp page: {exc}"})), 502
+        return _corsify(
+            jsonify({"error": f"Failed to fetch Bandcamp page: {exc}"})
+        ), 502
 
     html_text = resp.text
     data = extract_bc_meta(html_text)
     description = extract_bandcamp_description(html_text)
     if not data:
-        return _corsify(jsonify({"error": "Unable to find bc-page-properties meta"})), 404
+        return _corsify(
+            jsonify({"error": "Unable to find bc-page-properties meta"})
+        ), 404
 
     item_id = data.get("item_id")
     is_track = (data.get("item_type") == "track") or (data.get("item_type") == "t")
     embed_url = build_embed_url(item_id, is_track)
 
     # Persist embed metadata for future sessions.
-    _save_embed_metadata(release_url, release_id=item_id, is_track=is_track, embed_url=embed_url, description=description)
+    _save_embed_metadata(
+        release_url,
+        release_id=item_id,
+        is_track=is_track,
+        embed_url=embed_url,
+        description=description,
+    )
 
     response = jsonify(
-        {"release_id": item_id, "is_track": is_track, "embed_url": embed_url, "description": description}
+        {
+            "release_id": item_id,
+            "is_track": is_track,
+            "embed_url": embed_url,
+            "description": description,
+        }
     )
     return _corsify(response)
 
@@ -485,7 +523,12 @@ def reset_caches():
         return False
 
     if clear_cache:
-        for p in (RELEASE_CACHE_PATH, EMPTY_DATES_PATH, SCRAPE_STATUS_PATH, EMBED_CACHE_PATH):
+        for p in (
+            RELEASE_CACHE_PATH,
+            EMPTY_DATES_PATH,
+            SCRAPE_STATUS_PATH,
+            EMBED_CACHE_PATH,
+        ):
             if _safe_unlink(p):
                 cleared.append(p.name)
     if clear_viewed or clear_starred:
@@ -557,16 +600,20 @@ def populate_range_stream():
     start_arg = request.args.get("start") or request.args.get("from")
     end_arg = request.args.get("end") or start_arg
     max_results = int(request.args.get("max_results") or GMAIL_MAX_RESULTS_HARD)
+
     def error_stream(msg: str):
         def gen():
             yield f"event: error\ndata: {msg}\n\n"
+
         headers = {
             "Access-Control-Allow-Origin": "*",
             "Cache-Control": "no-cache",
         }
         # Also emit a one-line log-friendly version for browser status box
         app.logger.error(msg)
-        return Response(stream_with_context(gen()), mimetype="text/event-stream", headers=headers)
+        return Response(
+            stream_with_context(gen()), mimetype="text/event-stream", headers=headers
+        )
 
     if not start_arg or not end_arg:
         return error_stream("Missing start/end")
@@ -575,9 +622,13 @@ def populate_range_stream():
     if not start or not end or start > end:
         return error_stream("Invalid start/end")
     if not _find_credentials_file():
-        return error_stream("Credentials not found. Reload credentials in the settings panel.")
+        return error_stream(
+            "Credentials not found. Reload credentials in the settings panel."
+        )
     if not TOKEN_PATH.exists():
-        return error_stream("Gmail token missing. Reload credentials in the settings panel to re-authenticate.")
+        return error_stream(
+            "Gmail token missing. Reload credentials in the settings panel to re-authenticate."
+        )
 
     if not POPULATE_LOCK.acquire(blocking=False):
         return error_stream("Another populate is already running")
@@ -623,4 +674,8 @@ def populate_range_stream():
         "Access-Control-Allow-Origin": "*",
         "Cache-Control": "no-cache",
     }
-    return Response(stream_with_context(event_stream()), mimetype="text/event-stream", headers=headers)
+    return Response(
+        stream_with_context(event_stream()),
+        mimetype="text/event-stream",
+        headers=headers,
+    )
