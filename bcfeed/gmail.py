@@ -239,7 +239,7 @@ def get_messages(service, ids, format, batch_size, log=print):
 
 # ------------------------------------------------------------------------
 # Scrape Bandcamp URL and light metadata from one email
-def scrape_info_from_email(email_text, subject=None):
+def scrape_info_from_email(email_text, subject=None) -> EmailReleaseInfo | None:
     img_url = None
     release_url = None
     is_track = None
