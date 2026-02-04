@@ -4,8 +4,11 @@ import ast
 import json
 import re
 from typing import Optional
+import datetime
 
 from bs4 import BeautifulSoup
+
+from bcfeed.util import parse_text_date
 
 
 def extract_bc_meta(html_text: str) -> Optional[dict]:
@@ -49,6 +52,12 @@ def extract_bandcamp_description(html_text: str) -> str | None:
             parts.append(f"{credits_text}")
         if parts:
             return "\n\n".join(parts)
+        
+        first_line, *_ = credits_text.split('\n', 1)
+        release_date_str = first_line.strip()
+        parsed_release_date = parse_text_date(release_date_str)
+
+        is_forthcoming_release = (parsed_release_date > datetime.date.today())
 
         meta = soup.find("meta", attrs={"property": "og:description"}) or soup.find(
             "meta", attrs={"name": "description"}

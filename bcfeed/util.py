@@ -29,6 +29,18 @@ def parse_date(val, *, allow_none: bool = False) -> datetime.date | None:
         return None
     raise ValueError("Incorrect date format, should be YYYY-MM-DD or RFC 2822 date")
 
+def parse_text_date(date_text: str) -> datetime.date | None:
+    """Parse a text date of format 'released January 16, 2026' into a date."""
+    if not date_text:
+        return None
+    text = date_text.strip()
+    if text.startswith("released "):
+        text = text[9:]
+    try:
+        return datetime.datetime.strptime(text, "%B %d, %Y").date()
+    except ValueError:
+        return None
+
 
 def construct_release(
     is_track=None,
